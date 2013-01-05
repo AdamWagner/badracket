@@ -1,0 +1,15 @@
+.logo {
+  display:block;
+  margin:auto;
+  text-align:center;
+  font-size:5.5em;
+  position:relative;
+  z-index:100;
+  top:8%;
+  @include transition(font-size .3s, top .3s, color .25s ease-in-out);
+  .playing & {
+    font-size:4.8em;
+    top:0;
+    color:transparentize($cream,0.2);
+  }
+}

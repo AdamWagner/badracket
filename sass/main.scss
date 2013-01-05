@@ -1,0 +1,513 @@
+@import "compass";
+@import "normalize";
+@import "bits";
+@import "typography";
+@import "button";
+@import "forms";
+
+* { @include box-sizing(border-box); }
+
+$bg-gradient: linear-gradient(top, $dark 0%, $dark 27%, $cream 27%, $cream 100%);
+$bg-image: url(http://badracket-website.s3.amazonaws.com/bg-image.jpg);
+
+html { background:$dark; }
+
+body {
+  @include background($bg-image, $bg-gradient);
+  @include font-stack-body;
+  background-size:100%;
+  background-repeat:no-repeat;
+  background-position:0 550px;
+  min-height:2000px;
+  margin:0;
+}
+
+::selection {
+  opacity:0;
+}
+
+@import "header";
+
+
+.cream { color:$dark; }
+
+a { text-decoration:none; }
+
+.cream a {
+  color:$red;
+  &:hover, &:focus {
+    color:darken($red,5%);
+  }
+  &:active {
+    color:darken($red,10%);
+  }
+}
+
+.red, .green, .orange { color:$dark; }
+
+
+.dark a {
+  color:$light-on-dark;
+}
+
+
+.red a {
+  color:$dark;
+  &:hover, &:focus {
+    color:darken($dark,5%);
+  }
+  &:active {
+    color:darken($dark,10%);
+  }
+}
+
+ul, li {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.page-wrap {
+  width:$width;
+  margin:auto;
+  overflow:hidden;
+  @include transition(width .2s);
+  @include pie-clearfix;
+  @include breakpoint(medium) {
+    width:$width*1.15;
+  }
+  @include breakpoint(small) {
+    width:100%;
+  }
+}
+.site-header {
+  padding-top:60px;
+  height:185px;
+  color:$cream;
+  position:relative;
+  @include breakpoint(huge) {
+    height:220px;
+  }
+  img, p {
+    z-index:10;
+    position:relative;
+  }
+  img {
+    margin:auto;
+    display:block;
+    width:100px;
+  }
+  p {
+    margin:0;
+    font-size:1.1em;
+    @include font-stack-body-italic;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+.playbar {
+  height:60px;
+  background:desaturate(lighten($dark,5%),2%);
+  margin-bottom:3px;
+  padding:$spacing*1.50 $spacing*4;
+  position:relative;
+  bottom:-60px;
+  color:transparentize(desaturate($cream,25%),0.4);
+  a {
+    margin-left:15px;
+  }
+  @include breakpoint(medium) {
+    padding:$spacing*1.35 $spacing*3;
+  }
+  @include breakpoint(huge) {
+    padding:$spacing*1.35 $spacing*6.5;
+  }
+  @include transition (bottom .3s cubic-bezier(0.51,  0.01,  0.37,  0.98));
+  span {
+    opacity:0;
+    @include transition (opacity .2s .2s);
+  }
+  .current-artist {
+    margin-right:$spacing/2; 
+    color:transparentize(desaturate($cream,25%),0.5);
+  }
+  .current-title {
+    margin-left:$spacing/2; 
+    color:transparentize(desaturate($cream,25%),0.7);
+  }
+  .metadata{
+    float:left;
+    margin-right:$spacing;
+  }
+  .album-links {
+    float:right;
+  }
+  .playhead {
+    height:3px;
+    background:transparentize(desaturate($cream,25%),0.96);
+    @include transition (width .3s);
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+  }
+  .playing & {
+    bottom:0;
+    span { opacity: 1;}
+  }
+}
+
+
+ul { @include pie-clearfix; }
+
+section {
+  width:100%;
+  min-height:400px;
+  @include pie-clearfix;
+  overflow:hidden;
+  position:relative;
+  margin-bottom:$spacing*2;
+  border-radius:2px;
+  &.red { background:$red; }
+  &.green { background:$green; }
+  &.cream { background:desaturate(darken($cream,10%),10%); }
+  &.orange { background:$orange; }
+  &.dark { background:$dark; }
+  & hgroup {
+    color:$cream;
+    margin-bottom:$spacing*1.5;
+    @include pie-clearfix;
+    & h2 { text-transform:uppercase; }
+    & p {
+      @include font-stack-body-italic;
+      color:$cream;
+      color:transparentize($cream,0.5);
+    }
+  }
+  &[role="main"] {
+    @include transition(margin-top .5s);
+  }
+  .section-inner {
+    padding:$spacing*2.3 $spacing*3 $spacing*2 $spacing*4;
+    position:relative;
+    &.small { padding-top:$spacing*1.3;padding-bottom:$spacing*1.3; }
+    @include breakpoint(huge) {
+      padding:$spacing*2 $spacing*4 $spacing*3 $spacing*5;
+      font-size:120%;
+    }
+    @include breakpoint(medium) {
+      padding:$spacing*2 $spacing*2 $spacing*2 $spacing*3;
+    }
+    @include breakpoint(small) {
+      padding:$spacing;
+    }
+  }
+}
+
+.section-controls {
+  border-top:solid 2px transparentize($red-on-red,0.6);
+  padding-top:$spacing;
+  margin-bottom:$spacing;
+  @include calc('width', 100% - #{$spacing});
+  h5, p { display:inline; }
+  h5 { text-transform: uppercase; font-size:1em; margin-right:5px; }
+  p { font-size:90%; color:$red-on-red }
+  a { float:right; @include link }
+  @include pie-clearfix;
+}
+
+.thumbnail {
+  padding: 0.5em 0;
+  margin: $spacing*1.5 auto 0;
+  &.double li { width:50%; }
+  &.triple li { width:33.333%; }
+  &.quad li { width:25%; }
+  &.quint li { width:20%; }
+  &.double li, &.triple li, &.quad li, &.quint li {
+    @include breakpoint(small) {
+      display: table;
+      width: 100%;
+      margin:$spacing/2 0;
+    }
+  }
+}
+
+.thumbnail li {
+  display: block;
+  float: left;
+  background: none;
+  border: 0;
+  padding-right:$spacing*2;
+  @include breakpoint(huge) {
+    padding-right:$spacing*1.4;
+  }
+  border-collapse: collapse;
+  font-size:80%;
+}
+
+.li-img, .li-text, .inner {
+  display: block;
+  width: auto;
+  padding: 0;
+}
+
+.inner {
+  display: block;
+  position:relative;
+  // padding: $spacing $spacing*2 $spacing 0;
+  @include breakpoint(small) {
+    display: table-row;
+    overflow: hidden;
+  }
+}
+
+.li-text {
+  padding: $spacing 0;
+  color:transparentize($dark,0.6);
+  @include breakpoint(small) {
+    display: table-cell;
+    vertical-align: middle;
+    width: 60%;
+  }
+}
+.li-img {
+  vertical-align: middle;
+  overflow:hidden;
+  position:relative;
+  @include breakpoint(small) {
+    display: table-cell;
+    width: 40%;
+    padding-right: $spacing;
+  }
+}
+.li-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.li-head { margin: 0; }
+.li-sub { margin: 0; }
+
+ul li {
+  @include transition(all .25s);
+  div.li-img {
+    img { 
+      background:$dark; 
+      width:100%;
+    }
+  }
+  &.dimmed div {
+    opacity:0.8;
+  }
+}
+
+@mixin fade-gradient($direction) {
+  @include background(linear-gradient($direction, $red 80%, transparentize($red,1) 100%));
+}
+
+
+.fade-red {
+  height:100%;
+  width:60px;
+  position:absolute;
+  top:0;
+  z-index:50;
+  @include transition(width .2s);
+  @include breakpoint(huge) {
+    width:85px;
+  }
+  @include breakpoint(medium){
+    display:none;
+  }
+  &.right {
+    right:0;
+    @include fade-gradient(right);
+  }
+  &.left {
+    left:0;
+    @include fade-gradient(left);
+  }
+}
+
+
+.carousel-previous,
+.carousel-next {
+  top:56%;
+  color:transparentize($red-on-red,.7);
+  font-size:2.2em;
+  position:absolute;
+  cursor:pointer;
+  z-index:90;
+  @include transition(color,.15s);
+  @include breakpoint(huge) {
+    top:50%;
+    font-size:3em;
+  }
+  @include breakpoint(medium) {
+    display:none;
+  }
+}
+
+.carousel-next {
+  right:15px;
+  &:hover { color:$red-on-red; };  
+  &.end {
+    opacity:0;
+  }
+}
+.carousel-previous {
+  left:15px;
+  color:transparentize($red-on-red,1);
+  &.scrolled {
+   &:hover { color:$red-on-red; };  
+   color:transparentize($red-on-red,.7);
+  }
+}
+
+
+.albums,
+.videos {
+  position:relative;
+  @include transition(left .2s, right .2s, opacity .5s);
+  opacity:0;       /* For smooth page loading, removed onload */
+  height:150px;    /* For smooth page loading, removed onload */
+  overflow:hidden; /* For smooth page loading, removed onload */
+  &.loaded {
+    opacity:1;
+    height:auto;
+  }
+}
+
+
+.albums li,
+.videos li {
+  img {
+    opacity:0.85;
+    -webkit-filter:grayscale(0.3);
+    border-radius:2px;
+  }
+  .li-text {
+    color:transparentize($dark,0.5);
+    padding-left:3px;
+  }
+  .play-pause {
+    @include transition(opacity .2s );
+    opacity:0;
+    margin-right:$spacing/2;
+    &.loaded { opacity: 1; }
+  }
+  &:hover, &.playing-item {
+    .li-img {
+      box-shadow:0 0 0 2px $dark;
+      border-radius:2px;
+    }
+    img {
+      opacity:1;
+      -webkit-filter:grayscale(0);
+    }
+    .li-text {
+      color:transparentize($dark, 0.1);
+    }
+  }
+  .share {
+    height:$spacing*4;
+    width:100%;
+    background:transparentize(saturate($dark,5%),0.035);
+    position:absolute;
+    bottom:-$spacing*4;
+    @include transition (bottom .2s linear);
+    border-bottom-left-radius:2px;
+    border-bottom-right-radius:2px;
+    padding-top:$spacing/1.15;
+
+  }
+  &.playing-item {
+    .play-pause {
+      color:$dark;
+    }
+    .share {
+      bottom:0;
+      color:darken($dark,10%);
+      text-align:right;
+      text-align:center;
+      span {
+        width:30%;
+        display:inline-block;
+        color:transparentize($light-on-dark,0.4);
+        font-size:2.2em;
+        text-aling:center;
+        &:hover {
+          color:lighten($light-on-dark,20%);
+        }
+      }
+    }
+  }
+  &.invisible {
+    opacity:0;
+    @include transition(opacity .3s);
+  }
+  &.visible {
+    @include transition(opacity .25s .05s);
+    opacity:1;
+  }
+
+}
+
+
+
+
+
+.cta {
+  @include pie-clearfix;
+  background: $dark;
+  position:relative;
+  p { 
+    float:left; 
+    color:$light-on-dark;
+    margin-top:$spacing/2;
+    font-size:1.2em;
+    @include font-stack-body-italic;
+  }
+  form { 
+    position:relative;
+    right:$spacing;
+    width:25%;
+    float:right;
+    input[type="submit"] {
+      float:right;
+      margin-left:$spacing;
+    }
+    input[type="email"] { 
+      width:100%; 
+      position:absolute;
+      right:120px;
+    }
+
+  }
+}
+
+#peak {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:0;
+  opacity:0;
+  @include pie-clearfix;
+  @include transition(opacity .2s, height .5s);
+  & div {
+    position:absolute;
+    bottom:0;
+    float:left;
+    width:5px;
+    background:desaturate(transparentize(lighten($dark,5%),0.6),2%);
+    // border-radius:50%;
+    @include transition(height 0.2s);
+  }
+  .playing & {
+    @include transition(opacity .2s .4s linear, height 1.5s .4s linear);
+    height:110px;
+    opacity:1;
+  }
+}
