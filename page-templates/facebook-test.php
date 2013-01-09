@@ -9,17 +9,16 @@
 
 <?php get_template_part('parts/shared/html-header'); ?>
 
-  
-
 <?php  get_template_part('parts/shared/header'); ?>
+
+<?php 
+  // get_template_part('external/brv5_facebook'); 
+  // include (TEMPLATEPATH . '/external/brv5_facebook.php');
+?>
 
 <h1>js-sdk</h1>
 
-
-<ul>
-  <li></li>
-</ul>
-
+<ul></ul>
 
 <script type="text/javascript">
 
@@ -35,7 +34,6 @@ function get_music_listens() {
   FB.api('/me/music.listens', function(response) {
     listen = response.data;
     listenCount = listen.length;
-    console.log(listen);
     for (var i=0; i<listenCount; i++) {
       ripMusicData(listen[i].data)
     }
@@ -52,29 +50,40 @@ function ripMusicData(listen) {
 }
 
 function get_artist_name(listen){
-  console.log(listen);
   var albumID = listen.song.id;
   FB.api(albumID, function(response){
     artistList.push(response.data.musician[0].name);
-    if (artistList.length === listenCount) { allDone = true; }
+    if (artistList.length === listenCount) { render(); }
   });
 }  
 
+function get_friends() {
+   FB.api('/me/friends', function(response) {
+    console.log(response);
+    friends_likes(response);
+  });
+}
 
-(function doneTest() {
-  console.log('test ran');
-  setTimeout(function() {
-    if (allDone === true) {
-      render();
-    } else {
-      doneTest();
-    }
-  }, 100);
-})();
-
+function friends_likes(friends) {
+  for (i=0; i<friends.data.length; i++) {
+    var id = friends.data[i].id;
+    name = friends.data[i].name;
+    (function(){
+      var j = name;
+      FB.api(id + '/likes', function(response) {
+        var len = response.data.length;
+        console.log('***' + j + '***');
+        for (i=0; i<len; i++) {
+          if (response.data[i].category === "Musician/band") {
+            console.log(response.data[i].name);
+          }
+        }
+      });
+    })();
+  }
+}
 
 function render(){
-  console.log('render ran');
   $.each(titleList, function(index, value){
     $('ul').append(
         $(document.createElement('li')).text('You listened to ' + titleList[index] + ' by ' + artistList[index])
