@@ -60,7 +60,7 @@ function get_artist_name(listen){
 function get_friends() {
    FB.api('/me/friends', function(response) {
     console.log(response);
-    friends_likes(response);
+    // friends_likes(response);
   });
 }
 
@@ -82,6 +82,8 @@ function friends_likes(friends) {
     })();
   }
 }
+
+
 
 function render(){
   $.each(titleList, function(index, value){

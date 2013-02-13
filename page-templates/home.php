@@ -40,6 +40,7 @@
 
 <section role="main" class="red">
 <div class="section-inner">
+  <?php the_content(); ?>
   <hgroup>
     <h2>Discover Cleveland Music</h2>
     <p>Music Lovers: There’s something essential in four walls that makes music sound so good.</p>
