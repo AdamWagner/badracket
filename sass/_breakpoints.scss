@@ -1,0 +1,31 @@
+@mixin breakpoint($point) {
+  @if $point == huge { // if above 1280;
+    @media (min-width:1900px) { @content; }
+  }
+  @if $point == bigger { // if above 1280;
+    @media (min-width:1280px) { @content; }
+  }
+  @if $point == big { // if above 1024;
+    @media (min-width:1024px) { @content; }
+  }
+  @if $point == medium { // if above 768;
+    @media (min-width:768px) { @content; }
+  }
+  @if $point == mobile { // if below 480;
+    @media only screen and (max-device-width : 1024px) { @content; }
+  }
+
+}
+
+@mixin breakpoint-reverso($point) {
+  @if $point == small { // if below 1024;
+    @media (max-width:1024px) { @content; }
+  }
+}
+
+.hidden-mobile { display:none; }
+@include breakpoint(big) {
+  .hidden-big { display:none; }
+  .hidden-mobile { display:block; }
+}
+
