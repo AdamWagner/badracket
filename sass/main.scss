@@ -1,0 +1,608 @@
+@import 'compass';
+@import 'reset';
+@import 'utility';
+@import 'breakpoints';
+@import 'grid';
+
+/* --------------------------------------------------------------------------------------- *\
+  Vars
+/* --------------------------------------------------------------------------------------- */
+
+$cream: #f2e7cc;
+$red: #dc5b59;
+$orange: #d27f62;
+$dark: #403744;
+$light-on-dark:lighten($dark,30%);
+$green: #468d72;
+$dark:hsl(282, 11%, 23%);
+
+@import 'loading';
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Icon fonts
+/* --------------------------------------------------------------------------------------- */
+
+
+@font-face {
+font-family: 'icons';
+src: url('../fonts/icomoon.woff') format('woff'), 
+     url('../fonts/icomoon.svg') format('svg'),
+     url('../fonts/icomoon.eot') format('eot');
+}
+
+
+@mixin icons {
+  font-family: 'icons';
+  -webkit-font-smoothing:antialiased;
+  font-weight: normal;
+  font-style: normal;
+  font-variant:normal;
+  font-smooth:never;
+}
+
+[data-icon]:before {
+  @include icons;
+  content:attr(data-icon);
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Typography
+/* --------------------------------------------------------------------------------------- */
+
+.uppercase { text-transform:uppercase; }
+
+
+/* ------- Layout variables ----------------------------------------------------------------- */
+
+
+$header-height:4.6em;
+
+$nav-width-mobile:15.5em;
+$nav-width-big:19%;
+$nav-width-bigger:17%;
+$nav-width-huge:14%;
+
+$audio-player-width:60%;
+
+/* placholder classes*/
+%page-width {
+  width:100%;
+  @include breakpoint(big){
+    width:100%;
+    margin:auto;
+  }
+  @include breakpoint(bigger){ // between 1280 and 1900
+    width:80%;
+    min-width:1280px; // starts @1280  window width, ends @1600
+    max-width:1920px; // @2400 window width
+  }
+}
+
+%main-width {
+  width:100%;
+  @include breakpoint(big) { 
+    position:relative;
+    width:100 - $nav-width-big;  
+    left:$nav-width-big;
+  }
+  @include breakpoint(bigger) {
+   width:100 - $nav-width-bigger;  
+   left:$nav-width-bigger;
+ }
+  @include breakpoint(huge) {
+   width:100 - $nav-width-huge;  
+   left:$nav-width-huge;
+ }
+}
+
+%nav-width {
+  width:$nav-width-mobile;
+  @include breakpoint(big) { 
+    float:left; 
+    width:$nav-width-big;  
+  }
+  @include breakpoint(bigger) { 
+    width:$nav-width-bigger * .8;  
+  }
+ @media (min-width:1280px) and (max-width:1600px) { // address static page-width between 1280 and 1600
+    width:217.609375px;
+  }
+  @include breakpoint(huge) { 
+    width:$nav-width-huge *.8;  
+  } 
+ @media (min-width:2400px) { // address static page-width above 2400
+    width:268.8125px;
+  } 
+}
+
+html {
+  overflow-y: scroll;
+}
+body, html {
+  background:$dark;
+  padding:0;
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow-x:hidden;
+  font-size:102%;
+  @include breakpoint(big) {
+    font-size:108%;
+  }
+  @include breakpoint(bigger) {
+    font-size:112%;
+  }
+  @include breakpoint(huge) {
+    font-size:122%;
+  }
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Links
+/* --------------------------------------------------------------------------------------- */
+a {
+  // normal, hover, active, visited, focus
+  @include link-colors($cream, lighten($cream,5%), darken($cream,5%), darken($cream,5%), lighten($cream,5%));
+}
+
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Wrapper
+/* --------------------------------------------------------------------------------------- */
+
+.badracket-window {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+}
+
+.page-width {
+  @extend %page-width;
+}
+
+.app-main {
+  padding-top:$header-height;
+  position:relative;
+  background:$dark;
+}
+
+
+/* background image */
+.bg {
+  height:100%;
+  width:100%;
+  display:block;
+  position:fixed;
+  opacity:0;
+  pointer-events:none; // allow scroll when not over content
+  background-size:cover;
+  background-repeat:no-repeat;
+  z-index:0;
+  @include transition(opacity .2s);
+  @include breakpoint(big) {
+    &.loaded { opacity: 0.5; }
+  }
+
+}
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Header
+/* --------------------------------------------------------------------------------------- */
+
+header.mobile,
+header.desktop {
+  @extend .group;
+  height:$header-height;
+  top:0;
+  left:0;
+  right:0;
+  position:fixed;
+  z-index:100;
+}
+
+header.mobile {
+  @include transition(left .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
+  padding:1em;
+  z-index:100;
+  background:$dark;
+
+  .menu, .info, .logo {
+    width:3em;
+    height:3em;
+    background:blue;
+    cursor:pointer;
+    display:block;
+    
+    @include transition(opacity .3s linear .28s);
+    // to fade out when in mobile states
+  }
+  .logo {
+    margin:auto;
+    @extend %logo-mark;
+  }
+  .info {
+    float:right;
+  }
+}
+
+%logo-mark {
+ display:block;
+ background:url('../images/br-logo.svg');
+ background-size:cover; 
+ background-repeat:no-repeat;
+}
+
+header.desktop {
+  background:lighten($dark,1.5%);
+  .logo {
+    @extend %nav-width;
+    position:absolute;
+    top:0;
+    bottom:0;
+    padding:0.5em;
+
+    .logo-mark {
+      height:3em;
+      width:3em;
+      margin-top:0.4em;
+      @extend %logo-mark;
+    }
+  }
+
+  .header-bar {
+    @extend %main-width;
+    height:$header-height;
+    padding:1em;
+    @include breakpoint(big) {
+      padding:1em 1em 1em 1.6em;
+    }
+    @include background(linear-gradient(left, desaturate(lighten($dark,6%),1%), lighten($dark,1.5%)));
+    .audio-player {
+      width:$audio-player-width;
+      float:left;
+      margin-right:1.5em;
+    }
+  }
+
+  /* Audio player import */
+  @import 'audio-player';
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Main Nav
+/* --------------------------------------------------------------------------------------- */
+
+nav[role="navigation"] {
+  background:saturate(darken($dark,4%),1%);
+  @extend %nav-width;
+  position:fixed;
+  height:100%;
+  @include breakpoint(big) {
+    padding:0.75em;
+  }
+  @include breakpoint-reverso(small) {
+    opacity:0;
+  }
+}
+
+
+.nav-title, .nav-level-1 li {
+  padding:0.75em 0.5em;
+  @include breakpoint(big) {
+    padding:0.25 0;
+  }
+  
+}
+
+.nav-level-1 {
+  color:desaturate(lighten($dark,40%),4%);
+  // border-top:solid 1px lighten($dark, 3%);
+  // &:first-child{border-top:none;}
+  // &:last-child{ border-bottom:solid 1px lighten($dark, 3%); }
+
+  @include breakpoint(big) {
+    border-bottom:solid 1px lighten($dark, 3%);
+  }
+
+  .nav-title { 
+    font-size:.85em;
+    background:darken($dark,6.5%);
+    @include breakpoint(big) {
+      background:none;
+      font-size:1.3em; 
+      padding:.5em 0;
+    }
+  }
+
+  li { // sub-nav items
+    opacity:0.75;
+    font-size:1.2em;
+    border-top:solid 1px lighten($dark, 3%);
+    &:first-child{border-top:none;}
+    &:last-child{ border-bottom:solid 1px lighten($dark, 3%); } 
+    @include breakpoint(big) {
+      padding:0.2em 0;
+      font-size:0.875em;
+      border:none;
+      &:first-child{border-top:none;}
+      &:last-child{ border:none; } 
+    }
+  }
+
+  &.active {
+    @include breakpoint(big) {
+      padding-bottom:1em;
+    }
+  }
+
+  @include breakpoint(big) { // only show active nav sub items
+    // ul { display:none; }
+    // &.active ul { display:block; }
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Main content
+/* --------------------------------------------------------------------------------------- */
+
+.main-content {
+  @extend %main-width;
+  z-index:10;
+  position:relative; // for z-index effect
+  &.loading .loading-fade {
+    opacity:0.9;
+    @include transition(opacity 0.2s);
+  }
+}
+
+.loading-fade {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:darken($dark,8%);
+    @include transition(opacity 0.15s cubic-bezier(0.51,  0.01,  0.37,  0.98));
+    opacity:0;
+    z-index:200;
+    pointer-events:none;
+}
+
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Page state
+/* --------------------------------------------------------------------------------------- */
+
+header.mobile,
+.main-content {
+  @include transition(transform .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
+}
+
+@include breakpoint-reverso(small) {
+  [data-state="nav-state"] .main-content,
+  [data-state="nav-state"] header.mobile {
+    @include transform(translateX($nav-width-mobile));
+
+  }
+
+  [data-state="nav-state"] [role="navigation"] {
+    @include breakpoint-reverso(small) {
+      opacity:1;
+    }
+  }
+
+  [data-state="info-state"] .outer-wrapper {
+    @include transform(translateX(-$nav-width-mobile));
+  }
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Image containing divs
+/* --------------------------------------------------------------------------------------- */
+
+.img-container {
+    background-color:saturate(darken($dark,5%),5%);
+    position:relative;
+    .lazyload { 
+      display:block;
+      background-size:cover;
+      position: relative;
+      height: 0;
+      overflow: hidden;
+      width:100%;
+      height:100%;
+     -webkit-transform: translateZ(0); // kill the flash on load
+    }
+}
+
+// the placeholder on top fades out, the img doesn't fade in
+.placeholder { @include transition(opacity .15s linear); pointer-events:none; } 
+.loaded .lazyload.fade .placeholder { opacity:0; } 
+
+.ratio-16-9 {padding-bottom:56.25%; /* 9/16*100 */ }
+.ratio-4-3 {padding-bottom:75%; /* 3/4*100 */ }
+.ratio-1-1 {padding-bottom:100%; /* ... */ }
+
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Sections
+/* --------------------------------------------------------------------------------------- */
+
+.red { background:$red; }
+.green { background:$green; }
+
+section {
+  -webkit-transform: translateZ(0); // kill the flash on load
+  @include breakpoint(big) {
+    padding:1.6em;
+  }
+}
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Typography color
+/* --------------------------------------------------------------------------------------- */
+
+.cream { color:$dark; }
+
+a { text-decoration:none; }
+
+.cream a {
+  color:$red;
+  &:hover, &:focus {
+    color:darken($red,5%);
+  }
+  &:active {
+    color:darken($red,10%);
+  }
+}
+
+.red, .green, .orange { color:$dark; }
+
+.dark a {
+  color:$light-on-dark;
+}
+
+.red a {
+  color:$dark;
+  &:hover, &:focus {
+    color:darken($dark,5%);
+  }
+  &:active {
+    color:darken($dark,10%);
+  }
+}
+
+ul, li {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Music section
+/* --------------------------------------------------------------------------------------- */
+
+
+.section-subtitle {
+  padding:0.75em 0 0.75em;
+}
+
+.album-container {
+  @extend .group;
+}
+
+.play {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:url('../images/play.svg') no-repeat;
+  background-position:50%;
+  z-index:10;
+  pointer-events:none;
+  opacity:0;
+  @include transition(opacity .15s);
+}
+
+.album {
+  &.loading {
+    opacity:0.5;
+  }
+  &.playing .album-cover {
+    // border:solid 3px $dark;
+    @include box-shadow(0 0 0 0.25em $dark);
+  }
+}
+
+.album-cover {
+  cursor:pointer;
+  @include breakpoint(mobile) {
+    @include box-shadow(0 0 1px transparentize(black,0.2));
+  }
+  .album-cover-img {
+    // @include box-shadow(inset 0 1px 1px hsla(0, 0%, 100%,0.15));
+  }
+}
+
+
+%no-wrap-text {
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+.album-meta {
+  font-size:75%;
+  padding:0.5em 0;
+  .album-title, .artist-name {
+    @extend %no-wrap-text;
+  }
+  .album-title {
+    font-weight:bold;
+  }
+}
+
+@include breakpoint(big) {
+  .playable:hover {
+      @include box-shadow(0 0 1px $dark);
+      .lazyload {
+        opacity:0.35;
+        @include transition(opacity 0s);
+      }
+      .play { 
+        opacity: 1; 
+        @include transition(opacity 0s);
+      }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
