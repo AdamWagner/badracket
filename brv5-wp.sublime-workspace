@@ -1,0 +1,2613 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"delete",
+				"deleteProperty"
+			],
+			[
+				"duration",
+				"durationEstimate"
+			],
+			[
+				"very",
+				"very-narrow-width"
+			],
+			[
+				"gz",
+				"gzipped_file_path"
+			],
+			[
+				"gzipp",
+				"gzipped_file_path"
+			],
+			[
+				"gzip",
+				"gzip_assets"
+			],
+			[
+				"g",
+				"gzipped_file_path"
+			],
+			[
+				"upl",
+				"upload_to_s3"
+			],
+			[
+				"s",
+				"subdirectory"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"re",
+				"remote_filepath"
+			],
+			[
+				"gzip_",
+				"gzip_ext"
+			],
+			[
+				"make_",
+				"make_filepath"
+			],
+			[
+				"wp_enqueue",
+				"wp_enqueue_style"
+			],
+			[
+				"funct",
+				"functions"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"initial",
+				"initial_referrer"
+			],
+			[
+				"orange",
+				"orange"
+			],
+			[
+				"test",
+				"testimonial_item"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"meta",
+				"meta_box"
+			],
+			[
+				"tes",
+				"Testimonials"
+			],
+			[
+				"blog",
+				"blog-interstitial"
+			],
+			[
+				"wp_enq",
+				"wp_enqueue_style"
+			],
+			[
+				"wp_e",
+				"wp_enqueue_style"
+			],
+			[
+				"wp_enqueu",
+				"wp_enqueue_style"
+			],
+			[
+				"rec",
+				"recommendations"
+			],
+			[
+				"gues",
+				"guesswork-bubble"
+			],
+			[
+				"guess",
+				"guesswork-head"
+			],
+			[
+				"mar",
+				"marketing-index"
+			],
+			[
+				"flag-",
+				"flag-big	scss-flag-big"
+			],
+			[
+				"joke",
+				"joke_evaluation"
+			],
+			[
+				"my",
+				"my_hair"
+			],
+			[
+				"WP",
+				"WP_theme_path"
+			],
+			[
+				"more",
+				"more_free_form"
+			],
+			[
+				"blue",
+				"blue-l	cop_blue_light"
+			],
+			[
+				"update",
+				"updateProperties"
+			],
+			[
+				"local",
+				"local_path"
+			],
+			[
+				"home",
+				"homepage_js_path"
+			],
+			[
+				"create",
+				"createSynonymObject"
+			],
+			[
+				"words",
+				"wordsSynObj"
+			],
+			[
+				"wordS",
+				"wordsSynObj"
+			],
+			[
+				"get",
+				"getCurrentTime"
+			],
+			[
+				"global",
+				"globalProperties"
+			],
+			[
+				"up",
+				"updateProperties"
+			],
+			[
+				"no",
+				"nowrap"
+			],
+			[
+				"wp_register",
+				"wp_register_script"
+			],
+			[
+				"play",
+				"playhead"
+			],
+			[
+				"this",
+				"thisSong"
+			],
+			[
+				"email_client--sidebar",
+				"email_client--sidebar--item"
+			],
+			[
+				"event",
+				"eventName"
+			],
+			[
+				"globa",
+				"globalProperties"
+			],
+			[
+				"al",
+				"albumWrapper"
+			],
+			[
+				"tran",
+				"transparentize"
+			],
+			[
+				"ligh",
+				"light-on-dark"
+			],
+			[
+				"lig",
+				"light-on-dark"
+			],
+			[
+				"dar",
+				"light-on-dark"
+			],
+			[
+				"field",
+				"field-text	wp-mb_field-text"
+			],
+			[
+				"curr",
+				"current-title"
+			],
+			[
+				"sound",
+				"soundCount"
+			],
+			[
+				"ora",
+				"orange-d	cop_orange_dark"
+			],
+			[
+				"or",
+				"orange-l-hsla	cop_gray_light_hsla"
+			],
+			[
+				"album",
+				"albumWrapper"
+			],
+			[
+				"alb",
+				"albumWrapperWidth"
+			],
+			[
+				"invisib",
+				"invisibleOut"
+			],
+			[
+				"setup",
+				"setupAlbumSlider"
+			],
+			[
+				"set",
+				"setTimeout"
+			],
+			[
+				"par",
+				"parseInt"
+			],
+			[
+				"text-",
+				"text-align"
+			],
+			[
+				"mix",
+				"mixpanelExperimental"
+			],
+			[
+				"mi",
+				"mixpanelProduction"
+			],
+			[
+				"mixpanel",
+				"mixpanelProduction"
+			],
+			[
+				"oran",
+				"orange-l	cop_orange_light"
+			],
+			[
+				"email",
+				"email-footer"
+			],
+			[
+				"addres",
+				"address-label"
+			],
+			[
+				"linear",
+				"linear-gradient"
+			],
+			[
+				"bg",
+				"bg-gradient"
+			],
+			[
+				"font-st",
+				"font-stack-body-italic"
+			],
+			[
+				"pl",
+				"play-pause"
+			],
+			[
+				"font-",
+				"font-stack-body-italic"
+			],
+			[
+				"page",
+				"pageWidth"
+			],
+			[
+				"co",
+				"columns"
+			],
+			[
+				"te",
+				"textureCanvas"
+			],
+			[
+				"texture",
+				"textureHeight"
+			],
+			[
+				"track",
+				"trackSignupForm"
+			],
+			[
+				"people",
+				"peopleProperties"
+			],
+			[
+				"remove",
+				"removeClass"
+			],
+			[
+				"invalid",
+				"invalidHandler"
+			],
+			[
+				"pos",
+				"pos_name"
+			],
+			[
+				"prev",
+				"preventDefault"
+			],
+			[
+				"rout",
+				"routeForm"
+			],
+			[
+				"Form",
+				"FormRouting"
+			],
+			[
+				"match",
+				"matchPlayer"
+			],
+			[
+				"player",
+				"playerControls"
+			],
+			[
+				"deal",
+				"dealerDOM"
+			],
+			[
+				"dealer",
+				"dealerDOM"
+			],
+			[
+				"card",
+				"cardEl"
+			],
+			[
+				"css",
+				"cssSymbol"
+			],
+			[
+				"siaf",
+				"siafwp	siaf-wp"
+			],
+			[
+				"sec",
+				"secure-time"
+			],
+			[
+				"secu",
+				"secure-pos"
+			],
+			[
+				"homep",
+				"homepage-signup-form"
+			],
+			[
+				"hom",
+				"home-cta-button"
+			],
+			[
+				"trends",
+				"trends-water"
+			],
+			[
+				"tre",
+				"trends-water"
+			],
+			[
+				"reccomendations-",
+				"reccomendations-bg"
+			],
+			[
+				"guesswork-b",
+				"guesswork-bg"
+			],
+			[
+				"guessw",
+				"guesswork-head"
+			],
+			[
+				"guesw",
+				"guesswork-bubble"
+			],
+			[
+				"add",
+				"addPlaceholder"
+			],
+			[
+				"nth",
+				":nth-child(|)"
+			],
+			[
+				"feature-",
+				"featured-headline"
+			],
+			[
+				"cont",
+				"control-bar"
+			],
+			[
+				"geo",
+				"geo-regular	css-geo-regular"
+			],
+			[
+				"ba",
+				"background-repeat"
+			],
+			[
+				"return",
+				"returnFacebookLikes"
+			],
+			[
+				"twitter",
+				"twitterCount"
+			],
+			[
+				"go",
+				"geo-regular	css-geo-semi"
+			],
+			[
+				"wp",
+				"wp_reset_query"
+			],
+			[
+				"res",
+				"restaurantName"
+			],
+			[
+				"active",
+				"activeSlide"
+			],
+			[
+				"extra",
+				"extraProps"
+			],
+			[
+				"even",
+				"eventName"
+			],
+			[
+				"se",
+				"seconds"
+			],
+			[
+				"fa",
+				"faq-wrapper"
+			],
+			[
+				"backg",
+				"background-repeat"
+			],
+			[
+				"gfor",
+				"gform_wrapper"
+			],
+			[
+				"faq-",
+				"faq-wrapper"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "parts/home/section-music.php",
+			"settings":
+			{
+				"buffer_size": 1563,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "parts/shared/html-footer.php",
+			"settings":
+			{
+				"buffer_size": 884,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/main.js",
+			"settings":
+			{
+				"buffer_size": 7233,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/badracket.audio-player.js",
+			"settings":
+			{
+				"buffer_size": 9689,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "page-templates/album-data-structure-test.php",
+			"settings":
+			{
+				"buffer_size": 3598,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/YUI Compressor/YUI Compressor.sublime-build",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"syn html",
+				"Set Syntax: HTML"
+			],
+			[
+				"reveal",
+				"File: Reveal"
+			],
+			[
+				"git commit",
+				"Git: Commit"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"new",
+				"File: New View into File"
+			],
+			[
+				"select bra",
+				"Bracket Highlighter: Select Bracket Content"
+			],
+			[
+				"bracket",
+				"Bracket Highlighter: Select Bracket Content"
+			],
+			[
+				"bracket quote",
+				"Bracket Highlighter: Swap Quotes"
+			],
+			[
+				"bracket quo",
+				"Bracket Highlighter: Swap Quotes"
+			],
+			[
+				"settings user",
+				"Preferences: Settings - User"
+			],
+			[
+				"settings",
+				"Preferences: Settings - Default"
+			],
+			[
+				"setting",
+				"Preferences: Settings - Default"
+			],
+			[
+				"new view",
+				"File: New View into File"
+			],
+			[
+				"close",
+				"Project: Close"
+			],
+			[
+				"fetch",
+				"Fetch: Package"
+			],
+			[
+				"dis lint",
+				"SublimeLinter: Disable Linting"
+			],
+			[
+				"syn css",
+				"Set Syntax: CSS"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"browse",
+				"Preferences: Browse Packages"
+			],
+			[
+				"fetch f",
+				"Fetch: File"
+			],
+			[
+				"mini",
+				"View: Toggle Minimap"
+			],
+			[
+				"minimap",
+				"View: Toggle Minimap"
+			],
+			[
+				"settings us",
+				"Preferences: Settings - User"
+			],
+			[
+				"prefer",
+				"Preferences: Settings - Default"
+			],
+			[
+				"pref",
+				"Preferences: Settings - User"
+			],
+			[
+				"new vi",
+				"File: New View into File"
+			],
+			[
+				"syn scss",
+				"Set Syntax: SCSS"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"syn py",
+				"Set Syntax: Python"
+			],
+			[
+				"new ",
+				"File: New View into File"
+			],
+			[
+				"new v",
+				"File: New View into File"
+			],
+			[
+				"WRAP",
+				"Word Wrap: Toggle"
+			],
+			[
+				"forat",
+				"Format: Javascript"
+			],
+			[
+				"syn js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"html",
+				"HTML: Encode Special Characters"
+			],
+			[
+				"input",
+				"WordPress Codex: Search from Input"
+			],
+			[
+				"syn sass",
+				"Set Syntax: Sass"
+			],
+			[
+				"rev",
+				"File: Reveal"
+			],
+			[
+				"sn js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"lint",
+				"SublimeLinter: Save-Only Linting"
+			],
+			[
+				"remove pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"is lint",
+				"SublimeLinter: Save-Only Linting"
+			],
+			[
+				"dis",
+				"SublimeLinter: Disable Linting"
+			],
+			[
+				"dislint",
+				"SublimeLinter: Disable Linting"
+			],
+			[
+				"open",
+				"File: Open In Browser - Production Server"
+			],
+			[
+				"syn scs",
+				"Set Syntax: SCSS"
+			],
+			[
+				"syn sc",
+				"Set Syntax: SCSS"
+			],
+			[
+				"align",
+				"Preferences: Alignment File Settings – Default"
+			],
+			[
+				"pref def",
+				"Preferences: Settings - Default"
+			],
+			[
+				"js hint",
+				"JSHint"
+			],
+			[
+				"hint",
+				"JSHint"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"js",
+				"JSHint"
+			],
+			[
+				":js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				":html",
+				"Set Syntax: HTML"
+			],
+			[
+				":h",
+				"Set Syntax: Haskell"
+			],
+			[
+				"revlea",
+				"Tag: Remove All Attributes From Tags in Document"
+			],
+			[
+				"his",
+				"Snippet: lorem - HTML Kitchen sink"
+			],
+			[
+				"snippet wp che",
+				"Snippet: wp-mb_field-checkbox"
+			],
+			[
+				"syn javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"syn java",
+				"Set Syntax: Java"
+			],
+			[
+				"browse use",
+				"File: Open In Browser - Production Server"
+			],
+			[
+				"snippet wp text_",
+				"Snippet: wp-mb_field-text_area"
+			],
+			[
+				"snippet wp-fil",
+				"Snippet: wp-mb_field-text"
+			],
+			[
+				"REVEAL",
+				"File: Reveal"
+			],
+			[
+				"YUI",
+				"File: Copy Path as URI"
+			],
+			[
+				"lint dis",
+				"SublimeLinter: Disable Linting"
+			],
+			[
+				"alignment",
+				"Preferences: Alignment File Settings – Default"
+			],
+			[
+				"snippet wp",
+				"Snippet: wp-mb_field-text"
+			],
+			[
+				"newview",
+				"File: New View into File"
+			],
+			[
+				"browse pa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"new viw",
+				"File: New View into File"
+			],
+			[
+				"snippet wp tax",
+				"Snippet: wp-register-taxonomy"
+			],
+			[
+				"pref user",
+				"Preferences: Settings - User"
+			],
+			[
+				"pref u",
+				"Preferences: Settings - User"
+			],
+			[
+				"js ",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"error",
+				"SublimeLinter: Show Error List"
+			],
+			[
+				"linet",
+				"Sort Lines (Case Sensitive)"
+			],
+			[
+				"folder",
+				"Project: Add Folder"
+			],
+			[
+				"syn ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"sys html",
+				"Snippet: Create custom meta boxes using the Tammy's Hart system, available at https://github.com/tammyhart/Reusable-Custom-WordPress-Meta-Boxes"
+			],
+			[
+				"synt html",
+				"Set Syntax: HTML"
+			],
+			[
+				"brose pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"keyb",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"syn html	",
+				"Set Syntax: HTML"
+			],
+			[
+				"disable",
+				"SublimeLinter: Disable Linting"
+			],
+			[
+				"linter",
+				"SublimeLinter: Disable Linting"
+			],
+			[
+				"set syn html",
+				"Set Syntax: HTML"
+			],
+			[
+				"syn",
+				"Set Syntax: PHP"
+			],
+			[
+				"syn php",
+				"Set Syntax: PHP"
+			],
+			[
+				"synt javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"fetch ",
+				"Fetch"
+			],
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"syn	css",
+				"Set Syntax: CSS"
+			],
+			[
+				"synt css",
+				"Set Syntax: CSS"
+			],
+			[
+				"edit",
+				"Project: Edit"
+			],
+			[
+				"synt",
+				"Set Syntax: CSS"
+			],
+			[
+				"fetch	",
+				"Fetch"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"revel",
+				"File: Reveal"
+			],
+			[
+				"packag",
+				"Package Control: Install Package"
+			],
+			[
+				"package ins",
+				"Package Control: Install Package"
+			],
+			[
+				"diff",
+				"FileDiffs: Menu"
+			],
+			[
+				"install pack	",
+				"Package Control: Install Package"
+			],
+			[
+				"install pac",
+				"Package Control: Install Package"
+			],
+			[
+				"PACKAGE",
+				"Package Control: List Packages"
+			],
+			[
+				"synt ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"open brow",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"open br",
+				"File: Open In Browser - Production Server"
+			],
+			[
+				"css comb",
+				"Sort via CSScomb"
+			],
+			[
+				"comb",
+				"Sort via CSScomb"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"syntax js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"synt	js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"synt	css",
+				"Set Syntax: CSS"
+			],
+			[
+				"syn	",
+				"Set Syntax: PHP"
+			],
+			[
+				"fet",
+				"Fetch"
+			],
+			[
+				"list pa",
+				"Package Control: List Packages"
+			],
+			[
+				"gist",
+				"Gist: Create Private Gist"
+			],
+			[
+				"GIST",
+				"Gist: Create Private Gist"
+			],
+			[
+				"browse ser",
+				"SFTP: Browse Server…"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 579.0
+	},
+	"console":
+	{
+		"height": 253.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": true,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/js/main.js",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/js/badracket.audio-player.js",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/shared/html-header.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/page-templates/home.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/home/section-videos.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/page-templates/album-data-structure-test.php",
+		"/Users/adamwagner/Desktop/Screen Shot 2013-02-15 at 1.34.49 AM.png",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/shared/html-footer.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/functions.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/nav.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/style.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/home/section-music.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/page-templates/videos.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/section-videos.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/css/styles.css",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/style.css",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/shared/footer.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/config.rb",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_normalize.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/loading.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/header-mobile.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/external/meta-box/css/jqueryui/jquery-ui-timepicker-addon.css",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/home/section-music",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/header-desktop.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/mobile-header.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/shared/desktop-header.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/parts/shared/header.php",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/js/facebook.js",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/styles.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_header.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_breakpoints.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_forms.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_typography.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_inputs.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_grid.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_audio-player.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/main.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_loading.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_button.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_utility.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/utility.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/forms.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/utility",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/sass/_bits.scss",
+		"/Users/adamwagner/Sites/brv5/wp-br/wp-content/themes/badracket/css/main.css",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_grid.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/single-docs.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_utility.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_homepage.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_docs.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/archive-docs.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/js/homepage.js",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/style.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/templates/demo-tour.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_demo-tour.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/templates/homepage.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/components/_thumbnails-bootstrap.scss",
+		"/Users/adamwagner/Desktop/email-weekly.html",
+		"/Users/adamwagner/Desktop/email-2.html",
+		"/Users/adamwagner/Desktop/daily-email-feb-12 copy.html",
+		"/Users/adamwagner/Desktop/weekly-email-feb-10.html",
+		"/Users/adamwagner/Desktop/email-welcome.html",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/demo-account.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/includes/enqueue-script-style.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_page-sections.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_copilot-global.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/plugins/html-editor-syntax-highlighter/lib/htmlmixed.js",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/single-demo_account.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/demo-account/breakpoints.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/demo-account/demo-account.scss",
+		"/Users/adamwagner/Sites/omni-web-view/js/main.js",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/breakpoints.scss",
+		"/Users/adamwagner/Sites/omni-web-view/sass/main.scss",
+		"/Users/adamwagner/Sites/omni-web-view/sass/_breakpoints.scss",
+		"/Users/adamwagner/Sites/omni-web-view/sass/_grid.scss",
+		"/Users/adamwagner/Sites/omni-web-view/sass/reset.scss",
+		"/Users/adamwagner/Sites/omni-web-view/index.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/functions.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/includes/cpt-definitions.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/single-demo-web-view.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/templates/demo-account.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/js/site.js",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_vars.scss",
+		"/Users/adamwagner/Sites/concourse/wp-config.php",
+		"/Users/adamwagner/Desktop/email.html",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/templates/about.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_reset.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/config.rb",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/templates/page-no-title.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_blog-loop.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_blog-single.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_typography.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/templates/blog.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/parts/shared/header-homepage.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/parts/blogroll.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/single-promo_catalog.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/parts/shared/html-header.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/parts/shared/footer.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/parts/shared/html-footer.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/includes/meta-box-definitions.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_rm-guide.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/archive-promo_catalog.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/docs.php",
+		"/Users/adamwagner/Sites/concourse/concourse.sublime-project",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_header.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/parts/shared/header-default.php",
+		"/Users/adamwagner/Sites/concourse/fabfile.py",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/style.css",
+		"/Users/adamwagner/Library/Caches/Cleanup At Startup/Transmit/E0C4795A-C35F-4B79-B104-4B0EA03A7E2D/style.745368b365e42a2c1c43d5257ae29fff.gzip.css",
+		"/Users/adamwagner/Library/Caches/Cleanup At Startup/Transmit/2EF659D0-EF98-4061-B8ED-E7B223E55F34/style.css",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/single.php",
+		"/Users/adamwagner/Library/Caches/Cleanup At Startup/Transmit/DBD0C724-F294-49E8-A530-28B973082A07/aw_script.js",
+		"/Users/adamwagner/Library/Caches/Cleanup At Startup/Transmit/76925F4E-7DB9-43E4-8159-4E96B20FF650/aw_script.js",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_signup-page.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/pages/signup-page.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_signup-form.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/pages/landing-page-cpt.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/components/_carousel-bootstrap.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_what-is-copilot.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/templates/what-is-copilot.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_about.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_thank-you.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/templates/thank-you.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/parts/rm-guide-partial.php",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_topbar-cta.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_footer.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/sass/shared/_forms.scss",
+		"/Users/adamwagner/Sites/concourse/wp-content/themes/starkers/parts/two-minute-install.php"
+	],
+	"find":
+	{
+		"height": 79.0
+	},
+	"find_in_files":
+	{
+		"height": 95.0,
+		"where_history":
+		[
+			"<open folders>",
+			"/Applications/MAMP/htdocs/launchcopilot/wp-content/themes/starkers",
+			"/Applications/MAMP/htdocs/launchcopilot",
+			"/Applications/MAMP/htdocs/launchcopilot/wp-content",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"obj",
+			"prop.toString()",
+			"delete",
+			"   ",
+			"image-conta",
+			".albums",
+			"../",
+			"ico",
+			"font",
+			"images",
+			"serif",
+			"sans",
+			"serif",
+			"sans-serif",
+			"sans",
+			"images",
+			"iamges",
+			"djax",
+			"shit",
+			"cache_busting_path(",
+			"h3",
+			"'field' => 'slug'",
+			"bullet-list",
+			"ready",
+			".ready",
+			"filter: alpha(opacity=0);",
+			"filter: alpha(opacity=100);",
+			"had",
+			"opacity=1",
+			"opacity: 1;",
+			"chart",
+			"chgart",
+			"chart",
+			"dining room",
+			"very-narrow-width",
+			"$very-narrow-width",
+			"width",
+			"15",
+			"faq",
+			"mobile",
+			"3px",
+			"5px",
+			"left",
+			"button",
+			"../images",
+			"images",
+			"images/",
+			"../images/",
+			"Case Study",
+			".form-beta ",
+			"li",
+			"ul",
+			"<h4>",
+			"position",
+			"icon",
+			"group",
+			"top:",
+			"{ background",
+			".beta ",
+			"15px",
+			"20px",
+			"h3",
+			"h1",
+			"block",
+			"var",
+			"unexpected",
+			".",
+			"http://da6ki5l3xfcf0.cloudfront.net",
+			"s3_path",
+			"init",
+			"save_file_in_s3",
+			"http://d2k310j93pm7t9.cloudfront.net/images/home/competitive-intel.jpeg",
+			"competitive",
+			".top-left-corner-gra",
+			"sidebar",
+			"images",
+			"url(http://d2k310j93pm7t9.cloudfront.net/",
+			"http://d2k310j93pm7t9.cloudfront.net/",
+			"d2k310j",
+			"http://d2k310j93pm7t9.cloudfront.net/",
+			"dark-text",
+			"bottom0",
+			"http://d2k310j93pm7t9.cloudfront.net/",
+			"35",
+			".gz",
+			".'.gz'",
+			".gz",
+			"filename.split('.')",
+			"root",
+			"file_path",
+			".data",
+			"some",
+			"somefil",
+			"style",
+			"<? ",
+			"<?",
+			"45",
+			"green",
+			"50",
+			"35",
+			"64",
+			"specs",
+			"../",
+			".../",
+			"../",
+			"../img",
+			"specs",
+			"../",
+			"see your ra",
+			"compressed",
+			"53",
+			"190",
+			"here",
+			"#dd_ajax",
+			"ajax",
+			"styled",
+			"group",
+			".group",
+			"button-secondary",
+			"div",
+			"bac3c5",
+			"ccc",
+			".bind('waypoint.reached', ",
+			"event, ",
+			"faq",
+			"waypoint",
+			"waypoin",
+			"event,"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"verb\"",
+			"verb",
+			"noun",
+			"adjective",
+			"localhost:8888/sites/concourse",
+			"localhost:8888/sites/concourse/",
+			"../fonts/",
+			"../images/",
+			"http://localhost:8888/copilot-new-homepage",
+			"http://copilot.wpengine.com",
+			"http://http://copilot.wpengine.com",
+			"http://localhost:8888/brv5_wp",
+			"http://stagewp.badracket.com",
+			"",
+			"Copilot",
+			"copilot_",
+			"copilot",
+			"button-cta",
+			"../images",
+			"images",
+			"LivingSocial",
+			"0",
+			"../images/",
+			"Steel Wizard",
+			"hoW",
+			"width:90%;",
+			"width:175px;",
+			"31b2cc"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "parts/home/section-music.php",
+					"settings":
+					{
+						"buffer_size": 1563,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								395,
+								375
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "false",
+								"box-model": false,
+								"box-sizing": "false",
+								"compatible-vendor-prefixes": "false",
+								"display-property-grouping": false,
+								"duplicate-background-images": "false",
+								"duplicate-properties": false,
+								"empty-rules": false,
+								"errors": false,
+								"fallback-colors": "false",
+								"floats": "false",
+								"font-faces": "false",
+								"font-sizes": "false",
+								"gradients": "false",
+								"ids": "false",
+								"import": "false",
+								"important": "false",
+								"known-properties": false,
+								"outline-none": "false",
+								"overqualified-elements": "false",
+								"qualified-headings": "false",
+								"regex-selectors": "false",
+								"rules-count": "false",
+								"shorthand": "false",
+								"star-property-hack": "false",
+								"text-indent": "false",
+								"underscore-property-hack": "false",
+								"unique-headings": "false",
+								"universal-selector": "false",
+								"vendor-prefix": false,
+								"zero-units": "false"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"is_xml": false,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "parts/shared/html-footer.php",
+					"settings":
+					{
+						"buffer_size": 884,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								884,
+								884
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "false",
+								"box-model": false,
+								"box-sizing": "false",
+								"compatible-vendor-prefixes": "false",
+								"display-property-grouping": false,
+								"duplicate-background-images": "false",
+								"duplicate-properties": false,
+								"empty-rules": false,
+								"errors": false,
+								"fallback-colors": "false",
+								"floats": "false",
+								"font-faces": "false",
+								"font-sizes": "false",
+								"gradients": "false",
+								"ids": "false",
+								"import": "false",
+								"important": "false",
+								"known-properties": false,
+								"outline-none": "false",
+								"overqualified-elements": "false",
+								"qualified-headings": "false",
+								"regex-selectors": "false",
+								"rules-count": "false",
+								"shorthand": "false",
+								"star-property-hack": "false",
+								"text-indent": "false",
+								"underscore-property-hack": "false",
+								"unique-headings": "false",
+								"universal-selector": "false",
+								"vendor-prefix": false,
+								"zero-units": "false"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"is_xml": false,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/main.js",
+					"settings":
+					{
+						"buffer_size": 7233,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "false",
+								"box-model": false,
+								"box-sizing": "false",
+								"compatible-vendor-prefixes": "false",
+								"display-property-grouping": false,
+								"duplicate-background-images": "false",
+								"duplicate-properties": false,
+								"empty-rules": false,
+								"errors": false,
+								"fallback-colors": "false",
+								"floats": "false",
+								"font-faces": "false",
+								"font-sizes": "false",
+								"gradients": "false",
+								"ids": "false",
+								"import": "false",
+								"important": "false",
+								"known-properties": false,
+								"outline-none": "false",
+								"overqualified-elements": "false",
+								"qualified-headings": "false",
+								"regex-selectors": "false",
+								"rules-count": "false",
+								"shorthand": "false",
+								"star-property-hack": "false",
+								"text-indent": "false",
+								"underscore-property-hack": "false",
+								"unique-headings": "false",
+								"universal-selector": "false",
+								"vendor-prefix": false,
+								"zero-units": "false"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/badracket.audio-player.js",
+					"settings":
+					{
+						"buffer_size": 9689,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2785,
+								2785
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "false",
+								"box-model": false,
+								"box-sizing": "false",
+								"compatible-vendor-prefixes": "false",
+								"display-property-grouping": false,
+								"duplicate-background-images": "false",
+								"duplicate-properties": false,
+								"empty-rules": false,
+								"errors": false,
+								"fallback-colors": "false",
+								"floats": "false",
+								"font-faces": "false",
+								"font-sizes": "false",
+								"gradients": "false",
+								"ids": "false",
+								"import": "false",
+								"important": "false",
+								"known-properties": false,
+								"outline-none": "false",
+								"overqualified-elements": "false",
+								"qualified-headings": "false",
+								"regex-selectors": "false",
+								"rules-count": "false",
+								"shorthand": "false",
+								"star-property-hack": "false",
+								"text-indent": "false",
+								"underscore-property-hack": "false",
+								"unique-headings": "false",
+								"universal-selector": "false",
+								"vendor-prefix": false,
+								"zero-units": "false"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 980.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "page-templates/album-data-structure-test.php",
+					"settings":
+					{
+						"buffer_size": 3598,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2613,
+								2613
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "false",
+								"box-model": false,
+								"box-sizing": "false",
+								"compatible-vendor-prefixes": "false",
+								"display-property-grouping": false,
+								"duplicate-background-images": "false",
+								"duplicate-properties": false,
+								"empty-rules": false,
+								"errors": false,
+								"fallback-colors": "false",
+								"floats": "false",
+								"font-faces": "false",
+								"font-sizes": "false",
+								"gradients": "false",
+								"ids": "false",
+								"import": "false",
+								"important": "false",
+								"known-properties": false,
+								"outline-none": "false",
+								"overqualified-elements": "false",
+								"qualified-headings": "false",
+								"regex-selectors": "false",
+								"rules-count": "false",
+								"shorthand": "false",
+								"star-property-hack": "false",
+								"text-indent": "false",
+								"underscore-property-hack": "false",
+								"unique-headings": "false",
+								"universal-selector": "false",
+								"vendor-prefix": false,
+								"zero-units": "false"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"is_xml": false,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1488.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 155.0
+	},
+	"output.git":
+	{
+		"height": 114.0
+	},
+	"output.sftp":
+	{
+		"height": 28.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"data",
+				"page-templates/album-data-structure-test.php"
+			],
+			[
+				"videos",
+				"parts/home/section-videos.php"
+			],
+			[
+				"bad",
+				"js/badracket.audio-player.js"
+			],
+			[
+				"main",
+				"js/main.js"
+			],
+			[
+				"html",
+				"parts/shared/html-footer.php"
+			],
+			[
+				"home",
+				"page-templates/home.php"
+			],
+			[
+				"fun",
+				"functions.php"
+			],
+			[
+				"se",
+				"parts/home/section-music.php"
+			],
+			[
+				"music",
+				"parts/home/section-music.php"
+			],
+			[
+				"audio",
+				"js/badracket.audio-player.js"
+			],
+			[
+				"stylescss",
+				"sass/style.scss"
+			],
+			[
+				"stylescs",
+				"css/styles.css"
+			],
+			[
+				"style",
+				"style.css"
+			],
+			[
+				"stylscs",
+				"sass/style.scss"
+			],
+			[
+				"nav",
+				"parts/nav.php"
+			],
+			[
+				"sectionvideo",
+				"parts/home/section-videos.php"
+			],
+			[
+				"section",
+				"parts/home/section-music.php"
+			],
+			[
+				"norm",
+				"sass/_normalize.scss"
+			],
+			[
+				"normal",
+				"sass/_normalize.scss"
+			],
+			[
+				"ection",
+				"parts/home/section-music.php"
+			],
+			[
+				"mob",
+				"parts/header-mobile.php"
+			],
+			[
+				"footer",
+				"parts/shared/footer.php"
+			],
+			[
+				"enqueu",
+				"external/meta-box/css/jqueryui/jquery-ui-timepicker-addon.css"
+			],
+			[
+				"conf",
+				"config.rb"
+			],
+			[
+				"util",
+				"Concourse Theme/sass/shared/_utility.scss"
+			],
+			[
+				"homepagescs",
+				"Concourse Theme/sass/shared/_homepage.scss"
+			],
+			[
+				"homepage",
+				"Concourse Theme/js/homepage.js"
+			],
+			[
+				"grid",
+				"Concourse Theme/sass/shared/_grid.scss"
+			],
+			[
+				"singledo",
+				"Concourse Theme/single-docs.php"
+			],
+			[
+				"docs",
+				"Concourse Theme/archive-docs.php"
+			],
+			[
+				"docsscs",
+				"Concourse Theme/sass/shared/_docs.scss"
+			],
+			[
+				"demo-tou",
+				"Concourse WP Root/wp-content/themes/starkers/templates/demo-tour.php"
+			],
+			[
+				"demo",
+				"Concourse Theme/sass/shared/_demo-tour.scss"
+			],
+			[
+				"demo-tour",
+				"Concourse Theme/sass/shared/_demo-tour.scss"
+			],
+			[
+				"homep",
+				"Concourse Theme/templates/homepage.php"
+			],
+			[
+				"synhtml",
+				"Concourse WP Root/wp-content/plugins/html-editor-syntax-highlighter/lib/htmlmixed.js"
+			],
+			[
+				"global",
+				"Concourse Theme/sass/shared/_copilot-global.scss"
+			],
+			[
+				"break",
+				"Concourse Theme/sass/demo-account/breakpoints.scss"
+			],
+			[
+				"cpt",
+				"Concourse Theme/includes/cpt-definitions.php"
+			],
+			[
+				"enque",
+				"Concourse Theme/includes/enqueue-script-style.php"
+			],
+			[
+				"site.js",
+				"Concourse Theme/js/site.js"
+			],
+			[
+				"wp-conf",
+				"Concourse WP Root/wp-config.php"
+			],
+			[
+				"vars",
+				"Concourse Theme/sass/shared/_vars.scss"
+			],
+			[
+				"blogscss",
+				"Concourse WP Root/wp-content/themes/starkers/sass/shared/_blog-loop.scss"
+			],
+			[
+				"confi",
+				"Concourse Theme/config.rb"
+			],
+			[
+				"reset",
+				"Concourse Theme/sass/shared/_reset.scss"
+			],
+			[
+				"page-se",
+				"Concourse Theme/sass/shared/_page-sections.scss"
+			],
+			[
+				"typ",
+				"Concourse Theme/sass/shared/_typography.scss"
+			],
+			[
+				"styl",
+				"Concourse Theme/sass/style.scss"
+			],
+			[
+				"hea",
+				"Concourse Theme/parts/shared/header-homepage.php"
+			],
+			[
+				"blog",
+				"Concourse Theme/templates/blog.php"
+			],
+			[
+				"homepage.s",
+				"Concourse Theme/sass/shared/_homepage.scss"
+			],
+			[
+				"html-",
+				"Concourse Theme/parts/shared/html-footer.php"
+			],
+			[
+				"blog-sing",
+				"Concourse Theme/sass/shared/_blog-single.scss"
+			],
+			[
+				"singlrm",
+				"Concourse Theme/single-promo_catalog.php"
+			],
+			[
+				"html-he",
+				"Concourse Theme/parts/shared/html-header.php"
+			],
+			[
+				"typog",
+				"Concourse Theme/sass/shared/_typography.scss"
+			],
+			[
+				"promo",
+				"Concourse Theme/single-promo_catalog.php"
+			],
+			[
+				"meta",
+				"Concourse Theme/includes/meta-box-definitions.php"
+			],
+			[
+				"cpt-def",
+				"Concourse Theme/includes/cpt-definitions.php"
+			],
+			[
+				"guidescss",
+				"Concourse WP Root/wp-content/themes/starkers/sass/shared/_rm-guide.scss"
+			],
+			[
+				"html-h",
+				"Concourse Theme/parts/shared/html-header.php"
+			],
+			[
+				"homepa",
+				"Concourse Theme/templates/homepage.php"
+			],
+			[
+				"enqueue",
+				"Concourse Theme/includes/enqueue-script-style.php"
+			],
+			[
+				"hompage",
+				"Concourse Theme/js/homepage.js"
+			],
+			[
+				"e",
+				"Concourse Theme/includes/enqueue-script-style.php"
+			],
+			[
+				"headsc",
+				"Concourse Theme/sass/shared/_header.scss"
+			],
+			[
+				"hom",
+				"Concourse Theme/js/homepage.js"
+			],
+			[
+				"thom",
+				"Concourse Theme/js/homepage.js"
+			],
+			[
+				"headerscs",
+				"Concourse Theme/sass/shared/_header.scss"
+			],
+			[
+				"fab",
+				"Concourse WP Root/fabfile.py"
+			],
+			[
+				"singl",
+				"Concourse Theme/single.php"
+			],
+			[
+				"single",
+				"Concourse Theme/single.php"
+			],
+			[
+				"copi",
+				"Concourse Theme/sass/shared/_copilot-global.scss"
+			],
+			[
+				"blog-sins",
+				"Concourse Theme/sass/shared/_blog-single.scss"
+			],
+			[
+				"html-foo",
+				"Concourse Theme/parts/shared/html-footer.php"
+			],
+			[
+				"foot",
+				"Concourse Theme/parts/shared/footer.php"
+			],
+			[
+				"homepage.js",
+				"Concourse Theme/js/homepage.js"
+			],
+			[
+				"signup-page",
+				"Concourse Theme/sass/pages/signup-page.scss"
+			],
+			[
+				"signformscss",
+				"Concourse Theme/sass/shared/_signup-form.scss"
+			],
+			[
+				"signpage",
+				"Concourse Theme/sass/pages/signup-page.scss"
+			],
+			[
+				"landing-",
+				"Concourse Theme/sass/pages/landing-page-cpt.scss"
+			],
+			[
+				"carousel",
+				"Concourse Theme/sass/components/_carousel-bootstrap.scss"
+			],
+			[
+				"rmguidescss",
+				"Concourse Theme/sass/shared/_rm-guide.scss"
+			],
+			[
+				"what-isscss",
+				"Concourse Theme/sass/shared/_what-is-copilot.scss"
+			],
+			[
+				"what-is-",
+				"Concourse Theme/templates/what-is-copilot.php"
+			],
+			[
+				"blog-loop",
+				"Concourse Theme/sass/shared/_blog-loop.scss"
+			],
+			[
+				"aboutscs",
+				"Concourse Theme/sass/shared/_about.scss"
+			],
+			[
+				"thank-youscs",
+				"Concourse Theme/sass/shared/_thank-you.scss"
+			],
+			[
+				"thank-",
+				"Concourse Theme/templates/thank-you.php"
+			],
+			[
+				"rm-gss",
+				"Concourse Theme/sass/shared/_rm-guide.scss"
+			],
+			[
+				"rm-gui",
+				"Concourse Theme/parts/rm-guide-partial.php"
+			],
+			[
+				"top",
+				"Concourse Theme/sass/shared/_topbar-cta.scss"
+			],
+			[
+				"footerscss",
+				"Concourse Theme/sass/shared/_footer.scss"
+			],
+			[
+				"page-s",
+				"Concourse Theme/sass/shared/_page-sections.scss"
+			],
+			[
+				"forms",
+				"Concourse Theme/sass/shared/_forms.scss"
+			],
+			[
+				"headersc",
+				"Concourse Theme/sass/shared/_header.scss"
+			],
+			[
+				"footscs",
+				"Concourse Theme/sass/shared/_footer.scss"
+			],
+			[
+				"heasc",
+				"Concourse Theme/sass/shared/_header.scss"
+			],
+			[
+				"signup",
+				"Concourse Theme/sass/pages/signup-page.scss"
+			],
+			[
+				"two-m",
+				"Concourse Theme/parts/two-minute-install.php"
+			],
+			[
+				"aff",
+				"Concourse Theme/templates/affiliate-program.php"
+			],
+			[
+				"footer.scs",
+				"Concourse Theme/sass/shared/_footer.scss"
+			],
+			[
+				"header",
+				"Concourse Theme/parts/shared/header-default.php"
+			],
+			[
+				"style.",
+				"Concourse Theme/sass/style.scss"
+			],
+			[
+				"main.scss",
+				"Concourse Theme/sass/shared/_wp-admin.scss"
+			],
+			[
+				".ht",
+				"Concourse WP Root/.htaccess"
+			],
+			[
+				"hta",
+				"Concourse WP Root/.htaccess"
+			],
+			[
+				"fit",
+				"Concourse Theme/js/libs/fitvids.js"
+			],
+			[
+				"site",
+				"Concourse Theme/js/site.js"
+			],
+			[
+				"headerscss",
+				"Concourse Theme/sass/shared/_header.scss"
+			],
+			[
+				"header-hom",
+				"Concourse Theme/parts/shared/header-homepage.php"
+			],
+			[
+				"head",
+				"Concourse Theme/parts/shared/header-default.php"
+			],
+			[
+				"page-sec",
+				"Concourse Theme/sass/shared/_page-sections.scss"
+			],
+			[
+				"en",
+				"Concourse Theme/includes/enqueue-script-style.php"
+			],
+			[
+				"info",
+				"Concourse Theme/templates/infographic.php"
+			],
+			[
+				"header.scs",
+				"Concourse Theme/sass/shared/_header.scss"
+			],
+			[
+				"copilot",
+				"Concourse Theme/sass/shared/_copilot-global.scss"
+			],
+			[
+				"ho",
+				"Concourse Theme/templates/homepage.php"
+			],
+			[
+				"singlepromo",
+				"Concourse Theme/single-promo_catalog.php"
+			],
+			[
+				"rmgui",
+				"Concourse WP Root/wp-content/themes/starkers/parts/rm-guide-partial.php"
+			],
+			[
+				"rm-guide",
+				"Concourse Theme/parts/rm-guide-partial.php"
+			],
+			[
+				"blog-sin",
+				"Concourse Theme/sass/shared/_blog-single.scss"
+			],
+			[
+				"digg",
+				"Concourse Theme/sass/components/_digg-digg-plugin.scss"
+			],
+			[
+				"config",
+				"Concourse Theme/config.rb"
+			],
+			[
+				"blog-singl",
+				"Concourse WP Root/wp-content/themes/starkers/sass/shared/_blog-single.scss"
+			],
+			[
+				"copilot-g",
+				"Concourse Theme/sass/shared/_copilot-global.scss"
+			],
+			[
+				"style.s",
+				"Concourse Theme/sass/style.scss"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/Users/adamwagner/Sites/badracket/brv5-mobile.sublime-project"
+			],
+			[
+				"con",
+				"/Users/adamwagner/Sites/concourse/concourse.sublime-project"
+			],
+			[
+				"brv",
+				"/Users/adamwagner/Documents/Bad Racket/brv5/brv5.sublime-project"
+			],
+			[
+				"br",
+				"/Users/adamwagner/Documents/Bad Racket/brv5/brv5.sublime-project"
+			],
+			[
+				"cop",
+				"/Users/adamwagner/Documents/#COPILOT#/cp_homepage_v3/copilot_sales_page.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 221.0,
+	"status_bar_visible": true
+}

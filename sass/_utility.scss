@@ -1,0 +1,17 @@
+.group:before,
+.group:after { display: table; line-height: 0; content: ""; }
+.group:after { clear: both;}
+
+.pull-left { float:left; }
+.pull-right { float:right; }
+
+.bottom1 { margin-bottom: 1em; }
+
+.reset-list {
+  padding-left:0;
+  margin:0;
+  list-style:none;
+  li {
+    padding-left:0;
+  }
+}

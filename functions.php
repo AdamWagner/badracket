@@ -76,6 +76,11 @@ add_post_type('album', 'albums', array (
 'taxonomies' => array('post_tag'),
 ));
 
+
+add_post_type('albumTest', 'albumTests', array (
+'taxonomies' => array('post_tag'),
+));
+
 // add_taxonomy('Video Category', 'Video Categories', 'video');
 
 
@@ -328,18 +333,6 @@ add_action( 'admin_init', 'AW_register_meta_boxes' );
 
 
 
-/* ========================================================================================================================
-
-Cache buster
-
-======================================================================================================================== */
-function cache_busting_path($path, $time_format = 'U') {
-  if( $path[0] != '/' ) { //Checks for the first character in $path is a slash and adds it if it isn't. 
-    $path = '/' . $path;
-  }
-  return get_bloginfo('template_url') . $path . '?' . date($time_format, filemtime( get_theme_root() ) );
-}
-
 
 
 /* ========================================================================================================================
@@ -348,24 +341,19 @@ Scripts Add scripts via wp_head() // CODEX: wp_register_script( $handle, $src, $
 
 ======================================================================================================================== */
 
+function _remove_script_version( $src ){
+    $parts = explode( '?', $src );
+    return $parts[0];
+}
+add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
+add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
+
+
 function script_enqueuer() {
 
   wp_deregister_script('jquery');
 
-  wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"),'','', false);
-  wp_enqueue_script('jquery');
-
-  // wp_deregister_script('jquery');
-  // remember WP loads jQuery in no-conflict mode where the dollar-sign doesn't work
-
-  
-	wp_register_script( 'site', cache_busting_path('/js/prod/script.min.js'), 'jquery', '', true );
-		wp_enqueue_script( 'site' );
-
-	// wp_register_script( 'modernizr', get_template_directory_uri().'/js/modernizr.js', array( 'jquery' ) );
-	// 	wp_enqueue_script( 'modernizr' );
-
-	wp_register_style( 'screen', cache_busting_path('/style.css'), '', '', 'screen' );
+	wp_register_style( 'screen', get_template_directory_uri().'/style.css', '', '', 'screen' );
   	wp_enqueue_style( 'screen' );
 }	
 
@@ -415,3 +403,62 @@ global $menu;
   }
 }
 add_action('admin_menu', 'remove_menus');
+
+
+
+/* ========================================================================================================================
+Ajax Action hooks
+======================================================================================================================== */
+add_action('wp_ajax_nopriv_do_ajax', 'our_ajax_function');
+add_action('wp_ajax_do_ajax', 'our_ajax_function');
+
+function our_ajax_function(){
+
+   // the first part is a SWTICHBOARD that fires specific functions
+   // according to the value of Query Var 'fn'
+
+     switch($_REQUEST['fn']){
+          case 'get_latest_posts':
+               $output = ajax_get_latest_posts($_REQUEST['count'], $_REQUEST['post_type'] );
+          break;
+          default:
+              $output = 'No function specified, check your jQuery.ajax() call';
+          break;
+
+     }
+
+    $output=json_encode($output);
+
+    if(is_array($output)){
+      print_r($output); 
+    } else {
+      echo $output;
+    } die;
+}
+
+function ajax_get_latest_posts($count, $post_type){
+   query_posts(array('post_type' => 'album' ) );
+   $albums = array();
+   while (have_posts()) : the_post();
+     $meta = get_post_custom($post_id);
+     $meta['albumName'] = get_the_title($post_id);;
+     array_push($albums, $meta);
+   endwhile;
+   return $albums;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
