@@ -1,29 +1,179 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+    Normalize album data
+\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+badracket.getAlbumData = {
+
+  objValueToString: function(obj, key) {
+    if (obj.hasOwnProperty(key)) {
+       obj[key] = obj[key].toString();
+    }
+    return obj;
+  },
+
+  deleteProperty: function (obj, key) {
+      if (obj.hasOwnProperty(key)) {
+        delete obj[key];
+      }
+      return obj;
+  },
+
+  renameProperty: function (obj, oldName, newName) {
+      if (obj.hasOwnProperty(oldName)) {
+          obj[newName] = obj[oldName];
+          delete obj[oldName];
+      }
+      return obj;
+  },
+
+  count_tracks: function(obj) {
+      var trackCount=0;
+      for (var prop in obj) {
+        if (prop.toString().contains('songTitle')) {
+          trackCount++;
+        }
+      }
+      return trackCount;
+  },
+
+  // de-enumerate keys of all track objects within album object
+  createAblumHierarchy: function(obj) {
+    obj.tracks = [];
+    var trackCount = badracket.count_tracks(obj);
+    for (var i=1; i <= trackCount; i++) {
+      var trackTemp = {};
+      for (var prop in obj) {
+        var enumerator = prop.split('-')[1];
+        if (parseInt(enumerator, 10) === i) { // if property name containers enumerator
+          trackTemp[prop] = obj[prop].toString();
+          delete obj[prop];
+          }
+        }
+        obj.tracks.push(trackTemp);
+      }
+  },
+
+  cleanTrackPropKeys: function(array) {
+    trackcount = array.length;
+    for (i=0; i<trackcount; i++) {
+      for (var prop in array[i]) {
+        if (prop.contains('duration')) { badracket.renameProperty(array[i], prop, 'duration'); }
+        else if (prop.contains('songTitle')) { badracket.renameProperty(array[i], prop, 'songTitle'); }
+        else if (prop.contains('TrackNumber')) { badracket.renameProperty(array[i], prop, 'trackNumber'); }
+        else if (prop.contains('songUrl')) { badracket.renameProperty(array[i], prop, 'songUrl'); }
+        else if (prop.contains('isSampleTrack')) { badracket.renameProperty(array[i], prop, 'isSampleTrack'); }
+      }
+    }
+  },
+
+  cleanAlbumProperties: function(albumObject) {
+
+    // Delete WP properties from album object
+    badracket.deleteProperty(albumObject, '_edit_last');
+    badracket.deleteProperty(albumObject, '_edit_lock');
+
+    // Clean Album property key names
+    // oldName, newName
+    badracket.renameProperty(albumObject, '_br_artist','artist');
+    badracket.renameProperty(albumObject, '_br_zip_file','zipFile');
+    badracket.renameProperty(albumObject, '_br_cover_url','cover');
+    badracket.renameProperty(albumObject, '_br_release_date','releaseDate');
+    badracket.renameProperty(albumObject, '_br_buy_url','buyUrl');
+    badracket.renameProperty(albumObject, '_br_recording_studio','recordingStudio');
+
+    // Set album-level property values to strings instead of arrays
+    badracket.objValueToString(albumObject, 'artist');
+    badracket.objValueToString(albumObject, 'zipFile');
+    badracket.objValueToString(albumObject, 'cover');
+    badracket.objValueToString(albumObject, 'releaseDate');
+    badracket.objValueToString(albumObject, 'buyUrl');
+    badracket.objValueToString(albumObject, 'recordingStudio');
+  },
+
+  initAlbumNormalization: function(objArray) {
+    var len = objArray.length;
+    for (var i=len; i--;) {
+      badracket.createAblumHierarchy(objArray[i]);
+      badracket.cleanAlbumProperties(objArray[i]);
+      badracket.cleanTrackPropKeys(objArray[i].tracks);
+      console.log(objArray);
+    }
+  },
+
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+    Get album data via ajax
+  \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+  doAjaxRequest: function(){
+       // here is where the request will happen
+       console.log('jquery ajax request ran');
+       jQuery.ajax({
+            url: 'http://localhost:8888/sites/brv5/wp-br/wp-admin/admin-ajax.php',
+            data:{
+                 'action':'do_ajax',
+                 'fn':'get_latest_posts',
+                 'post_type': 'album',
+                 'count':99
+                 },
+            dataType: 'JSON',
+            success:function(data){
+                   badracket.albums = data;
+                   badracket.initAlbumNormalization(badracket.albums);
+                   badracket.soundmanager.smSetup(); // don't setup sm2 until we have album data
+
+                 },
+            error: function(errorThrown){
+                 alert('error');
+                 console.log(errorThrown);
+            }
+       });
+  }
+}; // end badracket.getAlbumData {...}
+
+
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-  badracket.soundmanger
+  badracket.audioPlayer
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-  badracket.soundmanager = {
-    smSetup: function() {
-      badracket.sm = soundManager;
-      badracket.sm.setup({
-        url: 'swf',
-        flashVersion: 9,
-        debugMode: false,
-        flashPollingInterval: 125,
-        html5PollingInterval: 125,
-        defaultOptions : {
-          useHighPerformance: true,
-          usePeakData: false,
-          useEQData: false
-        }
-      });
-      console.log('- - - sm setup ran - - -');
-      badracket.soundmanager.ready();
+  badracket.audioPlayer = function(){
+
+    var self = this;
+
+    console.log('logging self');
+    console.log(self);
+
+
+    this.smSetup = function() {
+        self.sm = soundManager;
+
+        badracket.sm.setup({
+          url: 'swf',
+          flashVersion: 9,
+          debugMode: false,
+          flashPollingInterval: 125,
+          html5PollingInterval: 125,
+          defaultOptions : {
+            useHighPerformance: true,
+            usePeakData: false,
+            useEQData: false
+          }
+        });
+
+        console.log('- - - sm setup ran - - -');
+
+        badracket.audioPlayer.ready();
+    };
+
     },
+
+badracket.old = {
+
     ready: function(){
       badracket.sm.onready(function(){
         console.log('Soundmanager ready');
-        badracket.soundmanager.init();
+        badracket.audioPlayer.init();
       });
     },
 
@@ -56,7 +206,7 @@
         onload: function(){ }
       });
     }
- }, // end badracket.soundmanager
+ }, // end badracket.audioPlayer
 
 badracket.initAudioPlayer = function() {
   var albums      = badracket.albums,
@@ -64,7 +214,7 @@ badracket.initAudioPlayer = function() {
       sampleTrack = badracket.findSampleSong(randomAlbum);
 
   badracket.updatePlayHistory(randomAlbum, sampleTrack);
-  sampleTrack.sm2_object = badracket.soundmanager.createSound(sampleTrack);      // creates sound
+  sampleTrack.sm2_object = badracket.audioPlayer.createSound(sampleTrack);      // creates sound
   badracket.updateAudioPlayer(randomAlbum, sampleTrack);                         // (album, song)
   $('.audio-player').addClass('ready');
 };
@@ -78,17 +228,13 @@ badracket.globalPlayState = false; //default
 
 
   this.events = {
-
     // handlers for sound events as they're started/stopped/played
-
     onPlayResume : function(sm2_object){
       console.log('onPlayResume() ran');
       badracket.whilePlayingCounter = 0;
     },
-
     onStopPause : function(sm2_object){
     },
-
     whileLoading : function(sm2_object) {
       var loadingWidth = ((sm2_object.bytesLoaded/(sm2_object.bytesTotal))*100).toFixed(2) + '%';
       var currentSong = badracket.playHistory.getCurrentSong();
@@ -96,7 +242,6 @@ badracket.globalPlayState = false; //default
         $('.loading').css('width', loadingWidth);
       }
     },
-
     whilePlaying : function(sm2_object){
       badracket.whilePlayingCounter += 1;
       var currentSong = badracket.playHistory.getCurrentSong(),
@@ -110,7 +255,6 @@ badracket.globalPlayState = false; //default
         $('.sm2_position').text( badracket.msToTime(sm2_object.position) );
       }
     },
-
     onFinish : function(sm2_object){
       console.log('on finish ran');
       if (sm2_object.sID) {                           // if it receives the sm2_object
@@ -122,6 +266,45 @@ badracket.globalPlayState = false; //default
     }
   };
 
+
+  badracket.playHistory = {
+    history : [], // [ [albumIndex, songIndex], [..], [..] ]
+    getCurrentHistory:function(){
+      return this.history[this.history.length - 1];
+    },
+    getCurrentAlbum : function(){
+      var currentAlbumIndex = this.getCurrentHistory()[0]; // get last item in playHistory
+      return badracket.albums[currentAlbumIndex];
+    },
+     getNextAlbum : function(){
+      var currentAlbumIndex = this.getCurrentHistory()[0]; // get last item in playHistory
+      return badracket.albums[currentAlbumIndex + 1];
+    },
+    getPreviousAlbum : function(){
+      var currentAlbumIndex = this.getCurrentHistory()[0]; // get last item in playHistory
+      return badracket.albums[currentAlbumIndex - 1];
+    },
+    getCurrentSong : function(){
+      var currentAlbumIndex = this.getCurrentHistory()[0];
+      var currentSongIndex = this.getCurrentHistory()[1];
+      return  badracket.albums[currentAlbumIndex].tracks[currentSongIndex];
+    },
+    getNextSong : function(){
+      var currentAlbumIndex = this.getCurrentHistory()[0];
+      var currentSongIndex = this.getCurrentHistory()[1];
+      return badracket.albums[currentAlbumIndex].tracks[currentSongIndex+1];
+    },
+    getPreviousSong : function(){
+      var currentAlbumIndex = this.getCurrentHistory()[0];
+      var currentSongIndex = this.getCurrentHistory()[1];
+      return badracket.albums[currentAlbumIndex].tracks[currentSongIndex-1];
+    },
+    getCurrentAlbumSong : function(){
+      var currentAlbumIndex = this.getCurrentHistory()[0];
+      var currentSongIndex = this.getCurrentHistory()[1];
+      return  [badracket.albums[currentAlbumIndex], badracket.albums[currentAlbumIndex].tracks[currentSongIndex]];
+    }
+  };
 
 /* Control 30 second samples  - - - - - - - - - - - - - - - */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -135,8 +318,7 @@ badracket.sampleSongTest = function(){
 
 badracket.attach30SecondListener = function(song){
   var s = song.sm2_object;
-  if (song.isSampleTrack === '0') {
-    console.log('!!!!!!!!! - - - - 30 second listener attached for ' + song.songTitle);
+  if (song.isSampleTrack === '0') {                                // if isSampleTrack is false
     s.onPosition(28000, function(eventPosition) {                  // fire at 28 seconds
       badracket.fadeOutSound(song);
     });
@@ -183,7 +365,6 @@ badracket.fadeOutSound = function(song) {
  };
 
 
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
    Page state logic
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
@@ -210,7 +391,6 @@ badracket.viewState = {
 
 
 
-
 /* Song iterators - - - - - - - - - - - - - - - - - - - - - */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 badracket.runFuncAllSongs = function(func) {
@@ -226,7 +406,7 @@ badracket.runFuncAllSongs = function(func) {
 badracket.loadSampleSongs = function() {
   badracket.runFuncAllSongs(function(song) {
     if (!song.sm2_object && song.isSampleTrack) {
-      song.sm2_object = badracket.soundmanager.createSound(song);
+      song.sm2_object = badracket.audioPlayer.createSound(song);
       song.sm2_object.load();
     }
   });
@@ -235,7 +415,7 @@ badracket.loadSampleSongs = function() {
 badracket.loadNextSong = function(song){
   var nextSong = badracket.playHistory.getNextSong();
   if (!song.sm2_object && song.isSampleTrack) {
-    nextSong.sm2_object = badracket.soundmanager.createSound(nextSong);
+    nextSong.sm2_object = badracket.audioPlayer.createSound(nextSong);
   }
     nextSong.sm2_object.load();
 };
@@ -269,44 +449,7 @@ badracket.getSongByUrl = function(songUrl) {
 };
 
 
-badracket.playHistory = {
-  history : [], // [ [albumIndex, songIndex], [..], [..] ]
-  getCurrentHistory:function(){
-    return this.history[this.history.length - 1];
-  },
-  getCurrentAlbum : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0]; // get last item in playHistory
-    return badracket.albums[currentAlbumIndex];
-  },
-   getNextAlbum : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0]; // get last item in playHistory
-    return badracket.albums[currentAlbumIndex + 1];
-  },
-  getPreviousAlbum : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0]; // get last item in playHistory
-    return badracket.albums[currentAlbumIndex - 1];
-  },
-  getCurrentSong : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0];
-    var currentSongIndex = this.getCurrentHistory()[1];
-    return  badracket.albums[currentAlbumIndex].tracks[currentSongIndex];
-  },
-  getNextSong : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0];
-    var currentSongIndex = this.getCurrentHistory()[1];
-    return badracket.albums[currentAlbumIndex].tracks[currentSongIndex+1];
-  },
-  getPreviousSong : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0];
-    var currentSongIndex = this.getCurrentHistory()[1];
-    return badracket.albums[currentAlbumIndex].tracks[currentSongIndex-1];
-  },
-  getCurrentAlbumSong : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0];
-    var currentSongIndex = this.getCurrentHistory()[1];
-    return  [badracket.albums[currentAlbumIndex], badracket.albums[currentAlbumIndex].tracks[currentSongIndex]];
-  }
-};
+
 
 badracket.updatePlayHistory = function(album, track) {
   var albumIndex = badracket.albums.indexOf(album);
@@ -445,7 +588,7 @@ badracket.handleNextClick = function(direction){
   if (badracket.globalPlayState === true) {
     badracket.playPause(song);
   } else {
-    song.sm2_object = badracket.soundmanager.createSound(song);
+    song.sm2_object = badracket.audioPlayer.createSound(song);
     badracket.attach30SecondListener(song);                     // attach 30 second listener
     song.sm2_object.setVolume(100);                             // [X] TODO: Cleanup the duplication between this and playPause();
   }
@@ -473,7 +616,7 @@ badracket.playPause = function(song) {
     badracket.attach30SecondListener(song);                     // attach 30 second listener
     song.sm2_object.togglePause();                              // play / pause sound
   } else {
-    song.sm2_object = badracket.soundmanager.createSound(song); // creates sound
+    song.sm2_object = badracket.audioPlayer.createSound(song); // creates sound
     badracket.stopOtherPlayers(song.sm2_object.sID);            // pauses other sounds
     badracket.attach30SecondListener(song);                     // attach 30 second listener
     song.sm2_object.togglePause();                              // play / pause sound
@@ -672,7 +815,7 @@ badracket.bindAudioUI = function(){
     dJax init stuff
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-badracket.soundmanager.djaxInit  = function(){
+badracket.audioPlayer.djaxInit  = function(){
   console.log('soundmanager djax init ran');
   var album = badracket.playHistory.getCurrentAlbum();
   var song = badracket.playHistory.getCurrentSong();
@@ -687,8 +830,11 @@ badracket.soundmanager.djaxInit  = function(){
 
 
 
-
-
+// from 
+soundManager.onready(function() {
+  pagePlayer = new badracket.audioPlayer();
+  pagePlayer.init();
+});
 
 
 
