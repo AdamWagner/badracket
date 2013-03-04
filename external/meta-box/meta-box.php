@@ -12,7 +12,7 @@ License: GPL2+
 
 
 
-$AW_DIR = '/wp-content/themes/starkers/external/meta-box/';
+$AW_DIR = '/wp-content/themes/badracket/external/meta-box/';
 
 
 

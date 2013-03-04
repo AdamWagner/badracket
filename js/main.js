@@ -12,7 +12,7 @@ badracket = {
   settings: {
     bd: $('body'),
     playBar: $('.controls .position'),
-    playSlider: $('#slider'),
+    playSlider: $('.slider'),
     audioPlayer: $('.audio-player')
   },
 
@@ -33,7 +33,7 @@ badracket = {
     return {
       setup: function() {
         badracket.loader.require([
-        badracket_theme_path + "js/lib/jquery.tap.js"],
+        badracket_theme_path + "/js/lib/jquery.tap.js"],
             function() {
                 // Callback
                 badracket.bindMobileUI();
@@ -56,12 +56,18 @@ badracket = {
             // Callback
             console.log('All Scripts Loaded');
             $('.video').fitVids();
-            badracket.soundmanager.smSetup();
-            if (badracket.hasCookie('sm_currentURL')) {
-              badracket.resumePlayback();
-            }
         });
     badracket.beforeUnload();
+  },
+
+  setupAlbumPage: function() {
+    badracket.loader.require([
+    badracket_theme_path + "/js/lib/jqTweets.js",
+    badracket_theme_path + "/js/album-page.js"],
+        function() {
+            // Callback
+            console.log('Album page scripts loaded');
+        });
   },
 
    loader: {
@@ -76,7 +82,7 @@ badracket = {
       },
       loaded: function (evt) {
           this.loadCount++;
-   
+
           if (this.loadCount == this.totalRequired && typeof this.callback == 'function') this.callback.call();
       },
       writeScript: function (src) {
@@ -158,7 +164,8 @@ badracket = {
     for (var i=1; i <= trackCount; i++) {
       var trackTemp = {};
       for (var prop in obj) {
-        if (prop.toString().contains(i.toString())) { // if property name containers enumerator
+        var enumerator = prop.split('-')[1];
+        if (parseInt(enumerator, 10) === i) { // if property name containers enumerator
           trackTemp[prop] = obj[prop].toString();
           delete obj[prop];
           }
@@ -175,7 +182,7 @@ badracket = {
         else if (prop.contains('songTitle')) { badracket.renameProperty(array[i], prop, 'songTitle'); }
         else if (prop.contains('TrackNumber')) { badracket.renameProperty(array[i], prop, 'trackNumber'); }
         else if (prop.contains('songUrl')) { badracket.renameProperty(array[i], prop, 'songUrl'); }
-        else if (prop.contains('checkbox')) { badracket.renameProperty(array[i], prop, 'isSampleTrack'); }
+        else if (prop.contains('isSampleTrack')) { badracket.renameProperty(array[i], prop, 'isSampleTrack'); }
       }
     }
   },
@@ -205,13 +212,13 @@ badracket = {
   },
 
   initAlbumNormalization: function(objArray) {
-    for (i=0; i<objArray.length; i++) {
-      // console.log(objArray[i]);
+    var len = objArray.length;
+    for (var i=len; i--;) {
       badracket.createAblumHierarchy(objArray[i]);
       badracket.cleanAlbumProperties(objArray[i]);
       badracket.cleanTrackPropKeys(objArray[i].tracks);
+      console.log(objArray);
     }
-    console.log(objArray);
   },
 
 
@@ -234,6 +241,7 @@ badracket = {
             success:function(data){
                    badracket.albums = data;
                    badracket.initAlbumNormalization(badracket.albums);
+                   badracket.soundmanager.smSetup(); // don't setup sm2 until we have album data
 
                  },
             error: function(errorThrown){
@@ -272,6 +280,10 @@ badracket = {
       badracket.setup();
 
       badracket.lazyLoadImg();
+      badracket.setView();
+      if ($('body').attr('data-view') === 'album') {
+        badracket.setupAlbumPage();
+      }
     });
   },
 
@@ -280,6 +292,12 @@ badracket = {
     // when djax element loads, remove loadin class & mimic doc ready stuff
     $(window).bind('djaxLoad', function(e, data) {
       badracket.lazyLoadImg();
+
+      badracket.setView(data.url);
+      if ($('body').attr('data-view') === 'album') {
+        badracket.setupAlbumPage();
+      }
+
       badracket.soundmanager.djaxInit();
       $('.main-content').removeClass('loading');
     });
@@ -306,6 +324,21 @@ badracket = {
     });
   },
 
+  setView: function(url) {
+    var urlComp;
+    if (url) {
+      urlComp = url;
+    } else {
+      urlComp = window.location.toString();
+    }
+    if (urlComp.contains('album=')) {
+      $('body').attr('data-view','album');
+    } else if (urlComp === 'http://localhost:8888/sites/brv5/wp-br/') {
+      $('body').attr('data-view','home');
+    } else {
+      $('body').attr('data-view','unknown');
+    }
+  },
 
 
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\

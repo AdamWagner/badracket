@@ -485,3 +485,22 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+div,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary,
+img,
+a,
+h1, h2, h3, h4, h5, h6 {
+  @include box-sizing(border-box);
+}
+

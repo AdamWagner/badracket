@@ -4,25 +4,6 @@
 @import 'breakpoints';
 @import 'grid';
 
-div,
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-nav,
-section,
-summary,
-img,
-a,
-h1, h2, h3, h4, h5, h6 {
-  @include box-sizing(border-box);
-}
-
-
 
 
 
@@ -40,6 +21,10 @@ $dark:hsl(282, 11%, 23%);
   
 @import 'loading';
 
+
+/* --------------------------------------------------------------------------------------- *\
+  HTML Base
+/* --------------------------------------------------------------------------------------- */
 
 html {
   overflow-y: scroll;
@@ -65,16 +50,9 @@ body, html {
 }
 
 
-
-
-
-
-
-
 /* --------------------------------------------------------------------------------------- *\
   Icon fonts
 /* --------------------------------------------------------------------------------------- */
-
 
 @font-face {
 font-family: 'icons';
@@ -86,10 +64,10 @@ src: url('fonts/icomoon.woff') format('woff'),
 
 @mixin icons {
   font-family: 'icons';
-  -webkit-font-smoothing:antialiased;
   font-weight: normal;
   font-style: normal;
   font-variant:normal;
+  -webkit-font-smoothing:antialiased;
   font-smooth:never;
 }
 
@@ -102,11 +80,62 @@ src: url('fonts/icomoon.woff') format('woff'),
   Typography
 /* --------------------------------------------------------------------------------------- */
 
-.uppercase { text-transform:uppercase; }
+%uppercase { text-transform:uppercase; }
+
+%no-wrap-text {
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+.red, .green, .orange, .cream { color:$dark; }
+
+ul, li {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Links
+/* --------------------------------------------------------------------------------------- */
+
+a {
+  text-decoration: none;
+  // normal, hover, active, visited, focus
+  @include link-colors(
+            $cream,
+            lighten($cream,5%),
+            darken($cream,5%),
+            darken($cream,5%),
+            lighten($cream,5%)
+           );
+}
+
+.red a, .dark-red a {
+  @include link-colors(
+            desaturate(darken($red,35%),30%),
+            desaturate(darken($red,35%),30%),
+            desaturate(darken($red,35%),30%),
+            desaturate(darken($red,35%),30%)
+           );
+}
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Image abstractions
+/* --------------------------------------------------------------------------------------- */
+
+%full-image {
+  height:100%;
+  width:100%;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
 
 
 /* ------- Layout variables ----------------------------------------------------------------- */
-
 
 $header-height:4.6em;
 
@@ -115,75 +144,57 @@ $nav-width-big:19%;
 $nav-width-bigger:17%;
 $nav-width-huge:14%;
 
-$audio-player-width:60%;
-
-/* placholder classes*/
 %page-width {
   width:100%;
   @include breakpoint(big){
     width:100%;
     margin:auto;
   }
-  @include breakpoint(bigger){ // between 1280 and 1900
+  @include breakpoint(bigger){    // between 1280 and 1900
     width:80%;
-    min-width:1280px; // starts @1280  window width, ends @1600
-    max-width:1920px; // @2400 window width
+    min-width:1280px;             // starts @1280  window width, ends @1600
+    max-width:1920px;             // @2400 window width
   }
 }
 
 %main-width {
   width:100%;
-  @include breakpoint(big) { 
+  @include breakpoint(big) {
     position:relative;
-    width:100 - $nav-width-big;  
+    width:100 - $nav-width-big;
     left:$nav-width-big;
   }
   @include breakpoint(bigger) {
-   width:100 - $nav-width-bigger;  
+   width:100 - $nav-width-bigger;
    left:$nav-width-bigger;
  }
   @include breakpoint(huge) {
-   width:100 - $nav-width-huge;  
+   width:100 - $nav-width-huge;
    left:$nav-width-huge;
  }
 }
 
 %nav-width {
   width:$nav-width-mobile;
-  @include breakpoint(big) { 
+  @include breakpoint(big) {
     float:left; 
-    width:$nav-width-big;  
+    width:$nav-width-big;
   }
   @include breakpoint(bigger) { 
-    width:$nav-width-bigger * .8;  
+    width:$nav-width-bigger * .8;
   }
  @media (min-width:1280px) and (max-width:1600px) { // address static page-width between 1280 and 1600
     width:217.609375px;
   }
-  @include breakpoint(huge) { 
-    width:$nav-width-huge *.8;  
-  } 
- @media (min-width:2400px) { // address static page-width above 2400
+  @include breakpoint(huge) {
+    width:$nav-width-huge *.8;
+  }
+ @media (min-width:2400px) {                                 // address static page-width above 2400
     width:268.8125px;
-  } 
+  }
 }
 
-
-/* --------------------------------------------------------------------------------------- *\
-  Links
-/* --------------------------------------------------------------------------------------- */
-a {
-  // normal, hover, active, visited, focus
-  @include link-colors($cream, lighten($cream,5%), darken($cream,5%), darken($cream,5%), lighten($cream,5%));
-}
-
-
-
-/* --------------------------------------------------------------------------------------- *\
-  Wrapper
-/* --------------------------------------------------------------------------------------- */
-
-.badracket-window {
+%full-absolute {
   position:absolute;
   top:0;
   bottom:0;
@@ -191,33 +202,45 @@ a {
   right:0;
 }
 
+
+/* --------------------------------------------------------------------------------------- *\
+  Wrapper
+/* --------------------------------------------------------------------------------------- */
+
+.badracket-window {
+  @extend %full-absolute;
+}
+
 .page-width {
   @extend %page-width;
+  position:relative;
 }
 
 .app-main {
-  padding-top:$header-height;
+  padding-top:4em;
+  @include breakpoint(big) {
+    padding-top:$header-height;
+  }
   position:relative;
   background:$dark;
 }
 
-
 /* background image */
 .bg {
-  height:100%;
-  width:100%;
+  @extend %full-image;
   display:block;
-  position:fixed;
-  opacity:0;
+  position:fixed!important;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
   pointer-events:none; // allow scroll when not over content
-  background-size:cover;
-  background-repeat:no-repeat;
   z-index:0;
+  opacity:0;
   @include transition(opacity .2s);
   @include breakpoint(big) {
     &.loaded { opacity: 0.5; }
   }
-
 }
 
 
@@ -238,26 +261,40 @@ header.desktop {
 
 header.mobile {
   @include transition(left .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
-  padding:1em;
+  padding:0.9em 1em 1em;
   z-index:100;
   background:$dark;
+  height:4em;
 
   .menu, .info, .logo {
-    width:3em;
-    height:3em;
-    background:blue;
+    width:2.4rem;
+    height:2.4rem;
     cursor:pointer;
     display:block;
-    
-    @include transition(opacity .3s linear .28s);
-    // to fade out when in mobile states
+    @include transition(opacity .3s linear .28s);  // to fade out when in mobile states
   }
+
   .logo {
     margin:auto;
     @extend %logo-mark;
+    opacity:0.75;
+  }
+  .info, .menu {
+    color:desaturate(lighten($dark,12%),3%);
+    display:inline-block;
+    &:hover {
+      color:desaturate(lighten($dark,21%),6%);
+    }
   }
   .info {
     float:right;
+    font-size:2.1em;
+    text-align:right;
+    margin-right:0.1em;
+  }
+  .menu {
+    margin-top:0.2em;
+    font-size:1.5em;
   }
 }
 
@@ -270,11 +307,10 @@ header.mobile {
 
 header.desktop {
   background:lighten($dark,1.5%);
+
   .logo {
     @extend %nav-width;
-    position:absolute;
-    top:0;
-    bottom:0;
+    @extend %full-absolute;
     padding:0.5em;
 
     .logo-mark {
@@ -283,7 +319,8 @@ header.desktop {
       margin-top:0.4em;
       @extend %logo-mark;
     }
-  }
+
+  } // end .logo
 
   .header-bar {
     @extend %main-width;
@@ -293,16 +330,16 @@ header.desktop {
       padding:1em 1em 1em 1.6em;
     }
     @include background(linear-gradient(left, desaturate(lighten($dark,6%),1%), lighten($dark,1.5%)));
-    .audio-player {
-      width:$audio-player-width;
-      float:left;
-      margin-right:1.5em;
-    }
   }
 
-  /* Audio player import */
+/* --------------------------------------------------------------------------------------- *\
+  Audio Player
+/* --------------------------------------------------------------------------------------- */
+
   @import 'audio-player';
+
 }
+
 
 /* --------------------------------------------------------------------------------------- *\
   Main Nav
@@ -313,6 +350,7 @@ nav[role="navigation"] {
   @extend %nav-width;
   position:fixed;
   height:100%;
+  @include transition(opacity .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
   @include breakpoint(big) {
     padding:0.75em;
   }
@@ -332,9 +370,6 @@ nav[role="navigation"] {
 
 .nav-level-1 {
   color:desaturate(lighten($dark,40%),4%);
-  // border-top:solid 1px lighten($dark, 3%);
-  // &:first-child{border-top:none;}
-  // &:last-child{ border-bottom:solid 1px lighten($dark, 3%); }
 
   @include breakpoint(big) {
     border-bottom:solid 1px lighten($dark, 3%);
@@ -354,14 +389,14 @@ nav[role="navigation"] {
     opacity:0.75;
     font-size:1.2em;
     border-top:solid 1px lighten($dark, 3%);
-    &:first-child{border-top:none;}
-    &:last-child{ border-bottom:solid 1px lighten($dark, 3%); } 
+    &:first-child { border-top:none; }
+    &:last-child { border-bottom:solid 1px lighten($dark, 3%); } 
     @include breakpoint(big) {
       padding:0.2em 0;
       font-size:0.875em;
       border:none;
-      &:first-child{border-top:none;}
-      &:last-child{ border:none; } 
+      &:first-child { border-top:none; }
+      &:last-child { border:none; } 
     }
   }
 
@@ -385,20 +420,17 @@ nav[role="navigation"] {
 
 .main-content {
   @extend %main-width;
+  min-height:100%;
   z-index:10;
   position:relative; // for z-index effect
   &.loading .loading-fade {
-    opacity:0.9;
+    opacity:1;
     @include transition(opacity 0.2s);
   }
 }
 
 .loading-fade {
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
+    @extend %full-absolute;
     background:darken($dark,8%);
     @include transition(opacity 0.15s cubic-bezier(0.51,  0.01,  0.37,  0.98));
     opacity:0;
@@ -439,23 +471,27 @@ header.mobile,
   Image containing divs
 /* --------------------------------------------------------------------------------------- */
 
-.img-container {
-    background-color:saturate(darken($dark,5%),5%);
-    position:relative;
-    .lazyload { 
-      display:block;
-      background-size:cover;
-      background-repeat:no-repeat;
-      position: relative;
-      height: 0;
-      overflow: hidden;
-      width:100%;
-      height:100%;
-    }
+.lazyload { 
+  background-color:saturate(darken($dark,5%),5%);
+  position:relative;
+  display:block;
+  position: relative;
+  overflow: hidden;
+  @extend %full-image;
 }
+
+
+/* Prevent reflow without placeholder image
+http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
+
+.ratio-16-9 { padding-bottom:56.25%; /* 9/16*100 */ }
+.ratio-4-3 { padding-bottom:75%; /* 3/4*100 */ }
+.ratio-1-1 { padding-bottom:100%; /* ... */ }
+
 
 // the placeholder on top fades out, the img doesn't fade in
 .placeholder { @include transition(opacity .15s linear); pointer-events:none; } 
+// when parent has class loaded, fade out placeholder
 .loaded .lazyload.fade .placeholder { opacity:0; } 
 
 .ratio-16-9 {padding-bottom:56.25%; /* 9/16*100 */ }
@@ -469,6 +505,7 @@ header.mobile,
 /* --------------------------------------------------------------------------------------- */
 
 .red { background:$red; }
+.dark-red { background:desaturate(darken($red,7%),20%); }
 .green { background:$green; }
 
 section {
@@ -480,128 +517,117 @@ section {
 
 
 /* --------------------------------------------------------------------------------------- *\
-  Typography color
-/* --------------------------------------------------------------------------------------- */
-
-.cream { color:$dark; }
-
-a { text-decoration:none; }
-
-.cream a {
-  color:$red;
-  &:hover, &:focus {
-    color:darken($red,5%);
-  }
-  &:active {
-    color:darken($red,10%);
-  }
-}
-
-.red, .green, .orange { color:$dark; }
-
-.dark a {
-  color:$light-on-dark;
-}
-
-.red a {
-  color:$dark;
-  &:hover, &:focus {
-    color:darken($dark,5%);
-  }
-  &:active {
-    color:darken($dark,10%);
-  }
-}
-
-ul, li {
-  list-style:none;
-  margin:0;
-  padding:0;
-}
-
-
-/* --------------------------------------------------------------------------------------- *\
   Music section
 /* --------------------------------------------------------------------------------------- */
 
+/* 
+<div class="grid album">
+
+   <div class="album-cover playable"> 
+     <div class="play"></div>
+     <div class="pause"></div>
+     <div class="album-cover-img lazyload fade ratio-1-1" data-src=" ... ">
+     </div> 
+   </div> 
+
+   <div class="album-meta">
+     <span data-icon="s" class="speaker-indicator"></span>
+     <div class="album-title"> ... </div>
+     <div class="artist-name"> ... </div>
+   </div>
+
+ </div>
+*/
 
 .section-subtitle {
   padding:0.75em 0 0.75em;
 }
 
-.album-container {
-  @extend .group;
-}
-
-.play {
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:url('images/play.svg') no-repeat;
-  background-position:50%;
-  z-index:10;
-  pointer-events:none;
-  opacity:0;
-  @include transition(opacity .15s);
-}
 
 .album {
   &.loading {
     opacity:0.5;
   }
-  .album-cover {
-    border:solid 1px $dark;
-  }
-  &.playing .album-cover {
-    @include box-shadow(0 0 0 0.25em $dark);
-  }
+  &.playing  { background:#b55050; }                                          // a little darker red 
 }
 
 .album-cover {
   cursor:pointer;
+  overflow:hidden;
+  border:solid 1px $dark;
   @include breakpoint(mobile) {
     @include box-shadow(0 0 1px transparentize(black,0.2));
   }
-  .album-cover-img {
-    // @include box-shadow(inset 0 1px 1px hsla(0, 0%, 100%,0.15));
-  }
-}
-
-
-%no-wrap-text {
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    overflow:hidden;
 }
 
 .album-meta {
   font-size:75%;
+  @include breakpoint(bigger) {font-size:15px;}  // intended to be non-flexy 
   padding:0.5em 0;
+  position:relative;
+  .playing & { color:darken($dark,5%); }
+
   .album-title, .artist-name {
     @extend %no-wrap-text;
+    .playing & { width:80%; }
   }
-  .album-title {
-    font-weight:bold;
+
+  .album-title { font-weight:bold; }
+
+  .speaker-indicator {
+    position:absolute;
+    z-index:100;
+    top:0.25em;
+    right:0;
+    padding:0.5em;
+    width:1.5em;
+    height:1em;
+    text-align:right;
+    font-size:1rem;
+    @include background(linear-gradient(right, #b55050, transparentize(#b55050,0.5)));
+    opacity:0;
+    .playing & { opacity:1; }
   }
 }
 
-@include breakpoint(big) {
-  .playable:hover {
-      @include box-shadow(0 0 1px $dark);
-      .lazyload {
-        opacity:0.35;
-        @include transition(opacity 0s);
-      }
-      .play { 
-        opacity: 1; 
-        @include transition(opacity 0s);
-      }
+.playable {
+  position:relative;
+  background:saturate(darken($dark,7%),10%);
+
+  .play, .pause {
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:10;
+    pointer-events:none;
+    opacity:0;
+    @include transition(opacity .15s);
+    @include box-shadow(0 0 1px $dark);
   }
-}
+
+  .play { background:url('images/play.svg') no-repeat center; }
+  .pause { background:url('images/pause-circle.svg') no-repeat center; }
+
+  &:hover {
+    .lazyload { opacity:0.3; }
+     .play {
+       opacity: 1;
+       @include transition(opacity 0s);
+     }
+
+    .playing & {
+      .play { opacity:0; }
+      .pause {
+        @include transition(opacity 0s);
+        opacity:1; 
+      }
+    }
+  } // end :hover
+} // end .playable
 
 
 
-
+@import 'album-detail';
 
 
 

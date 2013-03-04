@@ -7,7 +7,7 @@
   <script type="text/javascript">
   var badracket_theme_path = '<?php echo get_template_directory_uri();?>';
     jQuery(document).ready(function($) {
-        $('body').djax('.updatable', ['audio']);
+        $('body').djax('.updatable');
     });
   </script>
 

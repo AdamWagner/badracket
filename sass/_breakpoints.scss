@@ -11,6 +11,9 @@
   @if $point == medium { // if above 768;
     @media (min-width:768px) { @content; }
   }
+  @if $point == above-mobile { // if above 480
+    @media (min-width:480px) { @content; }
+  }
   @if $point == mobile { // if below 480;
     @media only screen and (max-device-width : 1024px) { @content; }
   }
@@ -24,8 +27,13 @@
 }
 
 .hidden-mobile { display:none; }
+.hidden-phone { display:none; }
 @include breakpoint(big) {
   .hidden-big { display:none; }
   .hidden-mobile { display:block; }
+}
+
+@include breakpoint(above-mobile) {
+.hidden-phone { display:block; }
 }
 

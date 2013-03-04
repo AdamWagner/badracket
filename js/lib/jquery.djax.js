@@ -193,11 +193,22 @@
       });
     }; /* End self.navigate */
 
-    // Only add a class to internal links
+    // // Only add a class to internal links
+    // $(this).find('a').filter(function () {
+    //   return this.hostname === location.hostname;
+    // }).addClass('dJAX_internal').on('click', function (event) {
+    //   return self.attachClick(this, event);
+    // });
+
     $(this).find('a').filter(function () {
-      return this.hostname === location.hostname;
-    }).addClass('dJAX_internal').on('click', function (event) {
-      return self.attachClick(this, event);
+            return this.hostname === location.hostname;
+    }).addClass('dJAX_internal')
+
+    $(this).on('click', '.dJAX_internal', function (event) {
+            if (this.hostname !== location.hostname)
+                return;
+            event.preventDefault();
+            return self.attachClick(this, event);
     });
 
     // On new page load

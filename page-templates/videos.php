@@ -25,7 +25,17 @@
       <div id="home-main"class="main-content scrollable group updatable">
       <div class="loading-fade"> <?php get_template_part('parts/loading');?> </div>
       <section class="red bottom1">
-        <?php  get_template_part('parts/section-videos');?>
+        <div class="video-container group">
+
+          <div class="section-subtitle video-container-header group">
+            <div class="video-name pull-left padded-sides">Videos</div>
+          </div>
+
+            <div class="s-1 m-3 b-3 h-4 padded">
+              <?php get_template_part('parts/content-loops/video-loop');?>
+            </div>
+
+        </div>  <?php // end videos ?>
       </section>
       </div>
     </div> <?php // end app-main ?>

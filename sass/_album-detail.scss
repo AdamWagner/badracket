@@ -1,0 +1,144 @@
+
+[data-view="album"] {
+  // font-family:helvetica;
+  // 
+  .album-page-section {
+    padding-bottom:2em;
+    @include breakpoint(medium) {
+      padding-bottom:3em;
+    }
+    @include breakpoint(big) {
+      padding-bottom:4em;
+    }
+  }
+
+  .album-page-meta {
+    @extend .group;
+    position:relative;
+    .album-page-cover {
+      width:100%;
+      @include breakpoint(above-mobile) {
+        float:right;
+        width:7em;
+        margin-right:1em;
+        margin-top:1em;
+      }
+      @include breakpoint(big) {
+        margin-top:0;
+        margin-right:0;
+      }
+    }
+
+    .meta-text {
+      position:absolute;
+      bottom:0;
+      width:100%;
+      background:transparentize(saturate(darken($dark,18%),100%),0.2);
+      background:adjust-hue(desaturate(darken($red,15%),16%),-4deg);
+      color:$cream;
+      -webkit-font-smoothing:antialiased;
+      font-size:90%;
+      @include breakpoint(above-mobile) {
+        position:static;
+        color:$dark;
+        -webkit-font-smoothing:subpixel-antialiased;
+        background:none;
+        width:auto;
+      }
+    }
+    .album-page-title {
+      font-size:1.5em;
+      line-height:1.5em;
+      margin:0;
+    }
+    .album-page-artist {
+      font-size:1.2em;
+      margin:0;
+      font-weight:normal;
+      opacity:0.7;
+      margin-bottom:0.5em;
+    }
+    .release-date, .recorded-at, .total-duration {
+      font-size:0.9em;
+      opacity:0.7;
+      line-height:1em;
+      margin:0.6em 0;
+    }
+  }
+  .album-controls {
+    @extend .group;
+    .total-duration {
+      float:right;
+    }
+  }
+}
+
+.track-list {
+  width:100%;
+  font-size:0.9em;
+  @include breakpoint(above-mobile) {
+    margin-top:2em;
+  }
+  td { 
+    padding:1em;
+    @include breakpoint(big) {
+      padding:0.5em 1em;
+    }
+    @extend %no-wrap-text;
+    &.trackNumber {
+      width:2.5em;
+      padding:0.5em 0;
+      overflow:hidden;
+    }
+    &.duration {
+      text-align:right;
+    }
+  }
+  tr {
+    cursor:pointer;
+    &:nth-child(odd) {
+      background:desaturate(darken($red,2.5%),5%);
+    }
+    &:hover {
+      .the-track-number { display:none; }
+      .play-icon { display:block; }
+    }
+    &.song-playing {
+      background:$dark;
+      color:$red;
+      .the-track-number { display:none; }
+      .play-icon { display:none; }
+      .speaker-icon { display:block; }
+    }
+    .speaker-indicator {
+      font-size:0.9em;
+    }
+    .the-track-number {
+      text-align:center;
+      opacity:0.7;
+    }
+    .speaker-icon, .play-icon {
+      font-size:0.8em;
+      text-align:center;
+      display:none;
+    }
+  }
+  }
+
+
+.twitter-wrapper {
+  margin-top:2em;
+  color: desaturate(darken($red,25%),30%);
+  border-top:solid 3px desaturate(darken($red,8%),19%);
+  a, a:visited { color: inherit; }
+  .tweet {
+    font-size:0.85em;
+    margin:0.5em 0;
+    padding:0.5em 0;
+    border-bottom:solid 1px desaturate(darken($red,8%),19%);;
+    .time {
+      font-size:0.9em;
+      line-height: 2.5em;
+    }
+  }
+}

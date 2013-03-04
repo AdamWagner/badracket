@@ -11,6 +11,17 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/images\/black-taxi2.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/images\/black-taxi2.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/images\/black-taxi2.png",
+      "initialSize" : 8750,
+      "fileType" : 8192
+    },
     "\/external\/meta-box\/inc\/fields\/slider.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -31,6 +42,17 @@
       "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/thickbox-image.min.js",
       "fileType" : 64
     },
+    "\/external\/meta-box\/css\/select2\/select2x2.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/css\/select2\/select2x2.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/external\/meta-box\/css\/select2\/select2x2.png",
+      "initialSize" : 845,
+      "fileType" : 8192
+    },
     "\/external\/meta-box\/js\/jqueryui\/jquery-ui-timepicker-addon.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -41,6 +63,24 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/external\/meta-box\/js\/jqueryui\/prod\/jquery-ui-timepicker-addon.min.js",
       "fileType" : 64
+    },
+    "\/external\/meta-box\/css\/select-advanced.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/css\/select-advanced.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/external\/meta-box\/inc\/fields\/url.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/url.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/images\/album-art-signals.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -75,7 +115,7 @@
     },
     "\/style.css" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/style.css",
@@ -92,6 +132,15 @@
       "outputAbbreviatedPath" : "\/external\/meta-box\/img\/jqueryui\/ui-icons_cd0a0a_256x240.png",
       "initialSize" : 4369,
       "fileType" : 8192
+    },
+    "\/parts\/content-loops\/video-loop-home.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/parts\/content-loops\/video-loop-home.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/js\/lib\/soundmanager2.js" : {
       "ignoreWasSetByUser" : 0,
@@ -151,12 +200,34 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/parts\/home\/section-videos.php" : {
+    "\/external\/meta-box\/js\/image-advanced.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/parts\/home\/section-videos.php",
+      "inputAbbreviatedPath" : "\/external\/meta-box\/js\/image-advanced.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/image-advanced.min.js",
+      "fileType" : 64
+    },
+    "\/external\/meta-box\/js\/select-advanced.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/js\/select-advanced.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/select-advanced.min.js",
+      "fileType" : 64
+    },
+    "\/external\/meta-box\/inc\/fields\/map.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/map.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -171,6 +242,15 @@
       "initialSize" : 180,
       "fileType" : 8192
     },
+    "\/external\/meta-box\/inc\/fields\/file-advanced.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/file-advanced.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/sass\/_forms.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -183,15 +263,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/external\/meta-box\/js\/jqueryui\/jquery.ui.slider.min.js" : {
+    "\/external\/meta-box\/js\/map.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/external\/meta-box\/js\/jqueryui\/jquery.ui.slider.min.js",
+      "inputAbbreviatedPath" : "\/external\/meta-box\/js\/map.js",
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/external\/meta-box\/js\/jqueryui\/prod\/jquery.ui.slider.min.min.js",
+      "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/map.min.js",
       "fileType" : 64
     },
     "\/page-templates\/home.php" : {
@@ -212,21 +292,21 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/parts\/header-desktop.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/parts\/header-desktop.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/tag.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/tag.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/parts\/header-desktop.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/parts\/header-desktop.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -242,15 +322,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/external\/meta-box\/inc\/fields\/time.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/time.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/js\/lib\/enquire.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -261,6 +332,35 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/js\/lib\/prod\/enquire.min.js",
       "fileType" : 64
+    },
+    "\/external\/meta-box\/js\/taxonomy.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/js\/taxonomy.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/taxonomy.min.js",
+      "fileType" : 64
+    },
+    "\/external\/meta-box\/inc\/fields\/time.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/time.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/external\/meta-box\/css\/jqueryui\/jquery.ui.datepicker.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/css\/jqueryui\/jquery.ui.datepicker.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/external\/meta-box\/inc\/fields\/date.php" : {
       "ignoreWasSetByUser" : 0,
@@ -280,24 +380,26 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/external\/meta-box\/css\/jqueryui\/jquery.ui.datepicker.css" : {
+    "\/js\/lib\/jqTweets.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/external\/meta-box\/css\/jqueryui\/jquery.ui.datepicker.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
-    "\/external\/meta-box\/js\/taxonomy.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/external\/meta-box\/js\/taxonomy.js",
+      "inputAbbreviatedPath" : "\/js\/lib\/jqTweets.js",
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/taxonomy.min.js",
+      "outputAbbreviatedPath" : "\/js\/lib\/prod\/jqTweets.min.js",
+      "fileType" : 64
+    },
+    "\/js\/badracket.audio-player.min.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/badracket.audio-player.min.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/prod\/badracket.audio-player.min.min.js",
       "fileType" : 64
     },
     "\/external\/meta-box\/css\/image.css" : {
@@ -340,6 +442,15 @@
       "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/validate.min.js",
       "fileType" : 64
     },
+    "\/external\/album-page.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/album-page.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/images\/album-art-thf.jpg" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -350,15 +461,6 @@
       "outputAbbreviatedPath" : "\/images\/album-art-thf.jpg",
       "initialSize" : 13623,
       "fileType" : 4096
-    },
-    "\/parts\/home\/section-music.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/parts\/home\/section-music.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/sass\/style.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -390,17 +492,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/js\/lib\/jquery.fitvids.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/js\/lib\/jquery.fitvids.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/lib\/prod\/jquery.fitvids.min.js",
-      "fileType" : 64
-    },
     "\/external\/meta-box\/img\/jqueryui\/ui-bg_highlight-soft_75_cccccc_1x100.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -411,6 +502,26 @@
       "outputAbbreviatedPath" : "\/external\/meta-box\/img\/jqueryui\/ui-bg_highlight-soft_75_cccccc_1x100.png",
       "initialSize" : 101,
       "fileType" : 8192
+    },
+    "\/external\/meta-box\/inc\/fields\/posts.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/posts.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/js\/lib\/jquery.fitvids.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/lib\/jquery.fitvids.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/lib\/prod\/jquery.fitvids.min.js",
+      "fileType" : 64
     },
     "\/external\/meta-box\/img\/jqueryui\/ui-icons_2e83ff_256x240.png" : {
       "ignoreWasSetByUser" : 0,
@@ -451,6 +562,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/plupload-image.min.js",
       "fileType" : 64
+    },
+    "\/archive-album.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/archive-album.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/external\/meta-box\/inc\/fields\/textarea.php" : {
       "ignoreWasSetByUser" : 0,
@@ -554,14 +674,17 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/comments.php" : {
+    "\/sass\/_album-detail.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/comments.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/sass\/_album-detail.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_album-detail.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/external\/meta-box\/css\/wysiwyg.css" : {
       "ignoreWasSetByUser" : 0,
@@ -572,12 +695,12 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/external\/meta-box\/inc\/fields\/hidden.php" : {
+    "\/comments.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/hidden.php",
+      "inputAbbreviatedPath" : "\/comments.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -621,12 +744,30 @@
       "initialSize" : 14327,
       "fileType" : 8192
     },
+    "\/external\/meta-box\/inc\/fields\/hidden.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/hidden.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/external\/meta-box\/inc\/fields\/radio.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/radio.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/parts\/content-loops\/video-loop.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/parts\/content-loops\/video-loop.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -642,21 +783,21 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/page-people.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/page-people.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/external\/meta-box\/inc\/fields\/checkbox.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/checkbox.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/page-people.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/page-people.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -679,6 +820,26 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/image.min.js",
       "fileType" : 64
+    },
+    "\/external\/meta-box\/css\/select2\/select2.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/css\/select2\/select2.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/external\/meta-box\/css\/select2\/select2.png",
+      "initialSize" : 613,
+      "fileType" : 8192
+    },
+    "\/parts\/content-loops\/album-loop.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/parts\/content-loops\/album-loop.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/external\/meta-box\/inc\/classes\/meta-box.php" : {
       "ignoreWasSetByUser" : 0,
@@ -758,17 +919,6 @@
       "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/time.min.js",
       "fileType" : 64
     },
-    "\/external\/meta-box\/js\/jqueryui\/jquery.ui.datepicker.min.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/external\/meta-box\/js\/jqueryui\/jquery.ui.datepicker.min.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/external\/meta-box\/js\/jqueryui\/prod\/jquery.ui.datepicker.min.min.js",
-      "fileType" : 64
-    },
     "\/page-template.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -799,6 +949,15 @@
       "outputAbbreviatedPath" : "\/external\/meta-box\/img\/jqueryui\/ui-icons_222222_256x240.png",
       "initialSize" : 4369,
       "fileType" : 8192
+    },
+    "\/external\/meta-box\/inc\/fields\/select-advanced.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/select-advanced.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/external\/meta-box\/inc\/fields\/checkbox-list.php" : {
       "ignoreWasSetByUser" : 0,
@@ -871,6 +1030,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/js\/lib\/prod\/jquery-ui-1.9.2.custom.min.js",
       "fileType" : 64
+    },
+    "\/external\/meta-box\/inc\/fields\/image-advanced.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/image-advanced.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/external\/meta-box\/js\/color.js" : {
       "ignoreWasSetByUser" : 0,
@@ -966,15 +1134,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/parts\/nav.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/parts\/nav.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/external\/meta-box\/js\/file.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -985,6 +1144,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/file.min.js",
       "fileType" : 64
+    },
+    "\/parts\/nav.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/parts\/nav.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/external\/meta-box\/css\/jqueryui\/jquery-ui-timepicker-addon.css" : {
       "ignoreWasSetByUser" : 0,
@@ -1064,21 +1232,12 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/config.rb" : {
+    "\/parts\/content-loops\/album-loop-more.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/config.rb",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 32768
-    },
-    "\/author .php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/author .php",
+      "inputAbbreviatedPath" : "\/parts\/content-loops\/album-loop-more.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -1090,6 +1249,24 @@
       "inputAbbreviatedPath" : "\/single.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/author .php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/author .php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/external\/meta-box\/css\/select2\/select2.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/css\/select2\/select2.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/sass\/_audio-player.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1112,14 +1289,14 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/external\/facebook_sdk\/base_facebook.php" : {
+    "\/config.rb" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/external\/facebook_sdk\/base_facebook.php",
+      "inputAbbreviatedPath" : "\/config.rb",
       "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "fileType" : 32768
     },
     "\/external\/meta-box\/img\/jqueryui\/ui-bg_glass_55_fbf9ee_1x400.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1132,6 +1309,26 @@
       "initialSize" : 120,
       "fileType" : 8192
     },
+    "\/js\/album-page.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/album-page.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/prod\/album-page.min.js",
+      "fileType" : 64
+    },
+    "\/external\/facebook_sdk\/base_facebook.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/facebook_sdk\/base_facebook.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/js\/lib\/jquery.tap.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1143,14 +1340,17 @@
       "outputAbbreviatedPath" : "\/js\/lib\/prod\/jquery.tap.min.js",
       "fileType" : 64
     },
-    "\/search.php" : {
+    "\/sass\/_loading.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/search.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/sass\/_loading.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_loading.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/images\/hungr-cover.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -1192,26 +1392,25 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/sass\/_loading.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/sass\/_loading.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_loading.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/external\/meta-box\/inc\/fields\/color.php" : {
+    "\/search.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/color.php",
+      "inputAbbreviatedPath" : "\/search.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/external\/meta-box\/js\/select2\/select2.min.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/js\/select2\/select2.min.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/external\/meta-box\/js\/select2\/prod\/select2.min.min.js",
+      "fileType" : 64
     },
     "\/external\/meta-box\/img\/jqueryui\/ui-bg_glass_75_e6e6e6_1x400.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1223,6 +1422,15 @@
       "outputAbbreviatedPath" : "\/external\/meta-box\/img\/jqueryui\/ui-bg_glass_75_e6e6e6_1x400.png",
       "initialSize" : 110,
       "fileType" : 8192
+    },
+    "\/external\/meta-box\/inc\/fields\/color.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/external\/meta-box\/inc\/fields\/color.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/external\/meta-box\/css\/color.css" : {
       "ignoreWasSetByUser" : 0,
@@ -1265,6 +1473,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/single-album.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/single-album.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/external\/meta-box.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1286,14 +1503,16 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/parts\/loading.php" : {
+    "\/external\/meta-box\/js\/file-advanced.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/parts\/loading.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/external\/meta-box\/js\/file-advanced.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/external\/meta-box\/js\/prod\/file-advanced.min.js",
+      "fileType" : 64
     },
     "\/js\/prod\/badracket.audio-player.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1306,16 +1525,14 @@
       "outputAbbreviatedPath" : "\/js\/prod\/prod\/badracket.audio-player.min.min.js",
       "fileType" : 64
     },
-    "\/images\/black-taxi2.png" : {
+    "\/parts\/loading.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/images\/black-taxi2.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/images\/black-taxi2.png",
-      "initialSize" : 8750,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/parts\/loading.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/external\/meta-box\/css\/style.css" : {
       "ignoreWasSetByUser" : 0,

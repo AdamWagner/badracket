@@ -18,6 +18,7 @@ Required external files
 require_once( 'external/starkers-utilities.php' );
 require_once( 'external/cpt.php' );
 require_once( 'external/meta-box/meta-box.php' );
+require_once( 'external/album-page.php' );
 // require_once( 'external/facebook_sdk/facebook.php' );
 // require_once( 'external/brv5_facebook.php' );
 
@@ -76,11 +77,6 @@ add_post_type('album', 'albums', array (
 'taxonomies' => array('post_tag'),
 ));
 
-
-add_post_type('albumTest', 'albumTests', array (
-'taxonomies' => array('post_tag'),
-));
-
 // add_taxonomy('Video Category', 'Video Categories', 'video');
 
 
@@ -119,6 +115,11 @@ $meta_boxes[] = array(
       'type'    => 'text',
     ),
     array(
+      'id'      => $prefix . 'artist_twitter', // Field ID, i.e. the meta key
+      'desc'    => 'Artist Twitter Handle (e.g. @badracket)', // Field description (optional)
+      'type'    => 'text',
+    ),
+    array(
       'id'      => $prefix . 'cover_url', // Field ID, i.e. the meta key
       'desc'    => 'IMAGE FILE: Upload album cover to post and paste URL here', // Field description (optional)
       'type'    => 'text',
@@ -128,10 +129,21 @@ $meta_boxes[] = array(
       'desc'    => 'ZIP FILE: Upload full album zip file andl paste URL here', // Field description (optional)
       'type'    => 'text',
     ),
+    // DATETIME
     array(
-      'id'      => $prefix . 'release_date', // Field ID, i.e. the meta key
-      'desc'    => 'The Release date of the album:  mm - dd - yyyy', // Field description (optional)
-      'type'    => 'text',
+      'name' => 'Release Date',
+      'id'   => $prefix . 'release_date',
+      'type' => 'datetime',
+
+      // jQuery datetime picker options. See here http://trentrichardson.com/examples/timepicker/
+      'js_options' => array(
+        'stepMinute'     => 15,
+        'showHour' => false,
+        'showMinute' => false,
+        'showTimepicker' => false,
+        'showTime' => false,
+        'alwaysSetTime' => false,
+      ),
     ),
     array(
       'id'      => $prefix . 'recording_studio', // Field ID, i.e. the meta key
@@ -178,7 +190,7 @@ $meta_boxes[] = array(
       'desc'    => 'songUrl',
     ),
      array(
-       'id'  => $prefix.'checkbox-01',
+       'id'  => $prefix.'isSampleTrack-01',
        'type'  => 'checkbox',
        'desc'    => 'sampleTrack',
      ),
@@ -199,27 +211,27 @@ $meta_boxes[] = array(
   'fields' => array(
 
     array(
-      'id'      => $prefix . 'songTitle-2',
+      'id'      => $prefix . 'songTitle-02',
       'type'    => 'text',
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-2', 
+      'id'      => $prefix . 'songTrackNumber-02', 
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-2', 
+      'id'      => $prefix . 'duration-02', 
       'type'    => 'text',
       'desc'    => 'duration',
     ),   
     array(
-      'id'      => $prefix . 'songUrl-2', 
+      'id'      => $prefix . 'songUrl-02', 
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),       
      array(
-       'id'  => $prefix.'checkbox-2',
+       'id'  => $prefix.'isSampleTrack-02',
        'type'  => 'checkbox',
        'desc'    => 'sampleTrack',
      ),
@@ -260,7 +272,7 @@ $meta_boxes[] = array(
       'desc'    => 'songUrl',
     ),
      array(
-       'id'  => $prefix.'checkbox-03',
+       'id'  => $prefix.'isSampleTrack-03',
        'type'  => 'checkbox',
        'desc'    => 'sampleTrack',
      ),
@@ -301,7 +313,7 @@ $meta_boxes[] = array(
       'desc'    => 'songUrl',
     ),
      array(
-       'id'  => $prefix.'checkbox-04',
+       'id'  => $prefix.'isSampleTrack-04',
        'type'  => 'checkbox',
        'desc'    => 'sampleTrack',
      ),
@@ -310,9 +322,319 @@ $meta_boxes[] = array(
 
 
 
+// 1st meta box
+$meta_boxes[] = array(
+  'id'            => 'album-tracks-05', // $id
+  'title'         => 'Track 05', // $title 
+  'pages'         => array('album'), // $Array of pages boxes will appear on
+  'context'       => 'normal', // $context (normal, advanced, side)
+  'priority'      => 'high', // position in editor (high, core, default, low)
+
+  // List of meta fields
+  'fields' => array(
+
+    array(
+      'id'      => $prefix . 'songTitle-05',
+      'type'    => 'text',
+      'desc'    => 'songTitle',
+    ),
+    array(
+      'id'      => $prefix . 'songTrackNumber-05', 
+      'type'    => 'text',
+      'desc'    => 'songTrackNumber',
+    ),
+     array(
+      'id'      => $prefix . 'duration-05', 
+      'type'    => 'text',
+      'desc'    => 'duration',
+    ),   
+    array(
+      'id'      => $prefix . 'songUrl-05', 
+      'type'    => 'text',
+      'desc'    => 'songUrl',
+    ),
+     array(
+       'id'  => $prefix.'isSampleTrack-05',
+       'type'  => 'checkbox',
+       'desc'    => 'sampleTrack',
+     ),
+  ) //end fields array
+); //end $meta_boxes array
+
+// 1st meta box
+$meta_boxes[] = array(
+  'id'            => 'album-tracks-06', // $id
+  'title'         => 'Track 06', // $title 
+  'pages'         => array('album'), // $Array of pages boxes will appear on
+  'context'       => 'normal', // $context (normal, advanced, side)
+  'priority'      => 'high', // position in editor (high, core, default, low)
+
+  // List of meta fields
+  'fields' => array(
+
+    array(
+      'id'      => $prefix . 'songTitle-06',
+      'type'    => 'text',
+      'desc'    => 'songTitle',
+    ),
+    array(
+      'id'      => $prefix . 'songTrackNumber-06', 
+      'type'    => 'text',
+      'desc'    => 'songTrackNumber',
+    ),
+     array(
+      'id'      => $prefix . 'duration-06', 
+      'type'    => 'text',
+      'desc'    => 'duration',
+    ),   
+    array(
+      'id'      => $prefix . 'songUrl-06', 
+      'type'    => 'text',
+      'desc'    => 'songUrl',
+    ),
+     array(
+       'id'  => $prefix.'isSampleTrack-06',
+       'type'  => 'checkbox',
+       'desc'    => 'sampleTrack',
+     ),
+  ) //end fields array
+); //end $meta_boxes array
+
+// 1st meta box
+$meta_boxes[] = array(
+  'id'            => 'album-tracks-07', // $id
+  'title'         => 'Track 07', // $title 
+  'pages'         => array('album'), // $Array of pages boxes will appear on
+  'context'       => 'normal', // $context (normal, advanced, side)
+  'priority'      => 'high', // position in editor (high, core, default, low)
+
+  // List of meta fields
+  'fields' => array(
+
+    array(
+      'id'      => $prefix . 'songTitle-07',
+      'type'    => 'text',
+      'desc'    => 'songTitle',
+    ),
+    array(
+      'id'      => $prefix . 'songTrackNumber-07', 
+      'type'    => 'text',
+      'desc'    => 'songTrackNumber',
+    ),
+     array(
+      'id'      => $prefix . 'duration-07', 
+      'type'    => 'text',
+      'desc'    => 'duration',
+    ),   
+    array(
+      'id'      => $prefix . 'songUrl-07', 
+      'type'    => 'text',
+      'desc'    => 'songUrl',
+    ),
+     array(
+       'id'  => $prefix.'isSampleTrack-07',
+       'type'  => 'checkbox',
+       'desc'    => 'sampleTrack',
+     ),
+  ) //end fields array
+); //end $meta_boxes array
 
 
+// 1st meta box
+$meta_boxes[] = array(
+  'id'            => 'album-tracks-08', // $id
+  'title'         => 'Track 08', // $title 
+  'pages'         => array('album'), // $Array of pages boxes will appear on
+  'context'       => 'normal', // $context (normal, advanced, side)
+  'priority'      => 'high', // position in editor (high, core, default, low)
 
+  // List of meta fields
+  'fields' => array(
+
+    array(
+      'id'      => $prefix . 'songTitle-08',
+      'type'    => 'text',
+      'desc'    => 'songTitle',
+    ),
+    array(
+      'id'      => $prefix . 'songTrackNumber-08', 
+      'type'    => 'text',
+      'desc'    => 'songTrackNumber',
+    ),
+     array(
+      'id'      => $prefix . 'duration-08', 
+      'type'    => 'text',
+      'desc'    => 'duration',
+    ),   
+    array(
+      'id'      => $prefix . 'songUrl-08', 
+      'type'    => 'text',
+      'desc'    => 'songUrl',
+    ),
+     array(
+       'id'  => $prefix.'isSampleTrack-08',
+       'type'  => 'checkbox',
+       'desc'    => 'sampleTrack',
+     ),
+  ) //end fields array
+); //end $meta_boxes array
+
+
+// 1st meta box
+$meta_boxes[] = array(
+  'id'            => 'album-tracks-09', // $id
+  'title'         => 'Track 09', // $title 
+  'pages'         => array('album'), // $Array of pages boxes will appear on
+  'context'       => 'normal', // $context (normal, advanced, side)
+  'priority'      => 'high', // position in editor (high, core, default, low)
+
+  // List of meta fields
+  'fields' => array(
+
+    array(
+      'id'      => $prefix . 'songTitle-09',
+      'type'    => 'text',
+      'desc'    => 'songTitle',
+    ),
+    array(
+      'id'      => $prefix . 'songTrackNumber-09', 
+      'type'    => 'text',
+      'desc'    => 'songTrackNumber',
+    ),
+     array(
+      'id'      => $prefix . 'duration-09', 
+      'type'    => 'text',
+      'desc'    => 'duration',
+    ),   
+    array(
+      'id'      => $prefix . 'songUrl-09', 
+      'type'    => 'text',
+      'desc'    => 'songUrl',
+    ),
+     array(
+       'id'  => $prefix.'isSampleTrack-09',
+       'type'  => 'checkbox',
+       'desc'    => 'sampleTrack',
+     ),
+  ) //end fields array
+); //end $meta_boxes array
+
+// 1st meta box
+$meta_boxes[] = array(
+  'id'            => 'album-tracks-10', // $id
+  'title'         => 'Track 10', // $title 
+  'pages'         => array('album'), // $Array of pages boxes will appear on
+  'context'       => 'normal', // $context (normal, advanced, side)
+  'priority'      => 'high', // position in editor (high, core, default, low)
+
+  // List of meta fields
+  'fields' => array(
+
+    array(
+      'id'      => $prefix . 'songTitle-10',
+      'type'    => 'text',
+      'desc'    => 'songTitle',
+    ),
+    array(
+      'id'      => $prefix . 'songTrackNumber-10', 
+      'type'    => 'text',
+      'desc'    => 'songTrackNumber',
+    ),
+     array(
+      'id'      => $prefix . 'duration-10', 
+      'type'    => 'text',
+      'desc'    => 'duration',
+    ),   
+    array(
+      'id'      => $prefix . 'songUrl-10', 
+      'type'    => 'text',
+      'desc'    => 'songUrl',
+    ),
+     array(
+       'id'  => $prefix.'isSampleTrack-10',
+       'type'  => 'checkbox',
+       'desc'    => 'sampleTrack',
+     ),
+  ) //end fields array
+); //end $meta_boxes array
+
+// 1st meta box
+$meta_boxes[] = array(
+  'id'            => 'album-tracks-12', // $id
+  'title'         => 'Track 12', // $title 
+  'pages'         => array('album'), // $Array of pages boxes will appear on
+  'context'       => 'normal', // $context (normal, advanced, side)
+  'priority'      => 'high', // position in editor (high, core, default, low)
+
+  // List of meta fields
+  'fields' => array(
+
+    array(
+      'id'      => $prefix . 'songTitle-12',
+      'type'    => 'text',
+      'desc'    => 'songTitle',
+    ),
+    array(
+      'id'      => $prefix . 'songTrackNumber-12', 
+      'type'    => 'text',
+      'desc'    => 'songTrackNumber',
+    ),
+     array(
+      'id'      => $prefix . 'duration-12', 
+      'type'    => 'text',
+      'desc'    => 'duration',
+    ),   
+    array(
+      'id'      => $prefix . 'songUrl-12', 
+      'type'    => 'text',
+      'desc'    => 'songUrl',
+    ),
+     array(
+       'id'  => $prefix.'isSampleTrack-12',
+       'type'  => 'checkbox',
+       'desc'    => 'sampleTrack',
+     ),
+  ) //end fields array
+); //end $meta_boxes array
+
+// 1st meta box
+$meta_boxes[] = array(
+  'id'            => 'album-tracks-13', // $id
+  'title'         => 'Track 13', // $title 
+  'pages'         => array('album'), // $Array of pages boxes will appear on
+  'context'       => 'normal', // $context (normal, advanced, side)
+  'priority'      => 'high', // position in editor (high, core, default, low)
+
+  // List of meta fields
+  'fields' => array(
+
+    array(
+      'id'      => $prefix . 'songTitle-13',
+      'type'    => 'text',
+      'desc'    => 'songTitle',
+    ),
+    array(
+      'id'      => $prefix . 'songTrackNumber-13', 
+      'type'    => 'text',
+      'desc'    => 'songTrackNumber',
+    ),
+     array(
+      'id'      => $prefix . 'duration-13', 
+      'type'    => 'text',
+      'desc'    => 'duration',
+    ),   
+    array(
+      'id'      => $prefix . 'songUrl-13', 
+      'type'    => 'text',
+      'desc'    => 'songUrl',
+    ),
+     array(
+       'id'  => $prefix.'isSampleTrack-13',
+       'type'  => 'checkbox',
+       'desc'    => 'sampleTrack',
+     ),
+  ) //end fields array
+); //end $meta_boxes array
 
 
 /* ========================================================================================================================
@@ -442,6 +764,7 @@ function ajax_get_latest_posts($count, $post_type){
    while (have_posts()) : the_post();
      $meta = get_post_custom($post_id);
      $meta['albumName'] = get_the_title($post_id);;
+     $meta['albumUrl'] = get_permalink($post_id);;
      array_push($albums, $meta);
    endwhile;
    return $albums;

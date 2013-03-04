@@ -18,6 +18,17 @@
   padding:1em;
 }
 
+
+
+.padded-mobile-1 {
+  padding:1em;
+  @include breakpoint(big) {
+    padding:0;
+  }
+}
+
+
+
 .bottom-1 {
   margin-bottom:1em;
 }
@@ -37,7 +48,6 @@
     padding:1.6em;
   }
 }
-
 
 @include breakpoint(mobile) {
   .overflow-carousel {
@@ -60,7 +70,6 @@
   }
   
 }
-
 
 .s-1 .grid { width:100%; }
 .s-2 .grid { width:50%; }
@@ -149,7 +158,7 @@
   &.m-9 .grid:nth-child(-n+9),
   &.m-10 .grid:nth-child(-n+10),
   &.m-12 .grid:nth-child(-n+11) { display:block; }
-}
+  }
 
   @include breakpoint(big) {
   &.b-1 .grid:nth-child(-n+1),
@@ -163,7 +172,7 @@
   &.b-9 .grid:nth-child(-n+9),
   &.b-10 .grid:nth-child(-n+10),
   &.b-12 .grid:nth-child(-n+11) { display:block; }
-}
+  }
 
   @include breakpoint(huge) {
   &.h-1 .grid:nth-child(-n+1),
@@ -177,7 +186,7 @@
   &.h-9 .grid:nth-child(-n+9),
   &.h-10 .grid:nth-child(-n+10),
   &.h-12 .grid:nth-child(-n+11) { display:block; }
-}
+  }
 }
 
 

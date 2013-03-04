@@ -1,7 +1,7 @@
 3.2.5 (Media Mark)
-c553f2b64108be6d39f799e5bfae5a54e2248b7f
+b2fb217e46026b3a632b9a6391cc011da5b63c50
 o:Sass::Tree::RootNode
-:@template"ˆ"/*! normalize.css 2012-08-07T21:27 UTC | MIT License | git.io/normalize */
+:@template"1#/*! normalize.css 2012-08-07T21:27 UTC | MIT License | git.io/normalize */
 
 /* ==========================================================================
    HTML5 display definitions
@@ -488,8 +488,27 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+div,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary,
+img,
+a,
+h1, h2, h3, h4, h5, h6 {
+  @include box-sizing(border-box);
+}
+
 :
-@linei:@has_childrenT:@options{ :@children[eo:Sass::Tree::CommentNode
+@linei:@has_childrenT:@options{ :@children[fo:Sass::Tree::CommentNode
 ;i;	@;
 [ :
 @type:	loud:@value["N/* normalize.css 2012-08-07T21:27 UTC | MIT License | git.io/normalize */o;
@@ -1105,4 +1124,56 @@ input;#0o;%
 [ ;o;;	@;;;"0;["
 table;o;;" ;iä;[o;;[o;
 ;@²;o; ;!{ ;iä;[o;"	;@²;iä;["
-table;#0;$0
+table;#0;$0o;;i÷;T;	@;i ;
+[o:Sass::Tree::MixinNode;iø;	@;"box-sizing:@splat0;
+[ :
+@args[o;	;iø;	@;;;"border-box:@keywords{ ;["div,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary,
+img,
+a,
+h1, h2, h3, h4, h5, h6;o;;" ;i÷;[o;;[o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["div;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["article;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["
+aside;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["details;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["figcaption;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["figure;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["footer;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["header;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["hgroup;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["nav;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["section;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["summary;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["img;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["a;#0;$0o;;["
+o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["h1;#0;$0o;;[o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["h2;#0;$0o;;[o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["h3;#0;$0o;;[o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["h4;#0;$0o;;[o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["h5;#0;$0o;;[o;
+;@É;o; ;!{ ;i÷;[o;"	;@É;i÷;["h6;#0;$0
