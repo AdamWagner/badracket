@@ -77,46 +77,50 @@ badracket.globalPlayState = false; //default
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 
-badracket.onPlayResume = function(sm2_object){
-  console.log('onPlayResume() ran');
-  badracket.whilePlayingCounter = 0;
-};
+  this.events = {
 
-badracket.onStopPause = function(sm2_object){
-};
+    // handlers for sound events as they're started/stopped/played
 
-badracket.whileLoading = function(sm2_object) {
-  var loadingWidth = ((sm2_object.bytesLoaded/(sm2_object.bytesTotal))*100).toFixed(2) + '%';
-  var currentSong = badracket.playHistory.getCurrentSong();
-  if (currentSong.sm2_object === sm2_object) {               // only update based on current song
-    $('.loading').css('width', loadingWidth);
-  }
-};
+    onPlayResume : function(sm2_object){
+      console.log('onPlayResume() ran');
+      badracket.whilePlayingCounter = 0;
+    },
 
-badracket.whilePlaying = function(sm2_object){
-  badracket.whilePlayingCounter += 1;
-  var currentSong = badracket.playHistory.getCurrentSong(),
-      songDuration =  badracket.min_secToMilliseconds(currentSong.duration);
+    onStopPause : function(sm2_object){
+    },
 
-  var playbarWidth = ((sm2_object.position/(songDuration))*100).toFixed(2) + '%';
-  var sliding = badracket.sm.sliding;
+    whileLoading : function(sm2_object) {
+      var loadingWidth = ((sm2_object.bytesLoaded/(sm2_object.bytesTotal))*100).toFixed(2) + '%';
+      var currentSong = badracket.playHistory.getCurrentSong();
+      if (currentSong.sm2_object === sm2_object) {               // only update based on current song
+        $('.loading').css('width', loadingWidth);
+      }
+    },
 
+    whilePlaying : function(sm2_object){
+      badracket.whilePlayingCounter += 1;
+      var currentSong = badracket.playHistory.getCurrentSong(),
+          songDuration =  badracket.min_secToMilliseconds(currentSong.duration);
 
-  if (sliding !== true && badracket.whilePlayingCounter > 2 && currentSong.sm2_object === sm2_object ) { // delays playbar redraw preventing flash
-    $('.controls .position').css('width', playbarWidth);
-    $('.sm2_position').text( badracket.msToTime(sm2_object.position) );
-  }
-};
+      var playbarWidth = ((sm2_object.position/(songDuration))*100).toFixed(2) + '%';
+      var sliding = badracket.sm.sliding;
 
-badracket.onFinish = function(sm2_object){
-  console.log('on finish ran');
-  if (sm2_object.sID) {                           // if it receives the sm2_object
-    sm2_object.setPosition(0);                    // rewind progress bar
-  } else {                                        // else it recieves songObject
-    sm2_object.sm2_object.setPosition(0);
-  }
-  badracket.handleNextClick('next');              // Advance play, depending on play mode
-};
+      if (sliding !== true && badracket.whilePlayingCounter > 2 && currentSong.sm2_object === sm2_object ) { // delays playbar redraw preventing flash
+        $('.controls .position').css('width', playbarWidth);
+        $('.sm2_position').text( badracket.msToTime(sm2_object.position) );
+      }
+    },
+
+    onFinish : function(sm2_object){
+      console.log('on finish ran');
+      if (sm2_object.sID) {                           // if it receives the sm2_object
+        sm2_object.setPosition(0);                    // rewind progress bar
+      } else {                                        // else it recieves songObject
+        sm2_object.sm2_object.setPosition(0);
+      }
+      badracket.handleNextClick('next');              // Advance play, depending on play mode
+    }
+  };
 
 
 /* Control 30 second samples  - - - - - - - - - - - - - - - */
