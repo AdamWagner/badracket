@@ -212,13 +212,14 @@ badracket = {
   },
 
   initAlbumNormalization: function(objArray) {
+    console.log('album normalization ran');
     var len = objArray.length;
     for (var i=len; i--;) {
       badracket.createAblumHierarchy(objArray[i]);
       badracket.cleanAlbumProperties(objArray[i]);
       badracket.cleanTrackPropKeys(objArray[i].tracks);
-      console.log(objArray);
     }
+    return objArray;
   },
 
 
@@ -239,10 +240,10 @@ badracket = {
                  },
             dataType: 'JSON',
             success:function(data){
-                   badracket.albums = data;
-                   badracket.initAlbumNormalization(badracket.albums);
-                   badracket.soundmanager.smSetup(); // don't setup sm2 until we have album data
-
+                   console.log('got the json');
+                   var cleanAlbums = badracket.initAlbumNormalization(data);
+                   br_audio.albums.set(cleanAlbums);
+                   br_doTheStuff();
                  },
             error: function(errorThrown){
                  alert('error');
@@ -279,8 +280,8 @@ badracket = {
     $(window).load(function(){
       badracket.setup();
 
+
       badracket.lazyLoadImg();
-      badracket.setView();
       if ($('body').attr('data-view') === 'album') {
         badracket.setupAlbumPage();
       }
@@ -324,21 +325,6 @@ badracket = {
     });
   },
 
-  setView: function(url) {
-    var urlComp;
-    if (url) {
-      urlComp = url;
-    } else {
-      urlComp = window.location.toString();
-    }
-    if (urlComp.contains('album=')) {
-      $('body').attr('data-view','album');
-    } else if (urlComp === 'http://localhost:8888/sites/brv5/wp-br/') {
-      $('body').attr('data-view','home');
-    } else {
-      $('body').attr('data-view','unknown');
-    }
-  },
 
 
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
@@ -407,6 +393,26 @@ badracket = {
       s.bd.attr('data-state', 'default-state');
     }
   },
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+   Utilities
+\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+ msToTime : function(s) {
+   var ms = s % 1000;
+   s = (s - ms) / 1000;
+   var secs = s % 60;
+   s = (s - secs) / 60;
+   var mins = s % 60;
+
+   if (secs < 10) {secs = "0"+secs;}
+   return mins + ':' + secs;
+ },
+
+ stringToTime : function(time) {
+     time = time.toString().split(/:/);
+     return time[0] * 60000 + time[1] * 1000;
+ },
 
 
 
