@@ -9,13 +9,14 @@
       badracket.sm.setup({
         url: 'swf',
         flashVersion: 9,
-        debugMode: false,
-        flashPollingInterval: 125,
-        html5PollingInterval: 125,
+        debugMode: true,
+        // flashPollingInterval: 125,
+        // html5PollingInterval: 125,
+        // preferFlash: true,
         defaultOptions : {
-          useHighPerformance: true,
-          usePeakData: false,
-          useEQData: false
+          // useHighPerformance: true,
+          // usePeakData: false,
+          // useEQData: false
         }
       });
       console.log('- - - sm setup ran - - -');
@@ -44,17 +45,18 @@
       }
       return badracket.sm.createSound({
         id:'brSound'+(badracket.getSm2_objectCount()),
-        url:song.songUrl,
+        serverURL:'rtmp://s1bhnfyr3iuoor.cloudfront.net/cfx/st',
+        url:'audio.mp3',
         debugMode: false,
-        autoLoad: true,
+        // autoLoad: true,
+        // autoPlay: false,
         onplay: function() { badracket.soundmanager.events.onPlayResume(this); },
         onresume: function() { badracket.soundmanager.events.onPlayResume(this); },
-        onpause: function() { badracket.soundmanager.events.onStopPause(this);  },
-        onstop: function() { badracket.soundmanager.events.onStopPause(this);   },
-        whileloading: function() { badracket.soundmanager.events.whileLoading(this); },
-        whileplaying: function() { badracket.soundmanager.events.whilePlaying(this); },
-        onfinish: function() { badracket.soundmanager.events.onFinish(this); },
-        onload: function(){ }
+        // onpause: function() { badracket.soundmanager.events.onStopPause(this);  },
+        // onstop: function() { badracket.soundmanager.events.onStopPause(this);   },
+        // whileplaying: function() { badracket.soundmanager.events.whilePlaying(this); },
+        // onfinish: function() { badracket.soundmanager.events.onFinish(this); },
+        // onload: function(){ }
       });
     },
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
