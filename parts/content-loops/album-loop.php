@@ -8,7 +8,7 @@
     $cover = get_post_meta($post->ID, '_br_cover_url', true);
     ?>
 
-    <div class="grid album">
+    <div class="grid album" data-album-title="<?php echo $albumName; ?>">
        <div class="album-cover playable"> 
          <div class="play"></div>
          <div class="pause"></div>
