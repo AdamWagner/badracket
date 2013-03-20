@@ -122,7 +122,7 @@ $darkest:darken($dark,11%);
 
 
 
-  .position, .loading {
+  .progress-bar, .loading {
     background:$progress-color;
     width:0;
     height:$player-control-bar-height;
@@ -141,7 +141,7 @@ $darkest:darken($dark,11%);
     }
   }
 
-  .position::before {
+  .progress-bar::before {
     left:-$player-control-bar-height/2;
     background:$progress-color;
   }

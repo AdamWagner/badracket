@@ -23,7 +23,6 @@
      <?php  get_template_part('parts/nav');?>
 
       <div id="home-main"class="main-content scrollable group updatable">
-      <div class="loading-fade"> <?php get_template_part('parts/loading');?> </div>
       <section class="red bottom1">
 
 

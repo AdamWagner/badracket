@@ -423,10 +423,6 @@ nav[role="navigation"] {
   min-height:100%;
   z-index:10;
   position:relative; // for z-index effect
-  &.loading .loading-fade {
-    opacity:1;
-    @include transition(opacity 0.2s);
-  }
 }
 
 .loading-fade {

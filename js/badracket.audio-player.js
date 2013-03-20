@@ -21,7 +21,6 @@ var br_sm2 = function(){
     });
   }
 
-
   function onPlayResume( sound ) {
     br_state.setPlayState(true);
   }
@@ -39,21 +38,19 @@ var br_sm2 = function(){
     if ( currentSong.sm2_object === sound ) {
       $('.loading').css('width', loadingWidth);
     }
-
   }
 
   function whilePlaying( sound ){
-    badracket.whilePlayingCounter += 1;
-    var currentSong = br_player.history.currentSong(),
-        songDuration =  badracket.stringToTime(currentSong.duration),
+    var currentSong = br_player.history.song.current(),
+        songDuration =  badracket.stringToTime(currentSong.duration);
         soundPosition = sound.position;
         isSliding = br_player.ui.state.isSliding;
 
     var playbarWidth = ( (soundPosition / songDuration) * 100 ).toFixed(2) + '%';
 
-    if (isSliding !== true && badracket.whilePlayingCounter > 2 && currentSong.sm2_object === sound ) { // delays playbar redraw preventing flash
-      $('.controls .position').css('width', playbarWidth);
-      $('.sm2_position').text( badracket.msToTime(sm2_object.position) );
+    if (isSliding !== true  && currentSong.sm2_object === sound ) { // delays playbar redraw preventing flash
+      br_player.ui.el.progressBar.css('width', playbarWidth);
+      br_player.ui.el.progressTime.text( badracket.msToTime(sound.position) );
     }
   }
 
@@ -105,13 +102,14 @@ var br_sm2 = function(){
 
   function playPause ( song ) {
     if (typeof song.sm2_object === 'undefined') {                   // if sm2_object doesn't exist
-      song.sm2_object = createSound(song);                   // ... create sound
+      song.sm2_object = createSound(song);                          // ... create sound
     }
     if ( br_state.isPlaying() && song !== br_player.history.song.current() ) {
       console.log('stop other players ran');
-      stopOtherPlayers(song.sm2_object.sID);                // pause other sounds
+      stopOtherPlayers(song.sm2_object.sID);                           // pause other sounds
     }
     // badracket.attach30SecondListener(song);                         // attach 30 second listener
+    console.log(song);
     console.log(song.sm2_object);
     song.sm2_object.togglePause();                                  // play / pause sound
   }
@@ -152,8 +150,8 @@ var br_state = function() {
     console.log('view set ran and url is ' + url);
     if ( typeof url === 'undefined' ) { url = window.location.toString(); }
 
-    if ( url.contains('album=') ) {
-      viewState = 'album';
+    if ( badracket.stringContains( url, 'album=' ) ) {
+      viewState = 'album-detail';
     } else if ( url === 'http://localhost:8888/sites/brv5/wp-br/' ) {
       viewState = 'home';
     } else {
@@ -183,7 +181,30 @@ var br_state = function() {
 }();
 
 
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+   Album Covers
+\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
+var br_albumCovers = function() {
+
+  function albumPlaying( albumName ) {
+    var targetAlbum = br_player.albums.getAlbumByName(albumName),
+        targetAlbumDOM = $('.album[data-album-title="'+ albumName +'"]'),
+        currentAlbum = br_player.history.album.current();
+
+    if ( targetAlbum === currentAlbum ) {
+      targetAlbumDOM.toggleClass('playing');
+    } else {
+      $('.album').removeClass('playing');
+      targetAlbumDOM.addClass('playing');
+    }
+  }
+
+  return {
+    updateAlbumPlaying : albumPlaying
+  };
+
+}();
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
@@ -201,20 +222,20 @@ var br_player = function() {
   /*- Audio Player -*/
   var playerUI = function(){
 
-    var elements = {
+    var el = {
       playerWrapper : $('.audio-player-wrapper'),
       player : $('.audio-player'),
       song : $('.audio-player .song'),
       artist : $('.audio-player .artist'),
-      trackNum_albumLink : $('.audio-player .view-full-album'),
+      albumLink : $('.audio-player .view-full-album'),
       progressBar : $('.audio-player .progress-bar'),
-      progressTime : $('.audio-player .progress-time')
-    };
-
-    var interactive = {
+      progressTime : $('.audio-player .progress-time'),
+      currentTrack : $('.audio-player .current-track'),
+      totalTracks : $('.audio-player .total-tracks'),
+      slider : $('.slider'),
       playButton : $('.play-pause'),
       prevButton : $('.previous'),
-      slider : $('.slider')
+      nextButton : $('.next'),
     };
 
     var iconFont = {
@@ -228,32 +249,62 @@ var br_player = function() {
       isSliding : false
     };
 
+    var render = {
+      init : function( album , song ) {
+        console.log(album);
+        el.artist.html(album.artist);
+        el.song.html(song.songTitle);
+        el.progressTime.html(song.duration);
+        el.albumLink.attr( 'href', album.albumUrl );
+        el.currentTrack.html(parseInt(song.trackNumber , 10));
+        el.totalTracks.html(album.tracks.length);
+        console.log(song.trackNumber);
+      },
+
+      playState : function() {
+        var playState = br_state.isPlaying();
+        if (playState === true ) {
+          br_player.ui.el.playButton.attr('data-icon', iconFont.pause);
+        } else {
+          br_player.ui.el.playButton.attr('data-icon', iconFont.play);
+        }
+      },
+
+      updateTime : function ( time ) {
+        el.progressTime.html( time );
+      }
+    };
+
     var handlers = {
       playClick : function() {
-        badracket.playPause( br_player.history.currentSong );
-        badracket.updateAudioDOM( br_player.history.album.current() , br_player.history.song.current() );
+        br_albumCovers.updateAlbumPlaying( br_player.history.album.current().albumName );
+        br_sm2.playPause( br_player.history.song.current() );
+        br_player.ui.render.playState();
       },
 
       albumClick : function(e) {
-        if ( br_state.viewGet() === 'album' ) { return false; }
+        if ( br_state.viewGet() === 'album-detail' ) { return false; }
 
         e.preventDefault();
 
-        var albumName = $(e.target).closest('.album').attr('data-album-title'),
+        var albumDOM = $(e.target).closest('.album'),
+            albumName = albumDOM.attr('data-album-title'),
             album = br_player.albums.getAlbumByName( albumName ),
             currentAlbum = br_player.history.album.current(),
             song;
 
         if ( album === currentAlbum ) {
           song = br_player.history.song.current();
-          br_sm2.playPause( song );
         } else {
           song = br_player.albums.sampleSong( album );
-          br_sm2.playPause( song );
-          br_player.history.update( album, song );
         }
-        // badracket.updateAudioDOM( album, sampleTrack );
 
+        br_albumCovers.updateAlbumPlaying( albumName );
+        br_player.ui.render.init( album, song );
+
+        br_sm2.playPause( song );
+        br_player.ui.render.playState();
+        br_player.history.update(album, song);
       },
 
       songClick : function(e) {
@@ -261,17 +312,44 @@ var br_player = function() {
             trackNumber = songDOM.find('.trackNumber').text(),
             albumName = $('[data-album-title]').attr('data-album-title'), // [X] TODO: don't search for album every song click
             album = br_player.albums.getAlbumByName( albumName ),
+            currentSong = br_player.history.song.current(),
+            clickedSong = album.tracks[ parseInt( trackNumber , 10 ) - 1 ],
             song;
 
-        if ( songDOM.hasClass('song-playing') ) {
-          song = br_player.history.song.current();
+        $('.song').removeClass('song-playing');
+
+        if ( currentSong.songTitle === clickedSong.songTitle ) {
+          song = currentSong;
         } else {
-          song = album.tracks[ parseInt( trackNumber , 10 ) - 1 ];
+          song = clickedSong;
+          songDOM.addClass('song-playing');
+          br_player.ui.render.init( album, song );
         }
+
         br_sm2.playPause( song );
-        // badracket.updateAudioDOM(album, song);
+        br_player.history.update(album, song);
+
+      },
+
+      whileSliding : function( event, ui, playbar ) {
+        var position = ui.value;
+        br_player.ui.el.progressBar.css('width', position + '%');
+      },
+
+      slideStart : function() {
+        state.isSliding = true;
+      },
+
+      slideStop : function( event, ui) {
+        state.isSliding = false;
+        var currentSong = br_player.history.song.current();
+        var position = ui.value;
+        var smPosition = (position/100) * badracket.stringToTime(currentSong.duration);
+        currentSong.sm2_object.setPosition(smPosition);
+
       }
     };
+
 
     var bindUI = {
       play : function() {
@@ -302,14 +380,23 @@ var br_player = function() {
         s.bd.on({
           click : function(e){ br_player.ui.handlers.songClick(e); }
         } , '.song' );
+      },
+      slider : function() {
+        br_player.ui.el.slider.slider({
+          step: 0.01,
+          slide: function( event, ui ) { br_player.ui.handlers.whileSliding( event, ui ); },
+          start: function() { br_player.ui.handlers.slideStart(); },
+          stop: function(event, ui) { br_player.ui.handlers.slideStop( event, ui ); }
+        });
       }
     };
 
     return {
-      elements : elements,
+      el : el,
       state : state,
       handlers : handlers,
-      bindUI : bindUI
+      bindUI : bindUI,
+      render : render
     };
 
   }();
@@ -444,7 +531,7 @@ var br_player = function() {
    Subscribe
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-$.subscribe('/view/change', updateView('/view/change'));   // triggered by djaxLoad()
+$.subscribe('/view/change', updateView('/view/change'));   // triggered by djaxLoad() + load()
 
 function updateView (name) {
   return function(_, url) {
@@ -542,6 +629,13 @@ var init = function(){
 
 init.loadSM();
 
+var Myname = {
+  first: 'adam'
+};
+
+var dick = {
+  size : 'big'
+};
 
 
 function doMoreStuff() {
@@ -549,10 +643,13 @@ function doMoreStuff() {
   var album = br_player.history.album.random();
   var song = br_player.albums.sampleSong(album);
   br_player.history.update(album, song);
+  br_player.ui.render.init(album, song);
   console.log(song);
   // song.play();
   br_player.ui.bindUI.album();
   br_player.ui.bindUI.song();
+  br_player.ui.bindUI.slider();
+  br_player.ui.bindUI.play();
 }
 
 
