@@ -187,7 +187,7 @@ badracket = {
             success:function(data){
                    console.log('got the json');
                    var cleanAlbums = badracket.albumNormalization(data);
-                   br_player.albums.set(cleanAlbums);
+                   br_player.albumData.set(cleanAlbums);
                    init.dataReady();
                  },
             error: function(errorThrown){

@@ -21,23 +21,12 @@ var br_sm2 = function(){
     });
   }
 
-  function onPlayResume( sound ) {
+  function onPlayResume( ) {
     br_state.setPlayState(true);
   }
 
-  function onStopPause( sound ) {
+  function onStopPause( ) {
     br_state.setPlayState(false);
-  }
-
-  function whileLoading( sound ) {
-    var loaded = sound.bytesLoaded,
-        total = sound.bytesTotal,
-        loadingWidth = ( (loaded / total) * 100 ).toFixed(2) + '%',
-        currentSong = br_player.history.currentSong();
-
-    if ( currentSong.sm2_object === sound ) {
-      $('.loading').css('width', loadingWidth);
-    }
   }
 
   function whilePlaying( sound ){
@@ -53,6 +42,7 @@ var br_sm2 = function(){
       br_player.ui.el.progressTime.text( badracket.msToTime(sound.position) );
     }
   }
+
 
   function onFinish( sound ) {
    console.log('on finish ran');
@@ -75,42 +65,32 @@ var br_sm2 = function(){
       onresume: function() { onPlayResume(); },
       onpause: function() { onStopPause(); },
       onstop: function() { onStopPause(); },
-      whileloading: function() { whileLoading(this); },
-      whileplaying: function() { whilePlaying(this); },
-      onfinish: function() { onFinish(this); }
-      // onload: function(){ }
+      whileloading: function() { whileLoading( this ); },
+      whileplaying: function() { whilePlaying( this ); },
+      onfinish: function() { onFinish( this ); }
     });
   }
 
-  function runFuncAllSongs( func ) {
-    var albums = br_player.albums.get();
-    for (var i = albums.length; i--; ) {
-      var albumTracks = albums[i].tracks;
-      for (var j = albumTracks.length; j--; ) {
-          func(albumTracks[j]);
-        }
-      }
-  }
 
-  function stopOtherPlayers(sm2_id) {
-    runFuncAllSongs(function(song){
-      if (typeof song.sm2_object !== 'undefined' && song.sm2_object.sID !== sm2_id) {
-        song.sm2_object.pause();
+  function previousLoadCheck(){
+    var lastPlayed = br_player.history.song.lastPlayed();
+
+    if ( typeof lastPlayed !== 'undefined' && typeof lastPlayed.sm2_object !== 'undefined' ) {
+      if ( lastPlayed.sm2_object.loaded === false ) {
+        lastPlayed.sm2_object.unload();  // if previous song not loaded, stop loading to avoid buildup
       }
-    });
+    }
   }
 
   function playPause ( song ) {
+
+    previousLoadCheck();
+
     if (typeof song.sm2_object === 'undefined') {                   // if sm2_object doesn't exist
       song.sm2_object = createSound(song);                          // ... create sound
     }
-    if ( br_state.isPlaying() && song !== br_player.history.song.current() ) {
-      console.log('stop other players ran');
-      stopOtherPlayers(song.sm2_object.sID);                           // pause other sounds
-    }
+
     // badracket.attach30SecondListener(song);                         // attach 30 second listener
-    console.log(song);
-    console.log(song.sm2_object);
     song.sm2_object.togglePause();                                  // play / pause sound
   }
 
@@ -131,12 +111,8 @@ var br_sm2 = function(){
 
 var br_state = function() {
 
-  var isPlaying = false;
-
-
-  var viewState = 'unknown';
-
-
+  var isPlaying = false,
+      viewState = 'unknown';
 
 // if ($('body').attr('data-view') === 'album') {
 //   badracket.setupAlbumPage();
@@ -181,31 +157,6 @@ var br_state = function() {
 }();
 
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-   Album Covers
-\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
-var br_albumCovers = function() {
-
-  function albumPlaying( albumName ) {
-    var targetAlbum = br_player.albums.getAlbumByName(albumName),
-        targetAlbumDOM = $('.album[data-album-title="'+ albumName +'"]'),
-        currentAlbum = br_player.history.album.current();
-
-    if ( targetAlbum === currentAlbum ) {
-      targetAlbumDOM.toggleClass('playing');
-    } else {
-      $('.album').removeClass('playing');
-      targetAlbumDOM.addClass('playing');
-    }
-  }
-
-  return {
-    updateAlbumPlaying : albumPlaying
-  };
-
-}();
-
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
    Player
@@ -235,7 +186,7 @@ var br_player = function() {
       slider : $('.slider'),
       playButton : $('.play-pause'),
       prevButton : $('.previous'),
-      nextButton : $('.next'),
+      nextButton : $('.next')
     };
 
     var iconFont = {
@@ -251,14 +202,12 @@ var br_player = function() {
 
     var render = {
       init : function( album , song ) {
-        console.log(album);
         el.artist.html(album.artist);
         el.song.html(song.songTitle);
         el.progressTime.html(song.duration);
         el.albumLink.attr( 'href', album.albumUrl );
         el.currentTrack.html(parseInt(song.trackNumber , 10));
         el.totalTracks.html(album.tracks.length);
-        console.log(song.trackNumber);
       },
 
       playState : function() {
@@ -277,58 +226,46 @@ var br_player = function() {
 
     var handlers = {
       playClick : function() {
-        br_albumCovers.updateAlbumPlaying( br_player.history.album.current().albumName );
-        br_sm2.playPause( br_player.history.song.current() );
+        br_player.logic.targetSong( br_player.history.album.current(), br_player.history.song.current() );
         br_player.ui.render.playState();
       },
 
-      albumClick : function(e) {
-        if ( br_state.viewGet() === 'album-detail' ) { return false; }
-
+      albumClick : function( e ) {
+        if ( br_state.viewGet() === 'album-detail' ) { return false; } // disable handler on album-detail page
         e.preventDefault();
 
-        var albumDOM = $(e.target).closest('.album'),
-            albumName = albumDOM.attr('data-album-title'),
-            album = br_player.albums.getAlbumByName( albumName ),
-            currentAlbum = br_player.history.album.current(),
-            song;
+        var albumName = $(e.target).closest('.album').attr('data-album-title'),
+            targetAlbum = br_player.albumData.getAlbumByName( albumName ),
+            targetSong= br_player.albumData.sampleSong( targetAlbum );
 
-        if ( album === currentAlbum ) {
-          song = br_player.history.song.current();
-        } else {
-          song = br_player.albums.sampleSong( album );
-        }
-
-        br_albumCovers.updateAlbumPlaying( albumName );
-        br_player.ui.render.init( album, song );
-
-        br_sm2.playPause( song );
-        br_player.ui.render.playState();
-        br_player.history.update(album, song);
+        br_player.logic.targetSong( targetAlbum, targetSong);
       },
 
-      songClick : function(e) {
-        var songDOM = $(e.target).closest('.song'),
-            trackNumber = songDOM.find('.trackNumber').text(),
-            albumName = $('[data-album-title]').attr('data-album-title'), // [X] TODO: don't search for album every song click
-            album = br_player.albums.getAlbumByName( albumName ),
-            currentSong = br_player.history.song.current(),
-            clickedSong = album.tracks[ parseInt( trackNumber , 10 ) - 1 ],
-            song;
+      songClick : function( e ) {
+        var albumName = $('[data-album-title]').attr('data-album-title'),
+            targetAlbum = br_player.albumData.getAlbumByName( albumName ),
+            songIndex = parseInt( $(e.target).closest('.song').find('.trackNumber').text() , 10 ) - 1,
+            targetSong = targetAlbum.tracks[songIndex];
 
-        $('.song').removeClass('song-playing');
+        br_player.logic.targetSong( targetAlbum, targetSong );
 
-        if ( currentSong.songTitle === clickedSong.songTitle ) {
-          song = currentSong;
-        } else {
-          song = clickedSong;
-          songDOM.addClass('song-playing');
-          br_player.ui.render.init( album, song );
-        }
+      },
 
-        br_sm2.playPause( song );
-        br_player.history.update(album, song);
 
+      nextPrev : function( direction ) {
+        var album, nextSong, previousSong;
+          if ( direction === 'next' ) {
+            album = br_player.history.song.next()[0];
+            nextSong = br_player.history.song.next()[1];
+            br_player.logic.targetSong(album, nextSong);
+
+          } else {
+
+           album = br_player.history.song.previous()[0],
+           previousSong = br_player.history.song.previous()[1];
+           br_player.logic.targetSong(album, previousSong);
+
+          }
       },
 
       whileSliding : function( event, ui, playbar ) {
@@ -360,14 +297,12 @@ var br_player = function() {
       },
       next : function() {
         s.bd.on({
-          // click: function(){  br_player.ui.handlers.albumClick(); },
-          // tap: function(){  br_player.ui.handlers.albumClick(); }
+          click: function(){  br_player.ui.handlers.nextPrev('next'); }
           }, '.next' );
       },
       previous : function() {
         s.bd.on({
-          // click: function(){  br_player.ui.handlers.albumClick(); },
-          // tap: function(){  br_player.ui.handlers.albumClick(); }
+          click: function(){  br_player.ui.handlers.nextPrev('prev'); }
           }, '.previous' );
       },
       album : function() {
@@ -391,6 +326,7 @@ var br_player = function() {
       }
     };
 
+
     return {
       el : el,
       state : state,
@@ -402,7 +338,57 @@ var br_player = function() {
   }();
 
 
+  var logic = function(){
 
+    function getAlbumDOM( album ) {
+      return $('.album[data-album-title="'+ album.albumName +'"]');
+    }
+
+    function getSongDOM( song ) {
+      return $('.song[data-track-number="'+ song.trackNumber +'"]');
+    }
+
+    function toggleActiveStyle( targetAlbum, targetSong ) {
+      if ( br_state.viewGet() === 'album-detail' ) {
+        if ( $('[data-album-title]').attr('data-album-title') === targetAlbum.albumName ) {
+          getSongDOM( targetSong ).toggleClass('song-playing');
+        }
+      } else {
+        getAlbumDOM( targetAlbum ).toggleClass('playing');
+      }
+    }
+
+    function clearActiveStyle( oldAlbum, oldSong ) {
+      if ( br_state.viewGet() === 'album-detail' ) {
+        getSongDOM( oldSong ).removeClass('song-playing');
+      } else {
+        getAlbumDOM( oldAlbum ).removeClass('playing');
+      }
+    }
+
+    function targetSongLogic( targetAlbum , targetSong ) {
+        var currentSong = br_player.history.song.current(),
+            currentAlbum = br_player.history.album.current();
+
+        if ( targetSong.songTitle !== currentSong.songTitle ) {
+          br_player.ui.render.init( targetAlbum, targetSong );
+          br_player.history.update( targetAlbum, targetSong );
+          clearActiveStyle( currentAlbum, currentSong );
+          if ( br_state.isPlaying() ) {
+            currentSong.sm2_object.pause();
+          }
+        }
+
+        toggleActiveStyle( targetAlbum, targetSong );
+        br_sm2.playPause( targetSong );
+        br_player.ui.render.playState();
+    }
+
+    return {
+      targetSong : targetSongLogic
+    };
+
+  }();
 
   /*- Albums -*/
   var musicData = function(){
@@ -447,11 +433,15 @@ var br_player = function() {
         currentAlbumIndex,
         currentSongIndex;
 
+    function get() {
+      return historyIndexes;
+    }
+
     function updateHistory( album, track ) {
-      currentAlbumIndex = br_player.albums.get().indexOf( album );
+      currentAlbumIndex = br_player.albumData.get().indexOf( album );
       currentSongIndex = album.tracks.indexOf( track );
       historyIndexes.push( [ currentAlbumIndex, currentSongIndex ] );
-      console.log(historyIndexes);
+      console.log('play history is now ' + historyIndexes.length + ' songs long');
     }
 
     function historyLen(){
@@ -460,19 +450,19 @@ var br_player = function() {
 
     var album = function(){
       function current() {
-        return br_player.albums.get()[ currentAlbumIndex ];
+        return br_player.albumData.get()[ currentAlbumIndex ];
       }
 
       function next(){
-        return br_player.albums.get()[ currentAlbumIndex + 1 ];
+        return br_player.albumData.get()[ currentAlbumIndex + 1 ];
       }
 
       function previous(){
-        return br_player.albums.get()[ currentAlbumIndex - 1 ];
+        return br_player.albumData.get()[ currentAlbumIndex - 1 ];
       }
 
       function random() {
-        var albums = br_player.albums.get();
+        var albums = br_player.albumData.get();
         return albums[ Math.round( Math.random( 0, albums.length )) ];
       }
 
@@ -487,27 +477,77 @@ var br_player = function() {
 
     var song = function() {
       function current() {
-        return  br_player.albums.get()[currentAlbumIndex].tracks[currentSongIndex];
+        return  br_player.albumData.get()[currentAlbumIndex].tracks[currentSongIndex];
       }
 
       function next() {
-        return br_player.albums.get()[currentAlbumIndex].tracks[currentSongIndex + 1];
+        var nextIndex = currentSongIndex + 1,
+            albumTrackLen = br_player.history.album.current().tracks.length,
+            numAlbums = br_player.albumData.get().length,
+            nextAlbum = br_player.history.album.next();
+
+        if ( nextIndex >= albumTrackLen ) {
+          if ( currentAlbumIndex >= numAlbums - 1 ) {
+            var albumData = br_player.albumData.get(),
+                firstAlbum = albumData[0],
+                firstAlbumSong = firstAlbum.tracks[0];
+            return [ firstAlbum, firstAlbumSong ];
+          } else {
+            var firstSong = nextAlbum.tracks[0];
+            return [ nextAlbum, firstSong ];
+          }
+        } else {
+          var currentAlbum = br_player.history.album.current(),
+              nextSong = currentAlbum.tracks[nextIndex];
+          return [currentAlbum, nextSong];
+        }
       }
 
       function previous() {
-        return br_player.albums.get()[currentAlbumIndex].tracks[currentSongIndex - 1];
+          var previousIndex = currentSongIndex - 1,
+              numAlbums = br_player.albumData.get().length,
+              previousAlbum = br_player.history.album.previous();
+
+          if ( previousIndex < 0 ) {
+            if ( currentAlbumIndex <= 0 ) {
+              var albumData = br_player.albumData.get(),
+                  lastAlbum = albumData[numAlbums - 1],
+                  lastAlbumSong = lastAlbum.tracks[lastAlbum.tracks.length - 1];
+              return [ lastAlbum, lastAlbumSong ];
+            } else {
+              var lastSong = previousAlbum.tracks[previousAlbum.tracks.length - 1];
+              return [ previousAlbum, lastSong ];
+            }
+          } else {
+            var currentAlbum = br_player.history.album.current(),
+                previousSong = currentAlbum.tracks[previousIndex];
+            return [currentAlbum, previousSong];
+          }
+        }
+      function lastPlayed() {
+        var previousHistory = historyIndexes[ historyIndexes.length - 2 ],
+            previousAlbumIndex,
+            previousSongIndex;
+
+        if ( typeof previousHistory !== 'undefined' ) {
+            previousAlbumIndex = previousHistory[0],
+            previousSongIndex = previousHistory[1];
+            return br_player.albumData.get()[previousAlbumIndex].tracks[previousSongIndex];
+        }
       }
 
       return {
         current : current,
         next : next,
-        previous : previous
+        previous : previous,
+        lastPlayed : lastPlayed
       };
 
     }();
 
 
     return {
+      get : get,
       update : updateHistory,
       length : historyLen,
       album : album,
@@ -519,7 +559,8 @@ var br_player = function() {
 
   return {
     ui : playerUI,
-    albums : musicData,
+    logic : logic,
+    albumData : musicData,
     history : history
   };
 
@@ -556,7 +597,7 @@ br_sm2
 
 br_player
 
-  .albums
+  .albumData
     .set( cleanJSON )
     .sampleSong( album )
 
@@ -641,15 +682,16 @@ var dick = {
 function doMoreStuff() {
   console.log('do more stuff ran');
   var album = br_player.history.album.random();
-  var song = br_player.albums.sampleSong(album);
+  var song = br_player.albumData.sampleSong(album);
   br_player.history.update(album, song);
   br_player.ui.render.init(album, song);
-  console.log(song);
   // song.play();
   br_player.ui.bindUI.album();
   br_player.ui.bindUI.song();
   br_player.ui.bindUI.slider();
   br_player.ui.bindUI.play();
+  br_player.ui.bindUI.next();
+  br_player.ui.bindUI.previous();
 }
 
 
