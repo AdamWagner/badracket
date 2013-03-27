@@ -1,6 +1,13 @@
 h1,h2,h3,h4,h5,h6 {
   font-weight:normal!important;
 }
+
+// probably only need woff
+// http://caniuse.com/woff
+
+// consider use of data-uri
+// http://www.motobit.com/util/base64-decoder-encoder.asp
+
 @font-face {
 font-family: 'zine-regular';
 src: url('../fonts/ZineSerifDisWebPro.eot') format('eot'), 

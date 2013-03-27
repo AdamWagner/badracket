@@ -1,5 +1,5 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-   SM2 setup + management
+   SM2
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 var br_sm2 = function(){
@@ -17,54 +17,40 @@ var br_sm2 = function(){
     soundManager.setup( sm2_settings );
     soundManager.onready(function(){
       callback();
-      // update a parent controller object property that soundmanager is ready
     });
   }
 
-  function onPlayResume( ) {
-    br_state.setPlayState(true);
-  }
-
-  function onStopPause( ) {
-    br_state.setPlayState(false);
-  }
-
   function whilePlaying( sound ){
-    var currentSong = br_player.history.song.current(),
-        songDuration =  badracket.stringToTime(currentSong.duration);
-        soundPosition = sound.position;
-        isSliding = br_player.ui.state.isSliding;
+    var duration     = badracket.stringToTime( br_player.state.currSong.duration ),
+        position     = sound.position,
+        isSliding    = br_player.state.isSliding;
+        playbarWidth = ( (position / duration) * 100 ).toFixed(2) + '%';
 
-    var playbarWidth = ( (soundPosition / songDuration) * 100 ).toFixed(2) + '%';
-
-    if (isSliding !== true  && currentSong.sm2_object === sound ) { // delays playbar redraw preventing flash
+    if (isSliding !== true  && br_player.state.currSong.sm2_obj === sound ) {
       br_player.ui.el.progressBar.css('width', playbarWidth);
       br_player.ui.el.progressTime.text( badracket.msToTime(sound.position) );
     }
   }
 
-
   function onFinish( sound ) {
-   console.log('on finish ran');
-   if (sound.sID) {                           // if it receives the sm2_object
-     sound.setPosition(0);                    // rewind progress bar
-   } else {                                        // else it recieves songObject
-     console.log(sound);
-     sound.sm2_object.setPosition(0);
-   }
-   badracket.handleNextClick('next');              // Advance play, depending on play mode 
+    console.log('on finish ran');
+    sound.setPosition(0);
+    br_player.ui.handlers.nextPrev('next');
   }
 
   var songCount = 0;
   function createSound( song ) {
+
+    if (song.isSampleTrack === '0') { song.duration = '0:30'; }
+
     return soundManager.createSound({
       id:'brSound' + songCount++,
       url:song.songUrl,
       autoLoad: true,
-      onplay: function() { onPlayResume(); },
-      onresume: function() { onPlayResume(); },
-      onpause: function() { onStopPause(); },
-      onstop: function() { onStopPause(); },
+      onplay: function() { br_player.state.isPlaying = true; },
+      onresume: function() { br_player.state.isPlaying = true; },
+      onpause: function() { br_player.state.isPlaying = false; },
+      onstop: function() { br_player.state.isPlaying = false; },
       whileloading: function() { whileLoading( this ); },
       whileplaying: function() { whilePlaying( this ); },
       onfinish: function() { onFinish( this ); }
@@ -75,9 +61,9 @@ var br_sm2 = function(){
   function previousLoadCheck(){
     var lastPlayed = br_player.history.song.lastPlayed();
 
-    if ( typeof lastPlayed !== 'undefined' && typeof lastPlayed.sm2_object !== 'undefined' ) {
-      if ( lastPlayed.sm2_object.loaded === false ) {
-        lastPlayed.sm2_object.unload();  // if previous song not loaded, stop loading to avoid buildup
+    if ( typeof lastPlayed !== 'undefined' && typeof lastPlayed.sm2_obj !== 'undefined' ) {
+      if ( lastPlayed.sm2_obj.loaded === false ) {
+        lastPlayed.sm2_obj.unload();  // if previous song not loaded, stop loading to avoid buildup
       }
     }
   }
@@ -86,18 +72,19 @@ var br_sm2 = function(){
 
     previousLoadCheck();
 
-    if (typeof song.sm2_object === 'undefined') {                   // if sm2_object doesn't exist
-      song.sm2_object = createSound(song);                          // ... create sound
+    if (typeof song.sm2_obj === 'undefined') {                   // if sm2_object doesn't exist
+      song.sm2_obj = createSound( song );                        // ... create sound
     }
 
-    // badracket.attach30SecondListener(song);                         // attach 30 second listener
-    song.sm2_object.togglePause();                                  // play / pause sound
+    br_player.logic.attach30SecondListener( song );              // attach 30 second listener
+    song.sm2_obj.togglePause();                                  // play / pause sound
   }
 
   return {
     setup : setupSM2,
     createSound : createSound,
-    playPause : playPause
+    playPause : playPause,
+    onFinish : onFinish
   };
 
 }();
@@ -111,51 +98,61 @@ var br_sm2 = function(){
 
 var br_state = function() {
 
-  var isPlaying = false,
-      viewState = 'unknown';
+  var viewState = 'unknown';
 
-// if ($('body').attr('data-view') === 'album') {
-//   badracket.setupAlbumPage();
-// }
 
-  function viewGet() {
-    return viewState;
-  }
+  var urls = {
+    home : 'http://localhost:8888/sites/brv5/wp-br/',
+    albumDetail : 'album='
+  };
 
   function viewSet( url ) {
     console.log('view set ran and url is ' + url);
     if ( typeof url === 'undefined' ) { url = window.location.toString(); }
 
-    if ( badracket.stringContains( url, 'album=' ) ) {
+    if ( badracket.stringContains( url, urls.albumDetail ) ) {
       viewState = 'album-detail';
-    } else if ( url === 'http://localhost:8888/sites/brv5/wp-br/' ) {
+      setupAlbumDetail();
+    } else if ( url === urls.home ) {
       viewState = 'home';
+      setupHome();
     } else {
       viewState = 'unknown';
     }
 
+    applyViewState(viewState);
     return viewState;
 
   }
 
-  function setPlayState(state) {
-    console.log('set playstate to ' + state);
-    isPlaying = state;
+  function viewGet() {
+    return viewState;
   }
 
-  function getPlayState() {
-    return isPlaying;
+  function applyViewState(viewState) {
+    console.log('apply view state ran');
+    $('body').attr('data-view', viewState);
+  }
+
+  function setupAlbumDetail(){
+    if ( br_player.state.isPlaying === true ) {
+      if ( br_player.history.album.current().albumName === $('[data-album-title]').attr('data-album-title') ) {
+        var trackNumber = br_player.state.currSong.trackNumber;
+        $('[data-track-number="'+ trackNumber +'"]').addClass('song-playing');
+      }
+    }
+  }
+
+  function setupHome() {
+    $('.view-full-album .target').show();
   }
 
   return {
     viewSet : viewSet,
-    viewGet : viewGet,
-    setPlayState : setPlayState,
-    isPlaying : getPlayState
+    viewGet : viewGet
   };
 
 }();
-
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
@@ -164,14 +161,25 @@ var br_state = function() {
 
 var br_player = function() {
   /* 
-  * TOC:
-  * Audio Player UI
-  * Albums
-  * History
+
+  TOC:
+    * state
+    * ui
+    * logic
+    * albumData
+    * history
+
   */
 
-  /*- Audio Player -*/
-  var playerUI = function(){
+  var state = {
+    isPreviewSong : false,
+    isSliding : false,
+    isPlaying : false,
+    currSong : null,
+    currAlbum : null
+  };
+
+  var ui = function() {
 
     var el = {
       playerWrapper : $('.audio-player-wrapper'),
@@ -195,12 +203,8 @@ var br_player = function() {
       speaker : 's'
     };
 
-    var state = {
-      isPreviewSong : false,
-      isSliding : false
-    };
-
     var render = {
+
       init : function( album , song ) {
         el.artist.html(album.artist);
         el.song.html(song.songTitle);
@@ -211,12 +215,8 @@ var br_player = function() {
       },
 
       playState : function() {
-        var playState = br_state.isPlaying();
-        if (playState === true ) {
-          br_player.ui.el.playButton.attr('data-icon', iconFont.pause);
-        } else {
-          br_player.ui.el.playButton.attr('data-icon', iconFont.play);
-        }
+        var icn = state.isPlaying ? iconFont.pause : iconFont.play;
+        el.playButton.attr('data-icon', icn);
       },
 
       updateTime : function ( time ) {
@@ -225,52 +225,46 @@ var br_player = function() {
     };
 
     var handlers = {
+
       playClick : function() {
-        br_player.logic.targetSong( br_player.history.album.current(), br_player.history.song.current() );
-        br_player.ui.render.playState();
+        br_player.logic.targetSong( state.currAlbum, state.currSong );
+        render.playState();
       },
 
       albumClick : function( e ) {
-        if ( br_state.viewGet() === 'album-detail' ) { return false; } // disable handler on album-detail page
+        var target = $(e.target);
+        if ( br_state.viewGet() === 'album-detail' || target.closest('a').hasClass('link-to-album') ) { return false; } // disable handler on album-detail page
         e.preventDefault();
 
-        var albumName = $(e.target).closest('.album').attr('data-album-title'),
-            targetAlbum = br_player.albumData.getAlbumByName( albumName ),
-            targetSong= br_player.albumData.sampleSong( targetAlbum );
+        var albumName = target.closest('.album').attr('data-album-title'),
+            targetAlbum = albumData.getAlbumByName( albumName ),
+            targetSong = albumData.sampleSong( targetAlbum );
 
-        br_player.logic.targetSong( targetAlbum, targetSong);
+        logic.targetSong( targetAlbum, targetSong);
       },
 
       songClick : function( e ) {
-        var albumName = $('[data-album-title]').attr('data-album-title'),
-            targetAlbum = br_player.albumData.getAlbumByName( albumName ),
-            songIndex = parseInt( $(e.target).closest('.song').find('.trackNumber').text() , 10 ) - 1,
-            targetSong = targetAlbum.tracks[songIndex];
+        var albumName     = $('[data-album-title]').attr('data-album-title'),
+            targetAlbum   = albumData.getAlbumByName( albumName ),
+            songIndex     = parseInt( $(e.target).closest('.song').attr('data-track-number') , 10 ) - 1,
+            targetSong    = targetAlbum.tracks[songIndex];
 
-        br_player.logic.targetSong( targetAlbum, targetSong );
-
+        logic.targetSong( targetAlbum, targetSong );
       },
 
-
       nextPrev : function( direction ) {
-        var album, nextSong, previousSong;
+        var nextAlbumSong, prevAlbumSong;
           if ( direction === 'next' ) {
-            album = br_player.history.song.next()[0];
-            nextSong = br_player.history.song.next()[1];
-            br_player.logic.targetSong(album, nextSong);
-
+            nextAlbumSong = history.song.next();  // [ album, song ]
+            logic.targetSong( nextAlbumSong[0], nextAlbumSong[1] );
           } else {
-
-           album = br_player.history.song.previous()[0],
-           previousSong = br_player.history.song.previous()[1];
-           br_player.logic.targetSong(album, previousSong);
-
+            previousAlbumSong = history.song.previous();  // [ album, song ]
+            logic.targetSong( previousAlbumSong[0], previousAlbumSong[1] );
           }
       },
 
       whileSliding : function( event, ui, playbar ) {
-        var position = ui.value;
-        br_player.ui.el.progressBar.css('width', position + '%');
+        el.progressBar.css( 'width', ui.value + '%' );
       },
 
       slideStart : function() {
@@ -279,59 +273,54 @@ var br_player = function() {
 
       slideStop : function( event, ui) {
         state.isSliding = false;
-        var currentSong = br_player.history.song.current();
-        var position = ui.value;
-        var smPosition = (position/100) * badracket.stringToTime(currentSong.duration);
-        currentSong.sm2_object.setPosition(smPosition);
-
+        var smPosition = ( ui.value / 100 ) * badracket.stringToTime( state.currSong.duration );
+        state.currSong.sm2_obj.setPosition( smPosition );
       }
     };
 
-
-    var bindUI = {
+    var bindui = {
       play : function() {
         s.bd.on({
-          click : function(){ br_player.ui.handlers.playClick(); },
-          tap : function(){ br_player.ui.handlers.playClick(); }
+          click : function(){ handlers.playClick(); },
+          tap : function(){ handlers.playClick(); }
         }, '.play-pause' );
       },
       next : function() {
         s.bd.on({
-          click: function(){  br_player.ui.handlers.nextPrev('next'); }
+          click: function(){  handlers.nextPrev('next'); }
           }, '.next' );
       },
       previous : function() {
         s.bd.on({
-          click: function(){  br_player.ui.handlers.nextPrev('prev'); }
+          click: function(){  handlers.nextPrev('prev'); }
           }, '.previous' );
       },
       album : function() {
         s.bd.on({
-          click : function(e){ br_player.ui.handlers.albumClick(e); },
-          tap : function(e){ br_player.ui.handlers.albumClick(e); }
+          click : function(e){ handlers.albumClick(e); },
+          tap : function(e){ handlers.albumClick(e); }
         }, '.album' );
       },
       song : function() {
         s.bd.on({
-          click : function(e){ br_player.ui.handlers.songClick(e); }
+          click : function(e){ handlers.songClick(e); },
+          tap : function(e){ handlers.songClick(e); }
         } , '.song' );
       },
       slider : function() {
-        br_player.ui.el.slider.slider({
+        el.slider.slider({
           step: 0.01,
-          slide: function( event, ui ) { br_player.ui.handlers.whileSliding( event, ui ); },
-          start: function() { br_player.ui.handlers.slideStart(); },
-          stop: function(event, ui) { br_player.ui.handlers.slideStop( event, ui ); }
+          slide: function( event, ui ) { handlers.whileSliding( event, ui ); },
+          start: function() { handlers.slideStart(); },
+          stop: function(event, ui) { handlers.slideStop( event, ui ); }
         });
       }
     };
 
-
     return {
       el : el,
-      state : state,
       handlers : handlers,
-      bindUI : bindUI,
+      bindui : bindui,
       render : render
     };
 
@@ -366,36 +355,40 @@ var br_player = function() {
       }
     }
 
-    function targetSongLogic( targetAlbum , targetSong ) {
-        var currentSong = br_player.history.song.current(),
-            currentAlbum = br_player.history.album.current();
+    function targetSongLogic( targetAlbum, targetSong ) {
+      if ( targetSong.songTitle !== state.currSong.songTitle ) {
+        ui.render.init( targetAlbum, targetSong );
+        clearActiveStyle( state.currAlbum, state.currSong );
+        if ( state.isPlaying ) { state.currSong.sm2_obj.stop(); }
+        history.update( targetAlbum, targetSong );
+      }
 
-        if ( targetSong.songTitle !== currentSong.songTitle ) {
-          br_player.ui.render.init( targetAlbum, targetSong );
-          br_player.history.update( targetAlbum, targetSong );
-          clearActiveStyle( currentAlbum, currentSong );
-          if ( br_state.isPlaying() ) {
-            currentSong.sm2_object.pause();
-          }
-        }
+      toggleActiveStyle( targetAlbum, targetSong );
+      br_sm2.playPause( targetSong );
+      ui.render.playState();
+    }
 
-        toggleActiveStyle( targetAlbum, targetSong );
-        br_sm2.playPause( targetSong );
-        br_player.ui.render.playState();
+    function attach30SecondListener ( song ) {
+      if (song.isSampleTrack === '0') {
+         song.sm2_obj.onPosition(30000, function() {
+          br_sm2.onFinish( song.sm2_obj );
+        });
+      }
     }
 
     return {
-      targetSong : targetSongLogic
+      targetSong : targetSongLogic,
+      attach30SecondListener : attach30SecondListener
     };
 
   }();
 
-  /*- Albums -*/
-  var musicData = function(){
+  /*- AlbumData -*/
+  var albumData = function(){
 
     var albums, numAlbums;
 
-    function receiveData(cleanJSON) {
+    function receiveData( cleanJSON ) {
       albums = cleanJSON;
       numAlbums = albums.length;
     }
@@ -412,7 +405,7 @@ var br_player = function() {
       var tracks = album.tracks;
       for (var i = tracks.length; i--;) {
         if (parseInt(tracks[i].isSampleTrack, 10) == 1) {
-          return tracks[i]; // return the album track with .isSampleTrack set to 1
+          return tracks[i];
         }
       }
     }
@@ -433,15 +426,22 @@ var br_player = function() {
         currentAlbumIndex,
         currentSongIndex;
 
+    function updateHistory( album, track ) {
+      currentAlbumIndex = albumData.get().indexOf( album );
+      currentSongIndex = album.tracks.indexOf( track );
+      historyIndexes.push( [ currentAlbumIndex, currentSongIndex ] );
+      updateState( album, track );
+      console.log('updatehistory ran');
+    }
+
     function get() {
       return historyIndexes;
     }
 
-    function updateHistory( album, track ) {
-      currentAlbumIndex = br_player.albumData.get().indexOf( album );
-      currentSongIndex = album.tracks.indexOf( track );
-      historyIndexes.push( [ currentAlbumIndex, currentSongIndex ] );
-      console.log('play history is now ' + historyIndexes.length + ' songs long');
+    function updateState( album, track ) {
+      console.log(state);
+      state.currAlbum = album;
+      state.currSong = track;
     }
 
     function historyLen(){
@@ -449,16 +449,17 @@ var br_player = function() {
     }
 
     var album = function(){
+
       function current() {
-        return br_player.albumData.get()[ currentAlbumIndex ];
+        return albumData.get()[ currentAlbumIndex ];
       }
 
       function next(){
-        return br_player.albumData.get()[ currentAlbumIndex + 1 ];
+        return albumData.get()[ currentAlbumIndex + 1 ];
       }
 
       function previous(){
-        return br_player.albumData.get()[ currentAlbumIndex - 1 ];
+        return albumData.get()[ currentAlbumIndex - 1 ];
       }
 
       function random() {
@@ -476,20 +477,28 @@ var br_player = function() {
     }();
 
     var song = function() {
+
       function current() {
-        return  br_player.albumData.get()[currentAlbumIndex].tracks[currentSongIndex];
+        return  albumData.get()[currentAlbumIndex].tracks[currentSongIndex];
+      }
+
+      var albums, numAlbums, albumTrackLen, nextAlbum, previousAlbum;
+
+      function populateScope() {
+        albums = albumData.get();
+        numAlbums = albums.length;
+        albumTrackLen = state.currAlbum.tracks.length;
+        nextAlbum = history.album.next();
+        previousAlbum = history.album.previous();
       }
 
       function next() {
-        var nextIndex = currentSongIndex + 1,
-            albumTrackLen = br_player.history.album.current().tracks.length,
-            numAlbums = br_player.albumData.get().length,
-            nextAlbum = br_player.history.album.next();
+        populateScope();
+        var nextIndex = currentSongIndex + 1;
 
         if ( nextIndex >= albumTrackLen ) {
           if ( currentAlbumIndex >= numAlbums - 1 ) {
-            var albumData = br_player.albumData.get(),
-                firstAlbum = albumData[0],
+            var firstAlbum = albums[0],
                 firstAlbumSong = firstAlbum.tracks[0];
             return [ firstAlbum, firstAlbumSong ];
           } else {
@@ -497,33 +506,30 @@ var br_player = function() {
             return [ nextAlbum, firstSong ];
           }
         } else {
-          var currentAlbum = br_player.history.album.current(),
-              nextSong = currentAlbum.tracks[nextIndex];
-          return [currentAlbum, nextSong];
+          nextSong = state.currAlbum.tracks[nextIndex];
+          return [ state.currAlbum, nextSong ];
         }
       }
 
       function previous() {
-          var previousIndex = currentSongIndex - 1,
-              numAlbums = br_player.albumData.get().length,
-              previousAlbum = br_player.history.album.previous();
+        populateScope();
+        var previousIndex = currentSongIndex - 1;
 
-          if ( previousIndex < 0 ) {
-            if ( currentAlbumIndex <= 0 ) {
-              var albumData = br_player.albumData.get(),
-                  lastAlbum = albumData[numAlbums - 1],
-                  lastAlbumSong = lastAlbum.tracks[lastAlbum.tracks.length - 1];
-              return [ lastAlbum, lastAlbumSong ];
-            } else {
-              var lastSong = previousAlbum.tracks[previousAlbum.tracks.length - 1];
-              return [ previousAlbum, lastSong ];
-            }
+        if ( previousIndex < 0 ) {
+          if ( currentAlbumIndex <= 0 ) {
+            var lastAlbum = albums[numAlbums - 1],
+                lastAlbumSong = lastAlbum.tracks[lastAlbum.tracks.length - 1];
+            return [ lastAlbum, lastAlbumSong ];
           } else {
-            var currentAlbum = br_player.history.album.current(),
-                previousSong = currentAlbum.tracks[previousIndex];
-            return [currentAlbum, previousSong];
+            var lastSong = previousAlbum.tracks[previousAlbum.tracks.length - 1];
+            return [ previousAlbum, lastSong ];
           }
+        } else {
+          previousSong = state.currAlbum.tracks[previousIndex];
+          return [ state.currAlbum, previousSong ];
         }
+      }
+
       function lastPlayed() {
         var previousHistory = historyIndexes[ historyIndexes.length - 2 ],
             previousAlbumIndex,
@@ -532,7 +538,7 @@ var br_player = function() {
         if ( typeof previousHistory !== 'undefined' ) {
             previousAlbumIndex = previousHistory[0],
             previousSongIndex = previousHistory[1];
-            return br_player.albumData.get()[previousAlbumIndex].tracks[previousSongIndex];
+            return albumData.get()[previousAlbumIndex].tracks[previousSongIndex];
         }
       }
 
@@ -545,7 +551,6 @@ var br_player = function() {
 
     }();
 
-
     return {
       get : get,
       update : updateHistory,
@@ -556,11 +561,11 @@ var br_player = function() {
 
   }();
 
-
   return {
-    ui : playerUI,
+    state : state,
+    ui : ui,
     logic : logic,
-    albumData : musicData,
+    albumData : albumData,
     history : history
   };
 
@@ -586,41 +591,6 @@ function updateView (name) {
    Do the stuff
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-
-// API Reference 
-/*
-
-br_sm2
-  .setup( callback )
-  .createSound( song )
-
-
-br_player
-
-  .albumData
-    .set( cleanJSON )
-    .sampleSong( album )
-
-  .history
-    .update( album, track )
-    .album
-      .current()
-      .next()
-      .previous()
-      .random()
-    .song
-      .current()
-      .next()
-      .previous()
-
-  .ui
-    .elements { ... }
-    .state { ... }
-    .handers
-      .playClick()
-
-
-*/
 
 
 var init = function(){
@@ -686,12 +656,12 @@ function doMoreStuff() {
   br_player.history.update(album, song);
   br_player.ui.render.init(album, song);
   // song.play();
-  br_player.ui.bindUI.album();
-  br_player.ui.bindUI.song();
-  br_player.ui.bindUI.slider();
-  br_player.ui.bindUI.play();
-  br_player.ui.bindUI.next();
-  br_player.ui.bindUI.previous();
+  br_player.ui.bindui.album();
+  br_player.ui.bindui.song();
+  br_player.ui.bindui.slider();
+  br_player.ui.bindui.play();
+  br_player.ui.bindui.next();
+  br_player.ui.bindui.previous();
 }
 
 

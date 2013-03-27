@@ -1,5 +1,30 @@
 /* @codekit-prepend "lib/enquire.js" */
 
+/*
+ * jQuery Tiny Pub/Sub
+ * https://github.com/cowboy/jquery-tiny-pubsub
+ *
+ * Copyright (c) 2013 "Cowboy" Ben Alman
+ * Licensed under the MIT license.
+ */
+
+(function($) {
+
+  var o = $({});
+
+  $.subscribe = function() {
+    o.on.apply(o, arguments);
+  };
+
+  $.unsubscribe = function() {
+    o.off.apply(o, arguments);
+  };
+
+  $.publish = function() {
+    o.trigger.apply(o, arguments);
+  };
+
+}(jQuery));
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
   BADRACKET APP
@@ -56,6 +81,7 @@ badracket = {
             console.log('All Scripts Loaded');
             badracket.postSetupTasks();
             s.video.fitVids();
+            badracket.doAjaxRequest();
         });
     badracket.beforeUnload();
   },
@@ -187,7 +213,17 @@ badracket = {
             success:function(data){
                    console.log('got the json');
                    var cleanAlbums = badracket.albumNormalization(data);
-                   br_player.albumData.set(cleanAlbums);
+
+                   (function setData(){
+                   if ( typeof br_player !== 'undefined' ) {
+                    br_player.albumData.set(cleanAlbums);
+                   } else {
+                    setTimeout(function() {
+                      setData();
+                    }, 250);
+                   }
+                   })();
+
                    init.dataReady();
                  },
             error: function(errorThrown){
@@ -205,15 +241,7 @@ badracket = {
   docReady: function(){
     $(document).ready(function(){
       badracket.enquire();
-
       console.log('document ready fires');
-
-      badracket.doAjaxRequest();
-
-
-
-
-
     });
   },
 
@@ -270,31 +298,6 @@ badracket = {
    beforeUnload()
   \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-  beforeUnload: function() {
-    window.onbeforeunload = function() {
-      // if (badracket.soundmanager.getCurrentSong()) {
-      //   var mySound = badracket.soundmanager.getCurrentSong();
-      //   if (mySound  && mySound.position) { // sound is playing
-      //     badracket.setCookie('sm_lastPosition', mySound.position);
-      //     badracket.setCookie('sm_duration', mySound.duration);
-      //     badracket.setCookie('sm_paused', mySound.paused);
-      //     badracket.setCookie('sm_stopped', mySound.playState);
-      //     badracket.setCookie('sm_currentURL', mySound.url);
-      //     badracket.setCookie('songTitle', $('.song').text());
-      //     badracket.setCookie('artistName', $('.artist').text());
-        // }
-      // } else {
-        // no sound, or not playing etc. Remove play state cookies.
-        badracket.removeCookie('sm_lastPosition');
-        badracket.removeCookie('sm_paused');
-        badracket.setCookie('sm_stopped');
-        badracket.removeCookie('sm_currentURL');
-        badracket.removeCookie('sm_duration');
-        badracket.removeCookie('songTitle');
-        badracket.removeCookie('artistName');
-      // }
-    };
-  }, // end beforeUnload
 
   bindMobileUI: function(){
     $('.menu').on('tap',function(){
@@ -351,31 +354,7 @@ badracket = {
 badracket.init();
 
 
-/*
- * jQuery Tiny Pub/Sub
- * https://github.com/cowboy/jquery-tiny-pubsub
- *
- * Copyright (c) 2013 "Cowboy" Ben Alman
- * Licensed under the MIT license.
- */
 
-(function($) {
-
-  var o = $({});
-
-  $.subscribe = function() {
-    o.on.apply(o, arguments);
-  };
-
-  $.unsubscribe = function() {
-    o.off.apply(o, arguments);
-  };
-
-  $.publish = function() {
-    o.trigger.apply(o, arguments);
-  };
-
-}(jQuery));
 
 
 

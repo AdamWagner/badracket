@@ -1,7 +1,4 @@
 
-[data-view="album"] {
-  // font-family:helvetica;
-  // 
   .album-page-section {
     padding-bottom:2em;
     @include breakpoint(medium) {
@@ -65,13 +62,7 @@
       margin:0.6em 0;
     }
   }
-  .album-controls {
-    @extend .group;
-    .total-duration {
-      float:right;
-    }
-  }
-}
+
 
 .track-list {
   width:100%;

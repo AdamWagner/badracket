@@ -12,7 +12,7 @@
                 <span class="artist"> {{ Myname.first }} </span>
              </a>
            </div>
-           <a class="view-full-album dJAX_internal" >track <span class="current-track">0</span> of <span class="total-tracks">99</span>  view Album  </a>
+           <a class="view-full-album dJAX_internal" >track <span class="current-track">0</span> of <span class="total-tracks">99</span>  <span class="target">View Album</span>  </a>
          </div>
          <div class="controls group">
           <span data-icon="h" class="previous"></span>

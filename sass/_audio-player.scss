@@ -59,6 +59,8 @@ $darkest:darken($dark,11%);
   .target { text-decoration:underline; }
 }
 
+[data-view="album-detail"] & .target { display:none; }
+
 .timing {
   float:right;
   position:relative;
