@@ -1263,7 +1263,10 @@ header.desktop .player-metadata .artist {
 header.desktop .audio-player-title {
   float: left;
   display: block;
-  width: 66%;
+  width: 63%;
+}
+.single-album header.desktop .audio-player-title {
+  width: 75%;
 }
 header.desktop .buy-album {
   float: left;
@@ -1276,6 +1279,7 @@ header.desktop .buy-album {
 header.desktop .view-full-album {
   float: right;
   font-size: 0.80em;
+  margin-top: 0.15em;
 }
 header.desktop .view-full-album .target {
   text-decoration: underline;
