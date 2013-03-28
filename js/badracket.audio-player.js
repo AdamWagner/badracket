@@ -61,7 +61,7 @@ var br_sm2 = function(){
   function previousLoadCheck(){
     var lastPlayed = br_player.history.song.lastPlayed();
 
-    if ( typeof lastPlayed !== 'undefined' && typeof lastPlayed.sm2_obj !== 'undefined' ) {
+    if ( typeof lastPlayed !== 'undefined' && ('sm2_obj' in lastPlayed) ) {
       if ( lastPlayed.sm2_obj.loaded === false ) {
         lastPlayed.sm2_obj.unload();  // if previous song not loaded, stop loading to avoid buildup
       }
@@ -72,7 +72,7 @@ var br_sm2 = function(){
 
     previousLoadCheck();
 
-    if (typeof song.sm2_obj === 'undefined') {                   // if sm2_object doesn't exist
+    if ( !('sm2_obj' in song) ) {                   // if sm2_object doesn't exist
       song.sm2_obj = createSound( song );                        // ... create sound
     }
 

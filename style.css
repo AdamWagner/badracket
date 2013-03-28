@@ -1280,7 +1280,7 @@ header.desktop .view-full-album {
 header.desktop .view-full-album .target {
   text-decoration: underline;
 }
-[data-view="album-detail"] header.desktop .target {
+.single-album header.desktop .target {
   display: none;
 }
 header.desktop .timing {

@@ -83,7 +83,6 @@ badracket = {
             s.video.fitVids();
             badracket.doAjaxRequest();
         });
-    badracket.beforeUnload();
   },
 
   setupAlbumPage: function() {
@@ -261,6 +260,14 @@ badracket = {
     // when djax element loads, remove loadin class & mimic doc ready stuff
     $(window).bind('djaxLoad', function(e, data) {
       badracket.lazyLoadImg();
+
+      var html = data.response,
+          search = '<body class="',
+          start = html.indexOf(search) + search.length,
+          end = html.indexOf('"', start),
+          bodyClass = html.slice( start, end );
+
+      $('body').attr('class', bodyClass);
 
       $.publish('/view/change', data.url);
 
