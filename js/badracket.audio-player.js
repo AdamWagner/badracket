@@ -1,680 +1,668 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-  badracket.soundmanger
+   SM2
+\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+var br_sm2 = function(){
+
+  var sm2_settings = {
+    url: 'swf',
+    flashVersion: 9,
+    debugMode: false,
+    flashPollingInterval: 125,
+    html5PollingInterval: 125,
+    useHighPerformance: true
+  };
+
+  function setupSM2(callback) {
+    soundManager.setup( sm2_settings );
+    soundManager.onready(function(){
+      callback();
+    });
+  }
+
+  function whilePlaying( sound ){
+    var duration     = badracket.stringToTime( br_player.state.currSong.duration ),
+        position     = sound.position,
+        isSliding    = br_player.state.isSliding;
+        playbarWidth = ( (position / duration) * 100 ).toFixed(2) + '%';
+
+    if (isSliding !== true  && br_player.state.currSong.sm2_obj === sound ) {
+      br_player.ui.el.progressBar.css('width', playbarWidth);
+      br_player.ui.el.progressTime.text( badracket.msToTime(sound.position) );
+    }
+  }
+
+  function onFinish( sound ) {
+    console.log('on finish ran');
+    sound.setPosition(0);
+    br_player.ui.handlers.nextPrev('next');
+  }
+
+  var songCount = 0;
+  function createSound( song ) {
+
+    if (song.isSampleTrack === '0') { song.duration = '0:30'; }
+
+    return soundManager.createSound({
+      id:'brSound' + songCount++,
+      url:song.songUrl,
+      autoLoad: true,
+      onplay: function() { br_player.state.isPlaying = true; },
+      onresume: function() { br_player.state.isPlaying = true; },
+      onpause: function() { br_player.state.isPlaying = false; },
+      onstop: function() { br_player.state.isPlaying = false; },
+      whileloading: function() { whileLoading( this ); },
+      whileplaying: function() { whilePlaying( this ); },
+      onfinish: function() { onFinish( this ); }
+    });
+  }
+
+
+  function previousLoadCheck(){
+    var lastPlayed = br_player.history.song.lastPlayed();
+
+    if ( typeof lastPlayed !== 'undefined' && ('sm2_obj' in lastPlayed) ) {
+      if ( lastPlayed.sm2_obj.loaded === false ) {
+        lastPlayed.sm2_obj.unload();  // if previous song not loaded, stop loading to avoid buildup
+      }
+    }
+  }
+
+  function playPause ( song ) {
+
+    previousLoadCheck();
+
+    if ( !('sm2_obj' in song) ) {                   // if sm2_object doesn't exist
+      song.sm2_obj = createSound( song );                        // ... create sound
+    }
+
+    br_player.logic.attach30SecondListener( song );              // attach 30 second listener
+    song.sm2_obj.togglePause();                                  // play / pause sound
+  }
+
+  return {
+    setup : setupSM2,
+    createSound : createSound,
+    playPause : playPause,
+    onFinish : onFinish
+  };
+
+}();
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+   Page State
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 
-  badracket.soundmanager = {
-    smSetup: function() {
-      badracket.sm = soundManager;
-      badracket.sm.setup({
-        url: 'swf',
-        flashVersion: 9,
-        debugMode: false,
-        flashPollingInterval: 125,
-        html5PollingInterval: 125,
-        defaultOptions : {
-          useHighPerformance: true,
-          usePeakData: false,
-          useEQData: false
+var br_state = function() {
+
+  var viewState = 'unknown';
+
+
+  var urls = {
+    home : 'http://localhost:8888/sites/brv5/wp-br/',
+    albumDetail : 'album='
+  };
+
+  function viewSet( url ) {
+    console.log('view set ran and url is ' + url);
+    if ( typeof url === 'undefined' ) { url = window.location.toString(); }
+
+    if ( badracket.stringContains( url, urls.albumDetail ) ) {
+      viewState = 'album-detail';
+      setupAlbumDetail();
+    } else if ( url === urls.home ) {
+      viewState = 'home';
+      setupHome();
+    } else {
+      viewState = 'unknown';
+    }
+
+    applyViewState(viewState);
+    return viewState;
+
+  }
+
+  function viewGet() {
+    return viewState;
+  }
+
+  function applyViewState(viewState) {
+    console.log('apply view state ran');
+    $('body').attr('data-view', viewState);
+  }
+
+  function setupAlbumDetail(){
+    if ( br_player.state.isPlaying === true ) {
+      if ( br_player.history.album.current().albumName === $('[data-album-title]').attr('data-album-title') ) {
+        var trackNumber = br_player.state.currSong.trackNumber;
+        $('[data-track-number="'+ trackNumber +'"]').addClass('song-playing');
+      }
+    }
+  }
+
+  function setupHome() {
+    $('.view-full-album .target').show();
+  }
+
+  return {
+    viewSet : viewSet,
+    viewGet : viewGet
+  };
+
+}();
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+   Player
+\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+var br_player = function() {
+  /* 
+
+  TOC:
+    * state
+    * ui
+    * logic
+    * albumData
+    * history
+
+  */
+
+  var state = {
+    isPreviewSong : false,
+    isSliding : false,
+    isPlaying : false,
+    currSong : null,
+    currAlbum : null
+  };
+
+  var ui = function() {
+
+    var el = {
+      playerWrapper : $('.audio-player-wrapper'),
+      player : $('.audio-player'),
+      song : $('.audio-player .song'),
+      artist : $('.audio-player .artist'),
+      albumLink : $('.audio-player .view-full-album'),
+      progressBar : $('.audio-player .progress-bar'),
+      progressTime : $('.audio-player .progress-time'),
+      currentTrack : $('.audio-player .current-track'),
+      totalTracks : $('.audio-player .total-tracks'),
+      slider : $('.slider'),
+      playButton : $('.play-pause'),
+      prevButton : $('.previous'),
+      nextButton : $('.next')
+    };
+
+    var iconFont = {
+      play : 'm',
+      pause : 'n',
+      speaker : 's'
+    };
+
+    var render = {
+
+      init : function( album , song ) {
+        el.artist.html(album.artist);
+        el.song.html(song.songTitle);
+        el.progressTime.html(song.duration);
+        el.albumLink.attr( 'href', album.albumUrl );
+        el.currentTrack.html(parseInt(song.trackNumber , 10));
+        el.totalTracks.html(album.tracks.length);
+      },
+
+      playState : function() {
+        var icn = state.isPlaying ? iconFont.pause : iconFont.play;
+        el.playButton.attr('data-icon', icn);
+      },
+
+      updateTime : function ( time ) {
+        el.progressTime.html( time );
+      }
+    };
+
+    var handlers = {
+
+      playClick : function() {
+        br_player.logic.targetSong( state.currAlbum, state.currSong );
+        render.playState();
+      },
+
+      albumClick : function( e ) {
+        var target = $(e.target);
+        if ( br_state.viewGet() === 'album-detail' || target.closest('a').hasClass('link-to-album') ) { return false; } // disable handler on album-detail page
+        e.preventDefault();
+
+        var albumName = target.closest('.album').attr('data-album-title'),
+            targetAlbum = albumData.getAlbumByName( albumName ),
+            targetSong = albumData.sampleSong( targetAlbum );
+
+        logic.targetSong( targetAlbum, targetSong);
+      },
+
+      songClick : function( e ) {
+        var albumName     = $('[data-album-title]').attr('data-album-title'),
+            targetAlbum   = albumData.getAlbumByName( albumName ),
+            songIndex     = parseInt( $(e.target).closest('.song').attr('data-track-number') , 10 ) - 1,
+            targetSong    = targetAlbum.tracks[songIndex];
+
+        logic.targetSong( targetAlbum, targetSong );
+      },
+
+      nextPrev : function( direction ) {
+        var nextAlbumSong, prevAlbumSong;
+          if ( direction === 'next' ) {
+            nextAlbumSong = history.song.next();  // [ album, song ]
+            logic.targetSong( nextAlbumSong[0], nextAlbumSong[1] );
+          } else {
+            previousAlbumSong = history.song.previous();  // [ album, song ]
+            logic.targetSong( previousAlbumSong[0], previousAlbumSong[1] );
+          }
+      },
+
+      whileSliding : function( event, ui, playbar ) {
+        el.progressBar.css( 'width', ui.value + '%' );
+      },
+
+      slideStart : function() {
+        state.isSliding = true;
+      },
+
+      slideStop : function( event, ui) {
+        state.isSliding = false;
+        var smPosition = ( ui.value / 100 ) * badracket.stringToTime( state.currSong.duration );
+        state.currSong.sm2_obj.setPosition( smPosition );
+      }
+    };
+
+    var bindui = {
+      play : function() {
+        s.bd.on({
+          click : function(){ handlers.playClick(); },
+          tap : function(){ handlers.playClick(); }
+        }, '.play-pause' );
+      },
+      next : function() {
+        s.bd.on({
+          click: function(){  handlers.nextPrev('next'); }
+          }, '.next' );
+      },
+      previous : function() {
+        s.bd.on({
+          click: function(){  handlers.nextPrev('prev'); }
+          }, '.previous' );
+      },
+      album : function() {
+        s.bd.on({
+          click : function(e){ handlers.albumClick(e); },
+          tap : function(e){ handlers.albumClick(e); }
+        }, '.album' );
+      },
+      song : function() {
+        s.bd.on({
+          click : function(e){ handlers.songClick(e); },
+          tap : function(e){ handlers.songClick(e); }
+        } , '.song' );
+      },
+      slider : function() {
+        el.slider.slider({
+          step: 0.01,
+          slide: function( event, ui ) { handlers.whileSliding( event, ui ); },
+          start: function() { handlers.slideStart(); },
+          stop: function(event, ui) { handlers.slideStop( event, ui ); }
+        });
+      }
+    };
+
+    return {
+      el : el,
+      handlers : handlers,
+      bindui : bindui,
+      render : render
+    };
+
+  }();
+
+
+  var logic = function(){
+
+    function getAlbumDOM( album ) {
+      return $('.album[data-album-title="'+ album.albumName +'"]');
+    }
+
+    function getSongDOM( song ) {
+      return $('.song[data-track-number="'+ song.trackNumber +'"]');
+    }
+
+    function toggleActiveStyle( targetAlbum, targetSong ) {
+      if ( br_state.viewGet() === 'album-detail' ) {
+        if ( $('[data-album-title]').attr('data-album-title') === targetAlbum.albumName ) {
+          getSongDOM( targetSong ).toggleClass('song-playing');
         }
-      });
-      console.log('- - - sm setup ran - - -');
-      badracket.soundmanager.ready();
-    },
-    ready: function(){
-      badracket.sm.onready(function(){
-        console.log('Soundmanager ready');
-        badracket.soundmanager.init();
-      });
-    },
+      } else {
+        getAlbumDOM( targetAlbum ).toggleClass('playing');
+      }
+    }
 
-    init: function() {
-      badracket.initAudioPlayer();
-      badracket.bindAudioUI();
-      badracket.bindSliderUI(s.playBar);
-      badracket.viewState.init();
-    },
+    function clearActiveStyle( oldAlbum, oldSong ) {
+      if ( br_state.viewGet() === 'album-detail' ) {
+        getSongDOM( oldSong ).removeClass('song-playing');
+      } else {
+        getAlbumDOM( oldAlbum ).removeClass('playing');
+      }
+    }
 
-    // good example of paralell downloads
-    // http://soundcloud-sm2.heroku.com/
-    createSound: function(song){
-      console.log('- - - createSound() ran - - -');
+    function targetSongLogic( targetAlbum, targetSong ) {
+      if ( targetSong.songTitle !== state.currSong.songTitle ) {
+        ui.render.init( targetAlbum, targetSong );
+        clearActiveStyle( state.currAlbum, state.currSong );
+        if ( state.isPlaying ) { state.currSong.sm2_obj.stop(); }
+        history.update( targetAlbum, targetSong );
+      }
+
+      toggleActiveStyle( targetAlbum, targetSong );
+      br_sm2.playPause( targetSong );
+      ui.render.playState();
+    }
+
+    function attach30SecondListener ( song ) {
       if (song.isSampleTrack === '0') {
-        song.duration = '0:30';
-      }
-      return badracket.sm.createSound({
-        id:'brSound'+(badracket.getSm2_objectCount()),
-        url:song.songUrl,
-        debugMode: false,
-        autoLoad: true,
-        onplay: function() { badracket.soundmanager.events.onPlayResume(this); },
-        onresume: function() { badracket.soundmanager.events.onPlayResume(this); },
-        onpause: function() { badracket.soundmanager.events.onStopPause(this);  },
-        onstop: function() { badracket.soundmanager.events.onStopPause(this);   },
-        whileloading: function() { badracket.soundmanager.events.whileLoading(this); },
-        whileplaying: function() { badracket.soundmanager.events.whilePlaying(this); },
-        onfinish: function() { badracket.soundmanager.events.onFinish(this); },
-        onload: function(){ }
-      });
-    },
-    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-       Play state controllers
-    \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
-    events: {
-      onPlayResume : function(sm2_object){
-        console.log('onPlayResume() ran');
-      },
-      onStopPause: function(){},
-      whileLoading : function(sm2_object) {
-        var loadingWidth = ((sm2_object.bytesLoaded/(sm2_object.bytesTotal))*100).toFixed(2) + '%';
-        var currentSong = badracket.playHistory.getCurrentSong();
-        if (currentSong.sm2_object === sm2_object) {               // only update based on current song
-          $('.loading').css('width', loadingWidth);
-        }
-      },
-      whilePlaying : function(sm2_object){
-        badracket.whilePlayingCounter += 1;
-        var currentSong = badracket.playHistory.getCurrentSong(),
-            songDuration =  badracket.min_secToMilliseconds(currentSong.duration);
-
-        var playbarWidth = ((sm2_object.position/(songDuration))*100).toFixed(2) + '%';
-        var sliding = badracket.sm.sliding;
-
-        if (sliding !== true && badracket.whilePlayingCounter > 2 && currentSong.sm2_object === sm2_object ) { // delays playbar redraw preventing flash
-          $('.controls .position').css('width', playbarWidth);
-          $('.sm2_position').text( badracket.msToTime(sm2_object.position) );
-        }
-      },
-      onFinish : function(song_or_sm2){
-        console.log('on finish ran');
-        if (song_or_sm2.sID) {                           // if it receives the sm2_object
-          song_or_sm2.setPosition(0);                    // rewind progress bar
-        } else {                                        // else it recieves songObject
-          song_or_sm2.sm2_object.setPosition(0);
-        }
-        badracket.handleNextClick('next');              // Advance play, depending on play mode
+         song.sm2_obj.onPosition(30000, function() {
+          br_sm2.onFinish( song.sm2_obj );
+        });
       }
     }
- }, // end badracket.soundmanager
 
-badracket.initAudioPlayer = function() {
-  var albums      = badracket.albums,
-      randomAlbum = albums[Math.round(Math.random(0, albums.length))],
-      sampleTrack = badracket.findSampleSong(randomAlbum);
+    return {
+      targetSong : targetSongLogic,
+      attach30SecondListener : attach30SecondListener
+    };
 
-  badracket.updatePlayHistory(randomAlbum, sampleTrack);
-  sampleTrack.sm2_object = badracket.soundmanager.createSound(sampleTrack);      // creates sound
-  badracket.updateAudioPlayer(randomAlbum, sampleTrack);                         // (album, song)
-  $('.audio-player').addClass('ready');
-};
+  }();
 
-badracket.globalPlayState = false; //default
-badracket.whilePlayingCounter = 2; // must be initialized for progress draw to happen initially
+  /*- AlbumData -*/
+  var albumData = function(){
 
+    var albums, numAlbums;
 
+    function receiveData( cleanJSON ) {
+      albums = cleanJSON;
+      numAlbums = albums.length;
+    }
 
+    function getAlbumByName( albumName ) {
+      for (var i = numAlbums; i--;) {
+        if (albums[i].albumName === albumName) {
+         return albums[i];
+        }
+      }
+    }
 
+    function findSampleSong ( album ) {
+      var tracks = album.tracks;
+      for (var i = tracks.length; i--;) {
+        if (parseInt(tracks[i].isSampleTrack, 10) == 1) {
+          return tracks[i];
+        }
+      }
+    }
 
-/* Control 30 second samples  - - - - - - - - - - - - - - - */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    return {
+      getAlbumByName : getAlbumByName,
+      sampleSong : findSampleSong,
+      set : receiveData,
+      get : function() { return albums; }
+    };
 
-badracket.sampleSongTest = function(){
-  var song = badracket.playHistory.getCurrentSong();
-  if (song.isSampleTrack === '0') {
-    return true;
-  }
-};
+  }();
 
-badracket.attach30SecondListener = function(song){
-  var s = song.sm2_object;
-  if (song.isSampleTrack === '0') {
-    console.log('!!!!!!!!! - - - - 30 second listener attached for ' + song.songTitle);
-    s.onPosition(28000, function(eventPosition) {                  // fire at 28 seconds
-      badracket.fadeOutSound(song);
-    });
-     s.onPosition(30000, function(eventPosition) {                 // fire at 30 seconds
-      badracket.soundmanager.events.onFinish(song);
-    });
-  }
-};
+  /*- History -*/
+  var history = function(){
 
-badracket.fadeOutSound = function(song) {
-  console.log('- - - fadeOutSound ran - - - ');
-  var s = song.sm2_object;
-  var vol = s.volume;
-  if (vol === 0) {
-    setTimeout(function() { s.setVolume(100); }, 1000); // undo fadeout after 1sec
-    return false;                                       // stop recursion
-  }
-  s.setVolume( Math.min(100 , vol - 1) );
-  setTimeout(function(){ badracket.fadeOutSound(song); } , 20);
-};
+    var historyIndexes = [],
+        currentAlbumIndex,
+        currentSongIndex;
 
+    function updateHistory( album, track ) {
+      currentAlbumIndex = albumData.get().indexOf( album );
+      currentSongIndex = album.tracks.indexOf( track );
+      historyIndexes.push( [ currentAlbumIndex, currentSongIndex ] );
+      updateState( album, track );
+      console.log('updatehistory ran');
+    }
 
+    function get() {
+      return historyIndexes;
+    }
 
-/* Time utilities - - - - - - - - - - - - - - - - - - - - - */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
- badracket.msToTime = function(s) {
-   var ms = s % 1000;
-   s = (s - ms) / 1000;
-   var secs = s % 60;
-   s = (s - secs) / 60;
-   var mins = s % 60;
+    function updateState( album, track ) {
+      console.log(state);
+      state.currAlbum = album;
+      state.currSong = track;
+    }
 
-   if (secs < 10) {secs = "0"+secs;}
-   return mins + ':' + secs;
- };
+    function historyLen(){
+      return historyIndexes.length;
+    }
 
- badracket.min_secToMilliseconds = function(time) {
-     time = time.toString().split(/:/);
-     return time[0] * 60000 + time[1] * 1000;
- };
+    var album = function(){
+
+      function current() {
+        return albumData.get()[ currentAlbumIndex ];
+      }
+
+      function next(){
+        return albumData.get()[ currentAlbumIndex + 1 ];
+      }
+
+      function previous(){
+        return albumData.get()[ currentAlbumIndex - 1 ];
+      }
+
+      function random() {
+        var albums = br_player.albumData.get();
+        return albums[ Math.round( Math.random( 0, albums.length )) ];
+      }
+
+      return {
+        current : current,
+        next : next,
+        previous : previous,
+        random : random
+      };
+
+    }();
+
+    var song = function() {
+
+      function current() {
+        return  albumData.get()[currentAlbumIndex].tracks[currentSongIndex];
+      }
+
+      var albums, numAlbums, albumTrackLen, nextAlbum, previousAlbum;
+
+      function populateScope() {
+        albums = albumData.get();
+        numAlbums = albums.length;
+        albumTrackLen = state.currAlbum.tracks.length;
+        nextAlbum = history.album.next();
+        previousAlbum = history.album.previous();
+      }
+
+      function next() {
+        populateScope();
+        var nextIndex = currentSongIndex + 1;
+
+        if ( nextIndex >= albumTrackLen ) {
+          if ( currentAlbumIndex >= numAlbums - 1 ) {
+            var firstAlbum = albums[0],
+                firstAlbumSong = firstAlbum.tracks[0];
+            return [ firstAlbum, firstAlbumSong ];
+          } else {
+            var firstSong = nextAlbum.tracks[0];
+            return [ nextAlbum, firstSong ];
+          }
+        } else {
+          nextSong = state.currAlbum.tracks[nextIndex];
+          return [ state.currAlbum, nextSong ];
+        }
+      }
+
+      function previous() {
+        populateScope();
+        var previousIndex = currentSongIndex - 1;
+
+        if ( previousIndex < 0 ) {
+          if ( currentAlbumIndex <= 0 ) {
+            var lastAlbum = albums[numAlbums - 1],
+                lastAlbumSong = lastAlbum.tracks[lastAlbum.tracks.length - 1];
+            return [ lastAlbum, lastAlbumSong ];
+          } else {
+            var lastSong = previousAlbum.tracks[previousAlbum.tracks.length - 1];
+            return [ previousAlbum, lastSong ];
+          }
+        } else {
+          previousSong = state.currAlbum.tracks[previousIndex];
+          return [ state.currAlbum, previousSong ];
+        }
+      }
+
+      function lastPlayed() {
+        var previousHistory = historyIndexes[ historyIndexes.length - 2 ],
+            previousAlbumIndex,
+            previousSongIndex;
+
+        if ( typeof previousHistory !== 'undefined' ) {
+            previousAlbumIndex = previousHistory[0],
+            previousSongIndex = previousHistory[1];
+            return albumData.get()[previousAlbumIndex].tracks[previousSongIndex];
+        }
+      }
+
+      return {
+        current : current,
+        next : next,
+        previous : previous,
+        lastPlayed : lastPlayed
+      };
+
+    }();
+
+    return {
+      get : get,
+      update : updateHistory,
+      length : historyLen,
+      album : album,
+      song : song
+    };
+
+  }();
+
+  return {
+    state : state,
+    ui : ui,
+    logic : logic,
+    albumData : albumData,
+    history : history
+  };
+
+}();
 
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-   Page state logic
+   Subscribe
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-badracket.viewState = {
+$.subscribe('/view/change', updateView('/view/change'));   // triggered by djaxLoad() + load()
 
-  view: $('body').attr('data-view'),
-
-  init: function(){
-    this.view = $('body').attr('data-view');
-    if (this.view === 'album') {
-      this.setupAlbumView();
-    }
-  },
-
-  setupAlbumView: function(){
-    console.log('setup album view ran');
-    var albumTitle = $('[data-album-title]').attr('data-album-title');
-    var album = badracket.getAlbumByName(albumTitle);
-    $('a[data-album="'+albumTitle+'"]').hide();
-    badracket.loadBandTweets();
-  }
-};
+function updateView (name) {
+  return function(_, url) {
+    br_state.viewSet(url);
+  };
+}
 
 
 
-
-/* Song iterators - - - - - - - - - - - - - - - - - - - - - */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-badracket.runFuncAllSongs = function(func) {
-  for (var i=0; i<badracket.albums.length; i++) {
-    var albumTracks = badracket.albums[i].tracks;
-    for (var j=0; j<albumTracks.length; j++) {
-        func(albumTracks[j]);
-      }
-    }
-};
-
-// https://getsatisfaction.com/schillmania/topics/how_do_i_preload_a_song
-badracket.loadSampleSongs = function() {
-  badracket.runFuncAllSongs(function(song) {
-    if (!song.sm2_object && song.isSampleTrack) {
-      song.sm2_object = badracket.soundmanager.createSound(song);
-      song.sm2_object.load();
-    }
-  });
-};
-
-badracket.loadNextSong = function(song){
-  var nextSong = badracket.playHistory.getNextSong();
-  if (!song.sm2_object && song.isSampleTrack) {
-    nextSong.sm2_object = badracket.soundmanager.createSound(nextSong);
-  }
-    nextSong.sm2_object.load();
-};
-
-badracket.stopOtherPlayers = function(sm2_id) {
-  badracket.runFuncAllSongs(function(song){
-    if (song.sm2_object) {
-      if (song.sm2_object.sID !== sm2_id) {
-        song.sm2_object.pause();
-      }
-    }
-  });
-};
-
-badracket.getSm2_objectCount = function() {
-  var sm2_objectCount = 0;
-  badracket.runFuncAllSongs(function(song){
-    if (song.sm2_object) {
-      sm2_objectCount+=1;
-    }
-  });
-  return sm2_objectCount;
-};
-
-badracket.getSongByUrl = function(songUrl) {
-  var targetSong;
-  badracket.runFuncAllSongs(function(song){
-    if (song.songUrl === songUrl) { targetSong = song; }
-  });
-  return targetSong;
-};
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+   Do the stuff
+\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 
-badracket.playHistory = {
-  history : [], // [ [albumIndex, songIndex], [..], [..] ]
-  getCurrentHistory:function(){
-    return this.history[this.history.length - 1];
-  },
-  /*- ALBUMS -*/
-  getCurrentAlbum : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0]; // get last item in playHistory
-    return badracket.albums[currentAlbumIndex];
-  },
-   getNextAlbum : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0]; // get last item in playHistory
-    return badracket.albums[currentAlbumIndex + 1];
-  },
-  getPreviousAlbum : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0]; // get last item in playHistory
-    return badracket.albums[currentAlbumIndex - 1];
-  },
-  /*- SONGS -*/
-  getCurrentSong : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0];
-    var currentSongIndex = this.getCurrentHistory()[1];
-    return  badracket.albums[currentAlbumIndex].tracks[currentSongIndex];
-  },
-  getNextSong : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0];
-    var currentSongIndex = this.getCurrentHistory()[1];
-    return badracket.albums[currentAlbumIndex].tracks[currentSongIndex+1];
-  },
-  getPreviousSong : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0];
-    var currentSongIndex = this.getCurrentHistory()[1];
-    return badracket.albums[currentAlbumIndex].tracks[currentSongIndex-1];
-  },
-  /*- Album + Song -*/
-  getCurrentAlbumSong : function(){
-    var currentAlbumIndex = this.getCurrentHistory()[0];
-    var currentSongIndex = this.getCurrentHistory()[1];
-    return  [badracket.albums[currentAlbumIndex], badracket.albums[currentAlbumIndex].tracks[currentSongIndex]];
-  }
-};
 
-badracket.updatePlayHistory = function(album, track) {
-  var albumIndex = badracket.albums.indexOf(album);
-  var songIndex = album.tracks.indexOf(track);
-  badracket.playHistory.history.push([albumIndex, songIndex]);
-};
+var init = function(){
 
+  var ready = {
+    sm : false,
+    albumData : false
+  };
 
-/* Album iterators - - - - - - - - - - - - - - - - - - - - - */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-badracket.runFuncAllAlbums = function(func) {
-  for (var i=0; i<badracket.albums.length; i++) {
-      func(badracket.albums[i]);
-    }
-};
-
-badracket.getAlbumByName = function(albumName) {
-  var albums = badracket.albums, len = albums.length;
-  for (var i=len; i--;) {
-    if (albums[i].albumName === albumName) {
-     return albums[i];
-    }
-  }
-};
-
-badracket.findSampleSong = function(album) {
-  var tracks = album.tracks;
-  for (var i=0; i<tracks.length; i++) {
-    if (parseInt(tracks[i].isSampleTrack, 10) == 1) {
-      return tracks[i]; // return the album track with .isSampleTrack set to 1
-    }
-  }
-};
-
-
-/* - - End Album iterators - - */
-
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-    Event Handlers
-\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
-badracket.handlePlayClick = function() {
- console.log(' - - - handle play click ran - - -');
-  var albumSong = badracket.playHistory.getCurrentAlbumSong();
-
-  badracket.playPause(albumSong[1]);
-  badracket.updateAudioDOM(albumSong[0],albumSong[1]);
-};
-
-badracket.handleAlbumClick = function(e) {
-  console.log('- - - handle album click ran - - -');
-  e.preventDefault();
-  var view = $('body').attr('data-view');
-  var albumName = $(e.target).closest('.album').find('.album-title').text();
-  console.log(albumName);
-
-  var album = badracket.getAlbumByName(albumName);
-  var currentAlbum = badracket.playHistory.getCurrentAlbum(),
-      currentSong = badracket.playHistory.getCurrentSong();
-
-  if (album === currentAlbum) {
-    if (view !== 'album') {
-      badracket.playPause(currentSong);
-      badracket.updateAudioDOM(currentAlbum, currentSong);
-    }
-  } else {
-    var sampleTrack = badracket.findSampleSong(album);
-    badracket.whilePlayingCounter = 0;      // delay progress bar redraw to avoid flicker
-    if (view !== 'album') {
-      badracket.playPause(sampleTrack);
-      badracket.updateAudioDOM(album, sampleTrack);
-    }
-  }
-};
-
-badracket.handleSongClick = function(e) {
-  var songDOM = $(e.target).closest('.song');
-  var trackNumber = songDOM.find('.trackNumber').text();
-
-  var albumName = $('[data-album-title]').attr('data-album-title');
-  var album = badracket.getAlbumByName(albumName);
-  var song;
-
-  if ( songDOM.hasClass('song-playing') ) {
-    song = badracket.playHistory.getCurrentSong();
-    console.log('clicking current row');
-  } else {
-    song = album.tracks[parseInt(trackNumber,10)-1];
-  }
-  badracket.playPause(song);
-  badracket.updateAudioDOM(album, song);
-};
-
-badracket.handleNextClick = function(direction){
-
-  console.log('- - - handle next click ran - - -');
-  console.log('direction is ' + direction);
-
-  var currentHistory = badracket.playHistory.getCurrentHistory(),
-      songIndex = currentHistory[1],
-      albumIndex = currentHistory[0],
-      album = badracket.playHistory.getCurrentAlbum(),
-      currentSong =  badracket.playHistory.getCurrentSong(),
-      id = currentSong.sm2_object.sID,
-      song;
-
-  badracket.sm.unload(id);                                        // unload current song to avoid request buildup
-  badracket.whilePlayingCounter = 0;                              // delay progress bar redraw to avoid flicker
-
-  if (direction === 'next') {                                     // direction is 'next'
-    if ( (songIndex + 1) >= album.tracks.length) {                // if on last song...
-      if (albumIndex + 1 >= badracket.albums.length) {            // and if on last album...
-        album = badracket.albums[0];                              // then rewind to first album
-        song = album.tracks[0];                                   // and get first song
-      } else {
-        album = badracket.playHistory.getNextAlbum();             // else go to next album
-        song = album.tracks[0];                                   // ... and get first song
-      }
+  function loadSM() {
+    if( typeof soundManager !== 'undefined' ) {
+      br_sm2.setup( smReady );
     } else {
-      song = badracket.playHistory.getNextSong();                 // else, get next song in album
-    }
-  } else {                                                        // direction is 'previous'
-    if ( (songIndex - 1 ) === -1 ) {                              // if on first song...
-      if (albumIndex === 0 ) {                                    // and if on first album...
-        album = badracket.albums[badracket.albums.length - 1 ];   // ... then go to last album
-        song = album.tracks[album.tracks.length - 1];             // ... and get the last song
-      } else {
-        album = badracket.playHistory.getPreviousAlbum();         // else, go to previous album
-        song = album.tracks[album.tracks.length - 1];             // and get the last song
-      }
-    } else {
-      song = badracket.playHistory.getPreviousSong();             // else, get prev song in album 
+      setTimeout(function() { loadSM(); }, 125);
     }
   }
 
-  if (badracket.globalPlayState === true) {                       // if audio is playing ...
-    badracket.playPause(song);                                    // ... get the next song
-  } else {
-    song.sm2_object = badracket.soundmanager.createSound(song);
-    badracket.attach30SecondListener(song);                     // attach 30 second listener
-    song.sm2_object.setVolume(100);                             // [X] TODO: Cleanup the duplication between this and playPause();
+  function smReady() {
+    console.log('Soundmanager ready');
+    ready.sm = true;
+    readyCallback();
   }
-  badracket.updateAudioDOM(album, song);
-};
 
-
-badracket.updateAudioDOM = function(album, song) {
-  badracket.updatePlayHistory(album, song);
-  badracket.updateGlobalPlayState();              // must be called after updatePlayHistory is updated
-  if (badracket.viewState.view !== 'album') {
-    badracket.updateAlbumCover(album);
+  function dataReady() {
+    console.log('Album data ready');
+    ready.albumData = true;
+    readyCallback();
   }
-  badracket.updateAudioPlayer(album, song);
-  if (badracket.viewState.view === 'album') {
-    badracket.updateSongRow(song);
+
+  function readyCallback() {
+    if (!ready.sm || !ready.albumData ) { return; }
+    console.log('everything is loaded');
+    doMoreStuff();
   }
+
+  return {
+    loadSM : loadSM,
+    dataReady : dataReady,
+    readyState : ready,
+    init : init
+
+  };
+
+}();
+
+
+
+init.loadSM();
+
+var Myname = {
+  first: 'adam'
+};
+
+var dick = {
+  size : 'big'
 };
 
 
-badracket.playPause = function(song) {
-  if (typeof song.sm2_object === 'undefined') {                   // if sm2_object doesn't exist
-    song.sm2_object = badracket.soundmanager.createSound(song);   // ... create sound
-  }
-  badracket.stopOtherPlayers(song.sm2_object.sID);                // pause other sounds
-  badracket.attach30SecondListener(song);                         // attach 30 second listener
-  song.sm2_object.togglePause();                                  // play / pause sound
-};
-
-
-badracket.updateGlobalPlayState = function() {
-  currentSong = badracket.playHistory.getCurrentSong().sm2_object;
-  if (typeof currentSong !== 'undefined' && currentSong.playState && !currentSong.paused) {
-    badracket.globalPlayState = true;
-  } else {
-    badracket.globalPlayState = false;
-  }
-};
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-   Update DOM
-\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
-badracket.updateAudioPlayer = function(album, track) {
- console.log(' - - - update audio player ran - - -');
- var playState;
- if (badracket.globalPlayState === true) {
-  playState = 'n';
- } else {
-  playState = 'm';
- }
-
- var sample = badracket.sampleSongTest(track), sampleClass;
- var viewAlbum;
-
- if ( badracket.viewState.view === 'album' && $('[data-album-title]').attr('data-album-title') === album.albumName) {
-  viewAlbum = '';
- } else {
-  viewAlbum = '<span class="target">View album</span>';
- }
-
- if (sample) {
-  sampleClass = 'preview-song';
- } else {
-  sampleClass = '';
- }
-
- var positionHTML, timePlayed;
- if (track.sm2_object) {
-  var position = track.sm2_object.position;
-  songDuration =  badracket.min_secToMilliseconds(track.duration);
-  positionHTML = ((position/(songDuration))*100).toFixed(2) + '%';
-  timePlayed = badracket.msToTime(position);
- } else {
-  positionHTML = '0%';
- }
-
-  var audioPlayer = [
-     '<div class="audio-player ready '+ sampleClass +'" data-songUrl="'+ track.songUrl +'">',
-       '<div class="player-metadata group">',
-         '<div class="audio-player-title">',
-           '<a href="" class="audio-title">',
-              '<span class="song">'+ track.songTitle +'</span> - ',
-              '<span class="artist">'+ album.artist +'</span>',
-           '</a>',
-         '</div>',
-         '<a class="view-full-album dJAX_internal" href="'+ album.albumUrl +'">track ' + parseInt(track.trackNumber,10) +' of '+ album.tracks.length +'</span> ' + viewAlbum + '</a>',
-       '</div>',
-       '<div class="controls group">',
-        '<span data-icon="h" class="previous"></span>',
-        '<span data-icon="'+playState+'" class="play-pause"></span>',
-        '<span data-icon="l" class="next"></span>',
-        '<div class="statusbar">',
-          '<div class="loading"></div>',
-          '<div class="slider"></div>',
-          '<div class="position" style="width:'+ positionHTML +'"></div>',
-        '</div>',
-         '<div class="timing">',
-          '<div id="sm2_timing" class="timing-data">',
-           '<span class="preview-song-indicator">preview</span>',
-           '<span class="sm2_position">'+timePlayed+'</span>',
-          '</div>',
-        '</div>',
-      '</div>'
-    ].join('');
-
-  $('.audio-player-wrapper').html(audioPlayer);      // plop in updated player
-  s.Playbar = $('.controls .position');              // update playbar element
-  badracket.bindSliderUI(s.Playbar);                 // re-bind slider
-};
-
-badracket.updateAlbumCover = function(album) {
-  $('.album').removeClass('playing');
-  var cover = album.cover;
-  var albumDom = $('[data-src="'+cover+'"]'); // find album DOM with data-src matching passed-in album.cover
-  if (badracket.globalPlayState === true) {
-    albumDom.parent().parent().addClass('playing');
-  }
-};
-
-badracket.updateSongRow = function(song){
-  $('.song').removeClass('song-playing');
-  var trackNumber = song.trackNumber;
-  var currentRow = $('[data-track-number='+trackNumber+']');
-  var albumTitle = $('[data-album-title]').attr('data-album-title');
-  console.log(albumTitle);
-  if (badracket.globalPlayState === true && albumTitle == badracket.playHistory.getCurrentAlbum().albumName) {
-    currentRow.addClass('song-playing');
-  }
-};
-
-
-
-// [X] TODO: simplify similar sliding functions below with whilePlaying() on line 84
-badracket.whileSliding = function(event, ui, playbar) {
-  var position = ui.value;
-  playbar.css('width', position + '%');
-  var currentSong = badracket.playHistory.getCurrentSong();
-  var smPosition = (position/100) * badracket.min_secToMilliseconds(currentSong.duration);
-  $('.sm2_position').text(badracket.msToTime(smPosition));
-};
-
-badracket.slideStop = function ( event, ui, playbar) {
-  badracket.sm.sliding = false;
-  var position = ui.value;
-  playbar.css('width', position + '%');
-  var currentSong = badracket.playHistory.getCurrentSong();
-  var smPosition = (position/100) * badracket.min_secToMilliseconds(currentSong.duration);
-  currentSong.sm2_object.setPosition(smPosition);
-  $('.sm2_position').text(badracket.msToTime(smPosition));
-};
-
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-   Bind UI
-\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
-
-
-badracket.bindSliderUI = function(playbar) {
-  console.log('- - - Bind slider UI ran - - -');
-  // Activate slider
-  $( ".slider" ).slider({
-    step: 0.01,
-    slide: function( event, ui ) { badracket.whileSliding( event, ui, playbar ); },
-    start: function() { badracket.sm.sliding = true; },
-    stop: function(event, ui) { badracket.slideStop( event, ui, playbar ); }
-  });
-
-};
-
-
-// [X] TODO: replace .live with new .on format
-
-badracket.bindAudioUI = function(){
-
-  /* Audio Player - Bind Play / Pause button click -  - - - - */
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-  $('.play-pause').live('tap, click', function(){
-    console.log('play-pause click');
-    badracket.handlePlayClick();
-  });
-
-  $('.next').live('tap, click', function(){
-    badracket.handleNextClick('next');
-  });
-
-  $('.previous').live('tap, click', function(){
-    badracket.handleNextClick('previous');
-  });
-
-  /* Bind album click - - - - - - - - - - -  - - - - - - - - */
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-  $('.album').live('tap, click',function(e){ // live is important to work with djax
-    badracket.handleAlbumClick(e);
-  });
-
-  /* Bind song click - - - - - - - - - - -  - - - - - - - - */
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-  $('.song').live('tap, click',function(e){ // live is important to work with djax
-    badracket.handleSongClick(e);
-  });
-
-}; // end badracket.bindAudioUI()
-
-
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-    dJax init stuff
-\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
-badracket.soundmanager.djaxInit  = function(){
-  console.log('soundmanager djax init ran');
-  var album = badracket.playHistory.getCurrentAlbum();
-  var song = badracket.playHistory.getCurrentSong();
-  if(album) {
-    badracket.updateAlbumCover(album);
-    badracket.updateAudioPlayer(album,song);
-    badracket.updateSongRow(song);
-  }
-  badracket.viewState.init();
-};
-
-
-
-
-
-
-
-
-
-
-
+function doMoreStuff() {
+  console.log('do more stuff ran');
+  var album = br_player.history.album.random();
+  var song = br_player.albumData.sampleSong(album);
+  br_player.history.update(album, song);
+  br_player.ui.render.init(album, song);
+  // song.play();
+  br_player.ui.bindui.album();
+  br_player.ui.bindui.song();
+  br_player.ui.bindui.slider();
+  br_player.ui.bindui.play();
+  br_player.ui.bindui.next();
+  br_player.ui.bindui.previous();
+}
 
 
 

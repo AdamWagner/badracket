@@ -49,16 +49,22 @@ body, html {
   }
 }
 
-
 /* --------------------------------------------------------------------------------------- *\
   Icon fonts
 /* --------------------------------------------------------------------------------------- */
+
+// try again to use compass helper inline-font-files()
+// http://compass-style.org/reference/compass/helpers/inline-data/#inline-font-files
 
 @font-face {
 font-family: 'icons';
 src: url('fonts/icomoon.woff') format('woff'), 
      url('fonts/icomoon.svg') format('svg'),
      url('fonts/icomoon.eot') format('eot');
+
+ // src: inline-font-files('icomoon.woff', 'woff'), 
+ //      inline-font-files('icomoon.svg', 'svg'),
+ //      inline-font-files('icomoon.eot', 'eot');
 }
 
 
@@ -300,7 +306,7 @@ header.mobile {
 
 %logo-mark {
  display:block;
- background:url('images/br-logo.svg');
+ background:inline-image('br-logo.svg');
  background-size:cover; 
  background-repeat:no-repeat;
 }
@@ -423,10 +429,6 @@ nav[role="navigation"] {
   min-height:100%;
   z-index:10;
   position:relative; // for z-index effect
-  &.loading .loading-fade {
-    opacity:1;
-    @include transition(opacity 0.2s);
-  }
 }
 
 .loading-fade {
@@ -560,6 +562,10 @@ section {
   }
 }
 
+.link-to-album { 
+  &:hover { text-decoration:underline; color: $dark;}
+}
+
 .album-meta {
   font-size:75%;
   @include breakpoint(bigger) {font-size:15px;}  // intended to be non-flexy 
@@ -605,8 +611,8 @@ section {
     @include box-shadow(0 0 1px $dark);
   }
 
-  .play { background:url('images/play.svg') no-repeat center; }
-  .pause { background:url('images/pause-circle.svg') no-repeat center; }
+  .play { background: inline-image('play.svg') no-repeat center; }
+  .pause { background: inline-image('pause-circle.svg') no-repeat center; }
 
   &:hover {
     .lazyload { opacity:0.3; }

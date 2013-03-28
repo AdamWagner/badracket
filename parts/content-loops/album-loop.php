@@ -8,14 +8,14 @@
     $cover = get_post_meta($post->ID, '_br_cover_url', true);
     ?>
 
-    <div class="grid album">
+    <div class="grid album" data-album-title="<?php echo $albumName; ?>">
        <div class="album-cover playable"> 
          <div class="play"></div>
          <div class="pause"></div>
          <div class="album-cover-img lazyload fade ratio-1-1" data-src="<?php echo $cover; ?>" alt="<?php echo $artist; ?> - <?php echo $albumName; ?>">
          </div> 
        </div> 
-       <a href="<?php echo the_permalink(); ?>">
+       <a class="link-to-album" href="<?php echo the_permalink(); ?>">
            <div class="album-meta">
              <span data-icon="s" class="speaker-indicator"></span>
              <div class="album-title"><?php echo $albumName; ?></div>
