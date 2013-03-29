@@ -1,4 +1,7 @@
+/* @codekit-prepend "lib/jquery.js" */
+/* @codekit-prepend "lib/jquery.djax.js" */
 /* @codekit-prepend "lib/enquire.js" */
+/* @codekit-prepend "lib/underscore.js" */
 
 /*
  * jQuery Tiny Pub/Sub
@@ -71,10 +74,8 @@ badracket = {
 
   setup: function(){
     badracket.loader.require([
-    badracket_theme_path + "/js/lib/soundmanager2.js",
-    badracket_theme_path + "/js/lib/underscore.js",
     badracket_theme_path + "/js/lib/jquery-ui-1.9.2.custom.js",
-    badracket_theme_path + "/js/badracket.audio-player.js",
+    badracket_theme_path + "/js/prod/badracket.audio-player.min.js",
     badracket_theme_path + "/js/lib/jquery.fitvids.js"],
         function() {
             // Callback
@@ -122,28 +123,6 @@ badracket = {
         }
       },
 
-  setCookie: function(key,value,days){
-    var expires;
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime()+(days*24*60*60*1000));
-      expires = "; expires="+date.toGMTString();
-    } else {
-     expires = "";
-   }
-   document.cookie = key +"="+value+expires+"; path=/";
-    },
-
-  getCookie: function(sKey) {
-    if (!sKey || !badracket.hasCookie(sKey)) { return null; }
-    return unescape(document.cookie.replace(new RegExp("(?:^|.*;\\s*)" + escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1"));
-  },
-  removeCookie: function(key) {
-    document.cookie = encodeURIComponent(key) + "=deleted; expires=" + new Date(0).toUTCString() + "; path=/";
-  },
-  hasCookie: function(sKey) {
-    return (new RegExp("(?:^|;\\s*)" + escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
-  },
 
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
     Normalize album data
@@ -192,7 +171,6 @@ badracket = {
   },
 
 
-
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
     Get album data via ajax
   \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
@@ -239,6 +217,7 @@ badracket = {
 
   docReady: function(){
     $(document).ready(function(){
+      $('body').djax('.updatable');
       badracket.enquire();
       console.log('document ready fires');
     });
@@ -359,9 +338,4 @@ badracket = {
 };
 
 badracket.init();
-
-
-
-
-
 

@@ -1,3 +1,5 @@
+/* @codekit-prepend "lib/soundmanager2.js" */
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
    SM2
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
@@ -51,7 +53,6 @@ var br_sm2 = function(){
       onresume: function() { br_player.state.isPlaying = true; },
       onpause: function() { br_player.state.isPlaying = false; },
       onstop: function() { br_player.state.isPlaying = false; },
-      whileloading: function() { whileLoading( this ); },
       whileplaying: function() { whilePlaying( this ); },
       onfinish: function() { onFinish( this ); }
     });
@@ -72,7 +73,7 @@ var br_sm2 = function(){
 
     previousLoadCheck();
 
-    if ( !('sm2_obj' in song) ) {                   // if sm2_object doesn't exist
+    if ( !('sm2_obj' in song) ) {                                // if sm2_object doesn't exist
       song.sm2_obj = createSound( song );                        // ... create sound
     }
 
@@ -115,7 +116,6 @@ var br_state = function() {
       setupAlbumDetail();
     } else if ( url === urls.home ) {
       viewState = 'home';
-      setupHome();
     } else {
       viewState = 'unknown';
     }
@@ -135,17 +135,14 @@ var br_state = function() {
   }
 
   function setupAlbumDetail(){
-    if ( br_player.state.isPlaying === true ) {
-      if ( br_player.history.album.current().albumName === $('[data-album-title]').attr('data-album-title') ) {
+    if ( br_player.state.isPlaying ) {
+      if ( br_player.state.currAlbum.albumName === $('[data-album-title]').attr('data-album-title') ) {
         var trackNumber = br_player.state.currSong.trackNumber;
         $('[data-track-number="'+ trackNumber +'"]').addClass('song-playing');
       }
     }
   }
 
-  function setupHome() {
-    $('.view-full-album .target').show();
-  }
 
   return {
     viewSet : viewSet,
@@ -168,7 +165,6 @@ var br_player = function() {
     * logic
     * albumData
     * history
-
   */
 
   var state = {
@@ -236,9 +232,9 @@ var br_player = function() {
         if ( br_state.viewGet() === 'album-detail' || target.closest('a').hasClass('link-to-album') ) { return false; } // disable handler on album-detail page
         e.preventDefault();
 
-        var albumName = target.closest('.album').attr('data-album-title'),
-            targetAlbum = albumData.getAlbumByName( albumName ),
-            targetSong = albumData.sampleSong( targetAlbum );
+        var albumName     = target.closest('.album').attr('data-album-title'),
+            targetAlbum   = albumData.getAlbumByName( albumName ),
+            targetSong    = albumData.sampleSong( targetAlbum );
 
         logic.targetSong( targetAlbum, targetSong);
       },
@@ -317,7 +313,7 @@ var br_player = function() {
       }
     };
 
-    return {
+    return { // ui {}
       el : el,
       handlers : handlers,
       bindui : bindui,
@@ -376,7 +372,7 @@ var br_player = function() {
       }
     }
 
-    return {
+    return { // logic {}
       targetSong : targetSongLogic,
       attach30SecondListener : attach30SecondListener
     };
@@ -410,7 +406,7 @@ var br_player = function() {
       }
     }
 
-    return {
+    return { // albumData {}
       getAlbumByName : getAlbumByName,
       sampleSong : findSampleSong,
       set : receiveData,
@@ -467,7 +463,7 @@ var br_player = function() {
         return albums[ Math.round( Math.random( 0, albums.length )) ];
       }
 
-      return {
+      return { // album {}
         current : current,
         next : next,
         previous : previous,
@@ -485,10 +481,10 @@ var br_player = function() {
       var albums, numAlbums, albumTrackLen, nextAlbum, previousAlbum;
 
       function populateScope() {
-        albums = albumData.get();
-        numAlbums = albums.length;
+        albums        = albumData.get();
+        numAlbums     = albums.length;
         albumTrackLen = state.currAlbum.tracks.length;
-        nextAlbum = history.album.next();
+        nextAlbum     = history.album.next();
         previousAlbum = history.album.previous();
       }
 
@@ -542,7 +538,7 @@ var br_player = function() {
         }
       }
 
-      return {
+      return { // song {}
         current : current,
         next : next,
         previous : previous,
@@ -551,7 +547,7 @@ var br_player = function() {
 
     }();
 
-    return {
+    return { // history {}
       get : get,
       update : updateHistory,
       length : historyLen,
@@ -561,7 +557,7 @@ var br_player = function() {
 
   }();
 
-  return {
+  return { // player {}
     state : state,
     ui : ui,
     logic : logic,

@@ -11,16 +11,7 @@
 
   <?php wp_head(); ?>
 
-
-
 </head>
 
 <body <?php body_class(); ?>>
-<!-- <div id="fb-root"></div> -->
-
-
-
-
-
-
-
+<!-- <div id="fb-root"></div> --> 
