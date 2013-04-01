@@ -1,0 +1,42 @@
+/* Button mixins */
+@mixin button($color) {
+  @include button-color($color);
+  text-decoration:none;
+  padding:19px 20px 20px; 
+  display:inline-block;
+  text-align:center;
+  border-radius:3px;
+  font-size:1em;
+}
+
+@mixin button-color($base_color) {
+  @include background(linear-gradient(lighten($base_color, 1%), darken($base_color, 3%)));
+ 
+  &:hover {
+    @include background(linear-gradient(lighten($base_color , 5%), darken($base_color , 6%)));
+    @include text-shadow(darken($base_color,10%));
+  }
+  &:active {
+    @include background(linear-gradient(darken($base_color , 0.15%), $base_color));
+    @include text-shadow(darken($base_color,10%));
+  }
+}
+
+
+/* Apply button mixin */
+
+a.show-rsvp {
+  @include button( $dark );
+  width:100%;
+  -webkit-font-smoothing:antialiased;
+  &, &:hover, &:active, &:visited {
+    color:$cream;
+  }
+}
+a.show-buy-tickets {
+  @include button( transparentize($pink-cream,0.1) );
+  width:100%;
+  &, &:hover, &:active, &:visited{
+    color:$dark;
+  }
+}

@@ -25,7 +25,7 @@ function add_post_type($name, $plural, $args = array()) {
     $args = array_merge (
       array( 
         'labels'              => $labels,
-        'hierarchical'        => true,
+        // 'hierarchical'        => true,
         'description'         => 'description',
         'taxonomies'          => array( 'category','post_tag' ),
         'public'              => true,

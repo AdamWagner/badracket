@@ -1,3 +1,4 @@
+/* @codekit-prepend "lib/jquery-ui-1.9.2.custom.js" */
 /* @codekit-prepend "lib/soundmanager2.js" */
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
@@ -15,10 +16,10 @@ var br_sm2 = function(){
     useHighPerformance: true
   };
 
-  function setupSM2(callback) {
+  function setupSM2( onSMReady) {
     soundManager.setup( sm2_settings );
     soundManager.onready(function(){
-      callback();
+      onSMReady();
     });
   }
 
@@ -28,22 +29,24 @@ var br_sm2 = function(){
         isSliding    = br_player.state.isSliding;
         playbarWidth = ( (position / duration) * 100 ).toFixed(2) + '%';
 
-    if (isSliding !== true  && br_player.state.currSong.sm2_obj === sound ) {
-      br_player.ui.el.progressBar.css('width', playbarWidth);
-      br_player.ui.el.progressTime.text( badracket.msToTime(sound.position) );
+    if (!isSliding && br_player.state.currSong.sm2_obj === sound ) {      // if not sliding and recieving current song
+      br_player.ui.el.progressBar.css('width', playbarWidth);             // update progress bar ...
+      br_player.ui.el.progressTime.text( badracket.msToTime(position) );  // ... and time progress
     }
   }
 
   function onFinish( sound ) {
     console.log('on finish ran');
-    sound.setPosition(0);
-    br_player.ui.handlers.nextPrev('next');
+    sound.setPosition( 0 );                     // rewind song
+    br_player.ui.handlers.nextPrev( 'next' );   // go to next song
   }
 
   var songCount = 0;
   function createSound( song ) {
 
     if (song.isSampleTrack === '0') { song.duration = '0:30'; }
+
+    console.log('create sound ran');
 
     return soundManager.createSound({
       id:'brSound' + songCount++,
@@ -70,6 +73,8 @@ var br_sm2 = function(){
   }
 
   function playPause ( song ) {
+
+    console.log('play-pause ran');
 
     previousLoadCheck();
 
@@ -101,10 +106,10 @@ var br_state = function() {
 
   var viewState = 'unknown';
 
-
   var urls = {
     home : 'http://localhost:8888/sites/brv5/wp-br/',
-    albumDetail : 'album='
+    albumDetail : 'album=',
+    showDetail : 'show='
   };
 
   function viewSet( url ) {
@@ -116,6 +121,8 @@ var br_state = function() {
       setupAlbumDetail();
     } else if ( url === urls.home ) {
       viewState = 'home';
+    } else if ( badracket.stringContains( url, urls.showDetail ) ) {
+      viewState = 'show-detail';
     } else {
       viewState = 'unknown';
     }
@@ -142,7 +149,6 @@ var br_state = function() {
       }
     }
   }
-
 
   return {
     viewSet : viewSet,
@@ -202,12 +208,22 @@ var br_player = function() {
     var render = {
 
       init : function( album , song ) {
-        el.artist.html(album.artist);
-        el.song.html(song.songTitle);
-        el.progressTime.html(song.duration);
+        el.player.addClass('ready');
+        if ( album.kind === 'show' ) {
+          el.artist.html( song.artist );
+          el.albumLink.find('.target').text('View upcoming show');
+          el.albumLink.find('.track-count').hide();
+        } else {
+          el.artist.html( album.artist );
+          el.albumLink.find('.track-count').show();
+          el.albumLink.find('.target').text('View album');
+        }
+
+        el.song.html( song.songTitle );
+        el.progressTime.html( song.duration );
         el.albumLink.attr( 'href', album.albumUrl );
-        el.currentTrack.html(parseInt(song.trackNumber , 10));
-        el.totalTracks.html(album.tracks.length);
+        el.currentTrack.html( parseInt(song.trackNumber , 10) );
+        el.totalTracks.html( album.tracks.length );
       },
 
       playState : function() {
@@ -229,7 +245,9 @@ var br_player = function() {
 
       albumClick : function( e ) {
         var target = $(e.target);
-        if ( br_state.viewGet() === 'album-detail' || target.closest('a').hasClass('link-to-album') ) { return false; } // disable handler on album-detail page
+        if ( br_state.viewGet() === 'album-detail' || target.closest('a').hasClass('link-to-album') ) {
+          return false; // disable handler on album-detail page
+        }
         e.preventDefault();
 
         var albumName     = target.closest('.album').attr('data-album-title'),
@@ -240,6 +258,7 @@ var br_player = function() {
       },
 
       songClick : function( e ) {
+        console.log(e);
         var albumName     = $('[data-album-title]').attr('data-album-title'),
             targetAlbum   = albumData.getAlbumByName( albumName ),
             songIndex     = parseInt( $(e.target).closest('.song').attr('data-track-number') , 10 ) - 1,
@@ -277,8 +296,7 @@ var br_player = function() {
     var bindui = {
       play : function() {
         s.bd.on({
-          click : function(){ handlers.playClick(); },
-          tap : function(){ handlers.playClick(); }
+          click : function(){ handlers.playClick(); }
         }, '.play-pause' );
       },
       next : function() {
@@ -293,14 +311,12 @@ var br_player = function() {
       },
       album : function() {
         s.bd.on({
-          click : function(e){ handlers.albumClick(e); },
-          tap : function(e){ handlers.albumClick(e); }
+          click : function(e){ handlers.albumClick(e); }
         }, '.album' );
       },
       song : function() {
         s.bd.on({
-          click : function(e){ handlers.songClick(e); },
-          tap : function(e){ handlers.songClick(e); }
+          click : function(e){ handlers.songClick(e); }
         } , '.song' );
       },
       slider : function() {
@@ -325,41 +341,37 @@ var br_player = function() {
 
   var logic = function(){
 
-    function getAlbumDOM( album ) {
-      return $('.album[data-album-title="'+ album.albumName +'"]');
-    }
+    function activeStyle( targetAlbum, targetSong, mode ) { // modes are toggle, clear
+      var songDOM = $('.song[data-track-number="'+ targetSong.trackNumber +'"]'),
+          albumDOM =  $('.album[data-album-title="'+ targetAlbum.albumName +'"]'),
+          currentView = br_state.viewGet();
 
-    function getSongDOM( song ) {
-      return $('.song[data-track-number="'+ song.trackNumber +'"]');
-    }
-
-    function toggleActiveStyle( targetAlbum, targetSong ) {
-      if ( br_state.viewGet() === 'album-detail' ) {
+      if ( currentView === 'album-detail' || currentView === 'show-detail' ) {
         if ( $('[data-album-title]').attr('data-album-title') === targetAlbum.albumName ) {
-          getSongDOM( targetSong ).toggleClass('song-playing');
+          if ( mode === 'toggle') {
+            songDOM.toggleClass('song-playing');
+          } else {
+            songDOM.removeClass('song-playing');
+          }
         }
-      } else {
-        getAlbumDOM( targetAlbum ).toggleClass('playing');
-      }
-    }
-
-    function clearActiveStyle( oldAlbum, oldSong ) {
-      if ( br_state.viewGet() === 'album-detail' ) {
-        getSongDOM( oldSong ).removeClass('song-playing');
-      } else {
-        getAlbumDOM( oldAlbum ).removeClass('playing');
+      } else if (currentView === 'home') {
+        if ( mode === 'toggle' ) {
+          albumDOM.toggleClass('playing');
+        } else {
+          albumDOM.removeClass('playing');
+        }
       }
     }
 
     function targetSongLogic( targetAlbum, targetSong ) {
       if ( targetSong.songTitle !== state.currSong.songTitle ) {
         ui.render.init( targetAlbum, targetSong );
-        clearActiveStyle( state.currAlbum, state.currSong );
+        activeStyle( state.currAlbum, state.currSong, 'clear' );
         if ( state.isPlaying ) { state.currSong.sm2_obj.stop(); }
         history.update( targetAlbum, targetSong );
       }
 
-      toggleActiveStyle( targetAlbum, targetSong );
+      activeStyle( targetAlbum, targetSong, 'toggle' );
       br_sm2.playPause( targetSong );
       ui.render.playState();
     }
@@ -382,10 +394,10 @@ var br_player = function() {
   /*- AlbumData -*/
   var albumData = function(){
 
-    var albums, numAlbums;
+    var albums = [], numAlbums;
 
     function receiveData( cleanJSON ) {
-      albums = cleanJSON;
+      albums = albums.concat(cleanJSON);
       numAlbums = albums.length;
     }
 
@@ -617,6 +629,7 @@ var init = function(){
   }
 
   function readyCallback() {
+    console.log('ready callback fire');
     if (!ready.sm || !ready.albumData ) { return; }
     console.log('everything is loaded');
     doMoreStuff();
@@ -633,17 +646,7 @@ var init = function(){
 }();
 
 
-
 init.loadSM();
-
-var Myname = {
-  first: 'adam'
-};
-
-var dick = {
-  size : 'big'
-};
-
 
 function doMoreStuff() {
   console.log('do more stuff ran');

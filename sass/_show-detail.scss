@@ -1,0 +1,88 @@
+
+.show-page-wrapper {
+
+}
+
+.show-main-section,
+.show-sidebar {
+  @include breakpoint(big) {
+    float:left;
+  }
+}
+
+.show-main-section {
+
+  .show-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    right: 0;
+    opacity: 0.07;
+    max-height: 8em;
+    overflow: hidden;
+    img {
+      width:100%;
+    }
+  }
+
+
+  .show-heading {
+    height:6em;
+    margin-top:0.5em;
+  }
+
+  .show-headliner {
+    font-size:2.2em;
+    font-weight:normal;
+    margin-top:0;
+    margin-bottom:0.15em;
+  }
+  .show-supporting-bands {
+    font-size:1.1em;
+    font-weight:normal;
+    margin:0;
+  }
+
+  .show-description {
+    width:95%;
+    color:$dark;
+    font-size:0.95em;
+    line-height:1.5em;
+  }
+}
+
+.show-sidebar {
+  font-size:0.9em;
+
+  .venue-address {
+    opacity:0.6;
+    font-size:0.9em;
+    line-height:1.4em;
+    @extend no-wrap-text;
+  }
+
+  .price-note { 
+    font-size:0.8em;
+    opacity:0.7;
+  }
+  .show-venue a, .show-date a {
+    text-decoration:underline;
+    font-size:0.8em;
+    &, &:hover, &:active { color:$dark; }
+    opacity:0.7;
+  }
+}
+
+.playlist {
+  .song-artist {
+    font-style: italic;
+    opacity:0.6;
+    max-width:5px;
+    display:inline-block;
+    @extend no-wrap-text;
+  }
+}
+
+
+

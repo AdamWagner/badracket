@@ -12,7 +12,7 @@
         <ul class="reset-list">
           <li><a href="http://localhost:8888/sites/brv5/wp-br/">Albums</a></li>
           <li><a href="http://localhost:8888/sites/brv5/wp-br/?page_id=160">Videos</a></li>
-          <li>Shows</li>
+          <li><a href="http://localhost:8888/sites/brv5/wp-br/?post_type=show">Shows</a></li>
           <li>Interviews</li>
         </ul>
 

@@ -88,15 +88,22 @@
   tr {
     cursor:pointer;
     &:nth-child(odd) {
-      background:desaturate(darken($red,2.5%),5%);
+      .red & { background:desaturate(darken($red,2.5%),5%); }
+      .pink-cream & { background:desaturate(darken($pink-cream,3.5%),5.5%); }
     }
     &:hover {
       .the-track-number { display:none; }
       .play-icon { display:block; }
     }
     &.song-playing {
-      background:$dark;
-      color:$red;
+      .red & { 
+        background:$dark;
+        color:$red;
+      }
+      .pink-cream & {
+        background:$dark;
+        color:$pink-cream;
+      }
       .the-track-number { display:none; }
       .play-icon { display:none; }
       .speaker-icon { display:block; }

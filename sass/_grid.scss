@@ -21,9 +21,8 @@
 
 
 .padded-mobile-1 {
-  padding:1em;
-  @include breakpoint(big) {
-    padding:0;
+  @include breakpoint-reverso(small) {
+    padding:1em;
   }
 }
 
@@ -208,6 +207,19 @@ $breakpoint_prefixes: s-,m-,l-;
 .layout-two-third { width:66.6666667%; }
 .layout-half { width:50%; }
 
+.layout-main { 
+  width:100%;
+  @include breakpoint(big) {
+  width:70%; 
+  }
+}
+
+.layout-sidebar { 
+  width:100%;
+  @include breakpoint(big) {
+    width:30%;
+  }
+}
 
 
 

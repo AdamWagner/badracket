@@ -9,9 +9,11 @@
 
 /* --------------------------------------------------------------------------------------- *\
   Vars
+  Vars
 /* --------------------------------------------------------------------------------------- */
 
 $cream: #f2e7cc;
+$pink-cream: #f8ebe1;
 $red: #dc5b59;
 $orange: #d27f62;
 $dark: #403744;
@@ -102,6 +104,7 @@ ul, li {
   padding:0;
 }
 
+
 /* --------------------------------------------------------------------------------------- *\
   Links
 /* --------------------------------------------------------------------------------------- */
@@ -126,6 +129,14 @@ a {
             desaturate(darken($red,35%),30%)
            );
 }
+
+
+/* --------------------------------------------------------------------------------------- *\
+  buttons
+/* --------------------------------------------------------------------------------------- */
+
+
+@import 'buttons';
 
 
 /* --------------------------------------------------------------------------------------- *\
@@ -507,6 +518,8 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 /* --------------------------------------------------------------------------------------- */
 
 .red { background:$red; }
+.cream { background:$cream; }
+.pink-cream { background:$pink-cream; }
 .dark-red { background:desaturate(darken($red,7%),20%); }
 .green { background:$green; }
 
@@ -517,6 +530,34 @@ section {
   }
 }
 
+
+@mixin section-divider($bg-color, $fg-color) {
+  border-top:solid 2px $fg-color;
+  font-color:$fg-color;
+  div {
+    background:$bg-color;
+    color:$fg-color;
+  }
+}
+
+.pink-cream {
+  .section-divider {
+    @include section-divider($pink-cream, $red);
+  }
+}
+
+.section-divider {
+  margin-bottom:-1em;
+  margin-top:2em;
+  div {
+    position:relative;
+    top:-1.10em;
+    left:0.5em;
+    padding:0.5em;
+    font-size:0.85em;
+    display:inline-block;
+  }
+}
 
 /* --------------------------------------------------------------------------------------- *\
   Music section
@@ -634,6 +675,7 @@ section {
 
 
 @import 'album-detail';
+@import 'show-detail';
 
 
 

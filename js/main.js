@@ -55,12 +55,11 @@ badracket = {
       .listen();
   },
 
-
   setupMobile: function(){
     return {
       setup: function() {
         badracket.loader.require([
-        badracket_theme_path + "/js/lib/jquery.tap.js"],
+          badracket_theme_path + "/js/lib/jquery.tap.js"],
             function() {
                 // Callback
                 badracket.bindMobileUI();
@@ -74,15 +73,17 @@ badracket = {
 
   setup: function(){
     badracket.loader.require([
-    badracket_theme_path + "/js/lib/jquery-ui-1.9.2.custom.js",
     badracket_theme_path + "/js/prod/badracket.audio-player.min.js",
-    badracket_theme_path + "/js/lib/jquery.fitvids.js"],
+    badracket_theme_path + "/js/lib/jquery.fitvids.js",
+    "//connect.facebook.net/en_US/all.js",
+    badracket_theme_path + "/js/prod/br_facebook.min.js"],
         function() {
             // Callback
             console.log('All Scripts Loaded');
             badracket.postSetupTasks();
             s.video.fitVids();
-            badracket.doAjaxRequest();
+            badracket.doAjaxRequest('album');
+            badracket.doAjaxRequest('show');
         });
   },
 
@@ -108,7 +109,6 @@ badracket = {
       },
       loaded: function (evt) {
           this.loadCount++;
-
           if (this.loadCount == this.totalRequired && typeof this.callback == 'function') this.callback.call();
       },
       writeScript: function (src) {
@@ -140,18 +140,29 @@ badracket = {
     return trackCount;
   },
 
- createTrackHierarchy :function (obj) {
+ createTrackHierarchy :function (obj, type) {
     var tracks = [];
     var trackCount = badracket.count_tracks(obj);
     for ( var i = 01; i <= trackCount; i++ ) {
       if (i >= 10) { enumerator = i.toString(); } else { enumerator = '0' + i.toString(); }
-      tracks.push({
-        songTitle: obj['_br_songTitle-' + enumerator][0],
-        duration: obj['_br_duration-' + enumerator][0],
-        trackNumber: obj['_br_songTrackNumber-' + enumerator][0],
-        songUrl: obj['_br_songUrl-' + enumerator][0],
-        isSampleTrack: obj['_br_isSampleTrack-' + enumerator][0]
-      });
+      if (type === 'album') {
+        tracks.push({
+          songTitle: obj['_br_songTitle-' + enumerator][0],
+          duration: obj['_br_duration-' + enumerator][0],
+          trackNumber: obj['_br_songTrackNumber-' + enumerator][0],
+          songUrl: obj['_br_songUrl-' + enumerator][0],
+          isSampleTrack: obj['_br_isSampleTrack-' + enumerator][0]
+        });
+      } else {
+         tracks.push({
+          songTitle: obj['_br_songTitle-' + enumerator][0],
+          artist: obj['_br_artist-' + enumerator][0],
+          duration: obj['_br_duration-' + enumerator][0],
+          trackNumber: obj['_br_songTrackNumber-' + enumerator][0],
+          songUrl: obj['_br_songUrl-' + enumerator][0],
+          isSampleTrack: 1
+        });
+      }
     }
     return tracks;
   },
@@ -161,11 +172,26 @@ badracket = {
       return {
         artist : value._br_artist[0],
         albumName : value.albumName,
+        kind : 'album',
         coverUrl : value._br_cover_url[0],
         buyURL : value._br_buy_url[0],
         zipFile : value._br_zip_file[0],
-        tracks : badracket.createTrackHierarchy(value),
+        tracks : badracket.createTrackHierarchy(value, 'album'),
         albumUrl : value.albumUrl
+      };
+    });
+  },
+
+  albumNormalizationShows : function(rawData) {
+    return _.map(rawData, function(value, key, list ){
+      var date = value._br_datetime[0];
+
+      return {
+        albumName : value.albumName,
+        kind : 'show',
+        date : date,
+        albumUrl : value.albumUrl,
+        tracks : badracket.createTrackHierarchy(value, 'show')
       };
     });
   },
@@ -175,7 +201,7 @@ badracket = {
     Get album data via ajax
   \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-  doAjaxRequest: function(){
+  doAjaxRequest: function( type ){
        // here is where the request will happen
        console.log('jquery ajax request ran');
        jQuery.ajax({
@@ -183,13 +209,19 @@ badracket = {
             data:{
                  'action':'do_ajax',
                  'fn':'get_latest_posts',
-                 'post_type': 'album',
+                 'post_type': type,
                  'count':99
                  },
             dataType: 'JSON',
             success:function(data){
                    console.log('got the json');
-                   var cleanAlbums = badracket.albumNormalization(data);
+                   console.log(data);
+                   var cleanAlbums;
+                   if (type == 'show') {
+                    cleanAlbums = badracket.albumNormalizationShows(data);
+                   } else {
+                    cleanAlbums = badracket.albumNormalization(data);
+                   }
 
                    (function setData(){
                    if ( typeof br_player !== 'undefined' ) {
@@ -217,7 +249,7 @@ badracket = {
 
   docReady: function(){
     $(document).ready(function(){
-      $('body').djax('.updatable');
+      $('body').djax('.updatable', ['###']);
       badracket.enquire();
       console.log('document ready fires');
     });
@@ -231,6 +263,7 @@ badracket = {
     $(window).load(function(){
       badracket.setup();
       badracket.lazyLoadImg();
+
     });
   },
 
