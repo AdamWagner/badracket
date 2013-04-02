@@ -1046,6 +1046,7 @@ a.show-rsvp {
   text-align: center;
   border-radius: 3px;
   font-size: 1em;
+  cursor: pointer;
   width: 100%;
   -webkit-font-smoothing: antialiased;
 }
@@ -1064,6 +1065,9 @@ a.show-rsvp:active {
   background: -o-linear-gradient(#3d3441, #3d3441);
   background: linear-gradient(#3d3441, #3d3441);
   text-shadow: #231e25;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 a.show-rsvp, a.show-rsvp:hover, a.show-rsvp:active, a.show-rsvp:visited {
   color: #f2e7cc;
@@ -1081,6 +1085,7 @@ a.show-buy-tickets {
   text-align: center;
   border-radius: 3px;
   font-size: 1em;
+  cursor: pointer;
   width: 100%;
 }
 a.show-buy-tickets:hover {
@@ -1098,6 +1103,9 @@ a.show-buy-tickets:active {
   background: -o-linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
   background: linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
   text-shadow: rgba(238, 207, 184, 0.9);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 a.show-buy-tickets, a.show-buy-tickets:hover, a.show-buy-tickets:active, a.show-buy-tickets:visited {
   color: #3d3441;
@@ -1322,6 +1330,69 @@ header.desktop .header-bar {
   header.desktop .header-bar {
     padding: 1em 1em 1em 1.6em;
   }
+}
+header.desktop .header-bar .facebook .login, header.desktop .header-bar .facebook .fb-user {
+  float: right;
+}
+header.desktop .header-bar .facebook .login {
+  color: #302933;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5b4d60), color-stop(100%, #504455));
+  background: -webkit-linear-gradient(#5b4d60, #504455);
+  background: -moz-linear-gradient(#5b4d60, #504455);
+  background: -o-linear-gradient(#5b4d60, #504455);
+  background: linear-gradient(#5b4d60, #504455);
+  text-decoration: none;
+  padding: 19px 20px 20px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 16px 20px;
+  -webkit-box-shadow: 0 1px 1px #352d39;
+  -moz-box-shadow: 0 1px 1px #352d39;
+  box-shadow: 0 1px 1px #352d39;
+  display: none;
+}
+header.desktop .header-bar .facebook .login:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #65566c), color-stop(100%, #483d4c));
+  background: -webkit-linear-gradient(#65566c, #483d4c);
+  background: -moz-linear-gradient(#65566c, #483d4c);
+  background: -o-linear-gradient(#65566c, #483d4c);
+  background: linear-gradient(#65566c, #483d4c);
+  text-shadow: #3d3441;
+}
+header.desktop .header-bar .facebook .login:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #574b5d), color-stop(100%, #584b5d));
+  background: -webkit-linear-gradient(#574b5d, #584b5d);
+  background: -moz-linear-gradient(#574b5d, #584b5d);
+  background: -o-linear-gradient(#574b5d, #584b5d);
+  background: linear-gradient(#574b5d, #584b5d);
+  text-shadow: #3d3441;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.fb-logged-out header.desktop .header-bar .facebook .login {
+  display: block;
+}
+header.desktop .header-bar .facebook .fb-user {
+  display: none;
+}
+.fb-logged-in header.desktop .header-bar .facebook .fb-user {
+  display: block;
+}
+header.desktop .header-bar .facebook .fb-user .fb-user-name, header.desktop .header-bar .facebook .fb-user .fb-user-picture {
+  float: left;
+}
+header.desktop .header-bar .facebook .fb-user .fb-user-name {
+  padding: 0.5em 0;
+}
+header.desktop .header-bar .facebook .fb-user .fb-user-picture {
+  margin-right: 0.5em;
+  border-radius: 3px;
+  width: 2em;
+  height: 2em;
 }
 header.desktop .audio-player {
   width: 60%;

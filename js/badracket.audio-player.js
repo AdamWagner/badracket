@@ -97,65 +97,7 @@ var br_sm2 = function(){
 
 
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-   Page State
-\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-
-var br_state = function() {
-
-  var viewState = 'unknown';
-
-  var urls = {
-    home : 'http://localhost:8888/sites/brv5/wp-br/',
-    albumDetail : 'album=',
-    showDetail : 'show='
-  };
-
-  function viewSet( url ) {
-    console.log('view set ran and url is ' + url);
-    if ( typeof url === 'undefined' ) { url = window.location.toString(); }
-
-    if ( badracket.stringContains( url, urls.albumDetail ) ) {
-      viewState = 'album-detail';
-      setupAlbumDetail();
-    } else if ( url === urls.home ) {
-      viewState = 'home';
-    } else if ( badracket.stringContains( url, urls.showDetail ) ) {
-      viewState = 'show-detail';
-    } else {
-      viewState = 'unknown';
-    }
-
-    applyViewState(viewState);
-    return viewState;
-
-  }
-
-  function viewGet() {
-    return viewState;
-  }
-
-  function applyViewState(viewState) {
-    console.log('apply view state ran');
-    $('body').attr('data-view', viewState);
-  }
-
-  function setupAlbumDetail(){
-    if ( br_player.state.isPlaying ) {
-      if ( br_player.state.currAlbum.albumName === $('[data-album-title]').attr('data-album-title') ) {
-        var trackNumber = br_player.state.currSong.trackNumber;
-        $('[data-track-number="'+ trackNumber +'"]').addClass('song-playing');
-      }
-    }
-  }
-
-  return {
-    viewSet : viewSet,
-    viewGet : viewGet
-  };
-
-}();
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\

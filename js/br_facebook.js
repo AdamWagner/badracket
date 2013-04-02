@@ -1,53 +1,82 @@
 
+
+
+
+
+
 var br_facebook = function(){
 
-  var state = {
-    userAuth : false
-  };
+
+
+
 
   var user = {
     token : null,
     userID : null,
-    firstName : null,
-    lastName : null,
+    first_name : null,
+    last_name : null,
+    email : null,
+    likesBR : null,
+    eventsAttending : [],
     bandLikes : [],
-    musicListens : [],
-    loaded : false
+    musicListens : []
   };
 
   var BR = {
     id : null,
+    pageName : null,
     link : null,
     likes : null,
     events : [],
-    loaded : false,
     photos : []
   };
 
-  function init(){
-    FB.init({
-      appId      : '182655285084916', // App ID
-      channelUrl : '//WWW.BADRACKET.COM/channel.html', // Channel File
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
-    });
 
-    FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-          var r = response.authResponse;
-          user.userID = r.userID;
-          user.token = r.accessToken;
-          populateUser.getUser(user.userID);
-          populateBR.getBaseline();
-          populateBR.getEvents();
-        }
-    });
-  }
+  var logic = function(){
+
+    var callstack = [];
+
+    function globalSetup(r){
+      user.userID = r.userID;
+      user.token = r.accessToken;
+
+      populateUser(user.userID);
+      populateBR.getBaseline();
+      populateBR.getEvents();
+
+
+    }
+
+    var permissions = 'email,user_activities,friends_activities,user_likes,friends_likes,friends_location,rsvp_event,user_events';
+
+    function login() {
+        FB.login(function(response) {
+            if (response.authResponse) {
+              fbToken = response.authResponse.accessToken;
+              br_facebook.token = fbToken;
+              var r = response.authResponse;
+              globalSetup(r);
+              UI.render.authStatus('logged-in');
+            } else {
+              UI.render.authStatus('logged-out');
+            }
+        }, { scope: permissions });
+   }
+
+   return {
+     callstack : callstack,
+     globalSetup : globalSetup,
+     login : login
+   };
+
+  }();
+
 
   var populateBR = function(){
+
     function getBaseline(){
       FB.api('/badracket', function(data) {
+        BR.pageName = data.name;
         BR.id = data.id;
         BR.likes =  data.likes;
         BR.link = data.link;
@@ -64,8 +93,6 @@ var br_facebook = function(){
       var albums;
        FB.api('/badracket/albums?fields=id&limit=9999', function(data) {
         albums = data.data;
-        console.log(albums);
-        console.log(albums.length);
         getPhotoURLS(albums);
       });
     }
@@ -90,31 +117,120 @@ var br_facebook = function(){
     };
   }();
 
-  var populateUser = function(){
-    function getUser(userID){
+  function populateUser ( userID ){
+
       FB.api( '/' + userID, function(data) {
         user.first_name = data.first_name;
         user.last_name = data.last_name;
-        user.loaded = true;
+        user.email = data.email;
+        UI.render.user();
+        _.each(logic.callstack, function(el){
+          el();
+        });
       });
+
+       FB.api( '/' + userID + '/picture', function(data) {
+        user.picture = data.data.url;
+        UI.render.userPicture();
+      });
+
+      FB.api( '/' + userID + '/likes', function(data) {
+        user.likes = data.data;
+
+        _.each(user.likes, function(el){
+          if (el.name === BR.pageName) { user.likesBR = true; }
+        });
+
+      });
+
      }
-
-      return {
-        getUser : getUser
-      };
-
-  }();
 
 
   var UI = function(){
-    var handlers = {};
-    var bindUI = {};
+    var handlers = {
+      login : function(){
+        console.log('login handler ran');
+        logic.login();
+      }
+
+    };
+
+    function viewDelegate(){
+      var view = br_state.viewGet();
+      if ( view === 'show-detail' ) {
+        var eventID = $('.show-rsvp').data('fb-id');
+        render.rsvpButton(eventID);
+      }
+    }
+
+    var render = {
+
+      authStatus : function( status ){
+        console.log('auth status ran');
+        var html = $('html');
+        if (status === 'logged-in') {
+          html.addClass('fb-logged-in');
+          html.removeClass('fb-logged-out');
+        } else {
+          html.addClass('fb-logged-out');
+          html.removeClass('fb-logged-in');
+        }
+      },
+
+      user : function(){
+        console.log('render login ran');
+        var greeting = ['Welcome ', 'Howdy ', 'Hola '];
+        var random = Math.floor(Math.random() * greeting.length );
+        $('.fb-user-name').text( greeting[random] + user.first_name + '!');
+      },
+
+      userPicture : function(){
+        $('.fb-user-picture').attr('src', user.picture);
+      },
+
+      rsvpButton : function( eventID ){
+        console.log('render rsvp button ran');
+        console.log(eventID);
+
+      },
+
+    };
+
+    var bindUI = {
+      login : function(){
+        $('.facebook .login').on('click', handlers.login );
+      }
+
+    };
 
     return {
       handers : handlers,
-      bindUI : bindUI
+      viewDelegate : viewDelegate,
+      bindUI : bindUI,
+      render : render
     };
   }();
+
+  function init(){
+
+    FB.init({
+      appId      : '182655285084916', // App ID
+      channelUrl : '//WWW.BADRACKET.COM/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+
+    FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          var r = response.authResponse;
+          logic.globalSetup(r);
+          UI.render.authStatus('logged-in');
+        } else {
+          UI.render.authStatus('logged-out');
+        }
+    });
+  }
 
     return {
       init : init,
@@ -122,14 +238,15 @@ var br_facebook = function(){
       BR : BR,
       UI : UI,
       populateBR : populateBR,
-      populateUser : populateUser
+      populateUser : populateUser,
+      logic : logic
     };
   }();
 
 
 
 function bullshit(){
-    $('html').html('');
+  $('html').html('');
   br_facebook.BR.photos = _.sortBy(br_facebook.BR.photos, function(p){ return -p.likes; });
   console.log(br_facebook.BR.photos);
   _.each(br_facebook.BR.photos, function(el){
@@ -138,17 +255,13 @@ function bullshit(){
 }
 
 
+function setupFacebook(){
+  br_facebook.init();
+  br_facebook.UI.bindUI.login();
+}
 
-// function login() {
-//     FB.login(function(response) {
-//         if (response.authResponse) {
-//           fbToken = response.authResponse.accessToken;
-//           br_facebook.token = fbToken;
-//         } else {
-//             // cancelled
-//         }
-//     }, { scope:'email,user_activities,friends_activities,friends_likes,friends_location,rsvp_event,user_events'});
-// }
+
+
 
 // function logout() {
 //   console.log('fuck you');

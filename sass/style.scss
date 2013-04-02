@@ -347,6 +347,38 @@ header.desktop {
       padding:1em 1em 1em 1.6em;
     }
     @include background(linear-gradient(left, desaturate(lighten($dark,6%),1%), lighten($dark,1.5%)));
+
+    .facebook {
+
+      .login, .fb-user { float: right; }
+
+      .login {
+        color:darken($dark,5%);
+        @include button(lighten($dark,10%));
+        padding:16px 20px;
+        @include box-shadow(0 1px 1px darken($dark, 3%));
+        display:none;
+        .fb-logged-out & { display:block; }
+      }
+
+      .fb-user {
+        display:none;
+        .fb-logged-in & { display:block; }
+        .fb-user-name, .fb-user-picture { float:left; }
+        .fb-user-name {
+          padding:0.5em 0;
+        }
+
+        .fb-user-picture {
+          margin-right:0.5em;
+          border-radius:3px;
+          width:2em;
+          height:2em;
+        }
+
+      }
+
+    }
   }
 
 /* --------------------------------------------------------------------------------------- *\

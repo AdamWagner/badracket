@@ -29,10 +29,16 @@
              <span class="progress-time"></span>
             </div>
           </div>
-      </div> <?php // end audio-player ?>
+      </div>
      </div>
-
-
+    </div> <?php // end audio-player ?>
+    
+    <div class="facebook">
+      <div class="login">Login with Facebook</div>
+      <div class="fb-user">
+        <img class="fb-user-picture"/>
+        <div class="fb-user-name"></div>
+      </div>
     </div>
   </div>
 </header>

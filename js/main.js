@@ -84,6 +84,7 @@ badracket = {
             s.video.fitVids();
             badracket.doAjaxRequest('album');
             badracket.doAjaxRequest('show');
+            setupFacebook();
         });
   },
 
@@ -369,6 +370,108 @@ badracket = {
  }
 
 };
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+   Page State
+\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+
+var func = function(fn, params) {
+    return function() {
+        fn.apply(this, params);
+    };
+};
+
+var sayHi = function(word) { console.log(word); };
+
+var test = func(sayHi, ['hi there fuckeeeeerrr!']);
+
+
+
+
+function facebookTest(){
+  var f = br_facebook;
+  console.log('fb test ran');
+  if ( f.user.first_name && f.user.likesBR && f.user.eventsAttending.length > 0 && f.BR.events.length > 0 ) {
+    console.log('fb test passed');
+    console.log(f.user.first_name);
+    return true;
+  }
+}
+
+
+var br_state = function() {
+
+  var viewState = 'unknown';
+
+  var urls = {
+    home : 'http://localhost:8888/sites/brv5/wp-br/',
+    albumDetail : 'album=',
+    showDetail : 'show='
+  };
+
+  function viewSet( url ) {
+    console.log('view set ran and url is ' + url);
+    if ( typeof url === 'undefined' ) { url = window.location.toString(); }
+
+    if ( badracket.stringContains( url, urls.albumDetail ) ) {
+      viewState = 'album-detail';
+      setupAlbumDetail();
+    } else if ( url === urls.home ) {
+      viewState = 'home';
+    } else if ( badracket.stringContains( url, urls.showDetail ) ) {
+      viewState = 'show-detail';
+
+      if ( facebookTest() ) {
+        setupShow();
+      } else {
+        var setupShowFunc = func(setupShow, []);
+        br_facebook.logic.callstack.push(setupShowFunc);
+      }
+
+    } else {
+      viewState = 'unknown';
+    }
+
+    applyViewState(viewState);
+
+    return viewState;
+
+  }
+
+  function viewGet() {
+    return viewState;
+  }
+
+  function applyViewState(viewState) {
+    console.log('apply view state ran');
+    $('body').attr('data-view', viewState);
+  }
+
+  function setupAlbumDetail(){
+    if ( br_player.state.isPlaying ) {
+      if ( br_player.state.currAlbum.albumName === $('[data-album-title]').attr('data-album-title') ) {
+        var trackNumber = br_player.state.currSong.trackNumber;
+        $('[data-track-number="'+ trackNumber +'"]').addClass('song-playing');
+      }
+    }
+  }
+
+  function setupShow() {
+    console.log('setup show ran just fine, and username is ' + br_facebook.user.first_name);
+  }
+
+
+  return {
+    viewSet : viewSet,
+    viewGet : viewGet
+  };
+
+}();
+
+
+
 
 badracket.init();
 
