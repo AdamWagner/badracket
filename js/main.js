@@ -84,7 +84,8 @@ badracket = {
             s.video.fitVids();
             badracket.doAjaxRequest('album');
             badracket.doAjaxRequest('show');
-            setupFacebook();
+            br_facebook.init();
+
         });
   },
 
@@ -376,31 +377,6 @@ badracket = {
    Page State
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-
-var func = function(fn, params) {
-    return function() {
-        fn.apply(this, params);
-    };
-};
-
-var sayHi = function(word) { console.log(word); };
-
-var test = func(sayHi, ['hi there fuckeeeeerrr!']);
-
-
-
-
-function facebookTest(){
-  var f = br_facebook;
-  console.log('fb test ran');
-  if ( f.user.first_name && f.user.likesBR && f.user.eventsAttending.length > 0 && f.BR.events.length > 0 ) {
-    console.log('fb test passed');
-    console.log(f.user.first_name);
-    return true;
-  }
-}
-
-
 var br_state = function() {
 
   var viewState = 'unknown';
@@ -422,14 +398,7 @@ var br_state = function() {
       viewState = 'home';
     } else if ( badracket.stringContains( url, urls.showDetail ) ) {
       viewState = 'show-detail';
-
-      if ( facebookTest() ) {
-        setupShow();
-      } else {
-        var setupShowFunc = func(setupShow, []);
-        br_facebook.logic.callstack.push(setupShowFunc);
-      }
-
+      setupShow();
     } else {
       viewState = 'unknown';
     }
@@ -459,7 +428,7 @@ var br_state = function() {
   }
 
   function setupShow() {
-    console.log('setup show ran just fine, and username is ' + br_facebook.user.first_name);
+    fbEnsureInit( later );
   }
 
 
