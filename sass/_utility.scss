@@ -30,3 +30,8 @@
 }
 
 .txtC { text-align: center; }
+
+.transparent {
+  opacity: 0;
+  @include transition(opacity, .2s);
+}

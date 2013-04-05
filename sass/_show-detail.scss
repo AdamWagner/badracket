@@ -55,6 +55,39 @@
 .show-sidebar {
   font-size:0.9em;
 
+  .show-rsvp {
+    .icon-checkmark { display:none; }
+    width:100%;
+    @include transition(opacity, .2s);
+    &.not-attending {
+      @include button( $dark );
+      padding: 19px 0 20px;
+      -webkit-font-smoothing:antialiased;
+      color:$cream;
+    }
+    &.rsvp-attending {
+      padding: 19px 0 20px;
+      display:inline-block;
+      text-align:center;
+      border-radius:3px;
+      color:darken($dark,15%);
+      background:transparentize($dark,0.5);
+      opacity:0.7;
+      .icon-checkmark {
+        display:block;
+        font-size:1.8em;
+      }
+    }
+  }
+
+  a.show-buy-tickets {
+    @include button( transparentize($pink-cream,0.1) );
+    width:100%;
+    &, &:hover, &:active, &:visited{
+      color:$dark;
+    }
+  }
+
   .venue-address {
     opacity:0.6;
     font-size:0.9em;
@@ -71,6 +104,30 @@
     font-size:0.8em;
     &, &:hover, &:active { color:$dark; }
     opacity:0.7;
+  }
+
+  .attendees {
+    // font-family:helvetica, sans-serif;
+    font-size:0.85em;
+    line-height:1.5em;
+    color:transparentize($dark,0.25);
+    .not-xparent {
+      color:$dark!important;
+    }
+    margin-top:2.4em;
+    padding-top:1em;
+    border-top:solid 1px transparentize($dark,0.7);
+
+    .facepile {
+      margin-top:1em;
+      width:100%;
+      img {
+        width:35px;
+        height:35px;
+        margin:0.1em;
+      }
+
+    }
   }
 }
 

@@ -35,7 +35,7 @@
 
 
             <div class="show-bg-image">
-              <img class="show-cover-photo"src="<?php echo wp_get_attachment_url($cover_photo);  ?>" alt="<?php echo the_title(); ?> at <?php ?>">
+              <img class="show-cover-photo lazyload_img" data-src="<?php echo wp_get_attachment_url($cover_photo);  ?>" src="" alt="<?php echo the_title(); ?> at <?php ?>">
             </div>
 
               <div class="show-heading padded-mobile-1">
@@ -120,6 +120,8 @@
          $gcal_link = 'http://www.google.com/calendar/event?ctext=+'. $show_headliner_band_name .' at '. $show_venue .' '. $show_human_date . ' ' . $show_human_time . '+&action=TEMPLATE&pprop=HowCreated%3AQUICKADD';
 
          // RSVP + ticketing
+         $fb_event_id = get_post_meta($post->ID, '_br_facebook-event-url', true);
+
          $advance_ticket_price = get_post_meta($post->ID, '_br_advance-ticket-price', true);
          $door_ticket_price = get_post_meta($post->ID, '_br_door-ticket-price', true);
         ?>
@@ -142,10 +144,12 @@
 
         <div class="button-group top2">
 
-          <a data-fb-id="486535661414081" href="###" class="show-rsvp">RSVP with Facebook</a>
+          <span data-fb-id="<?php echo $fb_event_id; ?>"  class="show-rsvp not-attending"><span data-icon="c" class="icon-checkmark"></span><span class="text">RSVP with Facebook</span></span>
 
           <a href="#" class="show-buy-tickets top1">Get $<?php echo $advance_ticket_price; ?> advance tickets</a>
           <div class="price-note txtC top05">tickets will be $<?php echo $door_ticket_price; ?> at door</div>
+
+          <div class="attendees"><div class="text"></div><div class="facepile s-4 m-4 b-6 h-9 single-row group"></div></div>
 
         </div>
         

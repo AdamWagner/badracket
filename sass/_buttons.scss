@@ -27,18 +27,3 @@
 
 /* Apply button mixin */
 
-a.show-rsvp {
-  @include button( $dark );
-  width:100%;
-  -webkit-font-smoothing:antialiased;
-  &, &:hover, &:active, &:visited {
-    color:$cream;
-  }
-}
-a.show-buy-tickets {
-  @include button( transparentize($pink-cream,0.1) );
-  width:100%;
-  &, &:hover, &:active, &:visited{
-    color:$dark;
-  }
-}

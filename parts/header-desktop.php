@@ -38,6 +38,7 @@
       <div class="fb-user">
         <img class="fb-user-picture"/>
         <div class="fb-user-name"></div>
+        <!-- <div class="logout">Logout</div> -->
       </div>
     </div>
   </div>

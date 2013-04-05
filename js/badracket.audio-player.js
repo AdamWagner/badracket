@@ -83,6 +83,7 @@ var br_sm2 = function(){
     }
 
     br_player.logic.attach30SecondListener( song );              // attach 30 second listener
+    song.sm2_obj.setPosition(0);
     song.sm2_obj.togglePause();                                  // play / pause sound
   }
 
@@ -162,6 +163,7 @@ var br_player = function() {
         }
 
         el.song.html( song.songTitle );
+        el.progressBar.css('width','0%');
         el.progressTime.html( song.duration );
         el.albumLink.attr( 'href', album.albumUrl );
         el.currentTrack.html( parseInt(song.trackNumber , 10) );
@@ -571,7 +573,6 @@ var init = function(){
   }
 
   function readyCallback() {
-    console.log('ready callback fire');
     if (!ready.sm || !ready.albumData ) { return; }
     console.log('everything is loaded');
     doMoreStuff();

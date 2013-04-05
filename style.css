@@ -556,6 +556,14 @@ header.desktop:after, .album-page-meta:after {
   text-align: center;
 }
 
+.transparent {
+  opacity: 0;
+  -webkit-transition: opacity, 0.2s;
+  -moz-transition: opacity, 0.2s;
+  -o-transition: opacity, 0.2s;
+  transition: opacity, 0.2s;
+}
+
 .hidden-mobile {
   display: none;
 }
@@ -920,7 +928,6 @@ header.desktop:after, .album-page-meta:after {
 
 /* --------------------------------------------------------------------------------------- *\
   Vars
-  Vars
 /* --------------------------------------------------------------------------------------- */
 .main-content.loading > section > * {
   opacity: 0.2;
@@ -1034,83 +1041,6 @@ a:active {
 /* --------------------------------------------------------------------------------------- */
 /* Button mixins */
 /* Apply button mixin */
-a.show-rsvp {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #403644), color-stop(100%, #352d39));
-  background: -webkit-linear-gradient(#403644, #352d39);
-  background: -moz-linear-gradient(#403644, #352d39);
-  background: -o-linear-gradient(#403644, #352d39);
-  background: linear-gradient(#403644, #352d39);
-  text-decoration: none;
-  padding: 19px 20px 20px;
-  display: inline-block;
-  text-align: center;
-  border-radius: 3px;
-  font-size: 1em;
-  cursor: pointer;
-  width: 100%;
-  -webkit-font-smoothing: antialiased;
-}
-a.show-rsvp:hover {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4b404f), color-stop(100%, #2d2730));
-  background: -webkit-linear-gradient(#4b404f, #2d2730);
-  background: -moz-linear-gradient(#4b404f, #2d2730);
-  background: -o-linear-gradient(#4b404f, #2d2730);
-  background: linear-gradient(#4b404f, #2d2730);
-  text-shadow: #231e25;
-}
-a.show-rsvp:active {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3d3441), color-stop(100%, #3d3441));
-  background: -webkit-linear-gradient(#3d3441, #3d3441);
-  background: -moz-linear-gradient(#3d3441, #3d3441);
-  background: -o-linear-gradient(#3d3441, #3d3441);
-  background: linear-gradient(#3d3441, #3d3441);
-  text-shadow: #231e25;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-a.show-rsvp, a.show-rsvp:hover, a.show-rsvp:active, a.show-rsvp:visited {
-  color: #f2e7cc;
-}
-
-a.show-buy-tickets {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(249, 238, 229, 0.9)), color-stop(100%, rgba(245, 227, 213, 0.9)));
-  background: -webkit-linear-gradient(rgba(249, 238, 229, 0.9), rgba(245, 227, 213, 0.9));
-  background: -moz-linear-gradient(rgba(249, 238, 229, 0.9), rgba(245, 227, 213, 0.9));
-  background: -o-linear-gradient(rgba(249, 238, 229, 0.9), rgba(245, 227, 213, 0.9));
-  background: linear-gradient(rgba(249, 238, 229, 0.9), rgba(245, 227, 213, 0.9));
-  text-decoration: none;
-  padding: 19px 20px 20px;
-  display: inline-block;
-  text-align: center;
-  border-radius: 3px;
-  font-size: 1em;
-  cursor: pointer;
-  width: 100%;
-}
-a.show-buy-tickets:hover {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(253, 249, 246, 0.9)), color-stop(100%, rgba(242, 218, 200, 0.9)));
-  background: -webkit-linear-gradient(rgba(253, 249, 246, 0.9), rgba(242, 218, 200, 0.9));
-  background: -moz-linear-gradient(rgba(253, 249, 246, 0.9), rgba(242, 218, 200, 0.9));
-  background: -o-linear-gradient(rgba(253, 249, 246, 0.9), rgba(242, 218, 200, 0.9));
-  background: linear-gradient(rgba(253, 249, 246, 0.9), rgba(242, 218, 200, 0.9));
-  text-shadow: rgba(238, 207, 184, 0.9);
-}
-a.show-buy-tickets:active {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(248, 235, 224, 0.9)), color-stop(100%, rgba(248, 235, 225, 0.9)));
-  background: -webkit-linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
-  background: -moz-linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
-  background: -o-linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
-  background: linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
-  text-shadow: rgba(238, 207, 184, 0.9);
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-a.show-buy-tickets, a.show-buy-tickets:hover, a.show-buy-tickets:active, a.show-buy-tickets:visited {
-  color: #3d3441;
-}
-
 /* --------------------------------------------------------------------------------------- *\
   Image abstractions
 /* --------------------------------------------------------------------------------------- */
@@ -1119,6 +1049,7 @@ a.show-buy-tickets, a.show-buy-tickets:hover, a.show-buy-tickets:active, a.show-
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* ------- Layout variables ----------------------------------------------------------------- */
@@ -1777,6 +1708,13 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
   /* ... */
 }
 
+.round-shadow {
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 1px rgba(61, 52, 65, 0.75);
+  -moz-box-shadow: 0 1px 1px rgba(61, 52, 65, 0.75);
+  box-shadow: 0 1px 1px rgba(61, 52, 65, 0.75);
+}
+
 /* --------------------------------------------------------------------------------------- *\
   Sections
 /* --------------------------------------------------------------------------------------- */
@@ -2173,6 +2111,102 @@ section {
 .show-sidebar {
   font-size: 0.9em;
 }
+.show-sidebar .show-rsvp {
+  width: 100%;
+  -webkit-transition: opacity, 0.2s;
+  -moz-transition: opacity, 0.2s;
+  -o-transition: opacity, 0.2s;
+  transition: opacity, 0.2s;
+}
+.show-sidebar .show-rsvp .icon-checkmark {
+  display: none;
+}
+.show-sidebar .show-rsvp.not-attending {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #403644), color-stop(100%, #352d39));
+  background: -webkit-linear-gradient(#403644, #352d39);
+  background: -moz-linear-gradient(#403644, #352d39);
+  background: -o-linear-gradient(#403644, #352d39);
+  background: linear-gradient(#403644, #352d39);
+  text-decoration: none;
+  padding: 19px 20px 20px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 19px 0 20px;
+  -webkit-font-smoothing: antialiased;
+  color: #f2e7cc;
+}
+.show-sidebar .show-rsvp.not-attending:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4b404f), color-stop(100%, #2d2730));
+  background: -webkit-linear-gradient(#4b404f, #2d2730);
+  background: -moz-linear-gradient(#4b404f, #2d2730);
+  background: -o-linear-gradient(#4b404f, #2d2730);
+  background: linear-gradient(#4b404f, #2d2730);
+  text-shadow: #231e25;
+}
+.show-sidebar .show-rsvp.not-attending:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3d3441), color-stop(100%, #3d3441));
+  background: -webkit-linear-gradient(#3d3441, #3d3441);
+  background: -moz-linear-gradient(#3d3441, #3d3441);
+  background: -o-linear-gradient(#3d3441, #3d3441);
+  background: linear-gradient(#3d3441, #3d3441);
+  text-shadow: #231e25;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.show-sidebar .show-rsvp.rsvp-attending {
+  padding: 19px 0 20px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  color: #151217;
+  background: rgba(61, 52, 65, 0.5);
+  opacity: 0.7;
+}
+.show-sidebar .show-rsvp.rsvp-attending .icon-checkmark {
+  display: block;
+  font-size: 1.8em;
+}
+.show-sidebar a.show-buy-tickets {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(249, 238, 229, 0.9)), color-stop(100%, rgba(245, 227, 213, 0.9)));
+  background: -webkit-linear-gradient(rgba(249, 238, 229, 0.9), rgba(245, 227, 213, 0.9));
+  background: -moz-linear-gradient(rgba(249, 238, 229, 0.9), rgba(245, 227, 213, 0.9));
+  background: -o-linear-gradient(rgba(249, 238, 229, 0.9), rgba(245, 227, 213, 0.9));
+  background: linear-gradient(rgba(249, 238, 229, 0.9), rgba(245, 227, 213, 0.9));
+  text-decoration: none;
+  padding: 19px 20px 20px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 1em;
+  cursor: pointer;
+  width: 100%;
+}
+.show-sidebar a.show-buy-tickets:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(253, 249, 246, 0.9)), color-stop(100%, rgba(242, 218, 200, 0.9)));
+  background: -webkit-linear-gradient(rgba(253, 249, 246, 0.9), rgba(242, 218, 200, 0.9));
+  background: -moz-linear-gradient(rgba(253, 249, 246, 0.9), rgba(242, 218, 200, 0.9));
+  background: -o-linear-gradient(rgba(253, 249, 246, 0.9), rgba(242, 218, 200, 0.9));
+  background: linear-gradient(rgba(253, 249, 246, 0.9), rgba(242, 218, 200, 0.9));
+  text-shadow: rgba(238, 207, 184, 0.9);
+}
+.show-sidebar a.show-buy-tickets:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(248, 235, 224, 0.9)), color-stop(100%, rgba(248, 235, 225, 0.9)));
+  background: -webkit-linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
+  background: -moz-linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
+  background: -o-linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
+  background: linear-gradient(rgba(248, 235, 224, 0.9), rgba(248, 235, 225, 0.9));
+  text-shadow: rgba(238, 207, 184, 0.9);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.show-sidebar a.show-buy-tickets, .show-sidebar a.show-buy-tickets:hover, .show-sidebar a.show-buy-tickets:active, .show-sidebar a.show-buy-tickets:visited {
+  color: #3d3441;
+}
 .show-sidebar .venue-address {
   opacity: 0.6;
   font-size: 0.9em;
@@ -2189,6 +2223,26 @@ section {
 }
 .show-sidebar .show-venue a, .show-sidebar .show-venue a:hover, .show-sidebar .show-venue a:active, .show-sidebar .show-date a, .show-sidebar .show-date a:hover, .show-sidebar .show-date a:active {
   color: #3d3441;
+}
+.show-sidebar .attendees {
+  font-size: 0.85em;
+  line-height: 1.5em;
+  color: rgba(61, 52, 65, 0.75);
+  margin-top: 2.4em;
+  padding-top: 1em;
+  border-top: solid 1px rgba(61, 52, 65, 0.3);
+}
+.show-sidebar .attendees .not-xparent {
+  color: #3d3441 !important;
+}
+.show-sidebar .attendees .facepile {
+  margin-top: 1em;
+  width: 100%;
+}
+.show-sidebar .attendees .facepile img {
+  width: 35px;
+  height: 35px;
+  margin: 0.1em;
 }
 
 .playlist .song-artist {

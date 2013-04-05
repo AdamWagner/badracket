@@ -14,6 +14,7 @@
           <li><a href="http://localhost:8888/sites/brv5/wp-br/?page_id=160">Videos</a></li>
           <li><a href="http://localhost:8888/sites/brv5/wp-br/?post_type=show">Shows</a></li>
           <li>Interviews</li>
+          <li><a href="http://localhost:8888/sites/brv5/wp-br/?page_id=336">Photos</a></li>
         </ul>
 
       </li>
