@@ -2,8 +2,9 @@ $audio-player-width:60%;
 
 $player-control-bar-height:0.6em;
 $statusbar-bg-color:$dark;
-$progress-color:darken($dark,5%);
-$darkest:darken($dark,11%);
+$progress-color:darken($dark,8%);
+$dark-text:darken($dark,12%);
+$darkest:darken($dark,13%);
 
 
 .audio-player {
@@ -33,7 +34,7 @@ $darkest:darken($dark,11%);
 .player-metadata {
   text-decoration:none;
   color:$progress-color;
-  a { color:inherit; }
+  a { color:$dark-text; }
   .song {
     color:darken($darkest,3%);
   }
@@ -53,11 +54,9 @@ $darkest:darken($dark,11%);
 }
 .buy-album {
   float:left;
-  color:inherit;
   background:lighten($dark,10%);
   padding:0.75em 1.5em;
   border-radius:3px;
-  font-color:$darkest;
 }
 
 .view-full-album {
@@ -73,7 +72,7 @@ $darkest:darken($dark,11%);
   float:right;
   position:relative;
   font-size:80%;
-  color:$progress-color;
+  color:$dark-text;
 }
 
 .preview-song-indicator {

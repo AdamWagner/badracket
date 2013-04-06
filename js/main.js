@@ -232,7 +232,7 @@ badracket = {
                    }
                    })();
 
-                   init.dataReady();
+                   init.dataReady( type );
                  },
             error: function(errorThrown){
                  console.log(errorThrown);
@@ -399,6 +399,7 @@ var br_state = function() {
   var urls = {
     home : 'http://localhost:8888/sites/brv5/wp-br/',
     albumDetail : 'album=',
+    albumRollup : '?post_type=album',
     showDetail : 'show=',
     photos : 'http://localhost:8888/sites/brv5/wp-br/?page_id=336'
   };
@@ -410,8 +411,12 @@ var br_state = function() {
     if ( badracket.stringContains( url, urls.albumDetail ) ) {
       viewState = 'album-detail';
       setupAlbumDetail();
+    } else if ( badracket.stringContains( url, urls.albumRollup ) ) {
+      viewState = 'album-rollup';
+      setupAlbumPage();
     } else if ( url === urls.home ) {
       viewState = 'home';
+      setupAlbumPage();
     } else if ( url === urls.photos ) {
       viewState = 'photos';
       setupPhotos();
@@ -435,6 +440,12 @@ var br_state = function() {
   function applyViewState(viewState) {
     console.log('apply view state ran');
     $('body').attr('data-view', viewState);
+  }
+
+  function setupAlbumPage(){
+    if ( br_player.state.isPlaying ) {
+        $('[data-album-title="'+ br_player.state.currAlbum.albumName +'"]').addClass('playing');
+    }
   }
 
   function setupAlbumDetail(){
