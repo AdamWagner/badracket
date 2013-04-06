@@ -2,6 +2,7 @@
 /* @codekit-prepend "lib/jquery.djax.js" */
 /* @codekit-prepend "lib/enquire.js" */
 /* @codekit-prepend "lib/underscore.js" */
+/* @codekit-prepend "lib/format_date.js" */
 
 /*
  * jQuery Tiny Pub/Sub
@@ -84,6 +85,7 @@ badracket = {
             s.video.fitVids();
             badracket.doAjaxRequest('album');
             badracket.doAjaxRequest('show');
+            badracket.getVimeo();
             br_fb.init();
         });
   },
@@ -238,6 +240,31 @@ badracket = {
                  console.log(errorThrown);
             }
        });
+
+  },
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+     Get Vimeo
+  \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+  getVimeo : function() {
+
+    var albumID = '1979291',
+        api_endpoint = 'http://vimeo.com/api/v2/album/',
+        path = '/videos.json?callback=?';
+
+    var url = api_endpoint + albumID + path;
+
+    jQuery.ajax({
+         url: url,
+         dataType: 'JSON',
+         success:function(data){
+          br_fb.BR.videos = data;
+         },
+         error: function(errorThrown){
+              console.log(errorThrown);
+         }
+    });
 
   },
 
@@ -476,10 +503,26 @@ var br_state = function() {
   }
 
   function setupPhotos() {
-    for (var i = 0; i < 95; i++ ) {
-      $('.s-1').append('<div class="grid padded"><div class="lazyload fade ratio-4-3" data-src="' + br_fb.BR.sortedPhotos[i].medium + '"></div>');
+    console.log('setup pohtos ran');
+
+    function blah() {
+      $.when( br_fb.fetch.getBR_albums() ).then(function( r ){
+        br_fb.fetch.popPhotos( r );
+      });
     }
-    badracket.lazyLoadImg();
+
+    console.log(br_fb.BR);
+
+    if ( typeof br_fb.BR.photos === 'null' ) return;
+
+    if ( br_fb.BR.photos.length < 50 ) {
+      console.log('waiting to run render photos');
+      br_fb.fbEnsureInit( blah );
+    } else {
+      console.log('running render photos');
+      br_fb.UI.render.renderPhotos();
+    }
+
   }
 
 

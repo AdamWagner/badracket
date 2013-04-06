@@ -43,7 +43,7 @@ var br_fb = function(){
   function fbEnsureInit ( cb ) {
        if ( !window.FB || ( !config.accessToken && !config.appAccess ) ) {
            console.log('ensure init still running');
-           setTimeout( function() { fbEnsureInit( cb ); }, 50);
+           setTimeout( function() { fbEnsureInit( cb ); }, 150);
        } else {
            if ( cb ) { cb(); }
        }
@@ -179,27 +179,25 @@ var br_fb = function(){
       BR.events = d.events.data;
     }
 
-    function getBRPhotos () {
+    function getBR_albums () {
       return call_fb('/badracket/albums?fields=id&limit=9999');
     }
 
     function popPhotos ( d ) {
       BR.albums = d.data;
       getPhotoURLS ( BR.albums );
-
     }
 
     function getPhotoURLS(albums){
       window.dfds = [];
-      console.log(dfds);
 
       _.each(albums, function(el){
         var dfd = new $.Deferred();
 
-
        FB.api(el.id + '/photos?fields=images,likes&limit=9999', function( r ) {
 
          _.each(r.data, function(el){
+          console.log(el);
            var mediumSrc = el.images[4].source;
            var largeSrc = el.images[0].source;
            var likes = (el.likes) ? el.likes.data.length : 0;
@@ -210,19 +208,9 @@ var br_fb = function(){
        });
 
        window.dfds.push( dfd.promise() );
-
       });
 
-      $.when.apply(null, window.dfds ).done(function( r ){
-        console.log('allphotos loadeeeeeeeeeed');
-        BR.sortedPhotos = _.sortBy(BR.photos, function( p ){ return -p.likes; });
-        for (var i = 0; i < 95; i++ ) {
-          $('.s-1').append('<div class="grid padded"><div class="lazyload fade ratio-4-3 round-shadow" data-src="' + BR.sortedPhotos[i].medium + '"></div>');
-        }
-        badracket.lazyLoadImg();
-      });
-
-
+      UI.render.renderPhotos();
     }
 
    return {
@@ -231,7 +219,7 @@ var br_fb = function(){
     getUser : getUser,
     popUser : popUser,
     getBR : getBR,
-    getBRPhotos : getBRPhotos,
+    getBR_albums : getBR_albums,
     getPhotoURLS : getPhotoURLS,
     popBR : popBR,
     popPhotos : popPhotos,
@@ -250,11 +238,6 @@ var br_fb = function(){
         $.when( fetch.getBR() ).then(function( r ){
           fetch.popBR( r );
           $(window).trigger('fb-page-data-load');
-        });
-
-
-        $.when( fetch.getBRPhotos() ).then(function( r ){
-          fetch.popPhotos( r );
         });
 
       if ( s === 'connected') {
@@ -454,6 +437,48 @@ var br_fb = function(){
         });
         $('.show-sidebar .attendees .facepile').html( frag.join('') );
 
+      },
+
+      renderPhotos : function(){
+        $.when.apply(null, window.dfds ).done(function( r ){
+          BR.sortedPhotos = _.sortBy(BR.photos, function( p ){ return -p.likes; });
+          for (var i = 0; i < 95; i++ ) {
+            $('.s-1').append('<div class="grid padded"><div class="lazyload fade ratio-4-3 round-shadow" data-src="' + BR.sortedPhotos[i].medium + '"></div>');
+          }
+          badracket.lazyLoadImg();
+        });
+      },
+
+      videos : function(){
+        var videoContainer = $('#video-container'),
+            frag = [];
+
+        _.each(BR.videos, function( el ){
+          var thumbnail = el.thumbnail_large,
+              title = el.title.split(':')[0],
+              formatted_date = date("M Y", new Date(el.upload_date));
+
+          var vidEl = [
+          '<div class="grid padded"><a href="videos.php">',
+            '<div class="playable">',
+              '<div class="play"></div> ',
+              '<div class="lazyload fade ratio-16-9" data-src="'+ thumbnail +'">',
+              '</div>',
+              '</a>',
+            '</div>',
+            '<div class="album-meta">',
+              '<div class="album-title">'+title+'</div>',
+              '<div class="artist-name">'+formatted_date+'</div>',
+            '</div>',
+          '</div>'
+          ].join('');
+
+          frag.push(vidEl);
+
+        });
+
+        videoContainer.html(frag);
+        badracket.lazyLoadImg();
       }
 
 

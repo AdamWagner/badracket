@@ -187,10 +187,13 @@ var br_player = function() {
           return false; // disable handler on album-detail page
         }
         e.preventDefault();
+        e.stopPropagation();
 
         var albumName     = target.closest('.album').attr('data-album-title'),
             targetAlbum   = albumData.getAlbumByName( albumName ),
             targetSong    = albumData.sampleSong( targetAlbum );
+
+            console.log(albumName);
 
         logic.targetSong( targetAlbum, targetSong);
       },
@@ -353,7 +356,7 @@ var br_player = function() {
 
     function findSampleSong ( album ) {
       var tracks = album.tracks;
-      for (var i = tracks.length; i--;) {
+      for (var i = 0; i < tracks.length; i++) {
         if (parseInt(tracks[i].isSampleTrack, 10) == 1) {
           return tracks[i];
         }

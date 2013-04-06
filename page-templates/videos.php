@@ -31,7 +31,7 @@
             <div class="video-name pull-left padded-sides">Videos</div>
           </div>
 
-            <div class="s-1 m-3 b-3 h-4 padded">
+            <div id="video-container" class="s-1 m-3 b-3 h-4 padded group">
               <?php get_template_part('parts/content-loops/video-loop');?>
             </div>
 

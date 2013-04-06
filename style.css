@@ -960,6 +960,63 @@ header.desktop:after, .album-page-meta:after {
   }
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal!important;
+}
+
+@font-face {
+  font-family: 'zine-regular';
+  src: url("fonts/ZineSerifDisWebPro.eot") format("eot"), url("fonts/ZineSerifDisWebPro.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'zine-bold';
+  src: url("fonts/ZineSerifDisWebPro-Bold.eot") format("eot"), url("fonts/ZineSerifDisWebPro-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'zine-italic';
+  src: url("fonts/ZineSerifDisWebPro-Italic.eot") format("woff"), url("fonts/ZineSerifDisWebPro-Italic.woff") format("eot");
+}
+
+@font-face {
+  font-family: 'zine-italic';
+  src: url("fonts/ZineSerifDisWebPro-MediumIta.woff") format("woff"), url("fonts/ZineSerifDisWebPro-MediumIta.eot") format("eot");
+}
+
+@font-face {
+  font-family: 'icons';
+  src: url("fonts/icomoon.woff") format("woff"), url("fonts/icomoon.svg") format("svg"), url("fonts/icomoon.eot") format("eot");
+}
+
+[data-icon]:before {
+  font-family: 'icons';
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-smooth: never;
+  content: attr(data-icon);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "zine-regular", georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+}
+
+h2 {
+  font-size: 2.2em;
+  margin: 0;
+  line-height: 1em;
+}
+
+p {
+  margin: 0;
+}
+
 /* --------------------------------------------------------------------------------------- *\
   Vars
 /* --------------------------------------------------------------------------------------- */
@@ -2305,25 +2362,26 @@ section {
   height: 9em;
   padding-right: 1.2em;
   margin-top: 0.2em;
-  opacity: 0.6;
+  opacity: 0.65;
 }
-.show-rollup-section .cover-photo {
-  height: 100%;
-  width: 100%;
+.show-rollup-section .show-rollup-image {
+  float: left;
+  margin-right: 5%;
 }
 .show-rollup-section .show-headliner {
   font-size: 1.4em;
   font-weight: normal;
   margin-top: 0;
   margin-bottom: 0.15em;
-  color: #3d3441;
+  color: #302933;
 }
 .show-rollup-section .show-headliner span {
-  color: rgba(61, 52, 65, 0.8);
+  color: #3d3441;
   font-size: 0.8em;
+  font-style: italic;
 }
 .show-rollup-section .show-details {
-  color: #3d3441;
+  color: #302933;
   font-size: 0.8em;
 }
 .show-rollup-section .show-description {
@@ -2349,10 +2407,6 @@ section {
 }
 .show-rollup-section .start-playlist:hover {
   background: #3d3441;
-}
-.show-rollup-section .show-rollup-image {
-  float: left;
-  margin-right: 5%;
 }
 
 .show-rollup-sidebar {
@@ -2453,4 +2507,8 @@ section {
 }
 .show-rollup-sidebar a.show-buy-tickets, .show-rollup-sidebar a.show-buy-tickets:hover, .show-rollup-sidebar a.show-buy-tickets:active, .show-rollup-sidebar a.show-buy-tickets:visited {
   color: #3d3441;
+}
+.show-rollup-sidebar .sub-button-details {
+  font-family: helvetica;
+  font-size: 0.8em;
 }

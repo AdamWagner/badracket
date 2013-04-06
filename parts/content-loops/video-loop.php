@@ -1,5 +1,10 @@
 <?php 
 
+
+if ( isset($videos) ) {
+  print_r(count($videos));
+}
+
 $album     = "1979291"; // lfbr album id
 $api_endpoint = "http://vimeo.com/api/v2/album";
 $path         = "/%s/videos.json";
@@ -7,7 +12,9 @@ $path         = "/%s/videos.json";
 $url          = $api_endpoint . sprintf($path, $album);
 
 $json         = file_get_contents($url);
+
 $videos       = json_decode($json);
+
 
 foreach($videos as $video): ?>
 

@@ -10,36 +10,36 @@ h1,h2,h3,h4,h5,h6 {
 
 @font-face {
 font-family: 'zine-regular';
-src: url('../fonts/ZineSerifDisWebPro.eot') format('eot'), 
-     url('../fonts/ZineSerifDisWebPro.woff') format('woff');
+src: url('fonts/ZineSerifDisWebPro.eot') format('eot'), 
+     url('fonts/ZineSerifDisWebPro.woff') format('woff');
 }
 @font-face {
 font-family: 'zine-bold';
-src: url('../fonts/ZineSerifDisWebPro-Bold.eot') format('eot'), 
-     url('../fonts/ZineSerifDisWebPro-Bold.woff') format('woff');
+src: url('fonts/ZineSerifDisWebPro-Bold.eot') format('eot'), 
+     url('fonts/ZineSerifDisWebPro-Bold.woff') format('woff');
 }
 @font-face {
 font-family: 'zine-italic';
-src: url('../fonts/ZineSerifDisWebPro-Italic.eot') format('woff'), 
-     url('../fonts/ZineSerifDisWebPro-Italic.woff') format('eot');
+src: url('fonts/ZineSerifDisWebPro-Italic.eot') format('woff'), 
+     url('fonts/ZineSerifDisWebPro-Italic.woff') format('eot');
 }
 @font-face {
 font-family: 'zine-italic';
-src: url('../fonts/ZineSerifDisWebPro-MediumIta.woff') format('woff'), 
-     url('../fonts/ZineSerifDisWebPro-MediumIta.eot') format('eot');
+src: url('fonts/ZineSerifDisWebPro-MediumIta.woff') format('woff'), 
+     url('fonts/ZineSerifDisWebPro-MediumIta.eot') format('eot');
 }
 
 @font-face {
 font-family: 'icons';
-src: url('../fonts/icomoon.woff') format('woff'), 
-     url('../fonts/icomoon.svg') format('svg'),
-     url('../fonts/icomoon.eot') format('eot');
+src: url('fonts/icomoon.woff') format('woff'), 
+     url('fonts/icomoon.svg') format('svg'),
+     url('fonts/icomoon.eot') format('eot');
 }
 
 
 @mixin font-stack-body {
-  font-family: 'zine-regular', georgia, serif;
-  -webkit-font-smoothing:antialiased;
+  font-family: georgia, serif;
+  // -webkit-font-smoothing:antialiased;
   font-weight: normal;
   font-style: normal;
   font-variant:normal;
@@ -75,11 +75,14 @@ src: url('../fonts/icomoon.woff') format('woff'),
   content:attr(data-icon);
 }
 
+h1,h2,h3,h4,h5,h6 {
+  @include font-stack-headline;
+}
+
 h2 {
   font-size:2.2em;
   margin:0;
   line-height:1em;
-  @include font-stack-headline;
 }
 
 p { margin:0; }
