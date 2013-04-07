@@ -197,7 +197,6 @@ var br_fb = function(){
        FB.api(el.id + '/photos?fields=images,likes&limit=9999', function( r ) {
 
          _.each(r.data, function(el){
-          console.log(el);
            var mediumSrc = el.images[4].source;
            var largeSrc = el.images[0].source;
            var likes = (el.likes) ? el.likes.data.length : 0;
@@ -258,8 +257,6 @@ var br_fb = function(){
         UI.render.authStatus(false);
         config.connectStatus = s;
 
-        console.log(';lasdfjk;aldskfja;lsdfkja;sdlfkj');
-
       } else {
         $.ajax({
           url: 'https://graph.facebook.com/oauth/access_token?client_id=517493138282534&redirect_uri=http://adamwagner.aws.af.cm/&client_secret=6434a549f714ca38d8920802637ee7b9&grant_type=client_credentials',
@@ -297,7 +294,11 @@ var br_fb = function(){
         function attend(){
             FB.api('/'+eventId+'/attending', 'post', function(data) {
              that.removeClass('transparent');
-             render.rsvpButton(true);
+             if ( data.error ) {
+              render.rsvpButton(false);
+             } else {
+              render.rsvpButton(true);
+             }
             });
         }
 
@@ -335,8 +336,14 @@ var br_fb = function(){
        $('.fb-user-picture').attr('src', user.picture);
       },
 
-      rsvpButton : function( status ){
-        var button = $('.show-rsvp');
+      rsvpButton : function( status , target ){
+        var button;
+        if ( target ) {
+          button = target;
+        } else {
+          button = $('.show-rsvp');
+        }
+
         if ( status ) {
           button.removeClass('not-attending')
             .addClass('rsvp-attending')
@@ -361,7 +368,9 @@ var br_fb = function(){
 
         var numAttending = attendees.length - names.length;
 
-        $('.show-sidebar .attendees .text').html( '<span class="not-xparent">'  + names.join(', ') + '</span> and <span class="not-xparent">' + numAttending + ' others </span> are going.');
+        var extra = (numAttending > 0 ) ? ' and </span> <span class="not-xparent">' + numAttending + ' others </span>' : '';
+
+        $('.show-sidebar .attendees .text').html( '<span class="not-xparent">'  + names.join(', ') + extra + ' are going.');
 
         var frag = [];
         _.each( attendees , function( el ){
@@ -425,8 +434,10 @@ var br_fb = function(){
 
         var numAttending = attendees.length - friendsGoing.length - minusYou;
 
+        var extra = (numAttending > 0 ) ? ' and  <span class="not-xparent">' + numAttending + ' others </span>' : '';
 
-        $('.show-sidebar .attendees .text').html( '<span class="not-xparent">' + you + names.join(', ') + '</span> and <span class="not-xparent">' + numAttending + ' others </span> are '+ also +' going.');
+        $('.show-sidebar .attendees .text').html( '<span class="not-xparent">'  + names.join(', ') + '</span>' + extra + ' are going.');
+
 
         var frag = [];
         _.each( attendees , function( el ){

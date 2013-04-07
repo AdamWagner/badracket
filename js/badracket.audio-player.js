@@ -193,8 +193,6 @@ var br_player = function() {
             targetAlbum   = albumData.getAlbumByName( albumName ),
             targetSong    = albumData.sampleSong( targetAlbum );
 
-            console.log(albumName);
-
         logic.targetSong( targetAlbum, targetSong);
       },
 
@@ -285,6 +283,7 @@ var br_player = function() {
       var songDOM = $('.song[data-track-number="'+ targetSong.trackNumber +'"]'),
           albumDOM =  $('.album[data-album-title="'+ targetAlbum.albumName +'"]'),
           currentView = br_state.viewGet();
+          console.log(currentView);
 
       if ( currentView === 'album-detail' || currentView === 'show-detail' ) {
         if ( $('[data-album-title]').attr('data-album-title') === targetAlbum.albumName ) {
@@ -294,7 +293,7 @@ var br_player = function() {
             songDOM.removeClass('song-playing');
           }
         }
-      } else if (currentView === 'home') {
+      } else if (currentView === 'home' || currentView === 'album-rollup') {
         if ( mode === 'toggle' ) {
           albumDOM.toggleClass('playing');
         } else {

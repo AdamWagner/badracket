@@ -53,7 +53,7 @@
               </h2>
               </div>
 
-            <div class="show-description padded-mobile-1">
+            <div class="show-description padded-mobile-1 top1">
               <?php the_content();?>
             </div>
 

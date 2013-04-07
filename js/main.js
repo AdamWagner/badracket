@@ -260,6 +260,7 @@ badracket = {
          dataType: 'JSON',
          success:function(data){
           br_fb.BR.videos = data;
+          $(window).trigger('videos-loaded');
          },
          error: function(errorThrown){
               console.log(errorThrown);
@@ -428,7 +429,9 @@ var br_state = function() {
     albumDetail : 'album=',
     albumRollup : '?post_type=album',
     showDetail : 'show=',
-    photos : 'http://localhost:8888/sites/brv5/wp-br/?page_id=336'
+    showRollup : '=show',
+    photos : 'http://localhost:8888/sites/brv5/wp-br/?page_id=336',
+    videos : 'http://localhost:8888/sites/brv5/wp-br/?page_id=160'
   };
 
   function viewSet( url ) {
@@ -444,12 +447,19 @@ var br_state = function() {
     } else if ( url === urls.home ) {
       viewState = 'home';
       setupAlbumPage();
+      setupVideosPage();
+    } else if ( url === urls.videos ) {
+      viewState = 'videos';
+      setupVideosPage();
     } else if ( url === urls.photos ) {
       viewState = 'photos';
       setupPhotos();
     } else if ( badracket.stringContains( url, urls.showDetail ) ) {
       viewState = 'show-detail';
       setupShow();
+    } else if ( badracket.stringContains( url, urls.showRollup ) ) {
+      viewState = 'show-rollup';
+      setupShowRoll();
     } else {
       viewState = 'unknown';
     }
@@ -475,6 +485,24 @@ var br_state = function() {
     }
   }
 
+  function setupVideosPage(){
+
+    console.log('setup videos page ran');
+
+    if (typeof br_fb.BR.videos !== 'undefined') {
+      if ( br_fb.BR.videos.length > 10 ) {
+        br_fb.UI.render.videos();
+      }
+    } else {
+      $(window).on('videos-loaded', function(){
+        br_fb.UI.render.videos();
+      });
+    }
+
+
+
+  }
+
   function setupAlbumDetail(){
     if ( br_player.state.isPlaying ) {
       if ( br_player.state.currAlbum.albumName === $('[data-album-title]').attr('data-album-title') ) {
@@ -484,9 +512,34 @@ var br_state = function() {
     }
   }
 
+
+  function setupShowRoll(){
+
+    function checkAttending(){
+
+      $('.show-rsvp').each(function(){
+        var eventID = $(this).data('fb-id');
+        if ( br_fb.fetch.isAttending( eventID ) ) {
+          br_fb.UI.render.rsvpButton(true, $(this) );
+        }
+      });
+
+    }
+
+    br_fb.user_do_or_wait( checkAttending );
+
+  }
+
   function setupShow() {
 
     var eventID = $('.show-rsvp').data('fb-id');
+
+      if ( br_player.state.isPlaying ) {
+        if ( br_player.state.currAlbum.albumName === $('[data-album-title]').attr('data-album-title') ) {
+          var trackNumber = br_player.state.currSong.trackNumber;
+          $('[data-track-number="'+ trackNumber +'"]').addClass('song-playing');
+        }
+      }
 
     function checkAttending(){
       if ( br_fb.fetch.isAttending( eventID ) ) {
@@ -510,10 +563,6 @@ var br_state = function() {
         br_fb.fetch.popPhotos( r );
       });
     }
-
-    console.log(br_fb.BR);
-
-    if ( typeof br_fb.BR.photos === 'null' ) return;
 
     if ( br_fb.BR.photos.length < 50 ) {
       console.log('waiting to run render photos');

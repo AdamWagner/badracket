@@ -46,9 +46,7 @@
             <div class="video-name pull-left padded-sides">Videos</div>
             <a href="" class="see-videos pull-right padded-sides">See All ></a>
           </div>
-            <div class="s-1 m-3 b-3 h-4 single-row padded">
-              <?php get_template_part('parts/content-loops/video-loop-home');?>
-            </div>
+            <div id="video-container" class="s-1 m-3 b-3 h-4 single-row padded"> </div>
         </div>  <?php // end videos ?>
 
 
