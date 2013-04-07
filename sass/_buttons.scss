@@ -11,10 +11,10 @@
 }
 
 @mixin button-color($base_color) {
-  @include background(linear-gradient(lighten($base_color, 1%), darken($base_color, 3%)));
+  @include background(linear-gradient(lighten($base_color, 1%), darken($base_color, 2%)));
  
   &:hover {
-    @include background(linear-gradient(lighten($base_color , 5%), darken($base_color , 6%)));
+    @include background(linear-gradient(lighten($base_color , 3%), darken($base_color , 3%)));
     @include text-shadow(darken($base_color,10%));
   }
   &:active {

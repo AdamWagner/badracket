@@ -216,6 +216,20 @@ var br_player = function() {
           }
       },
 
+      buyAlbum : function(e){
+        e.preventDefault();
+        var album = br_player.state.currAlbum,
+            title = album.albumName,
+            price = '$' + album.price + '.00',
+            artist = album.artist,
+            cover = album.coverUrl;
+
+        $('.buy-album-cover').attr('src',cover);
+        $('#buy-album-header').text(title);
+        $('.buy-artist-name').text(artist);
+        $('.price').text(price);
+      },
+
       whileSliding : function( event, ui, playbar ) {
         el.progressBar.css( 'width', ui.value + '%' );
       },
@@ -256,6 +270,12 @@ var br_player = function() {
         s.bd.on({
           click : function(e){ handlers.songClick(e); }
         } , '.song' );
+      },
+      buyAlbum : function() {
+        console.log('bind album ;aldkfja;ldskjf');
+         s.bd.on({
+          click : function(e){ handlers.buyAlbum(e); }
+        } , '.support-band-button' );
       },
       slider : function() {
         el.slider.slider({
@@ -604,6 +624,7 @@ function doMoreStuff() {
   br_player.ui.bindui.slider();
   br_player.ui.bindui.play();
   br_player.ui.bindui.next();
+  br_player.ui.bindui.buyAlbum();
   br_player.ui.bindui.previous();
 }
 

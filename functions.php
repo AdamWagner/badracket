@@ -195,8 +195,8 @@ $meta_boxes[] = array(
       'type'    => 'text',
     ),
     array(
-      'id'      => $prefix . 'buy_url', // Field ID, i.e. the meta key
-      'desc'    => 'Link to purchase page for this album', // Field description (optional)
+      'id'      => $prefix . 'price', // Field ID, i.e. the meta key
+      'desc'    => 'Price of the album. Use a single number only, e.g. "8"', // Field description (optional)
       'type'    => 'text',
     ),
   ) //end fields array

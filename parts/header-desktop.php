@@ -32,6 +32,10 @@
       </div>
      </div>
     </div> <?php // end audio-player ?>
+
+    <a href="#buy-album-form" data-toggle="modal" class="support-band">
+      <div class="support-band-button button">Get album </div>
+    </a>
     
     <div class="facebook">
       <div class="login">Login with Facebook</div>
@@ -41,5 +45,6 @@
         <!-- <div class="logout">Logout</div> -->
       </div>
     </div>
+
   </div>
 </header>

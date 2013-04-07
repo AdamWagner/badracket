@@ -111,6 +111,7 @@ ul, li {
 
 a {
   text-decoration: none;
+  &, &:hover, &:focus, &:visited { outline: none; }
   // normal, hover, active, visited, focus
   @include link-colors(
             $cream,
@@ -368,6 +369,7 @@ header.desktop {
         .fb-user-name, .fb-user-picture { float:left; }
         .fb-user-name {
           padding:0.5em 0;
+          display:none;
         }
 
         .fb-user-picture {
@@ -376,11 +378,21 @@ header.desktop {
           width:2em;
           height:2em;
         }
-
       }
+    } // facebook
 
+    .support-band {
+      float:left;
+      .support-band-button {
+        @include button(lighten(mix($dark,$red,99%),10%));
+        @include box-shadow(0 1px 1px darken($dark, 2%));
+        @include text-shadow(0 1px 1px lighten($dark,13%));
+        color:darken($dark,7%);
+        padding:16px 19px;
+      }
     }
   }
+
 
 /* --------------------------------------------------------------------------------------- *\
   Audio Player
@@ -390,6 +402,11 @@ header.desktop {
 
 }
 
+/* --------------------------------------------------------------------------------------- *\
+  Payment modal
+/* --------------------------------------------------------------------------------------- */
+
+@import 'pay-modal';
 
 /* --------------------------------------------------------------------------------------- *\
   Main Nav
@@ -561,6 +578,7 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 .pink-cream { background:$pink-cream; }
 .dark-red { background:desaturate(darken($red,7%),20%); }
 .green { background:$green; }
+.orange { background:$orange; }
 
 section {
   -webkit-transform: translateZ(0); // kill the flash on load
