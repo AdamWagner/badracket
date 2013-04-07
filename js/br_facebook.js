@@ -43,7 +43,7 @@ var br_fb = function(){
   function fbEnsureInit ( cb ) {
        if ( !window.FB || ( !config.accessToken && !config.appAccess ) ) {
            console.log('ensure init still running');
-           setTimeout( function() { fbEnsureInit( cb ); }, 50);
+           setTimeout( function() { fbEnsureInit( cb ); }, 150);
        } else {
            if ( cb ) { cb(); }
        }
@@ -179,23 +179,20 @@ var br_fb = function(){
       BR.events = d.events.data;
     }
 
-    function getBRPhotos () {
+    function getBR_albums () {
       return call_fb('/badracket/albums?fields=id&limit=9999');
     }
 
     function popPhotos ( d ) {
       BR.albums = d.data;
       getPhotoURLS ( BR.albums );
-
     }
 
     function getPhotoURLS(albums){
       window.dfds = [];
-      console.log(dfds);
 
       _.each(albums, function(el){
         var dfd = new $.Deferred();
-
 
        FB.api(el.id + '/photos?fields=images,likes&limit=9999', function( r ) {
 
@@ -210,19 +207,9 @@ var br_fb = function(){
        });
 
        window.dfds.push( dfd.promise() );
-
       });
 
-      $.when.apply(null, window.dfds ).done(function( r ){
-        console.log('allphotos loadeeeeeeeeeed');
-        BR.sortedPhotos = _.sortBy(BR.photos, function( p ){ return -p.likes; });
-        for (var i = 0; i < 95; i++ ) {
-          $('.s-1').append('<div class="grid padded"><div class="lazyload fade ratio-4-3 round-shadow" data-src="' + BR.sortedPhotos[i].medium + '"></div>');
-        }
-        badracket.lazyLoadImg();
-      });
-
-
+      UI.render.renderPhotos();
     }
 
    return {
@@ -231,7 +218,7 @@ var br_fb = function(){
     getUser : getUser,
     popUser : popUser,
     getBR : getBR,
-    getBRPhotos : getBRPhotos,
+    getBR_albums : getBR_albums,
     getPhotoURLS : getPhotoURLS,
     popBR : popBR,
     popPhotos : popPhotos,
@@ -252,11 +239,6 @@ var br_fb = function(){
           $(window).trigger('fb-page-data-load');
         });
 
-
-        $.when( fetch.getBRPhotos() ).then(function( r ){
-          fetch.popPhotos( r );
-        });
-
       if ( s === 'connected') {
         var a = r.authResponse.accessToken;
         config.accessToken = a;
@@ -274,8 +256,6 @@ var br_fb = function(){
       } else if ( s === 'not_authorized') {
         UI.render.authStatus(false);
         config.connectStatus = s;
-
-        console.log(';lasdfjk;aldskfja;lsdfkja;sdlfkj');
 
       } else {
         $.ajax({
@@ -314,7 +294,11 @@ var br_fb = function(){
         function attend(){
             FB.api('/'+eventId+'/attending', 'post', function(data) {
              that.removeClass('transparent');
-             render.rsvpButton(true);
+             if ( data.error ) {
+              render.rsvpButton(false);
+             } else {
+              render.rsvpButton(true);
+             }
             });
         }
 
@@ -352,8 +336,14 @@ var br_fb = function(){
        $('.fb-user-picture').attr('src', user.picture);
       },
 
-      rsvpButton : function( status ){
-        var button = $('.show-rsvp');
+      rsvpButton : function( status , target ){
+        var button;
+        if ( target ) {
+          button = target;
+        } else {
+          button = $('.show-rsvp');
+        }
+
         if ( status ) {
           button.removeClass('not-attending')
             .addClass('rsvp-attending')
@@ -378,7 +368,9 @@ var br_fb = function(){
 
         var numAttending = attendees.length - names.length;
 
-        $('.show-sidebar .attendees .text').html( '<span class="not-xparent">'  + names.join(', ') + '</span> and <span class="not-xparent">' + numAttending + ' others </span> are going.');
+        var extra = (numAttending > 0 ) ? ' and </span> <span class="not-xparent">' + numAttending + ' others </span>' : '';
+
+        $('.show-sidebar .attendees .text').html( '<span class="not-xparent">'  + names.join(', ') + extra + ' are going.');
 
         var frag = [];
         _.each( attendees , function( el ){
@@ -442,8 +434,10 @@ var br_fb = function(){
 
         var numAttending = attendees.length - friendsGoing.length - minusYou;
 
+        var extra = (numAttending > 0 ) ? ' and  <span class="not-xparent">' + numAttending + ' others </span>' : '';
 
-        $('.show-sidebar .attendees .text').html( '<span class="not-xparent">' + you + names.join(', ') + '</span> and <span class="not-xparent">' + numAttending + ' others </span> are '+ also +' going.');
+        $('.show-sidebar .attendees .text').html( '<span class="not-xparent">'  + names.join(', ') + '</span>' + extra + ' are going.');
+
 
         var frag = [];
         _.each( attendees , function( el ){
@@ -454,6 +448,48 @@ var br_fb = function(){
         });
         $('.show-sidebar .attendees .facepile').html( frag.join('') );
 
+      },
+
+      renderPhotos : function(){
+        $.when.apply(null, window.dfds ).done(function( r ){
+          BR.sortedPhotos = _.sortBy(BR.photos, function( p ){ return -p.likes; });
+          for (var i = 0; i < 95; i++ ) {
+            $('.s-1').append('<div class="grid padded"><div class="lazyload fade ratio-4-3 round-shadow" data-src="' + BR.sortedPhotos[i].medium + '"></div>');
+          }
+          badracket.lazyLoadImg();
+        });
+      },
+
+      videos : function(){
+        var videoContainer = $('#video-container'),
+            frag = [];
+
+        _.each(BR.videos, function( el ){
+          var thumbnail = el.thumbnail_large,
+              title = el.title.split(':')[0],
+              formatted_date = date("M Y", new Date(el.upload_date));
+
+          var vidEl = [
+          '<div class="grid padded"><a href="videos.php">',
+            '<div class="playable">',
+              '<div class="play"></div> ',
+              '<div class="lazyload fade ratio-16-9" data-src="'+ thumbnail +'">',
+              '</div>',
+              '</a>',
+            '</div>',
+            '<div class="album-meta">',
+              '<div class="album-title">'+title+'</div>',
+              '<div class="artist-name">'+formatted_date+'</div>',
+            '</div>',
+          '</div>'
+          ].join('');
+
+          frag.push(vidEl);
+
+        });
+
+        videoContainer.html(frag);
+        badracket.lazyLoadImg();
       }
 
 

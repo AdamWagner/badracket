@@ -61,7 +61,6 @@ var br_sm2 = function(){
     });
   }
 
-
   function previousLoadCheck(){
     var lastPlayed = br_player.history.song.lastPlayed();
 
@@ -83,7 +82,6 @@ var br_sm2 = function(){
     }
 
     br_player.logic.attach30SecondListener( song );              // attach 30 second listener
-    song.sm2_obj.setPosition(0);
     song.sm2_obj.togglePause();                                  // play / pause sound
   }
 
@@ -95,10 +93,6 @@ var br_sm2 = function(){
   };
 
 }();
-
-
-
-
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
@@ -193,6 +187,7 @@ var br_player = function() {
           return false; // disable handler on album-detail page
         }
         e.preventDefault();
+        e.stopPropagation();
 
         var albumName     = target.closest('.album').attr('data-album-title'),
             targetAlbum   = albumData.getAlbumByName( albumName ),
@@ -202,7 +197,6 @@ var br_player = function() {
       },
 
       songClick : function( e ) {
-        console.log(e);
         var albumName     = $('[data-album-title]').attr('data-album-title'),
             targetAlbum   = albumData.getAlbumByName( albumName ),
             songIndex     = parseInt( $(e.target).closest('.song').attr('data-track-number') , 10 ) - 1,
@@ -289,6 +283,7 @@ var br_player = function() {
       var songDOM = $('.song[data-track-number="'+ targetSong.trackNumber +'"]'),
           albumDOM =  $('.album[data-album-title="'+ targetAlbum.albumName +'"]'),
           currentView = br_state.viewGet();
+          console.log(currentView);
 
       if ( currentView === 'album-detail' || currentView === 'show-detail' ) {
         if ( $('[data-album-title]').attr('data-album-title') === targetAlbum.albumName ) {
@@ -298,7 +293,7 @@ var br_player = function() {
             songDOM.removeClass('song-playing');
           }
         }
-      } else if (currentView === 'home') {
+      } else if (currentView === 'home' || currentView === 'album-rollup') {
         if ( mode === 'toggle' ) {
           albumDOM.toggleClass('playing');
         } else {
@@ -309,6 +304,11 @@ var br_player = function() {
 
     function targetSongLogic( targetAlbum, targetSong ) {
       if ( targetSong.songTitle !== state.currSong.songTitle ) {
+
+        if ( typeof state.currSong.sm2_obj !== 'undefined') {
+          state.currSong.sm2_obj.setPosition(0);
+        }
+
         ui.render.init( targetAlbum, targetSong );
         activeStyle( state.currAlbum, state.currSong, 'clear' );
         if ( state.isPlaying ) { state.currSong.sm2_obj.stop(); }
@@ -355,7 +355,7 @@ var br_player = function() {
 
     function findSampleSong ( album ) {
       var tracks = album.tracks;
-      for (var i = tracks.length; i--;) {
+      for (var i = 0; i < tracks.length; i++) {
         if (parseInt(tracks[i].isSampleTrack, 10) == 1) {
           return tracks[i];
         }
@@ -549,7 +549,8 @@ var init = function(){
 
   var ready = {
     sm : false,
-    albumData : false
+    album: false,
+    show: false
   };
 
   function loadSM() {
@@ -566,14 +567,14 @@ var init = function(){
     readyCallback();
   }
 
-  function dataReady() {
+  function dataReady(type) {
     console.log('Album data ready');
-    ready.albumData = true;
+    ready[type] = true;
     readyCallback();
   }
 
   function readyCallback() {
-    if (!ready.sm || !ready.albumData ) { return; }
+    if (!ready.sm || !ready.album || !ready.show ) { return; }
     console.log('everything is loaded');
     doMoreStuff();
   }

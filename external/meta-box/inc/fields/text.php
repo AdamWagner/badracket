@@ -36,7 +36,7 @@ if ( ! class_exists( 'RWMB_Text_Field' ) )
 		static function normalize_field( $field )
 		{
 			$field = wp_parse_args( $field, array(
-				'size' => 30,
+				'size' => 70,
 			) );
 			return $field;
 		}

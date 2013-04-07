@@ -207,6 +207,14 @@ $breakpoint_prefixes: s-,m-,l-;
 .layout-two-third { width:66.6666667%; }
 .layout-half { width:50%; }
 
+.grid-10 { width:10%; }
+.grid-15 { width:15%; }
+.grid-20 { width:20%; }
+.grid-30 { width:30%; }
+.grid-60 { width:60%; }
+.grid-70 { width:70%; }
+.grid-80 { width:80%; }
+
 .layout-main { 
   width:100%;
   @include breakpoint(big) {
