@@ -142,7 +142,7 @@ jQuery(function($){
       $('.loading-messages').append('<div>' + messages[i] + '</div>');
       i++;
       if ( i < 2) {
-        setTimeout(function() { displayMessage(); }, 2000);
+        setTimeout(function() { displayMessage(); }, 2100);
       }
     }
   }
