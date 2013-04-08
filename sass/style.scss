@@ -373,10 +373,12 @@ header.desktop {
         }
 
         .fb-user-picture {
+          box-sizing:content-box;
           margin-right:0.5em;
           border-radius:3px;
-          width:2em;
-          height:2em;
+          width:2.75em;
+          height:2.75em;
+          @include box-shadow(0 1px 1px darken($dark,3%));
         }
       }
     } // facebook
@@ -427,12 +429,15 @@ nav[role="navigation"] {
 }
 
 
-.nav-title, .nav-level-1 li {
+.nav-title, .nav-level-1 li,  {
   padding:0.75em 0.5em;
   @include breakpoint(big) {
     padding:0.25 0;
   }
-  
+  a {color:desaturate(lighten($dark,40%),4%);
+  }
+
+
 }
 
 .nav-level-1 {

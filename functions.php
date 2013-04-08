@@ -19,10 +19,35 @@ Required external files
 
 require_once( 'external/starkers-utilities.php' );
 require_once( 'external/cpt.php' );
-require_once( 'external/meta-box/meta-box.php' );
 require_once( 'external/album-page.php' );
-// require_once( 'external/facebook_sdk/facebook.php' );
-// require_once( 'external/brv5_facebook.php' );
+require_once( 'external/meta-box/meta-box.php' );
+require_once( 'external/stripe-php/lib/Stripe.php' );
+
+
+
+/* ========================================================================================================================
+
+Stripe
+
+======================================================================================================================== */
+
+if ($_POST) {
+  Stripe::setApiKey("sk_test_5WPYe79f3ARl35CElPgwxV5y");
+  $error = '';
+  $success = '';
+  try {
+    if (!isset($_POST['stripeToken']))
+      throw new Exception("The Stripe Token was not generated correctly");
+    Stripe_Charge::create(array("amount" => 1000,
+                                "currency" => "usd",
+                                "card" => $_POST['stripeToken']));
+    $success = 'Your payment was successful.';
+  }
+  catch (Exception $e) {
+    $error = $e->getMessage();
+  }
+}
+
 
 /* ========================================================================================================================
 

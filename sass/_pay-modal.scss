@@ -7,8 +7,65 @@
 /* --------------------------------------------------------------------------------------- */
 
 
-#payment-form { 
+
+.loading-container {
+  position:absolute;
+  z-index:9999;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+  text-align:center;
+  padding-top:20%;
+  // background:transparentize($pink-cream,0.2);
+  display:none;
+  
+  .loading-messages {
+    margin:1em 0;
+    div {
+      color:transparentize($dark,0.2);
+      padding:0.5em 0;
+    }
+  }
+}
+
+.loading-spinner {
+  display: inline-block;
+  margin: auto;
+  border-width: 30px;
+  border-radius: 50%;
+  -webkit-animation: spin 1s linear infinite;
+     -moz-animation: spin 1s linear infinite;
+       -o-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
+  }
+
+
+.style-2 {
+  border-style: double;
+  border-color: $dark transparent;
+  }
+
+@-webkit-keyframes spin {
+  100% { -webkit-transform: rotate(359deg); }
+  }
+
+@-moz-keyframes spin {
+  100% { -moz-transform: rotate(359deg); }
+  }
+
+@-o-keyframes spin {
+  100% { -moz-transform: rotate(359deg); }
+  }
+
+@keyframes spin {
+  100% {  transform: rotate(359deg); }
+  }
+
+
+.payment-form { 
   padding:0.5em 1.5em 0.5em 1.5em;
+  position:relative;
 
   table {
     width:100%;
@@ -16,6 +73,12 @@
   
   td {
     padding:0.5em 0;
+  }
+  &.loading {
+    opacity:0.2;
+    -webkit-filter: blur(3px);
+    -webkit-transition:-webkit-filter 0.25s;
+    @include transition(opacity,.2s);
   }
 }
 
@@ -25,6 +88,7 @@
     padding:1em 0;
     color:darken($dark,5%);
   }
+  p { color:$dark; line-height:1.4em; }
 }
 
 
@@ -44,11 +108,34 @@
   h4 { font-size:1.3em; }
 }
 
+
+.red-button,
+a.red-button {
+   @include button($red);
+  color:$pink-cream;
+}
+
+
 .submit-payment-button {
   @include button($red);
   color:$pink-cream;
   -webkit-appearance:none;
   border:none;
+  &.disabled {
+    background:desaturate($red,5%);
+    opacity:0.5;
+    pointer-events:none;
+    &:after{
+      display:block;
+      content:'please fill out the form first';
+      font-size:0.65em;
+    }
+  }
+  &.loading {
+     background:desaturate($red,5%);
+    opacity:0.5;
+    pointer-events:none;
+  }
 }
 
 .cancel-purchase {

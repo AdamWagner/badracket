@@ -7,6 +7,10 @@
  */
 ?>
 
+
+
+
+
 <?php get_template_part('parts/shared/html-header'); ?>
 
 <body data-state="default-state">
@@ -91,6 +95,11 @@
     </hgroup>
   </div>
   <div class="modal-body">
+      <div class="loading-container">
+        <span class="loading-spinner style-2"></span>
+        <div class="loading-messages"></div>
+      </div>
+
     <div class="payment-form">
 
       <form action="" method="POST" id="payment-form" novalidate autocomplete="on">
@@ -99,13 +108,13 @@
         <table>
         <tr>
           <td class="label-container">Name</td>
-          <td class="input-container"><input type="text" size="20" class="cc-number w-100" placeholder="Your name" required/></td>
+          <td class="input-container"><input type="text" size="20" class="your-name w-100" placeholder="Your name" /></td>
           
         </tr>
 
         <tr>
           <td class="label-container">Email</td>
-          <td class="input-container"><input type="text" size="20" class="cc-number w-100" placeholder="Your email" required/></td>
+          <td class="input-container"><input type="text" size="20" class="your-email w-100" placeholder="Your email" /></td>
         </div>
           
         </tr>
@@ -126,19 +135,19 @@
 
         <tr>
           <td class="label-container">Exp date</td>
-          <td class="input-container"><input type="text" size="9" data-stripe="exp-date " class="cc-exp w-100 " pattern="\d*" x-autocompletetype="cc-exp" placeholder="MM / YYYY" required maxlength="9"/></td>
+          <td class="input-container"><input type="text" size="9" data-stripe="exp-date " class="cc-exp w-100 " pattern="\d*" x-autocompletetype="cc-exp" placeholder="MM / YY" required maxlength="9"/></td>
         </div>
           
         </tr>
       </table>
 
-      </form>
 
     </div>
   </div>
   <div class="modal-footer">
     <span  class="cancel-purchase" data-dismiss="modal" aria-hidden="true">close</span>
-    <button class="submit-payment-button" type="submit">Submit Payment</button>
+    <button class="submit-payment-button disabled" type="submit">Submit Payment</button>
+      </form>
   </div>
 </div>
 

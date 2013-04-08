@@ -1416,10 +1416,14 @@ header.desktop .header-bar .facebook .fb-user .fb-user-name {
   display: none;
 }
 header.desktop .header-bar .facebook .fb-user .fb-user-picture {
+  box-sizing: content-box;
   margin-right: 0.5em;
   border-radius: 3px;
-  width: 2em;
-  height: 2em;
+  width: 2.75em;
+  height: 2.75em;
+  -webkit-box-shadow: 0 1px 1px #352d39;
+  -moz-box-shadow: 0 1px 1px #352d39;
+  box-shadow: 0 1px 1px #352d39;
 }
 header.desktop .header-bar .support-band {
   float: left;
@@ -1659,19 +1663,92 @@ header.desktop .slider + .handle {
 /* --------------------------------------------------------------------------------------- *\
   Payment form styles
 /* --------------------------------------------------------------------------------------- */
-#payment-form {
-  padding: 0.5em 1.5em 0.5em 1.5em;
+.loading-container {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+  padding-top: 20%;
+  display: none;
 }
-#payment-form table {
+.loading-container .loading-messages {
+  margin: 1em 0;
+}
+.loading-container .loading-messages div {
+  color: rgba(61, 52, 65, 0.8);
+  padding: 0.5em 0;
+}
+
+.loading-spinner {
+  display: inline-block;
+  margin: auto;
+  border-width: 30px;
+  border-radius: 50%;
+  -webkit-animation: spin 1s linear infinite;
+  -moz-animation: spin 1s linear infinite;
+  -o-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+.style-2 {
+  border-style: double;
+  border-color: #3d3441 transparent;
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+@-o-keyframes spin {
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.payment-form {
+  padding: 0.5em 1.5em 0.5em 1.5em;
+  position: relative;
+}
+.payment-form table {
   width: 100%;
 }
-#payment-form td {
+.payment-form td {
   padding: 0.5em 0;
+}
+.payment-form.loading {
+  opacity: 0.2;
+  -webkit-filter: blur(3px);
+  -webkit-transition: -webkit-filter 0.25s;
+  -webkit-transition: opacity, 0.2s;
+  -moz-transition: opacity, 0.2s;
+  -o-transition: opacity, 0.2s;
+  transition: opacity, 0.2s;
 }
 
 #buy-album-form hgroup {
   padding: 1em 0;
   color: #302933;
+}
+#buy-album-form p {
+  color: #3d3441;
+  line-height: 1.4em;
 }
 
 .buy-album-cover {
@@ -1694,6 +1771,44 @@ header.desktop .slider + .handle {
 }
 .modal-header h4 {
   font-size: 1.3em;
+}
+
+.red-button,
+a.red-button {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dd5f5d), color-stop(100%, #da5351));
+  background: -webkit-linear-gradient(#dd5f5d, #da5351);
+  background: -moz-linear-gradient(#dd5f5d, #da5351);
+  background: -o-linear-gradient(#dd5f5d, #da5351);
+  background: linear-gradient(#dd5f5d, #da5351);
+  text-decoration: none;
+  padding: 19px 20px 20px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 1em;
+  cursor: pointer;
+  color: #f8ebe1;
+}
+.red-button:hover,
+a.red-button:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #df6766), color-stop(100%, #d94f4c));
+  background: -webkit-linear-gradient(#df6766, #d94f4c);
+  background: -moz-linear-gradient(#df6766, #d94f4c);
+  background: -o-linear-gradient(#df6766, #d94f4c);
+  background: linear-gradient(#df6766, #d94f4c);
+  text-shadow: #d3312f;
+}
+.red-button:active,
+a.red-button:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dc5a58), color-stop(100%, #dc5b59));
+  background: -webkit-linear-gradient(#dc5a58, #dc5b59);
+  background: -moz-linear-gradient(#dc5a58, #dc5b59);
+  background: -o-linear-gradient(#dc5a58, #dc5b59);
+  background: linear-gradient(#dc5a58, #dc5b59);
+  text-shadow: #d3312f;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 .submit-payment-button {
@@ -1731,6 +1846,21 @@ header.desktop .slider + .handle {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+.submit-payment-button.disabled {
+  background: #d7605e;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.submit-payment-button.disabled:after {
+  display: block;
+  content: 'please fill out the form first';
+  font-size: 0.65em;
+}
+.submit-payment-button.loading {
+  background: #d7605e;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .cancel-purchase {
@@ -1935,6 +2065,9 @@ nav[role="navigation"] {
   .nav-title, .nav-level-1 li {
     padding: 0.25 0;
   }
+}
+.nav-title a, .nav-level-1 li a {
+  color: #a39aa7;
 }
 
 .nav-level-1 {

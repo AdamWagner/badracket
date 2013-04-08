@@ -230,6 +230,14 @@ var br_player = function() {
         $('.price').text(price);
       },
 
+      buyAlbumHover : function(){
+          badracket.loader.require( [ badracket_theme_path + "/js/prod/payments.min.js" ], paymentsLoaded() );
+          function paymentsLoaded(){
+            console.log('yep');
+             s.bd.off('hover' , '.support-band-button' );
+          }
+      },
+
       whileSliding : function( event, ui, playbar ) {
         el.progressBar.css( 'width', ui.value + '%' );
       },
@@ -272,9 +280,13 @@ var br_player = function() {
         } , '.song' );
       },
       buyAlbum : function() {
-        console.log('bind album ;aldkfja;ldskjf');
          s.bd.on({
           click : function(e){ handlers.buyAlbum(e); }
+        } , '.support-band-button' );
+      },
+      buyAlbumHover : function() {
+       s.bd.on({
+          hover : function(e){ handlers.buyAlbumHover(e); }
         } , '.support-band-button' );
       },
       slider : function() {
@@ -625,6 +637,7 @@ function doMoreStuff() {
   br_player.ui.bindui.play();
   br_player.ui.bindui.next();
   br_player.ui.bindui.buyAlbum();
+  br_player.ui.bindui.buyAlbumHover();
   br_player.ui.bindui.previous();
 }
 
