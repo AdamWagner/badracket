@@ -2,9 +2,6 @@
 /* @codekit-prepend "lib/jquery.payments.js" */
 /* @codekit-prepend "lib/jquery.form.js" */
 
-
-// Stripe
-
 jQuery(function($){
 
   var paymentForm = $('.payment-form'),
@@ -104,7 +101,6 @@ jQuery(function($){
       // Insert the token into the form so it gets submitted to the server
       $form.append($('<input type="hidden" name="stripeToken" />').val(token));
       // and submit
-      // $form.get(0).submit();
       $form.ajaxSubmit(options = {
         success:function(){
           paymentForm.removeClass('loading');
@@ -118,7 +114,7 @@ jQuery(function($){
 
           var html = [
             '<h2 class="bottom1 top1">Thanks for your support!</h2>',
-            '<p class="bottom1">Use the download button below to begin downloading the album. Enjoy :-)</p>',
+            '<p class="bottom1">Use the download button below to begin downloading the album. Enjoy :-)</p>'
           ].join('\n');
 
           paymentForm.html(html);

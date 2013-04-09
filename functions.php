@@ -38,7 +38,7 @@ if ($_POST) {
   try {
     if (!isset($_POST['stripeToken']))
       throw new Exception("The Stripe Token was not generated correctly");
-    Stripe_Charge::create(array("amount" => 1000,
+    Stripe_Charge::create(array("amount" => $_POST['price'],
                                 "currency" => "usd",
                                 "card" => $_POST['stripeToken']));
     $success = 'Your payment was successful.';

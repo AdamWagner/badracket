@@ -221,6 +221,7 @@ var br_player = function() {
         var album = br_player.state.currAlbum,
             title = album.albumName,
             price = '$' + album.price + '.00',
+            priceCents = album.price*100,
             artist = album.artist,
             cover = album.coverUrl;
 
@@ -228,6 +229,7 @@ var br_player = function() {
         $('#buy-album-header').text(title);
         $('.buy-artist-name').text(artist);
         $('.price').text(price);
+        $('#payment-form').append('<input type="hidden" name="price" value="'+priceCents+'"/">');
       },
 
       buyAlbumHover : function(){
