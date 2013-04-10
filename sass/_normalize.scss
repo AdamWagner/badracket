@@ -473,6 +473,12 @@ textarea {
     vertical-align: top; /* 2 */
 }
 
+
+iframe {
+    outline:none;
+    border:none;
+}
+
 /* ==========================================================================
    Tables
    ========================================================================== */
@@ -489,6 +495,7 @@ table {
 div,
 span,
 article,
+input,
 img,
 aside,
 details,

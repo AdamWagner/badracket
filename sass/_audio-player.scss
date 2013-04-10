@@ -2,9 +2,9 @@ $audio-player-width:60%;
 
 $player-control-bar-height:0.6em;
 $statusbar-bg-color:$dark;
-$progress-color:darken($dark,8%);
+$progress-color:darken($dark,5%);
 $dark-text:darken($dark,12%);
-$darkest:darken($dark,13%);
+$darkest:darken($dark,11%);
 
 
 .audio-player {
@@ -36,7 +36,7 @@ $darkest:darken($dark,13%);
   color:$progress-color;
   a { color:$dark-text; }
   .song {
-    color:darken($darkest,3%);
+    color:darken($darkest,6%);
   }
   .artist {
     color:darken($progress-color,3%);
@@ -132,7 +132,7 @@ $darkest:darken($dark,13%);
 
 
   .progress-bar, .loading {
-    background:$progress-color;
+    background-color:$progress-color;
     width:0;
     height:$player-control-bar-height;
     position:absolute;

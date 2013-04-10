@@ -19,10 +19,35 @@ Required external files
 
 require_once( 'external/starkers-utilities.php' );
 require_once( 'external/cpt.php' );
-require_once( 'external/meta-box/meta-box.php' );
 require_once( 'external/album-page.php' );
-// require_once( 'external/facebook_sdk/facebook.php' );
-// require_once( 'external/brv5_facebook.php' );
+require_once( 'external/meta-box/meta-box.php' );
+require_once( 'external/stripe-php/lib/Stripe.php' );
+
+
+
+/* ========================================================================================================================
+
+Stripe
+
+======================================================================================================================== */
+
+if ($_POST) {
+  Stripe::setApiKey("sk_test_5WPYe79f3ARl35CElPgwxV5y");
+  $error = '';
+  $success = '';
+  try {
+    if (!isset($_POST['stripeToken']))
+      throw new Exception("The Stripe Token was not generated correctly");
+    Stripe_Charge::create(array("amount" => $_POST['price'],
+                                "currency" => "usd",
+                                "card" => $_POST['stripeToken']));
+    $success = 'Your payment was successful.';
+  }
+  catch (Exception $e) {
+    $error = $e->getMessage();
+  }
+}
+
 
 /* ========================================================================================================================
 
@@ -195,8 +220,8 @@ $meta_boxes[] = array(
       'type'    => 'text',
     ),
     array(
-      'id'      => $prefix . 'buy_url', // Field ID, i.e. the meta key
-      'desc'    => 'Link to purchase page for this album', // Field description (optional)
+      'id'      => $prefix . 'price', // Field ID, i.e. the meta key
+      'desc'    => 'Price of the album. Use a single number only, e.g. "8"', // Field description (optional)
       'type'    => 'text',
     ),
   ) //end fields array

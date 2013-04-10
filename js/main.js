@@ -3,6 +3,7 @@
 /* @codekit-prepend "lib/enquire.js" */
 /* @codekit-prepend "lib/underscore.js" */
 /* @codekit-prepend "lib/format_date.js" */
+/* @codekit-prepend "lib/froogaloop.js" */
 
 /*
  * jQuery Tiny Pub/Sub
@@ -177,7 +178,7 @@ badracket = {
         albumName : value.albumName,
         kind : 'album',
         coverUrl : value._br_cover_url[0],
-        buyURL : value._br_buy_url[0],
+        price : value._br_price[0],
         zipFile : value._br_zip_file[0],
         tracks : badracket.createTrackHierarchy(value, 'album'),
         albumUrl : value.albumUrl
@@ -275,7 +276,7 @@ badracket = {
 
   docReady: function(){
     $(document).ready(function(){
-      $('body').djax('.updatable', ['###']);
+      $('body').djax('.updatable', ['###','buy-album']);
       badracket.enquire();
       console.log('document ready fires');
     });
@@ -361,7 +362,6 @@ badracket = {
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
    beforeUnload()
   \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
 
   bindMobileUI: function(){
     $('.menu').on('tap',function(){
@@ -498,9 +498,6 @@ var br_state = function() {
         br_fb.UI.render.videos();
       });
     }
-
-
-
   }
 
   function setupAlbumDetail(){
@@ -511,7 +508,6 @@ var br_state = function() {
       }
     }
   }
-
 
   function setupShowRoll(){
 

@@ -23,6 +23,8 @@ var br_sm2 = function(){
     });
   }
 
+
+
   function whilePlaying( sound ){
     var duration     = badracket.stringToTime( br_player.state.currSong.duration ),
         position     = sound.position,
@@ -52,14 +54,15 @@ var br_sm2 = function(){
       id:'brSound' + songCount++,
       url:song.songUrl,
       autoLoad: true,
-      onplay: function() { br_player.state.isPlaying = true; },
-      onresume: function() { br_player.state.isPlaying = true; },
+      onplay: function() { br_player.state.isPlaying = true; $(window).trigger('sm2-play-event'); },
+      onresume: function() { br_player.state.isPlaying = true; $(window).trigger('sm2-play-event');  },
       onpause: function() { br_player.state.isPlaying = false; },
       onstop: function() { br_player.state.isPlaying = false; },
       whileplaying: function() { whilePlaying( this ); },
       onfinish: function() { onFinish( this ); }
     });
   }
+
 
   function previousLoadCheck(){
     var lastPlayed = br_player.history.song.lastPlayed();
@@ -71,7 +74,7 @@ var br_sm2 = function(){
     }
   }
 
-  function playPause ( song ) {
+  function playPause ( song, isPause ) {
 
     console.log('play-pause ran');
 
@@ -82,7 +85,13 @@ var br_sm2 = function(){
     }
 
     br_player.logic.attach30SecondListener( song );              // attach 30 second listener
-    song.sm2_obj.togglePause();                                  // play / pause sound
+
+    if ( isPause ) {
+      song.sm2_obj.pause();
+    } else {
+      song.sm2_obj.togglePause();                                  // play / pause sound
+    }
+
   }
 
   return {
@@ -100,7 +109,7 @@ var br_sm2 = function(){
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 var br_player = function() {
-  /* 
+  /*
 
   TOC:
     * state
@@ -216,6 +225,27 @@ var br_player = function() {
           }
       },
 
+      buyAlbum : function(e){
+        e.preventDefault();
+        var album = br_player.state.currAlbum,
+            title = album.albumName,
+            file = album.zipFile,
+            price = '$' + album.price + '.00',
+            priceCents = album.price * 100,
+            artist = album.artist,
+            cover = album.coverUrl;
+
+        badracket.setupPayForm(cover, title, artist, price, file);
+      },
+
+      buyAlbumHover : function(){
+          badracket.loader.require( [ badracket_theme_path + "/js/prod/payments.min.js" ], paymentsLoaded() );
+          function paymentsLoaded(){
+            console.log('yep');
+             s.bd.off('hover' , '.support-band-button' );
+          }
+      },
+
       whileSliding : function( event, ui, playbar ) {
         el.progressBar.css( 'width', ui.value + '%' );
       },
@@ -256,6 +286,16 @@ var br_player = function() {
         s.bd.on({
           click : function(e){ handlers.songClick(e); }
         } , '.song' );
+      },
+      buyAlbum : function() {
+         s.bd.on({
+          click : function(e){ handlers.buyAlbum(e); }
+        } , '.support-band-button' );
+      },
+      buyAlbumHover : function() {
+       s.bd.on({
+          hover : function(e){ handlers.buyAlbumHover(e); }
+        } , '.support-band-button' );
       },
       slider : function() {
         el.slider.slider({
@@ -302,7 +342,7 @@ var br_player = function() {
       }
     }
 
-    function targetSongLogic( targetAlbum, targetSong ) {
+    function targetSongLogic( targetAlbum, targetSong, isPause ) {
       if ( targetSong.songTitle !== state.currSong.songTitle ) {
 
         if ( typeof state.currSong.sm2_obj !== 'undefined') {
@@ -316,7 +356,7 @@ var br_player = function() {
       }
 
       activeStyle( targetAlbum, targetSong, 'toggle' );
-      br_sm2.playPause( targetSong );
+      br_sm2.playPause( targetSong , isPause );
       ui.render.playState();
     }
 
@@ -564,6 +604,14 @@ var init = function(){
   function smReady() {
     console.log('Soundmanager ready');
     ready.sm = true;
+    console.log('vimeo listener set up');
+    $(window).on('vimeo-play-event', function(){
+      console.log('sm2 heard vimeo!');
+      console.log(br_player.state.currSong.sm2_obj);
+      var a = br_player.state.currAlbum;
+      var s = br_player.state.currSong;
+      br_player.logic.targetSong(a,s,true);
+    });
     readyCallback();
   }
 
@@ -604,6 +652,8 @@ function doMoreStuff() {
   br_player.ui.bindui.slider();
   br_player.ui.bindui.play();
   br_player.ui.bindui.next();
+  br_player.ui.bindui.buyAlbum();
+  br_player.ui.bindui.buyAlbumHover();
   br_player.ui.bindui.previous();
 }
 

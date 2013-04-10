@@ -25,6 +25,4 @@ function ucSent($string) {
   return ucfirst(strtolower($string));
 }
 
-
-
 ?>
