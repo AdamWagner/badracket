@@ -1,12 +1,6 @@
-
-
-
-
 /* --------------------------------------------------------------------------------------- *\
   Payment form styles
 /* --------------------------------------------------------------------------------------- */
-
-
 
 .loading-container {
   position:absolute;
@@ -19,7 +13,7 @@
   padding-top:20%;
   // background:transparentize($pink-cream,0.2);
   display:none;
-  
+
   .loading-messages {
     margin:1em 0;
     div {
@@ -63,14 +57,14 @@
   }
 
 
-.payment-form { 
+.payment-form-wrapper {
   padding:0.5em 1.5em 0.5em 1.5em;
   position:relative;
 
   table {
     width:100%;
   }
-  
+
   td {
     padding:0.5em 0;
   }
@@ -131,8 +125,8 @@ a.red-button {
       font-size:0.65em;
     }
   }
-  &.loading {
-     background:desaturate($red,5%);
+  .loading & {
+    background:desaturate($red,5%);
     opacity:0.5;
     pointer-events:none;
   }

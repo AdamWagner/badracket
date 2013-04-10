@@ -20,7 +20,7 @@ $dark: #403744;
 $light-on-dark:lighten($dark,30%);
 $green: #468d72;
 $dark:hsl(282, 11%, 23%);
-  
+
 @import 'loading';
 
 
@@ -60,11 +60,11 @@ body, html {
 
 @font-face {
 font-family: 'icons';
-src: url('fonts/icomoon.woff') format('woff'), 
+src: url('fonts/icomoon.woff') format('woff'),
      url('fonts/icomoon.svg') format('svg'),
      url('fonts/icomoon.eot') format('eot');
 
- // src: inline-font-files('icomoon.woff', 'woff'), 
+ // src: inline-font-files('icomoon.woff', 'woff'),
  //      inline-font-files('icomoon.svg', 'svg'),
  //      inline-font-files('icomoon.eot', 'eot');
 }
@@ -196,10 +196,10 @@ $nav-width-huge:14%;
 %nav-width {
   width:$nav-width-mobile;
   @include breakpoint(big) {
-    float:left; 
+    float:left;
     width:$nav-width-big;
   }
-  @include breakpoint(bigger) { 
+  @include breakpoint(bigger) {
     width:$nav-width-bigger * .8;
   }
  @media (min-width:1280px) and (max-width:1600px) { // address static page-width between 1280 and 1600
@@ -320,7 +320,7 @@ header.mobile {
 %logo-mark {
  display:block;
  background:inline-image('br-logo.svg');
- background-size:cover; 
+ background-size:cover;
  background-repeat:no-repeat;
 }
 
@@ -447,12 +447,12 @@ nav[role="navigation"] {
     border-bottom:solid 1px lighten($dark, 3%);
   }
 
-  .nav-title { 
+  .nav-title {
     font-size:.85em;
     background:darken($dark,6.5%);
     @include breakpoint(big) {
       background:none;
-      font-size:1.3em; 
+      font-size:1.3em;
       padding:.5em 0;
     }
   }
@@ -462,13 +462,13 @@ nav[role="navigation"] {
     font-size:1.2em;
     border-top:solid 1px lighten($dark, 3%);
     &:first-child { border-top:none; }
-    &:last-child { border-bottom:solid 1px lighten($dark, 3%); } 
+    &:last-child { border-bottom:solid 1px lighten($dark, 3%); }
     @include breakpoint(big) {
       padding:0.2em 0;
       font-size:0.875em;
       border:none;
       &:first-child { border-top:none; }
-      &:last-child { border:none; } 
+      &:last-child { border:none; }
     }
   }
 
@@ -539,7 +539,7 @@ header.mobile,
   Image containing divs
 /* --------------------------------------------------------------------------------------- */
 
-.lazyload { 
+.lazyload {
   background-color:saturate(darken($dark,5%),5%);
   position:relative;
   display:block;
@@ -558,9 +558,9 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 
 
 // the placeholder on top fades out, the img doesn't fade in
-.placeholder { @include transition(opacity .15s linear); pointer-events:none; } 
+.placeholder { @include transition(opacity .15s linear); pointer-events:none; }
 // when parent has class loaded, fade out placeholder
-.loaded .lazyload.fade .placeholder { opacity:0; } 
+.loaded .lazyload.fade .placeholder { opacity:0; }
 
 .ratio-16-9 {padding-bottom:56.25%; /* 9/16*100 */ }
 .ratio-4-3 {padding-bottom:75%; /* 3/4*100 */ }
@@ -625,15 +625,15 @@ section {
   Music section
 /* --------------------------------------------------------------------------------------- */
 
-/* 
+/*
 <div class="grid album">
 
-   <div class="album-cover playable"> 
+   <div class="album-cover playable">
      <div class="play"></div>
      <div class="pause"></div>
      <div class="album-cover-img lazyload fade ratio-1-1" data-src=" ... ">
-     </div> 
-   </div> 
+     </div>
+   </div>
 
    <div class="album-meta">
      <span data-icon="s" class="speaker-indicator"></span>
@@ -653,7 +653,7 @@ section {
   &.loading {
     opacity:0.5;
   }
-  &.playing  { background:#b55050; }                                          // a little darker red 
+  &.playing  { background:#b55050; }                                          // a little darker red
 }
 
 .album-cover {
@@ -665,13 +665,13 @@ section {
   }
 }
 
-.link-to-album { 
+.link-to-album {
   &:hover { text-decoration:underline; color: $dark;}
 }
 
 .album-meta {
   font-size:75%;
-  @include breakpoint(bigger) {font-size:15px;}  // intended to be non-flexy 
+  @include breakpoint(bigger) {font-size:15px;}  // intended to be non-flexy
   padding:0.5em 0;
   position:relative;
   .playing & { color:darken($dark,5%); }
@@ -728,7 +728,7 @@ section {
       .play { opacity:0; }
       .pause {
         @include transition(opacity 0s);
-        opacity:1; 
+        opacity:1;
       }
     }
   } // end :hover

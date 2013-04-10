@@ -450,6 +450,11 @@ textarea {
   /* 2 */
 }
 
+iframe {
+  outline: none;
+  border: none;
+}
+
 /* ==========================================================================
    Tables
    ========================================================================== */
@@ -1722,17 +1727,17 @@ header.desktop .slider + .handle {
   }
 }
 
-.payment-form {
+.payment-form-wrapper {
   padding: 0.5em 1.5em 0.5em 1.5em;
   position: relative;
 }
-.payment-form table {
+.payment-form-wrapper table {
   width: 100%;
 }
-.payment-form td {
+.payment-form-wrapper td {
   padding: 0.5em 0;
 }
-.payment-form.loading {
+.payment-form-wrapper.loading {
   opacity: 0.2;
   -webkit-filter: blur(3px);
   -webkit-transition: -webkit-filter 0.25s;
@@ -1857,7 +1862,7 @@ a.red-button:active {
   content: 'please fill out the form first';
   font-size: 0.65em;
 }
-.submit-payment-button.loading {
+.loading .submit-payment-button {
   background: #d7605e;
   opacity: 0.5;
   pointer-events: none;
@@ -2297,15 +2302,15 @@ section {
 /* --------------------------------------------------------------------------------------- *\
   Music section
 /* --------------------------------------------------------------------------------------- */
-/* 
+/*
 <div class="grid album">
 
-   <div class="album-cover playable"> 
+   <div class="album-cover playable">
      <div class="play"></div>
      <div class="pause"></div>
      <div class="album-cover-img lazyload fade ratio-1-1" data-src=" ... ">
-     </div> 
-   </div> 
+     </div>
+   </div>
 
    <div class="album-meta">
      <span data-icon="s" class="speaker-indicator"></span>

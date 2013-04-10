@@ -3,7 +3,7 @@
 /* @codekit-prepend "lib/enquire.js" */
 /* @codekit-prepend "lib/underscore.js" */
 /* @codekit-prepend "lib/format_date.js" */
-/* @codekit-prepend "lib/leanModal.js" */
+/* @codekit-prepend "lib/froogaloop.js" */
 
 /*
  * jQuery Tiny Pub/Sub
