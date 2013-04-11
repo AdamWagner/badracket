@@ -10,14 +10,13 @@
 
 
 
-function TodoCtrl($scope) {
-  $scope.todos = [
-    {text:'learn angular', done:true},
-    {text:'build an angular app', done:false}];
+function AlbumCtrl($scope) {
+  $scope.albums = albums;
 
-  $scope.addTodo = function() {
-    $scope.todos.push({text:$scope.todoText, done:false});
-    $scope.todoText = '';
+  $scope.play = function(album, $event) {
+    // $scope.todos.push({text:$scope.todoText, done:false});
+    // $scope.todoText = '';
+    console.log(album);
   };
 
   $scope.remaining = function() {
@@ -36,3 +35,24 @@ function TodoCtrl($scope) {
     });
   };
 }
+
+
+function lazyload(){
+    $('.lazyload').each(function() {
+     var lazy = $(this);
+     var src = lazy.attr('data-src');
+     $('<img>').attr('src', src).load(function(){
+          lazy.css('background-image', 'url("'+src+'")');
+          if (lazy.hasClass('fade')) {
+            lazy.parent().addClass('loaded');
+          } else if (lazy.hasClass('fade-this')) {
+            lazy.addClass('loaded');
+          }
+        });
+    });
+  }
+
+
+$(window).load(function(){
+  lazyload();
+});

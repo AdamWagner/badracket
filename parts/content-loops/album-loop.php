@@ -1,18 +1,24 @@
-<div ng-app>
-  <h2>Todo</h2>
-  <div ng-controller="TodoCtrl">
-  <span>{{remaining()}} of {{todos.length}} remaining</span>
-  [ <a href="" ng-click="archive()">archive</a> ]
-  <ul class="unstyled">
-    <li ng-repeat="todo in todos">
-      <input type="checkbox" ng-model="todo.done">
-      <span class="done-{{todo.done}}">{{todo.text}}</span>
-    </li>
-  </ul>
-  <form ng-submit="addTodo()">
-    <input type="text" ng-model="todoText"  size="30"
-           placeholder="add new todo here">
-    <input class="btn-primary" type="submit" value="add">
-  </form>
-  </div>
+
+
+
+
+<div  ng-controller="AlbumCtrl">
+
+<div ng-click="play(album)" ng-repeat="album in albums" class="grid album">
+   <div class="album-cover playable">
+     <div class="play"></div>
+     <div class="pause"></div>
+     <div class="album-cover-img lazyload fade ratio-1-1" data-src="{{album.coverUrl}}" alt="{{album.albumName + album.artist}}">
+     </div>
+   </div>
+   <a class="link-to-album" href="<?php echo the_permalink(); ?>">
+       <div class="album-meta">
+         <span data-icon="s" class="speaker-indicator"></span>
+         <div class="album-title">{{album.albumName}}</div>
+         <div class="artist-name">{{album.artist}}</div>
+       </div>
+   </a>
+ </div>
+
+
 </div>
