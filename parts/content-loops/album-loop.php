@@ -1,26 +1,18 @@
-<?php
-    query_posts(array('post_type' => 'album' ) );
-
-    while (have_posts()) : the_post();
-
-    $albumName = get_the_title();
-    $artist = get_post_meta($post->ID, '_br_artist', true);
-    $cover = get_post_meta($post->ID, '_br_cover_url', true);
-    ?>
-
-    <div class="grid album" data-album-title="<?php echo $albumName; ?>">
-       <div class="album-cover playable"> 
-         <div class="play"></div>
-         <div class="pause"></div>
-         <div class="album-cover-img lazyload fade ratio-1-1" data-src="<?php echo $cover; ?>" alt="<?php echo $artist; ?> - <?php echo $albumName; ?>">
-         </div> 
-       </div> 
-       <a class="link-to-album" href="<?php echo the_permalink(); ?>">
-           <div class="album-meta">
-             <span data-icon="s" class="speaker-indicator"></span>
-             <div class="album-title"><?php echo $albumName; ?></div>
-             <div class="artist-name"><?php echo $artist; ?></div>
-           </div>
-       </a>
-     </div>
-    <?php endwhile; ?>
+<div ng-app>
+  <h2>Todo</h2>
+  <div ng-controller="TodoCtrl">
+  <span>{{remaining()}} of {{todos.length}} remaining</span>
+  [ <a href="" ng-click="archive()">archive</a> ]
+  <ul class="unstyled">
+    <li ng-repeat="todo in todos">
+      <input type="checkbox" ng-model="todo.done">
+      <span class="done-{{todo.done}}">{{todo.text}}</span>
+    </li>
+  </ul>
+  <form ng-submit="addTodo()">
+    <input type="text" ng-model="todoText"  size="30"
+           placeholder="add new todo here">
+    <input class="btn-primary" type="submit" value="add">
+  </form>
+  </div>
+</div>
