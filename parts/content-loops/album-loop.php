@@ -1,10 +1,9 @@
 
 
 
+<div ng-controller="AlbumCtrl">
 
-<div  ng-controller="AlbumCtrl">
-
-<div ng-click="play(album)" ng-repeat="album in albums" class="grid album">
+<div ng-click="play(album)" ng-repeat="album in albums | filter:{kind:'album'}" class="grid album {{ album.isPlaying }}">
    <div class="album-cover playable">
      <div class="play"></div>
      <div class="pause"></div>
@@ -19,6 +18,9 @@
        </div>
    </a>
  </div>
+
+
+
 
 
 </div>

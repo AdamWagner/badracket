@@ -1476,14 +1476,10 @@ header.desktop .audio-player {
   width: 60%;
   float: left;
   margin-right: 1.5em;
-  opacity: 0.5;
   -webkit-transition: opacity 0.25s;
   -moz-transition: opacity 0.25s;
   -o-transition: opacity 0.25s;
   transition: opacity 0.25s;
-}
-header.desktop .audio-player.ready {
-  opacity: 1;
 }
 header.desktop .audio-player.preview-song .statusbar {
   width: 60%;

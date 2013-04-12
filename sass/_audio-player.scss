@@ -13,9 +13,7 @@ $darkest:darken($dark,11%);
   float:left;
   margin-right:1.5em;
 
-  opacity:0.5;
   @include transition(opacity .25s);
-  &.ready { opacity:1; }
   &.preview-song {
     .statusbar {
       width:60%;
@@ -158,7 +156,7 @@ $darkest:darken($dark,11%);
   .loading {
     background-color:darken($dark, 2%);
     z-index:30;
-    &::before { content:none;} 
+    &::before { content:none;}
     &::after { background:darken($dark, 2%); z-index:30;}
   }
 }

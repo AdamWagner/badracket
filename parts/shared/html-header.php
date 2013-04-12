@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html ng-app xmlns:fb="http://www.facebook.com/2008/fbml">
+<html ng-app="BR" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
   <title><?php  global $page, $paged; wp_title( '|', true, 'right' );   ?></title> <!-- Title optimized for use with Yoast SEO plugin -->
   <meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -13,5 +13,5 @@
 
 </head>
 
-<body <?php body_class(); ?>>
+<body  <?php body_class(); ?>>
 <div id="fb-root"></div>
