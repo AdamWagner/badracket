@@ -3,15 +3,9 @@
 /* @codekit-prepend "lib/enquire.js" */
 /* @codekit-prepend "lib/underscore.js" */
 /* @codekit-prepend "lib/format_date.js" */
+/* @codekit-prepend "lib/bootstrap-modal.js" */
 /* @codekit-prepend "lib/froogaloop.js" */
 
-/*
- * jQuery Tiny Pub/Sub
- * https://github.com/cowboy/jquery-tiny-pubsub
- *
- * Copyright (c) 2013 "Cowboy" Ben Alman
- * Licensed under the MIT license.
- */
 
 (function($) {
 

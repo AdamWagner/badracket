@@ -67,7 +67,7 @@
       display:block;
     }
   }
-  
+
 }
 
 .s-1 .grid { width:100%; }
@@ -215,14 +215,14 @@ $breakpoint_prefixes: s-,m-,l-;
 .grid-70 { width:70%; }
 .grid-80 { width:80%; }
 
-.layout-main { 
+.layout-main {
   width:100%;
   @include breakpoint(big) {
-  width:70%; 
+  width:70%;
   }
 }
 
-.layout-sidebar { 
+.layout-sidebar {
   width:100%;
   @include breakpoint(big) {
     width:30%;

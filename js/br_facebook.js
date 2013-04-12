@@ -337,6 +337,21 @@ var br_fb = function(){
       },
 
       rsvpButton : function( status , target ){
+
+        var now = (new Date().getTime() / 1000).toFixed();
+
+        var then = $(target).closest('.padded-section').data('timestamp');
+        console.log(now);
+        console.log(target);
+        console.log(then);
+
+        var text = '';
+        if ( then > now ) {
+          text = 'You\'re going!';
+        } else {
+          text = 'You went!';
+        }
+
         var button;
         if ( target ) {
           button = target;
@@ -347,7 +362,7 @@ var br_fb = function(){
         if ( status ) {
           button.removeClass('not-attending')
             .addClass('rsvp-attending')
-            .find('.text').text('You\'re going!');
+            .find('.text').text(text);
         }
       },
 
