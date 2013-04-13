@@ -124,7 +124,7 @@ var br_fb = function(){
       user.email = d.email;
       user.gender = d.gender;
       user.likes = d.likes.data;
-      user.events = d.events.data;
+      user.events = (typeof d.events !== 'undefined') ? d.events.data : null;
       user.location = d.location.name;
       user.picture = d.picture.data.url;
       user.friends = d.friends.data;
@@ -141,6 +141,7 @@ var br_fb = function(){
     }
 
     function isAttending ( eventID ) {
+      if ( !user.events ) return false;
       for ( var i = user.events.length; i--; ) {
         if ( user.events[i].id == eventID ) { return true; }
       }
@@ -294,6 +295,7 @@ var br_fb = function(){
         function attend(){
             FB.api('/'+eventId+'/attending', 'post', function(data) {
              that.removeClass('transparent');
+              console.log(data);
              if ( data.error ) {
               render.rsvpButton(false);
              } else {

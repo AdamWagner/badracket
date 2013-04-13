@@ -14,6 +14,7 @@
 <?php get_template_part('parts/shared/html-header'); ?>
 
 <body data-state="default-state">
+  <?php wp_mail('me@example.net', 'The subject from local', 'The message'); ?>
   <div data-src="http://badracket.com/wp-content/themes/badracketv4/images/bad-racket-bg-image2.jpg" class="bg lazyload fade-this"></div>
 
   <div class="badracket-window">
