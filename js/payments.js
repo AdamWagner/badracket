@@ -6,9 +6,15 @@ jQuery(function($){
 
   var paymentFormWrapper, paymentForm, loadingContainer,
       loadingSpinner, needsValidation, submitButton,
-      name, email, ccNum, ccExp, ccCvc, filePath;
+      name, email, ccNum, ccExp, ccCvc, filePath,
+      _cover, _title, _artist, _file;
 
   badracket.setupPayForm = function( cover, title, artist, price, file) {
+
+    _cover = cover;
+    _title = title;
+    _artist = artist;
+    _file = file;
 
     var priceCents = price * 100;
     filePath = file;
@@ -120,6 +126,7 @@ jQuery(function($){
           paymentFormWrapper.removeClass('loading');
           loadingContainer.hide();
           submitButton.hide();
+          sendMail( name.val(), email.val() );
 
           var downloadButton = '<a class="red-button" href="'+filePath+'">Download album</a>';
 
@@ -154,6 +161,45 @@ jQuery(function($){
         setTimeout(function() { displayMessage(); }, 2100);
       }
     }
+  }
+
+  function sendMail( name, email ){
+
+    console.log('send mail js ran');
+
+    var message = [
+      name + ',',
+      '\n',
+      'Thanks for supporting ' + _artist + '!',
+      'You can download ' + _title + ' with the link below.',
+      '\n',
+      _file,
+      '\n',
+      '-The Bad Racket Team',
+      'http://www.badracket.com'
+    ].join('\n');
+
+    var subject = _title + ' Download Link';
+
+    var domain = document.location.origin + document.location.pathname;
+
+    jQuery.ajax({
+         url: domain + 'wp-admin/admin-ajax.php',
+         data:{
+              'action':'do_ajax',
+              'fn':'send_mail',
+              'subject': subject,
+              'message': message,
+              'email' : email
+              },
+         dataType: 'JSON',
+         success:function(data){
+           console.log(data);
+         },
+         error: function(errorThrown){
+              console.log(errorThrown);
+         }
+     });
   }
 });
 

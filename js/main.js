@@ -35,7 +35,8 @@ badracket = {
   settings: {
     bd : $('body'),
     mainContent : $('.main-content'),
-    video : $('.video')
+    video : $('.video'),
+    domain : document.location.origin
   },
 
   init: function() {
@@ -201,9 +202,10 @@ badracket = {
 
   doAjaxRequest: function( type ){
        // here is where the request will happen
-       console.log('jquery ajax request ran');
+       var domain = document.location.origin + document.location.pathname;
+
        jQuery.ajax({
-            url: 'http://localhost:8888/sites/brv5/wp-br/wp-admin/admin-ajax.php',
+            url: domain + 'wp-admin/admin-ajax.php',
             data:{
                  'action':'do_ajax',
                  'fn':'get_latest_posts',
@@ -418,14 +420,16 @@ var br_state = function() {
 
   var viewState = 'unknown';
 
+  var domain = document.location.origin + document.location.pathname;
+
   var urls = {
-    home : 'http://localhost:8888/sites/brv5/wp-br/',
+    home : domain,
     albumDetail : 'album=',
     albumRollup : '?post_type=album',
     showDetail : 'show=',
     showRollup : '=show',
-    photos : 'http://localhost:8888/sites/brv5/wp-br/?page_id=336',
-    videos : 'http://localhost:8888/sites/brv5/wp-br/?page_id=160'
+    photos : domain + '?page_id=336',
+    videos : domain + '?page_id=160'
   };
 
   function viewSet( url ) {
@@ -469,7 +473,8 @@ var br_state = function() {
   }
 
   function applyViewState(viewState) {
-    console.log('apply view state ran');
+      console.log(urls.photos);
+    console.log('apply view state ran. State is ' + viewState);
     $('body').attr('data-view', viewState);
   }
 

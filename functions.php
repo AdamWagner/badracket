@@ -77,9 +77,9 @@ remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
 add_action('init', 'removeHeadLinks');
 
 function my_excerpt($excerpt_length = 55, $id = false, $echo = true) {
-    
+
     $text = '';
-    
+
     if($id) {
       $the_post = & get_post( $my_id = $id );
       $text = ($the_post->post_excerpt) ? $the_post->post_excerpt : $the_post->post_content;
@@ -87,12 +87,12 @@ function my_excerpt($excerpt_length = 55, $id = false, $echo = true) {
       global $post;
       $text = ($post->post_excerpt) ? $post->post_excerpt : get_the_content('');
     }
-    
+
     $text = strip_shortcodes( $text );
     $text = apply_filters('the_content', $text);
     $text = str_replace(']]>', ']]&gt;', $text);
     $text = strip_tags($text);
-  
+
     $excerpt_more = ' ' . '[...]';
     $words = preg_split("/[\n\r\t ]+/", $text, $excerpt_length + 1, PREG_SPLIT_NO_EMPTY);
     if ( count($words) > $excerpt_length ) {
@@ -169,7 +169,7 @@ Add Meta Boxes Here
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-details', // $id
-  'title'         => 'Album Details', // $title 
+  'title'         => 'Album Details', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -230,7 +230,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks', // $id
-  'title'         => 'Track 01', // $title 
+  'title'         => 'Track 01', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -244,17 +244,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-01', 
+      'id'      => $prefix . 'songTrackNumber-01',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-01', 
+      'id'      => $prefix . 'duration-01',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-01', 
+      'id'      => $prefix . 'songUrl-01',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -271,7 +271,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-02', // $id
-  'title'         => 'Track 02', // $title 
+  'title'         => 'Track 02', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -285,20 +285,20 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-02', 
+      'id'      => $prefix . 'songTrackNumber-02',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-02', 
+      'id'      => $prefix . 'duration-02',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-02', 
+      'id'      => $prefix . 'songUrl-02',
       'type'    => 'text',
       'desc'    => 'songUrl',
-    ),       
+    ),
      array(
        'id'  => $prefix.'isSampleTrack-02',
        'type'  => 'checkbox',
@@ -312,7 +312,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-03', // $id
-  'title'         => 'Track 03', // $title 
+  'title'         => 'Track 03', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -326,17 +326,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-03', 
+      'id'      => $prefix . 'songTrackNumber-03',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-03', 
+      'id'      => $prefix . 'duration-03',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-03', 
+      'id'      => $prefix . 'songUrl-03',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -353,7 +353,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-04', // $id
-  'title'         => 'Track 04', // $title 
+  'title'         => 'Track 04', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -367,17 +367,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-04', 
+      'id'      => $prefix . 'songTrackNumber-04',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-04', 
+      'id'      => $prefix . 'duration-04',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-04', 
+      'id'      => $prefix . 'songUrl-04',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -394,7 +394,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-05', // $id
-  'title'         => 'Track 05', // $title 
+  'title'         => 'Track 05', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -408,17 +408,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-05', 
+      'id'      => $prefix . 'songTrackNumber-05',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-05', 
+      'id'      => $prefix . 'duration-05',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-05', 
+      'id'      => $prefix . 'songUrl-05',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -433,7 +433,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-06', // $id
-  'title'         => 'Track 06', // $title 
+  'title'         => 'Track 06', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -447,17 +447,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-06', 
+      'id'      => $prefix . 'songTrackNumber-06',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-06', 
+      'id'      => $prefix . 'duration-06',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-06', 
+      'id'      => $prefix . 'songUrl-06',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -472,7 +472,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-07', // $id
-  'title'         => 'Track 07', // $title 
+  'title'         => 'Track 07', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -486,17 +486,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-07', 
+      'id'      => $prefix . 'songTrackNumber-07',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-07', 
+      'id'      => $prefix . 'duration-07',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-07', 
+      'id'      => $prefix . 'songUrl-07',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -512,7 +512,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-08', // $id
-  'title'         => 'Track 08', // $title 
+  'title'         => 'Track 08', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -526,17 +526,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-08', 
+      'id'      => $prefix . 'songTrackNumber-08',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-08', 
+      'id'      => $prefix . 'duration-08',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-08', 
+      'id'      => $prefix . 'songUrl-08',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -552,7 +552,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-09', // $id
-  'title'         => 'Track 09', // $title 
+  'title'         => 'Track 09', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -566,17 +566,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-09', 
+      'id'      => $prefix . 'songTrackNumber-09',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-09', 
+      'id'      => $prefix . 'duration-09',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-09', 
+      'id'      => $prefix . 'songUrl-09',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -591,7 +591,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-10', // $id
-  'title'         => 'Track 10', // $title 
+  'title'         => 'Track 10', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -605,17 +605,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-10', 
+      'id'      => $prefix . 'songTrackNumber-10',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-10', 
+      'id'      => $prefix . 'duration-10',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-10', 
+      'id'      => $prefix . 'songUrl-10',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -630,7 +630,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-12', // $id
-  'title'         => 'Track 12', // $title 
+  'title'         => 'Track 12', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -644,17 +644,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-12', 
+      'id'      => $prefix . 'songTrackNumber-12',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-12', 
+      'id'      => $prefix . 'duration-12',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-12', 
+      'id'      => $prefix . 'songUrl-12',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -669,7 +669,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'album-tracks-13', // $id
-  'title'         => 'Track 13', // $title 
+  'title'         => 'Track 13', // $title
   'pages'         => array('album'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -683,17 +683,17 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-13', 
+      'id'      => $prefix . 'songTrackNumber-13',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-13', 
+      'id'      => $prefix . 'duration-13',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-13', 
+      'id'      => $prefix . 'songUrl-13',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -715,7 +715,7 @@ Show metaboxes here
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'show-details', // $id
-  'title'         => 'Show Details', // $title 
+  'title'         => 'Show Details', // $title
   'pages'         => array('show'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -781,7 +781,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'bands', // $id
-  'title'         => 'Supporting bands', // $title 
+  'title'         => 'Supporting bands', // $title
   'pages'         => array('show'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -801,7 +801,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'venue-details', // $id
-  'title'         => 'Venue', // $title 
+  'title'         => 'Venue', // $title
   'pages'         => array('show'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -845,7 +845,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'show-tracks-01', // $id
-  'title'         => 'Playlist Track 1', // $title 
+  'title'         => 'Playlist Track 1', // $title
   'pages'         => array('show'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -864,17 +864,17 @@ $meta_boxes[] = array(
       'desc'    => 'artistName',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-01', 
+      'id'      => $prefix . 'songTrackNumber-01',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-01', 
+      'id'      => $prefix . 'duration-01',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-01', 
+      'id'      => $prefix . 'songUrl-01',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -884,7 +884,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'show-tracks-02', // $id
-  'title'         => 'Playlist Track 2', // $title 
+  'title'         => 'Playlist Track 2', // $title
   'pages'         => array('show'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -903,17 +903,17 @@ $meta_boxes[] = array(
       'desc'    => 'artistName',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-02', 
+      'id'      => $prefix . 'songTrackNumber-02',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-02', 
+      'id'      => $prefix . 'duration-02',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-02', 
+      'id'      => $prefix . 'songUrl-02',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -925,7 +925,7 @@ $meta_boxes[] = array(
 // 1st meta box
 $meta_boxes[] = array(
   'id'            => 'show-tracks-03', // $id
-  'title'         => 'Playlist Track 3', // $title 
+  'title'         => 'Playlist Track 3', // $title
   'pages'         => array('show'), // $Array of pages boxes will appear on
   'context'       => 'normal', // $context (normal, advanced, side)
   'priority'      => 'high', // position in editor (high, core, default, low)
@@ -944,17 +944,17 @@ $meta_boxes[] = array(
       'desc'    => 'artistName',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-03', 
+      'id'      => $prefix . 'songTrackNumber-03',
       'type'    => 'text',
       'desc'    => 'songTrackNumber',
     ),
      array(
-      'id'      => $prefix . 'duration-03', 
+      'id'      => $prefix . 'duration-03',
       'type'    => 'text',
       'desc'    => 'duration',
-    ),   
+    ),
     array(
-      'id'      => $prefix . 'songUrl-03', 
+      'id'      => $prefix . 'songUrl-03',
       'type'    => 'text',
       'desc'    => 'songUrl',
     ),
@@ -969,9 +969,9 @@ Now, register them meta boxes!
 
 ======================================================================================================================== */
 
-function AW_register_meta_boxes() { 
+function AW_register_meta_boxes() {
 	global $meta_boxes;
-  if ( class_exists( 'RW_Meta_Box' ) ) { 
+  if ( class_exists( 'RW_Meta_Box' ) ) {
 	  foreach ( $meta_boxes as $meta_box ) {
 	  	new RW_Meta_Box( $meta_box );
 	  	}
@@ -985,7 +985,7 @@ add_action( 'admin_init', 'AW_register_meta_boxes' );
 
 /* ========================================================================================================================
 
-Scripts Add scripts via wp_head() // CODEX: wp_register_script( $handle, $src, $deps, $ver, $in_footer ); 
+Scripts Add scripts via wp_head() // CODEX: wp_register_script( $handle, $src, $deps, $ver, $in_footer );
 
 ======================================================================================================================== */
 
@@ -1003,18 +1003,18 @@ function script_enqueuer() {
 
 	wp_register_style( 'screen', get_template_directory_uri().'/style.css', '', '', 'screen' );
   	wp_enqueue_style( 'screen' );
-}	
+}
 
 /* ========================================================================================================================
 
-Comments: Custom callback for outputting comments 
+Comments: Custom callback for outputting comments
 
 ======================================================================================================================== */
 
 function starkers_comment( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment; 
+	$GLOBALS['comment'] = $comment;
 	?>
-	<?php if ( $comment->comment_approved == '1' ): ?>	
+	<?php if ( $comment->comment_approved == '1' ): ?>
 	<li>
 		<article id="comment-<?php comment_ID() ?>">
 			<?php echo get_avatar( $comment ); ?>
@@ -1069,6 +1069,9 @@ function our_ajax_function(){
           case 'get_latest_posts':
                $output = ajax_get_latest_posts($_REQUEST['count'], $_REQUEST['post_type'] );
           break;
+          case 'send_mail':
+               $output = send_mail($_REQUEST['subject'], $_REQUEST['message'], $_REQUEST['email'] );
+          break;
           default:
               $output = 'No function specified, check your jQuery.ajax() call';
           break;
@@ -1078,7 +1081,7 @@ function our_ajax_function(){
     $output=json_encode($output);
 
     if(is_array($output)){
-      print_r($output); 
+      print_r($output);
     } else {
       echo $output;
     } die;
@@ -1097,6 +1100,14 @@ function ajax_get_latest_posts($count, $post_type){
 }
 
 
+function send_mail($subject, $message, $email){
+
+   $headers[] = 'From: Bad Racket <team@badracket.com>';
+
+   wp_mail( $email, $subject, $message, $headers);
+
+   return;
+}
 
 
 
