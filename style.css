@@ -2156,6 +2156,10 @@ header.mobile,
 }
 
 @media (max-width: 1024px) {
+  [data-state="nav-state"] .modal {
+    display: none;
+  }
+
   [data-state="nav-state"] .main-content,
   [data-state="nav-state"] header.mobile {
     -webkit-transform: translateX(15.5em);

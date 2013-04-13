@@ -472,6 +472,44 @@ var br_fb = function(){
         videoContainer.html(frag);
         bindUI.video();
         badracket.lazyLoadImg();
+      },
+
+      videosHome : function(){
+       var videoContainer = $('#video-container'),
+           frag = [];
+
+         for (var i = 0; i < 4; i++ ) {
+           var el = BR.videos[i];
+           var thumbnail = el.thumbnail_large,
+               title = el.title.split(':')[0],
+               formatted_date = date("M Y", new Date(el.upload_date)),
+               id = el.id;
+
+           var vidEl = [
+           '<div class="grid padded">',
+           '<a href="'+br_state.urls.videos+'" class="dJAX_internal">',
+           '<span>',
+             '<div class="playable video" data-id="'+id+'">',
+               '<div class="play"></div> ',
+               '<div class="lazyload fade ratio-16-9" data-src="'+ thumbnail +'">',
+               '</div>',
+               '</span>',
+             '</div>',
+             '<div class="album-meta">',
+               '<div class="album-title">'+title+'</div>',
+               '<div class="artist-name">'+formatted_date+'</div>',
+             '</div>',
+           '</a>',
+           '</div>'
+           ].join('');
+
+           frag.push(vidEl);
+         }
+
+
+       videoContainer.html(frag);
+       bindUI.videoHome();
+       badracket.lazyLoadImg();
       }
 
 
@@ -524,6 +562,17 @@ var br_fb = function(){
          logout();
        },
 
+
+       videoHomeClick : function(){
+        var id = $(this).data('id');
+
+        $(window).on('djaxLoad', function(e, data) {
+          console.log(id);
+          $('[data-id="'+id+'"]').click();
+        });
+
+       },
+
        videoClick : function(){
         var that = $(this);
 
@@ -538,10 +587,12 @@ var br_fb = function(){
            .next()
            .addClass('next');
 
-         var ratioHeight = $('.main-content').width() * (.5);
+         var ratioHeight = $('.main-content').width() * 0.5;
+
          vimeoContainer
           .addClass('loading')
           .css('height', ratioHeight );
+
          vimeoContainer.find('.iframe-wrap').html('<iframe style="visibility:hidden;" onload="this.style.visibility=\'visible\';" id="vimeo-player" src="http://player.vimeo.com/video/'+id+'?api=1&autoplay=true&player_id=vimeo-player"></iframe>');
 
          vimeo.bind();
@@ -589,6 +640,10 @@ var br_fb = function(){
 
       video : function(){
         $('.video').on('click', handlers.videoClick );
+      },
+
+      videoHome : function(){
+        $('.video').on('click', handlers.videoHomeClick );
       },
 
       bindAll : function(){

@@ -518,10 +518,10 @@ header.mobile,
 }
 
 @include breakpoint-reverso(small) {
+  [data-state="nav-state"] .modal { display:none; }
   [data-state="nav-state"] .main-content,
   [data-state="nav-state"] header.mobile {
     @include transform(translateX($nav-width-mobile));
-
   }
 
   [data-state="nav-state"] [role="navigation"] {

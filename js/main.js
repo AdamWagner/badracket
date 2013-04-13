@@ -458,8 +458,8 @@ var br_state = function() {
       setupAlbumPage();
     } else if ( url === urls.home ) {
       viewState = 'home';
+      setupHome();
       setupAlbumPage();
-      setupVideosPage();
     } else if ( url === urls.videos ) {
       viewState = 'videos';
       setupVideosPage();
@@ -496,6 +496,19 @@ var br_state = function() {
     if ( br_player.state.isPlaying ) {
         $('[data-album-title="'+ br_player.state.currAlbum.albumName +'"]').addClass('playing');
     }
+  }
+
+
+  function setupHome(){
+   if (typeof br_fb.BR.videos !== 'undefined') {
+     if ( br_fb.BR.videos.length > 10 ) {
+       br_fb.UI.render.videosHome();
+     }
+   } else {
+     $(window).on('videos-loaded', function(){
+       br_fb.UI.render.videosHome();
+     });
+   }
   }
 
   function setupVideosPage(){
@@ -587,7 +600,8 @@ var br_state = function() {
 
   return {
     viewSet : viewSet,
-    viewGet : viewGet
+    viewGet : viewGet,
+    urls : urls
   };
 
 }();
