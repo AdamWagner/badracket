@@ -18,7 +18,7 @@ jQuery(function($){
 
     var priceCents = price * 100;
     filePath = file;
-    $('#modal-content').html('<form action="" method="POST" id="payment-form" novalidate autocomplete="on"> <div class="modal-body"> <div class="loading-container"> <span class="loading-spinner style-2"> </span> <div class="loading-messages"></div> </div> <div class="payment-form-wrapper"> <span class="payment-errors"></span> <table> <tr> <td class="label-container">Name </td> <td class="input-container"> <input type="text" size="20" class="your-name w-100" placeholder="Your name" /> </td> </tr> <tr> <td class="label-container">Email </td> <td class="input-container"><input type="text" size="20" class="your-email w-100" placeholder="Your email" /> </td> </tr> <tr> <td class="label-container">Card Number </td> <td class="input-container"><input type="text" size="20" data-stripe="number " class="cc-number w-100 " pattern="\d*" x-autocompletetype="cc-number" placeholder="Card number" required/> </td> </tr> <tr> <td class="label-container">CVC </td> <td class="input-container"><input type="text" size="4" data-stripe="cvc" class="cc-cvc" pattern="\d*" x-autocompletetype="cc-csc" placeholder="Security code" required  autocomplete="off"/> </td> </tr> <tr> <td class="label-container">Exp date </td> <td class="input-container"><input type="text" size="9" data-stripe="exp-date " class="cc-exp w-100 " pattern="\d*" x-autocompletetype="cc-exp" placeholder="MM / YY" required maxlength="9"/> </td> </tr> </table> </div> <!-- end form-wrapper --> </div> <!-- end modal-body --> <div class="modal-footer"> <span  class="cancel-purchase" data-dismiss="modal" aria-hidden="true">close </span> <button class="submit-payment-button disabled" type="submit">Submit Payment </button> </div> </form>');
+    $('#modal-content').html('<form action="" method="POST" id="payment-form" novalidate autocomplete="on"> <div class="modal-body"> <div class="loading-container"> <span class="loading-spinner style-2"> </span> <div class="loading-messages"></div> </div> <div class="payment-form-wrapper"> <span class="payment-errors"></span> <table> <tr> <td class="label-container">Name </td> <td class="input-container"> <input type="text" size="20" class="your-name w-100" placeholder="Your name" /> </td> </tr> <tr> <td class="label-container">Email </td> <td class="input-container"><input type="email" size="20" class="your-email w-100" placeholder="Your email" /> </td> </tr> <tr> <td class="label-container">Card Number </td> <td class="input-container"><input type="text" size="20" data-stripe="number " class="cc-number w-100 " pattern="\d*" x-autocompletetype="cc-number" placeholder="Card number" required/> </td> </tr> <tr> <td class="label-container">CVC </td> <td class="input-container"><input type="text" size="4" data-stripe="cvc" class="cc-cvc" pattern="\d*" x-autocompletetype="cc-csc" placeholder="Security code" required  autocomplete="off"/> </td> </tr> <tr> <td class="label-container">Exp date </td> <td class="input-container"><input type="text" size="9" data-stripe="exp-date " class="cc-exp w-100 " pattern="\d*" x-autocompletetype="cc-exp" placeholder="MM / YY" required maxlength="9"/> </td> </tr> </table> </div> <!-- end form-wrapper --> </div> <!-- end modal-body --> <div class="modal-footer"> <span  class="cancel-purchase" data-dismiss="modal" aria-hidden="true">close </span> <button class="submit-payment-button disabled" type="submit">Submit Payment </button> </div> </form>');
 
     $('#payment-form').append('<input type="hidden" name="price" value="'+priceCents+'"/">');
     $('.buy-album-cover').attr('src',cover);
@@ -52,6 +52,12 @@ jQuery(function($){
     // console.log(file);
   };
 
+   function isValidEmail(email) {
+      var eReg=/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+      return eReg.test(email);
+  }
+
+
 
   function validateFields(){
     var cardType = $.payment.cardType( ccNum.val() );
@@ -60,7 +66,7 @@ jQuery(function($){
     ccExp.toggleClass('invalid', !$.payment.validateCardExpiry(ccExp.payment('cardExpiryVal')));
     ccCvc.toggleClass('invalid', !$.payment.validateCardCVC(ccCvc.val(), cardType));
     name.toggleClass('invalid', name.val().length < 3 );
-    email.toggleClass('invalid', email.val().length < 4 );
+    email.toggleClass('invalid', !isValidEmail( email.val() ) );
 
     if ( $('input.invalid').length ) {
       submitButton.addClass('disabled');

@@ -2328,7 +2328,7 @@ section {
   opacity: 0.5;
 }
 .album.playing {
-  background: #b55050;
+  background: #cc4c4a;
 }
 
 .album-cover {
@@ -2392,6 +2392,7 @@ section {
 .playable {
   position: relative;
   background: #2c2031;
+  cursor: pointer;
 }
 .playable .play, .playable .pause {
   position: absolute;
@@ -2601,6 +2602,10 @@ section {
   .show-sidebar {
     float: left;
   }
+}
+
+[data-view="show-detail"] .view-full-album {
+  display: none;
 }
 
 .show-main-section .show-bg-image {
@@ -2953,4 +2958,41 @@ section {
 .show-rollup-sidebar .sub-button-details {
   font-family: helvetica;
   font-size: 0.8em;
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Videos page
+/* --------------------------------------------------------------------------------------- */
+.vimeo-container {
+  -webkit-transition: height, 0.2s;
+  -moz-transition: height, 0.2s;
+  -o-transition: height, 0.2s;
+  transition: height, 0.2s;
+}
+.vimeo-container iframe {
+  opacity: 1;
+  -webkit-transition: opacity, 0.4s;
+  -moz-transition: opacity, 0.4s;
+  -o-transition: opacity, 0.4s;
+  transition: opacity, 0.4s;
+}
+.vimeo-container.loading {
+  height: 900px;
+  background: #3d3441;
+}
+.vimeo-container.loading iframe {
+  opacity: 0;
+}
+.vimeo-container.loading .loading-container {
+  display: block;
+}
+.vimeo-container.loading .loading-container .style-2 {
+  border-color: #f2e7cc transparent;
+}
+.vimeo-container.loading .loading-container .loading-spinner {
+  border-width: 40px;
+}
+
+.video-container .playing {
+  background: #cc4c4a;
 }

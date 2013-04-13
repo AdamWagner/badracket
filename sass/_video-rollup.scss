@@ -1,0 +1,31 @@
+
+
+// player container
+.vimeo-container {
+  @include transition(height, .2s);
+  iframe {
+    opacity:1;
+    @include transition(opacity, .4s);
+  }
+  &.loading {
+    height:900px;
+    iframe { opacity:0; }
+    background:$dark;
+    .loading-container {
+      display:block;
+      .style-2 {
+        border-color: $cream transparent;
+      }
+      .loading-spinner {
+        border-width:40px;
+      }
+    }
+  }
+
+}
+
+// thumbnail container
+.video-container {
+  .playing  { background:desaturate(darken($red,6%),9%); }
+
+}

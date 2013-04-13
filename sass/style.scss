@@ -653,7 +653,7 @@ section {
   &.loading {
     opacity:0.5;
   }
-  &.playing  { background:#b55050; }                                          // a little darker red
+  &.playing  { background:desaturate(darken($red,6%),9%); }                    // a little darker red
 }
 
 .album-cover {
@@ -702,6 +702,7 @@ section {
 .playable {
   position:relative;
   background:saturate(darken($dark,7%),10%);
+  cursor:pointer;
 
   .play, .pause {
     position:absolute;
@@ -740,6 +741,11 @@ section {
 @import 'show-detail';
 @import 'show-rollup';
 
+/* --------------------------------------------------------------------------------------- *\
+  Videos page
+/* --------------------------------------------------------------------------------------- */
+
+@import 'video-rollup';
 
 
 

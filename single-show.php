@@ -40,7 +40,7 @@
 
               <div class="show-heading padded-mobile-1">
                 <h1 class="show-headliner"><?php the_title(); ?></h1>
-                <h2 class="show-supporting-bands">with <?php 
+                <h2 class="show-supporting-bands">with <?php
 
                 foreach ( $supporting_bands as $band ) {
                   if ($band === end($supporting_bands)){
@@ -49,7 +49,7 @@
                     echo $band . ' / ';
                   }
                 }
-                ?> 
+                ?>
               </h2>
               </div>
 
@@ -75,14 +75,14 @@
                     if ($i<10) {
                       $songTitle = ucSent(get_post_meta($post->ID, '_br_songTitle-0'.$i.'', true));
                       $songArtist = ucSent(get_post_meta($post->ID, '_br_artist-0'.$i.'', true));
-                      $duration = get_post_meta($post->ID, '_br_duration-0'.$i.'', true); 
-                      $songTrackNumber = get_post_meta($post->ID, '_br_songTrackNumber-0'.$i.'', true); 
-                      $isPreview = get_post_meta($post->ID, '_br_isSampleTrack-0'.$i.'', true); 
+                      $duration = get_post_meta($post->ID, '_br_duration-0'.$i.'', true);
+                      $songTrackNumber = get_post_meta($post->ID, '_br_songTrackNumber-0'.$i.'', true);
+                      $isPreview = get_post_meta($post->ID, '_br_isSampleTrack-0'.$i.'', true);
                     } else {
                       $songTitle = ucSent(get_post_meta($post->ID, '_br_songTitle-'.$i.'', true));
                       $songArtist = ucSent(get_post_meta($post->ID, '_br_artist-'.$i.'', true));
-                      $duration = get_post_meta($post->ID, '_br_duration-'.$i.'', true); 
-                      $songTrackNumber = get_post_meta($post->ID, '_br_songTrackNumber-'.$i.'', true); 
+                      $duration = get_post_meta($post->ID, '_br_duration-'.$i.'', true);
+                      $songTrackNumber = get_post_meta($post->ID, '_br_songTrackNumber-'.$i.'', true);
                     }
                     echo '<tr class="song" data-track-number="'.$songTrackNumber.'">';
                         echo  '<td class="trackNumber">
@@ -152,7 +152,7 @@
           <div class="attendees"><div class="text"></div><div class="facepile s-4 m-4 b-6 h-9 single-row group"></div></div>
 
         </div>
-        
+
       </section>
       <?php endwhile; ?>
 

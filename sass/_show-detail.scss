@@ -6,6 +6,10 @@
   }
 }
 
+[data-view="show-detail"] {
+  .view-full-album { display:none; }
+}
+
 .show-main-section {
 
   .show-bg-image {
@@ -91,7 +95,7 @@
     @extend no-wrap-text;
   }
 
-  .price-note { 
+  .price-note {
     font-size:0.8em;
     opacity:0.7;
   }

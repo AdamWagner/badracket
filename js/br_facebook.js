@@ -277,43 +277,6 @@ var br_fb = function(){
 
   var UI = function(){
 
-
-    var handlers = {
-       login : function(){
-         login();
-       },
-
-       logout : function(){
-         logout();
-       },
-
-       rsvp : function(){
-        var that = $(this);
-        that.addClass('transparent');
-        var eventId = $('.show-rsvp').data('fb-id');
-
-        function attend(){
-            FB.api('/'+eventId+'/attending', 'post', function(data) {
-             that.removeClass('transparent');
-              console.log(data);
-             if ( data.error ) {
-              render.rsvpButton(false);
-             } else {
-              render.rsvpButton(true);
-             }
-            });
-        }
-
-        if ( config.connectStatus !== 'connected' ) {
-          login( attend );
-        } else {
-          attend();
-        }
-       }
-
-     };
-
-
     var render = {
 
       authStatus : function( loggedIn ){
@@ -482,7 +445,6 @@ var br_fb = function(){
             frag = [];
 
         _.each(BR.videos, function( el ){
-          console.log(el);
           var thumbnail = el.thumbnail_large,
               title = el.title.split(':')[0],
               formatted_date = date("M Y", new Date(el.upload_date)),
@@ -522,34 +484,95 @@ var br_fb = function(){
 
         // When the player is ready, add listeners for pause, finish, and playProgress
         player.addEvent('ready', function() {
-            console.log('vimeo ready');
-            player.addEvent('play', onPlay);
-            player.addEvent('pause', onPause);
-            player.addEvent('finish', onFinish);
+          player.addEvent('play', onPlay);
+          player.addEvent('pause', onPause);
+          player.addEvent('finish', onFinish);
+
         });
 
-        $(window).on('sm2-play-event', function() {
-          console.log('sm2 play event hhhhhhhhaaaaaaaarrrrrrrrrrrddd');
-          player.api('pause');
-        });
+        $(window).on('sm2-play-event', function() { player.api('pause'); });
 
         function onPlay(id){
-          console.log('played');
+            var vimeoContainer = $('.vimeo-container');
+            setTimeout(function() {
+              vimeoContainer.removeClass('loading');
+            }, 500);
+
           $(window).trigger('vimeo-play-event');
         }
 
         function onPause(id) {
-          console.log('paused');
           $(window).trigger('vimeo-pause-event');
         }
 
         function onFinish(id) {
-          console.log('finished');
-          $(window).trigger('vimeo-trigger-event');
+          $('.next')
+            .find('.video')
+            .click();
         }
 
       }
     };
+
+
+    var handlers = {
+       login : function(){
+         login();
+       },
+
+       logout : function(){
+         logout();
+       },
+
+       videoClick : function(){
+        var that = $(this);
+
+        var id = that.data('id'),
+            vimeoContainer = $('.vimeo-container');
+
+         $('.grid').removeClass('playing next');
+
+         that
+           .closest('.grid')
+           .addClass('playing')
+           .next()
+           .addClass('next');
+
+         var ratioHeight = $('.main-content').width() * (.5);
+         vimeoContainer
+          .addClass('loading')
+          .css('height', ratioHeight );
+         vimeoContainer.find('.iframe-wrap').html('<iframe style="visibility:hidden;" onload="this.style.visibility=\'visible\';" id="vimeo-player" src="http://player.vimeo.com/video/'+id+'?api=1&autoplay=true&player_id=vimeo-player"></iframe>');
+
+         vimeo.bind();
+         vimeoContainer.fitVids();
+       },
+
+       rsvp : function(){
+        var that = $(this);
+        that.addClass('transparent');
+        var eventId = $('.show-rsvp').data('fb-id');
+
+        function attend(){
+            FB.api('/'+eventId+'/attending', 'post', function(data) {
+             that.removeClass('transparent');
+              console.log(data);
+             if ( data.error ) {
+              render.rsvpButton(false);
+             } else {
+              render.rsvpButton(true);
+             }
+            });
+        }
+
+        if ( config.connectStatus !== 'connected' ) {
+          login( attend );
+        } else {
+          attend();
+        }
+       }
+
+     };
 
     var bindUI = {
       login : function(){
@@ -565,15 +588,7 @@ var br_fb = function(){
       },
 
       video : function(){
-        console.log('video binding');
-        $('.video').on('click', function(){
-          var id = $(this).data('id');
-          // $('#vimeo-player').attr('src', 'http://player.vimeo.com/video/' + id + '?api=1&player_id=vimeo-player');
-          $('.vimeo-container').html('<iframe style="visibility:hidden;" onload="this.style.visibility=\'visible\';" id="vimeo-player" src="http://player.vimeo.com/video/'+id+'?api=1&player_id=vimeo-player"></iframe>');
-          vimeo.bind();
-          console.log(s.video.fitVids);
-          $('.vimeo-container').fitVids();
-        });
+        $('.video').on('click', handlers.videoClick );
       },
 
       bindAll : function(){

@@ -8,7 +8,7 @@
          <div class="player-metadata group">
            <div class="audio-player-title">
              <a href="" class="audio-title">
-                <span class="song">Loading...</span> <span class="hide-till-ready">-</span> 
+                <span class="song">Loading...</span> <span class="hide-till-ready">-</span>
                 <span class="artist"></span>
              </a>
            </div>
@@ -36,7 +36,7 @@
     <a href="#buy-album-form" data-toggle="modal" class="support-band">
       <div class="support-band-button button">Get album </div>
     </a>
-    
+
     <div class="facebook">
       <div class="login">Login with Facebook</div>
       <div class="fb-user">
