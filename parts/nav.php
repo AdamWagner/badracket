@@ -10,12 +10,19 @@
         </div>
 
         <ul class="reset-list">
-          <li><a href="<?php echo get_post_type_archive_link( 'album' ); ?>">Albums</a></li>
-          <li><a href="<?php echo get_page_link(160);?>">Videos</a></li>
-          <li><a href="<?php echo get_post_type_archive_link( 'show' ); ?>">Shows</a></li>
-          <li><a href="<?php echo get_page_link(336);?>">Photos</a></li>
-          <li><a href="<?php echo get_post_type_archive_link( 'interview' ); ?>">Interviews</a></li>
-          <li><a href="<?php echo get_page_link(2479);?>">Articles</a></li>
+          <li>
+            <a href="<?php echo get_post_type_archive_link( 'album' ); ?>">Albums</a>
+            <span class="count">12</span>
+          </li>
+          <li>
+            <a href="<?php echo get_page_link(160);?>">Videos</a>
+            <span class="count new">25</span>
+          </li>
+          <li>
+            <a href="<?php echo get_post_type_archive_link( 'show' ); ?>">Shows</a>
+            <span class="count">25</span>
+          </li>
+          <li class="small"> <a href="<?php echo get_page_link(336);?>">More</a> </li>
         </ul>
 
       </li>

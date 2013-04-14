@@ -344,7 +344,6 @@ badracket = {
      if ( isSet === 'none' ) {                                //avoid double running on elements
        $('<img>').attr('src', src).load(function(){
             lazy.css('background-image', 'url("'+src+'")');
-            lazy.parent().append('loaded mutha');
             if (lazy.hasClass('fade')) {
               lazy.parent().addClass('loaded');
             } else if (lazy.hasClass('fade-this')) {

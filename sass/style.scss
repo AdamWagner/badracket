@@ -16,10 +16,9 @@ $cream: #f2e7cc;
 $pink-cream: #f8ebe1;
 $red: #dc5b59;
 $orange: #d27f62;
-$dark: #403744;
+$dark:hsl(282, 12%, 20%);
 $light-on-dark:lighten($dark,30%);
 $green: #468d72;
-$dark:hsl(282, 11%, 23%);
 
 @import 'loading';
 
@@ -431,7 +430,7 @@ nav[role="navigation"] {
   height:100%;
   @include transition(opacity .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
   @include breakpoint(big) {
-    padding:0.75em;
+    padding:1em;
   }
   @include breakpoint-reverso(small) {
     opacity:0;
@@ -441,17 +440,12 @@ nav[role="navigation"] {
 
 .nav-title, .nav-level-1 li,  {
   padding:0.75em 0.5em;
-  @include breakpoint(big) {
-    padding:0.25 0;
-  }
-  a {color:desaturate(lighten($dark,40%),4%);
-  }
-
-
+  @include breakpoint(big) { padding:0.25 0; }
+  a { color:desaturate(lighten($dark,55%),3% );   }
 }
 
 .nav-level-1 {
-  color:desaturate(lighten($dark,40%),4%);
+  color:desaturate(lighten($dark,14%),2.5%);
 
   @include breakpoint(big) {
     border-bottom:solid 1px lighten($dark, 3%);
@@ -462,8 +456,10 @@ nav[role="navigation"] {
     background:darken($dark,6.5%);
     @include breakpoint(big) {
       background:none;
-      font-size:1.3em;
-      padding:.5em 0;
+      font-size:1.2em;
+      text-rendering:optimizelegibility;
+      padding:0.4em 0;
+      margin-top:0.23em;
     }
   }
 
@@ -473,6 +469,39 @@ nav[role="navigation"] {
     border-top:solid 1px lighten($dark, 3%);
     &:first-child { border-top:none; }
     &:last-child { border-bottom:solid 1px lighten($dark, 3%); }
+    // .count {
+    //   font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    //   text-rendering:optimizelegibility;
+    //   font-size:0.65em;
+    //   background:$dark;
+    //   border-radius:3px;
+    //   padding:0.3em 0.5em;
+    //   position:absolute;
+    //   right:0;
+    //   top:0;
+      // &.new::before {
+      //     content:'';
+      //     display:block;
+      //     position:absolute;
+      //     left:-1.1em;
+      //     top:0.5em;
+      //     width:0.65em;
+      //     height:0.65em;
+      //     background:$green;
+      //     border-radius:50%;
+      // }
+    // }
+    &.small {
+      font-size:0.65em;
+      font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+      text-rendering:optimizelegibility;
+      opacity:0.2;
+      margin-top:0.25em;
+    }
+    &:hover {
+      a, .count { color:desaturate(lighten($dark,80%),3% ); }
+
+    }
     @include breakpoint(big) {
       padding:0.2em 0;
       font-size:0.875em;
@@ -548,20 +577,12 @@ header.mobile,
 }
 
 
-
-
 /* Prevent reflow without placeholder image
 http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 
 .ratio-16-9 { padding-bottom:56.25%; /* 9/16*100 */ }
 .ratio-4-3 { padding-bottom:75%; /* 3/4*100 */ }
 .ratio-1-1 { padding-bottom:100%; /* ... */ }
-
-// the placeholder on top fades out, the img doesn't fade in
-.placeholder { @include transition(opacity .15s linear); pointer-events:none; }
-// when parent has class loaded, fade out placeholder
-.loaded .lazyload.fade .placeholder { opacity:0; }
-
 
 .round-shadow {
   border-radius:3px;

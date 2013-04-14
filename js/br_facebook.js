@@ -433,7 +433,7 @@ var br_fb = function(){
         $.when.apply(null, window.dfds ).done(function( r ){
           BR.sortedPhotos = _.sortBy(BR.photos, function( p ){ return -p.likes; });
           for (var i = 0; i < 95; i++ ) {
-            $('.s-1').append('<div class="grid padded"><div class="lazyload fade ratio-4-3 round-shadow" data-src="' + BR.sortedPhotos[i].medium + '"></div>');
+            $('.s-1').append('<div class="grid padded"><div class="lazyload fade ratio-4-3" data-src="' + BR.sortedPhotos[i].medium + '"></div>');
           }
           badracket.lazyLoadImg('render photos');
         });

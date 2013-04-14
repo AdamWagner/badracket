@@ -10,28 +10,28 @@ h1,h2,h3,h4,h5,h6 {
 
 @font-face {
 font-family: 'zine-regular';
-src: url('fonts/ZineSerifDisWebPro.eot') format('eot'), 
+src: url('fonts/ZineSerifDisWebPro.eot') format('eot'),
      url('fonts/ZineSerifDisWebPro.woff') format('woff');
 }
 @font-face {
 font-family: 'zine-bold';
-src: url('fonts/ZineSerifDisWebPro-Bold.eot') format('eot'), 
+src: url('fonts/ZineSerifDisWebPro-Bold.eot') format('eot'),
      url('fonts/ZineSerifDisWebPro-Bold.woff') format('woff');
 }
 @font-face {
 font-family: 'zine-italic';
-src: url('fonts/ZineSerifDisWebPro-Italic.eot') format('woff'), 
+src: url('fonts/ZineSerifDisWebPro-Italic.eot') format('woff'),
      url('fonts/ZineSerifDisWebPro-Italic.woff') format('eot');
 }
 @font-face {
 font-family: 'zine-italic';
-src: url('fonts/ZineSerifDisWebPro-MediumIta.woff') format('woff'), 
+src: url('fonts/ZineSerifDisWebPro-MediumIta.woff') format('woff'),
      url('fonts/ZineSerifDisWebPro-MediumIta.eot') format('eot');
 }
 
 @font-face {
 font-family: 'icons';
-src: url('fonts/icomoon.woff') format('woff'), 
+src: url('fonts/icomoon.woff') format('woff'),
      url('fonts/icomoon.svg') format('svg'),
      url('fonts/icomoon.eot') format('eot');
 }
@@ -59,6 +59,7 @@ src: url('fonts/icomoon.woff') format('woff'),
   font-weight: normal;
   font-style: normal;
   font-variant:normal;
+  text-rendering:optimizelegibility;
 }
 
 @mixin icons {
