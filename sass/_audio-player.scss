@@ -39,7 +39,7 @@ $darkest:darken($dark,11%);
     color:darken($darkest,6%);
   }
   .artist {
-    color:saturate(darken($progress-color,3.7%),12%);
+    color:saturate(darken($progress-color,3.7%),3%);
     font-style:italic;
     @extend %no-wrap-text;
   }

@@ -44,11 +44,19 @@ var br_sm2 = function(){
   }
 
   var songCount = 0;
-  function createSound( song ) {
+  function createSound( song, isInline ) {
 
     if (song.isSampleTrack === '0') { song.duration = '0:30'; }
 
     console.log('create sound ran');
+
+    if ( isInline ) {
+       return soundManager.createSound({
+        id:'brSound' + songCount++,
+        url:song.songUrl,
+        autoLoad: true
+      });
+    }
 
     return soundManager.createSound({
       id:'brSound' + songCount++,
@@ -74,20 +82,20 @@ var br_sm2 = function(){
     }
   }
 
-  function playPause ( song, isPause ) {
+  function playPause ( song, isPause, isInline ) {
 
     console.log('play-pause ran');
 
     previousLoadCheck();
 
     if ( !('sm2_obj' in song) ) {                                // if sm2_object doesn't exist
-      song.sm2_obj = createSound( song );                        // ... create sound
+      song.sm2_obj = createSound( song, isInline );              // ... create sound
     }
 
     br_player.logic.attach30SecondListener( song );              // attach 30 second listener
 
     if ( isPause ) {
-      song.sm2_obj.pause();
+      song.sm2_obj.stop(); // seems to work fine, not rewinding
     } else {
       song.sm2_obj.togglePause();                                  // play / pause sound
     }
@@ -102,6 +110,67 @@ var br_sm2 = function(){
   };
 
 }();
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+   Inline Player
+\* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+var br_inline_player = function(){
+
+  var allSongs = [];
+
+  function songAlreadyExists ( songURL ) {
+    var exists;
+    _.each( allSongs, function( song ) {
+        if ( song.songUrl === songURL ) {
+          exists = song;
+        }
+    });
+    return exists;
+  }
+
+  var bindUI = {
+    playClick: function(){
+      console.log('inline-play-click-bound');
+        s.bd.on({
+          click : function(e){ handlers.playClick(e); }
+        }, '.inline-play-pause' );
+      }
+    };
+
+  var handlers = {
+    playClick: function(e){
+      var el = $(e.target).closest('.inline-player'),
+          songURL = el.data('song-url'),
+          exists = songAlreadyExists( songURL ),
+          button = el.find('.inline-play-pause');
+
+      $(window).trigger('vimeo-play-event', songURL);
+
+      if ( exists ) {
+        exists.sm2_obj.togglePause();
+        var icn2 = exists.sm2_obj.paused ? 'm' : 'n';
+        button.attr('data-icon', icn2);
+      } else {
+        var song = {songUrl : songURL };
+        allSongs.push(song);
+        br_sm2.playPause( song, false, true); // song, isPause, isInline
+        button.attr('data-icon', 'n');
+        $(window).on('sm2-play-event vimeo-play-event', function( _ , songURL){
+          if ( songURL === song.songUrl ) { return false; }
+          song.sm2_obj.pause();
+          button.attr('data-icon', 'm');
+        });
+      }
+    }
+  };
+
+  return {
+    bindUI : bindUI
+  };
+}();
+
+br_inline_player.bindUI.playClick();
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\

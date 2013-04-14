@@ -22,8 +22,9 @@ require_once( 'external/cpt.php' );
 require_once( 'external/album-page.php' );
 require_once( 'external/meta-box/meta-box.php' );
 require_once( 'external/stripe-php/lib/Stripe.php' );
+require_once( 'external/shortcodes.php' );
 
-
+// remove_filter( 'the_content', 'wpautop' );
 
 /* ========================================================================================================================
 
@@ -47,6 +48,8 @@ if ($_POST) {
     $error = $e->getMessage();
   }
 }
+
+
 
 
 /* ========================================================================================================================

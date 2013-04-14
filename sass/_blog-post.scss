@@ -1,0 +1,16 @@
+.inline-player {
+  margin:1em 0;
+  background:$red;
+
+  .inline-play-pause {
+    color:$dark;
+    font-size:1em;
+    float:left;
+    width:1.4em;
+    cursor:pointer;
+    &:hover {
+      color:darken($dark,5%);
+    }
+  }
+
+}

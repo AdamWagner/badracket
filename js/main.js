@@ -4,6 +4,7 @@
 /* @codekit-prepend "lib/underscore.js" */
 /* @codekit-prepend "lib/format_date.js" */
 /* @codekit-prepend "lib/bootstrap-modal.js" */
+/* @codekit-prepend "lib/bootstrap-carousel.js" */
 /* @codekit-prepend "lib/froogaloop.js" */
 
 
@@ -286,7 +287,7 @@ badracket = {
 
   docReady: function(){
     $(document).ready(function(){
-      $('body').djax('.updatable', ['###','buy-album']);
+      $('body').djax('.updatable', ['###','buy-album','carousel','post_photo']);
       badracket.enquire();
       console.log('document ready fires');
     });

@@ -16,7 +16,7 @@ $cream: #f2e7cc;
 $pink-cream: #f8ebe1;
 $red: #dc5b59;
 $orange: #d27f62;
-$dark:hsl(282, 12%, 20%);
+$dark:hsl(282, 11%, 19%);
 $light-on-dark:lighten($dark,30%);
 $green: #468d72;
 
@@ -334,7 +334,7 @@ header.mobile {
 }
 
 header.desktop {
-  background:lighten($dark,1.5%);
+  background:lighten($dark,3%);
 
 
   .logo {
@@ -359,7 +359,7 @@ header.desktop {
     @include breakpoint(big) {
       padding:1em 1em 1em 1.6em;
     }
-    @include background(linear-gradient(left, desaturate(lighten($dark,6.5%),2%), lighten($dark,1.5%)));
+    @include background(linear-gradient(left, desaturate(lighten($dark,7.5%),1%), lighten($dark,3%)));
 
     .facebook {
 
@@ -397,7 +397,7 @@ header.desktop {
     .support-band {
       float:left;
       .support-band-button {
-        @include button(desaturate(lighten($dark,10%),1%));
+        @include button(lighten($dark,10%));
         @include box-shadow(0 1px 0 $dark);
         @include text-shadow(0 1px 1px lighten($dark,12%));
         color:darken($dark,7%);
@@ -437,6 +437,9 @@ nav[role="navigation"] {
   @include breakpoint-reverso(small) {
     opacity:0;
   }
+  @include breakpoint(huge) {
+    font-size:0.9em;
+  }
 }
 
 .main-nav-container {
@@ -447,11 +450,11 @@ nav[role="navigation"] {
 .nav-title, .nav-level-1 li,  {
   padding:0.75em 0.5em;
   @include breakpoint(big) { padding:0.25 0; }
-  a { color:desaturate(lighten($dark,55%),3% );  display:block; }
+  a { color:desaturate(lighten($dark,60%),3% );  display:block; }
 }
 
 .nav-level-1 {
-  color:desaturate(lighten($dark,17%),4%);
+  color:desaturate(lighten($dark,20%),4%);
 
   @include breakpoint(big) {
     border-bottom:solid 1px lighten($dark, 1%);
@@ -495,7 +498,7 @@ nav[role="navigation"] {
       @include box-shadow(inset 0 1px 0 darken($dark,5.5%));
       text-shadow:0 1px 0 darken($dark,4%);
       border-radius:3px;
-      padding:0.3em 0.6em;
+      padding:0.33em 0.6em 0.3em;
       position:absolute;
       right:0;
       top:0;
@@ -528,6 +531,10 @@ nav[role="navigation"] {
       border:none;
       &:first-child { border-top:none; }
       &:last-child { border:none; }
+    }
+
+    @include breakpoint(huge) {
+      padding:0.3em 0;
     }
   }
 
@@ -785,6 +792,12 @@ section {
 @import 'video-rollup';
 
 
+/* --------------------------------------------------------------------------------------- *\
+  Blog post
+/* --------------------------------------------------------------------------------------- */
+
+@import 'blog-post';
+@import 'lib/bootstrap-carousel';
 
 
 

@@ -9,9 +9,9 @@
 <?php get_template_part('parts/clusters/page-bootstrap-top'); ?>
 
 
-<section class="cream">
+<section class="pink-cream">
 
-<h2>News & Articles</h2>
+<h2>Interviews</h2>
 
 <ul class="posts">
 <?php while (have_posts() ) : the_post(); ?>
@@ -26,8 +26,6 @@
 
    <?php endwhile; // end of loop ?>
 </ul>
-
-
 
 </section>
 
