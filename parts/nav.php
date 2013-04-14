@@ -1,6 +1,6 @@
 <nav  id="nav" role="navigation">
     <div class="main-nav-container">
-      
+
     <ul class="nav-list reset-list">
 
       <li class="nav-level-1 active">
@@ -10,11 +10,12 @@
         </div>
 
         <ul class="reset-list">
-          <li><a href="http://localhost:8888/sites/brv5/wp-br/">Albums</a></li>
-          <li><a href="http://localhost:8888/sites/brv5/wp-br/?page_id=160">Videos</a></li>
-          <li><a href="http://localhost:8888/sites/brv5/wp-br/?post_type=show">Shows</a></li>
-          <li>Interviews</li>
-          <li><a href="http://localhost:8888/sites/brv5/wp-br/?page_id=336">Photos</a></li>
+          <li><a href="<?php echo get_post_type_archive_link( 'album' ); ?>">Albums</a></li>
+          <li><a href="<?php echo get_page_link(160);?>">Videos</a></li>
+          <li><a href="<?php echo get_post_type_archive_link( 'show' ); ?>">Shows</a></li>
+          <li><a href="<?php echo get_page_link(336);?>">Photos</a></li>
+          <li><a href="<?php echo get_post_type_archive_link( 'interview' ); ?>">Interviews</a></li>
+          <li><a href="<?php echo get_page_link(2479);?>">Articles</a></li>
         </ul>
 
       </li>
@@ -26,9 +27,9 @@
         </div>
 
         <ul class="reset-list">
-          <li>Process</li>
-          <li>Gear</li>
-          <li>Rates</li>
+          <li><a href="<?php echo get_page_link(9);?>">Process</a></li>
+          <li><a href="<?php echo get_page_link(2476);?>">Gear</a></li>
+          <li><a href="<?php echo get_page_link(1316);?>">Rates</a></li>
         </ul>
 
       </li>
@@ -40,12 +41,12 @@
         </div>
 
         <ul class="reset-list">
-          <li>Staff</li>
-          <li>Join Team</li>
+          <li><a href="<?php echo get_post_type_archive_link( 'staff' ); ?>">Staff</a></li>
+          <li><a href="<?php echo get_page_link(2696);?>">Join Team</a></li>
         </ul>
 
       </li>
 
-    </ul> 
+    </ul>
   </div> <?php // end main nav container ?>
 </nav>

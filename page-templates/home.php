@@ -49,7 +49,7 @@
         <div class="video-container group">
           <div class="section-subtitle video-container-header group">
             <div class="video-name pull-left padded-sides">Videos</div>
-            <a href="" class="see-videos pull-right padded-sides">See All ></a>
+            <a href="<?php echo get_page_link(160);?>" class="see-videos pull-right padded-sides">See All ></a>
           </div>
             <div id="video-container" class="s-1 m-3 b-3 h-4 single-row padded"> </div>
         </div>  <?php // end videos ?>

@@ -210,7 +210,6 @@ var br_fb = function(){
        window.dfds.push( dfd.promise() );
       });
 
-      UI.render.renderPhotos();
     }
 
    return {
@@ -436,7 +435,7 @@ var br_fb = function(){
           for (var i = 0; i < 95; i++ ) {
             $('.s-1').append('<div class="grid padded"><div class="lazyload fade ratio-4-3 round-shadow" data-src="' + BR.sortedPhotos[i].medium + '"></div>');
           }
-          badracket.lazyLoadImg();
+          badracket.lazyLoadImg('render photos');
         });
       },
 
@@ -471,7 +470,7 @@ var br_fb = function(){
 
         videoContainer.html(frag);
         bindUI.video();
-        badracket.lazyLoadImg();
+        badracket.lazyLoadImg('vimeo inject - all');
       },
 
       videosHome : function(){
@@ -509,7 +508,7 @@ var br_fb = function(){
 
        videoContainer.html(frag);
        bindUI.videoHome();
-       badracket.lazyLoadImg();
+       badracket.lazyLoadImg('vimeo inject - home');
       }
 
 

@@ -142,6 +142,19 @@ add_post_type('album', 'albums', array (
 ));
 
 
+add_post_type('interview', 'interviews', array (
+'taxonomies' => array('post_tag'),
+'rewrite' => array(
+          'with_front' => FALSE,
+    ),
+));
+
+add_post_type('staff', 'staff', array (
+'taxonomies' => array('post_tag'),
+'rewrite' => array(
+          'with_front' => FALSE,
+    ),
+));
 
 add_post_type('show', 'shows', array (
 'taxonomies' => array('post_tag'),

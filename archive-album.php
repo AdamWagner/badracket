@@ -6,56 +6,27 @@
  */
 ?>
 
-
 <?php get_template_part('parts/shared/html-header'); ?>
 
-
-<body data-state="default-state">
-  <div data-src="http://badracket.com/wp-content/themes/badracketv4/images/bad-racket-bg-image2.jpg" class="bg lazyload fade-this"></div>
-
-  <div class="badracket-window">
-
-     <?php  get_template_part('parts/header-desktop');?>
-     <?php  get_template_part('parts/header-mobile');?>
+<?php get_template_part('parts/clusters/page-bootstrap-top'); ?>
+<section class="red bottom1">
 
 
-    <div  class="app-main page-width group ">
+  <div class="album-container ">
 
-     <?php  get_template_part('parts/nav');?>
+    <div class="section-subtitle album-container-header group ">
+      <div class="album-name pull-left padded-sides">Albums</div>
+    </div>
 
-      <div id="home-main"class="main-content scrollable group updatable">
-      <div class="loading-fade"> <?php get_template_part('parts/loading');?> </div>
-      <section class="red bottom1">
+    <div class="overflow-carousel">
+      <div class="overflow-wrapper group p-5-9 s-3 m-5 b-5 h-7 padded">
 
+      <?php get_template_part('parts/content-loops/album-loop');?>
 
-        <div class="album-container ">
+    </div>
+  </div>
+</div> <?php // end albums ?>
 
-          <div class="section-subtitle album-container-header group ">
-            <div class="album-name pull-left padded-sides">Albums</div>
-          </div>
+</section>
 
-          <div class="overflow-carousel">
-            <div class="overflow-wrapper group p-5-9 s-3 m-5 b-5 h-7 padded">
-
-            <?php get_template_part('parts/content-loops/album-loop');?>
-
-          </div>
-        </div>
-
-
-        </div> <?php // end albums ?> 
-
-
-
-
-
-      </section>
-      </div>
-    </div> <?php // end app-main ?>
-  </div> <?php //end badracket-window ?>
-
-
-
-
-<?php get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer') ); ?>
-
+<?php get_template_part('parts/clusters/page-bootstrap-bottom'); ?>

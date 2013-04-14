@@ -131,6 +131,16 @@ a {
            );
 }
 
+.cream a {
+  @include link-colors(
+            $dark,
+            desaturate(darken($dark,35%),30%),
+            $dark,
+            desaturate(darken($dark,35%),30%)
+           );
+}
+
+
 
 /* --------------------------------------------------------------------------------------- *\
   buttons
@@ -497,17 +507,6 @@ nav[role="navigation"] {
   position:relative; // for z-index effect
 }
 
-.loading-fade {
-    @extend %full-absolute;
-    background:darken($dark,8%);
-    @include transition(opacity 0.15s cubic-bezier(0.51,  0.01,  0.37,  0.98));
-    opacity:0;
-    z-index:200;
-    pointer-events:none;
-}
-
-
-
 /* --------------------------------------------------------------------------------------- *\
   Page state
 /* --------------------------------------------------------------------------------------- */
@@ -549,6 +548,8 @@ header.mobile,
 }
 
 
+
+
 /* Prevent reflow without placeholder image
 http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 
@@ -556,15 +557,10 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 .ratio-4-3 { padding-bottom:75%; /* 3/4*100 */ }
 .ratio-1-1 { padding-bottom:100%; /* ... */ }
 
-
 // the placeholder on top fades out, the img doesn't fade in
 .placeholder { @include transition(opacity .15s linear); pointer-events:none; }
 // when parent has class loaded, fade out placeholder
 .loaded .lazyload.fade .placeholder { opacity:0; }
-
-.ratio-16-9 {padding-bottom:56.25%; /* 9/16*100 */ }
-.ratio-4-3 {padding-bottom:75%; /* 3/4*100 */ }
-.ratio-1-1 {padding-bottom:100%; /* ... */ }
 
 
 .round-shadow {
