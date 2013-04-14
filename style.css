@@ -1361,15 +1361,16 @@ header.desktop .logo .logo-mark {
   height: 3em;
   width: 3em;
   margin-top: 0.4em;
+  opacity: 0;
 }
 header.desktop .header-bar {
   height: 4.6em;
   padding: 1em;
-  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #453b4a), color-stop(100%, #39303d));
-  background: -webkit-linear-gradient(left, #453b4a, #39303d);
-  background: -moz-linear-gradient(left, #453b4a, #39303d);
-  background: -o-linear-gradient(left, #453b4a, #39303d);
-  background: linear-gradient(left, #453b4a, #39303d);
+  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #463d4a), color-stop(100%, #39303d));
+  background: -webkit-linear-gradient(left, #463d4a, #39303d);
+  background: -moz-linear-gradient(left, #463d4a, #39303d);
+  background: -o-linear-gradient(left, #463d4a, #39303d);
+  background: linear-gradient(left, #463d4a, #39303d);
 }
 @media (min-width: 1024px) {
   header.desktop .header-bar {
@@ -1448,11 +1449,11 @@ header.desktop .header-bar .support-band {
   float: left;
 }
 header.desktop .header-bar .support-band .support-band-button {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #544658), color-stop(100%, #4c3f50));
-  background: -webkit-linear-gradient(#544658, #4c3f50);
-  background: -moz-linear-gradient(#544658, #4c3f50);
-  background: -o-linear-gradient(#544658, #4c3f50);
-  background: linear-gradient(#544658, #4c3f50);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #534658), color-stop(100%, #4b404f));
+  background: -webkit-linear-gradient(#534658, #4b404f);
+  background: -moz-linear-gradient(#534658, #4b404f);
+  background: -o-linear-gradient(#534658, #4b404f);
+  background: linear-gradient(#534658, #4b404f);
   text-decoration: none;
   padding: 19px 20px 20px;
   display: inline-block;
@@ -1460,28 +1461,28 @@ header.desktop .header-bar .support-band .support-band-button {
   border-radius: 3px;
   font-size: 1em;
   cursor: pointer;
-  -webkit-box-shadow: 0 1px 1px #302833;
-  -moz-box-shadow: 0 1px 1px #302833;
-  box-shadow: 0 1px 1px #302833;
-  text-shadow: 0 1px 1px #584a5e;
+  -webkit-box-shadow: 0 1px 0 #352d39;
+  -moz-box-shadow: 0 1px 0 #352d39;
+  box-shadow: 0 1px 0 #352d39;
+  text-shadow: 0 1px 1px #56485b;
   color: #231d25;
   padding: 16px 19px;
 }
 header.desktop .header-bar .support-band .support-band-button:hover {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #594a5e), color-stop(100%, #493d4d));
-  background: -webkit-linear-gradient(#594a5e, #493d4d);
-  background: -moz-linear-gradient(#594a5e, #493d4d);
-  background: -o-linear-gradient(#594a5e, #493d4d);
-  background: linear-gradient(#594a5e, #493d4d);
-  text-shadow: #362d39;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #584b5d), color-stop(100%, #483d4c));
+  background: -webkit-linear-gradient(#584b5d, #483d4c);
+  background: -moz-linear-gradient(#584b5d, #483d4c);
+  background: -o-linear-gradient(#584b5d, #483d4c);
+  background: linear-gradient(#584b5d, #483d4c);
+  text-shadow: #352d39;
 }
 header.desktop .header-bar .support-band .support-band-button:active {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #514355), color-stop(100%, #514456));
-  background: -webkit-linear-gradient(#514355, #514456);
-  background: -moz-linear-gradient(#514355, #514456);
-  background: -o-linear-gradient(#514355, #514456);
-  background: linear-gradient(#514355, #514456);
-  text-shadow: #362d39;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4f4454), color-stop(100%, #504455));
+  background: -webkit-linear-gradient(#4f4454, #504455);
+  background: -moz-linear-gradient(#4f4454, #504455);
+  background: -o-linear-gradient(#4f4454, #504455);
+  background: linear-gradient(#4f4454, #504455);
+  text-shadow: #352d39;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -1524,7 +1525,7 @@ header.desktop .player-metadata .song {
   color: #080709;
 }
 header.desktop .player-metadata .artist {
-  color: #201b22;
+  color: #201624;
   font-style: italic;
 }
 header.desktop .audio-player-title {
@@ -2058,7 +2059,7 @@ td.label-container {
   Main Nav
 /* --------------------------------------------------------------------------------------- */
 nav[role="navigation"] {
-  background: #2b232e;
+  background: #2c242f;
   position: fixed;
   height: 100%;
   -webkit-transition: opacity 0.3s cubic-bezier(0.51, 0.01, 0.37, 0.98);
@@ -2077,6 +2078,10 @@ nav[role="navigation"] {
   }
 }
 
+.main-nav-container {
+  position: relative;
+}
+
 .nav-title, .nav-level-1 li {
   padding: 0.75em 0.5em;
 }
@@ -2087,39 +2092,60 @@ nav[role="navigation"] {
 }
 .nav-title a, .nav-level-1 li a {
   color: #c2bac5;
+  display: block;
 }
 
 .nav-level-1 {
-  color: #5a4e5f;
+  color: #615766;
 }
 @media (min-width: 1024px) {
   .nav-level-1 {
-    border-bottom: solid 1px #3d3442;
+    border-bottom: solid 1px #382f3c;
   }
 }
 .nav-level-1 .nav-title {
+  font-family: "zine-regular", georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: optimizelegibility;
   font-size: .85em;
   background: #241e27;
 }
 @media (min-width: 1024px) {
   .nav-level-1 .nav-title {
     background: none;
-    font-size: 1.2em;
+    font-size: 1.4em;
     text-rendering: optimizelegibility;
     padding: 0.4em 0;
     margin-top: 0.23em;
   }
 }
 .nav-level-1 li {
+  position: relative;
   opacity: 0.75;
   font-size: 1.2em;
-  border-top: solid 1px #3d3442;
+  border-top: solid 1px #3b313f;
 }
 .nav-level-1 li:first-child {
   border-top: none;
 }
-.nav-level-1 li:last-child {
-  border-bottom: solid 1px #3d3442;
+.nav-level-1 li .count {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-rendering: optimizelegibility;
+  font-size: 0.65em;
+  background: #382f3c;
+  color: #6a5d6f;
+  -webkit-box-shadow: inset 0 1px 0 #272129;
+  -moz-box-shadow: inset 0 1px 0 #272129;
+  box-shadow: inset 0 1px 0 #272129;
+  text-shadow: 0 1px 0 #2b242e;
+  border-radius: 3px;
+  padding: 0.3em 0.6em;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 .nav-level-1 li.small {
   font-size: 0.65em;

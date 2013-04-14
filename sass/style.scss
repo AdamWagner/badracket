@@ -336,6 +336,7 @@ header.mobile {
 header.desktop {
   background:lighten($dark,1.5%);
 
+
   .logo {
     @extend %nav-width;
     @extend %full-absolute;
@@ -346,6 +347,7 @@ header.desktop {
       width:3em;
       margin-top:0.4em;
       @extend %logo-mark;
+      opacity: 0;
     }
 
   } // end .logo
@@ -357,7 +359,7 @@ header.desktop {
     @include breakpoint(big) {
       padding:1em 1em 1em 1.6em;
     }
-    @include background(linear-gradient(left, desaturate(lighten($dark,6%),1%), lighten($dark,1.5%)));
+    @include background(linear-gradient(left, desaturate(lighten($dark,6.5%),2%), lighten($dark,1.5%)));
 
     .facebook {
 
@@ -395,9 +397,9 @@ header.desktop {
     .support-band {
       float:left;
       .support-band-button {
-        @include button(lighten(mix($dark,$red,99%),10%));
-        @include box-shadow(0 1px 1px darken($dark, 2%));
-        @include text-shadow(0 1px 1px lighten($dark,13%));
+        @include button(desaturate(lighten($dark,10%),1%));
+        @include box-shadow(0 1px 0 $dark);
+        @include text-shadow(0 1px 1px lighten($dark,12%));
         color:darken($dark,7%);
         padding:16px 19px;
       }
@@ -424,7 +426,7 @@ header.desktop {
 /* --------------------------------------------------------------------------------------- */
 
 nav[role="navigation"] {
-  background:saturate(darken($dark,4%),1%);
+  background:saturate(darken($dark,3.7%),1%);
   @extend %nav-width;
   position:fixed;
   height:100%;
@@ -437,26 +439,31 @@ nav[role="navigation"] {
   }
 }
 
+.main-nav-container {
+  position:relative;
+}
+
 
 .nav-title, .nav-level-1 li,  {
   padding:0.75em 0.5em;
   @include breakpoint(big) { padding:0.25 0; }
-  a { color:desaturate(lighten($dark,55%),3% );   }
+  a { color:desaturate(lighten($dark,55%),3% );  display:block; }
 }
 
 .nav-level-1 {
-  color:desaturate(lighten($dark,14%),2.5%);
+  color:desaturate(lighten($dark,17%),4%);
 
   @include breakpoint(big) {
-    border-bottom:solid 1px lighten($dark, 3%);
+    border-bottom:solid 1px lighten($dark, 1%);
   }
 
   .nav-title {
+    @include font-stack-headline;
     font-size:.85em;
     background:darken($dark,6.5%);
     @include breakpoint(big) {
       background:none;
-      font-size:1.2em;
+      font-size:1.4em;
       text-rendering:optimizelegibility;
       padding:0.4em 0;
       margin-top:0.23em;
@@ -464,21 +471,34 @@ nav[role="navigation"] {
   }
 
   li { // sub-nav items
+    position:relative;
     opacity:0.75;
     font-size:1.2em;
-    border-top:solid 1px lighten($dark, 3%);
+    border-top:solid 1px lighten($dark, 2%);
     &:first-child { border-top:none; }
-    &:last-child { border-bottom:solid 1px lighten($dark, 3%); }
-    // .count {
-    //   font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
-    //   text-rendering:optimizelegibility;
-    //   font-size:0.65em;
-    //   background:$dark;
+    // &:before {
+    //   content:'';
+    //   display:block;
+    //   float:left;
+    //   width:1em;
+    //   height:1em;
+    //   background:lighten($dark,8%);
+    //   margin-right:0.75em;
     //   border-radius:3px;
-    //   padding:0.3em 0.5em;
-    //   position:absolute;
-    //   right:0;
-    //   top:0;
+    // }
+    .count {
+      font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+      text-rendering:optimizelegibility;
+      font-size:0.65em;
+      background:lighten($dark,1%);
+      color:desaturate(lighten($dark,20%),2.7%);
+      @include box-shadow(inset 0 1px 0 darken($dark,5.5%));
+      text-shadow:0 1px 0 darken($dark,4%);
+      border-radius:3px;
+      padding:0.3em 0.6em;
+      position:absolute;
+      right:0;
+      top:0;
       // &.new::before {
       //     content:'';
       //     display:block;
@@ -490,7 +510,7 @@ nav[role="navigation"] {
       //     background:$green;
       //     border-radius:50%;
       // }
-    // }
+    }
     &.small {
       font-size:0.65em;
       font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;

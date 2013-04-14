@@ -39,7 +39,7 @@ $darkest:darken($dark,11%);
     color:darken($darkest,6%);
   }
   .artist {
-    color:darken($progress-color,3%);
+    color:saturate(darken($progress-color,3.7%),12%);
     font-style:italic;
     @extend %no-wrap-text;
   }
@@ -158,7 +158,7 @@ $darkest:darken($dark,11%);
   .loading {
     background-color:darken($dark, 2%);
     z-index:30;
-    &::before { content:none;} 
+    &::before { content:none;}
     &::after { background:darken($dark, 2%); z-index:30;}
   }
 }

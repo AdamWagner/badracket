@@ -16,13 +16,23 @@
           </li>
           <li>
             <a href="<?php echo get_page_link(160);?>">Videos</a>
-            <span class="count new">25</span>
+            <span class="count">25</span>
+
           </li>
           <li>
             <a href="<?php echo get_post_type_archive_link( 'show' ); ?>">Shows</a>
-            <span class="count">25</span>
+            <span class="count">3</span>
           </li>
           <li class="small"> <a href="<?php echo get_page_link(336);?>">More</a> </li>
+          <li>
+            <a href="<?php echo get_page_link(336);?>">Photos</a>
+          </li>
+          <li>
+            <a href="<?php echo get_post_type_archive_link( 'interview' ); ?>">Interviews</a>
+          </li>
+          <li>
+            <a href="<?php echo get_page_link(2479);?>">Articles</a>
+          </li>
         </ul>
 
       </li>
@@ -40,6 +50,7 @@
         </ul>
 
       </li>
+
 
       <li class="nav-level-1 active">
         <div class="nav-title">
