@@ -1,8 +1,8 @@
-$audio-player-width:60%;
+$audio-player-width:70%;
 
-$player-control-bar-height:0.6em;
+$player-control-bar-height:0.55em;
 $statusbar-bg-color:$dark;
-$progress-color:darken($dark,5%);
+$progress-color:darken($dark,4%);
 $dark-text:darken($dark,12%);
 $darkest:darken($dark,11%);
 
@@ -51,6 +51,7 @@ $darkest:darken($dark,11%);
   width:63%;
   @extend %no-wrap-text;
   .single-album & { width: 75%; }
+  font-size:0.9em;
 }
 .buy-album {
   float:left;
@@ -85,8 +86,13 @@ $darkest:darken($dark,11%);
 
   .play-pause, .previous,.next {
     color:$progress-color;
-    font-size:0.875em;
-    margin-top:0.125em;
+    font-size:0.8em;
+    @include breakpoint(big) {
+      margin-top:0.2em;
+    }
+    @include breakpoint(huge) {
+      margin-top:0.125em;
+    }
     float:left;
     width:1.4em;
     cursor:pointer;
@@ -97,8 +103,8 @@ $darkest:darken($dark,11%);
 
   .play-pause {
     font-size:1.1em;
-    width:1.8em;
-    padding-left:0.8em;
+    width:1.6em;
+    padding-left:0.6em;
     margin:0;
     @include box-sizing(content-box);
     color:#211b23;
@@ -106,7 +112,7 @@ $darkest:darken($dark,11%);
 
   .statusbar {
     float:left;
-    margin-top:0.25em;
+    margin-top:0.33em;
     margin-right:1%;
     margin-left:1%;
     background:$statusbar-bg-color;

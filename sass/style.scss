@@ -16,7 +16,7 @@ $cream: #f2e7cc;
 $pink-cream: #f8ebe1;
 $red: #dc5b59;
 $orange: #d27f62;
-$dark:hsl(265, 12%, 19%);
+$dark:hsl(280, 12%, 19%);
 $light-on-dark:lighten($dark,30%);
 $green: #468d72;
 
@@ -178,7 +178,7 @@ a {
 
 /* ------- Layout variables ----------------------------------------------------------------- */
 
-$header-height:4.6em;
+$header-height:4.1em;
 
 $nav-width-mobile:15.5em;
 $nav-width-big:19%;
@@ -370,7 +370,8 @@ header.mobile {
 }
 
 header.desktop {
-  background:desaturate(lighten($dark,9%),1%);
+  background:desaturate(lighten($dark,13%),2%);
+  background:hsl(290, 7%, 40%);;
   // background:#514757;
 
   .page-fixed &, .force-fixed & {
@@ -382,7 +383,7 @@ header.desktop {
     height:$header-height;
     padding:1em;
     @include breakpoint(big) {
-      padding:1em 1em 1em 1.6em;
+      padding:0.7em 1.4em;
     }
     // @include background(linear-gradient(left, desaturate(lighten($dark,8%),1%), lighten($dark,5%)));
 
