@@ -1,16 +1,17 @@
 <header class="desktop hidden-mobile">
     <div class="header-bar">
 
-      <div class="audio-player-wrapper">
-        <div class="audio-player">
+      <div ng-controller="AlbumCtrl" class="audio-player-wrapper ready">
+        <div ng-repeat="album in albums | filter:{isPlaying:'playing'}" class="audio-player">
          <div class="player-metadata group">
            <div class="audio-player-title">
              <a href="" class="audio-title">
                 <span class="song">Loading...</span> <span class="hide-till-ready">-</span>
                 <span class="artist"></span>
+                <span class="song">{{album.albumName}}</span> - <span class="artist">{{album.artist}}</span>
              </a>
            </div>
-           <a class="view-full-album dJAX_internal" > <span class="track-count hide-till-ready">track <span class="current-track">0</span> of <span class="total-tracks"></span>  </span><span class="target"></span>  </a>
+           <a class="view-full-album dJAX_internal" > <span class="track-count hide-till-ready">track <span class="current-track">0</span> of <span class="total-tracks">{{album.tracks|length}}</span>  </span><span class="target"></span>  </a>
          </div>
          <div class="controls group">
           <span data-icon="h" class="previous"></span>
