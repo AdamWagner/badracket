@@ -16,7 +16,7 @@ $cream: #f2e7cc;
 $pink-cream: #f8ebe1;
 $red: #dc5b59;
 $orange: #d27f62;
-$dark:hsl(282, 11%, 19%);
+$dark:hsl(282, 12%, 19%);
 $light-on-dark:lighten($dark,30%);
 $green: #468d72;
 
@@ -127,6 +127,7 @@ a {
             desaturate(darken($red,35%),30%),
             desaturate(darken($red,35%),30%),
             desaturate(darken($red,35%),30%)
+            desaturate(darken($red,35%),30%)
            );
 }
 
@@ -135,7 +136,19 @@ a {
             $dark,
             desaturate(darken($dark,35%),30%),
             $dark,
+            $dark,
             desaturate(darken($dark,35%),30%)
+           );
+}
+
+
+.pink-cream a {
+  @include link-colors(
+            $red,
+            desaturate(darken($red,35%),30%),
+            $red,
+            $red,
+            desaturate(darken($red,35%),30%)
            );
 }
 
@@ -793,8 +806,29 @@ section {
 
 
 /* --------------------------------------------------------------------------------------- *\
-  Blog post
+  Blog post + Interviews + heavy reading
 /* --------------------------------------------------------------------------------------- */
+
+.longform-text {
+
+  font-size:90%;
+  width:88%;
+  margin-left:auto;
+  margin-right:auto;
+  max-width:45rem;
+
+  @include breakpoint(big) {
+    font-size:108%;
+    margin-top:2em;
+    width:80%;
+  }
+
+  @include tablet() {
+    font-size:122%;
+    width:75%;
+  }
+
+}
 
 @import 'blog-post';
 @import 'lib/bootstrap-carousel';

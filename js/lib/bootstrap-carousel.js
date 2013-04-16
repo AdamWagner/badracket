@@ -171,7 +171,7 @@
   }
 
   $.fn.carousel.defaults = {
-    interval: 5000
+    interval: 9999999
   , pause: 'hover'
   }
 
@@ -197,7 +197,7 @@
 
     $target.carousel(options)
     console.log('clicked carousel');
-    console.log($target.data);
+    console.log();
 
     if (slideIndex = $this.attr('data-slide-to')) {
       $target.data('carousel').pause().to(slideIndex).cycle()

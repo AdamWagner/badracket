@@ -9,7 +9,7 @@
 <?php get_template_part('parts/clusters/page-bootstrap-top'); ?>
 
 
-<section class="cream">
+<section class="pink-cream">
 
 <h2>Staff</h2>
 
