@@ -85,7 +85,8 @@ $darkest:darken($dark,11%);
 
   .play-pause, .previous,.next {
     color:$progress-color;
-    font-size:1em;
+    font-size:0.875em;
+    margin-top:0.125em;
     float:left;
     width:1.4em;
     cursor:pointer;
@@ -95,7 +96,12 @@ $darkest:darken($dark,11%);
   }
 
   .play-pause {
-    padding-left:0.25em;
+    font-size:1.1em;
+    width:1.8em;
+    padding-left:0.8em;
+    margin:0;
+    @include box-sizing(content-box);
+    color:#211b23;
   }
 
   .statusbar {
@@ -105,8 +111,8 @@ $darkest:darken($dark,11%);
     margin-left:1%;
     background:$statusbar-bg-color;
     height:$player-control-bar-height;
-    width:73%;
-    width: -webkit-calc(100% - 7.5em);
+    width:65%;
+    width: -webkit-calc(100% - 8.5em);
     left:$player-control-bar-height/2;
     position:relative;
     &::after, &::before {

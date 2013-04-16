@@ -573,6 +573,7 @@ var br_fb = function(){
        },
 
        videoClick : function(){
+        $(window).off('sm2-play-event');
         var that = $(this);
 
         var id = that.data('id'),

@@ -95,7 +95,7 @@ var br_sm2 = function(){
     br_player.logic.attach30SecondListener( song );              // attach 30 second listener
 
     if ( isPause ) {
-      song.sm2_obj.stop(); // seems to work fine, not rewinding
+      song.sm2_obj.pause(); // seems to work fine, not rewinding
     } else {
       song.sm2_obj.togglePause();                                  // play / pause sound
     }

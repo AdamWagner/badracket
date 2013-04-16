@@ -29,7 +29,7 @@
   $wp_query = new WP_Query($args);
 ?>
 
-<section class="cream">
+<section class="pink-cream">
 
 <h2>News & Articles</h2>
 

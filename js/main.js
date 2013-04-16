@@ -83,8 +83,51 @@ badracket = {
             badracket.doAjaxRequest('album');
             badracket.doAjaxRequest('show');
             badracket.getVimeo();
+            badracket.affix();
             br_fb.init();
         });
+  },
+
+  affix: function(){
+    var offset = $('header.desktop').offset().top,
+        force = $('html').hasClass('force-fixed'),
+        fixed = false;
+
+    $(window).bind('djaxLoad', function(e, data) {
+      force = $('html').hasClass('force-fixed');
+    });
+
+    $(window).resize(function(){
+      if (!fixed) { offset = $('header.desktop').offset().top; }
+    });
+
+    $(document).scroll(function() {
+        if( !fixed && !force && $(this).scrollTop() >= offset ) {
+          console.log(offset);
+          console.log($(this).scrollTop());
+          fixed = true;
+          $('html').addClass('page-fixed');
+        } else if ($(this).scrollTop() <= offset) {
+          fixed = false;
+          $('html').removeClass('page-fixed');
+        }
+    });
+
+  },
+
+  px2em: function( elem ){
+    var W = window,
+        D = document;
+    if (!elem || elem.parentNode.tagName.toLowerCase() == 'body') {
+        return false;
+    }
+    else {
+        var parentFontSize = parseInt(W.getComputedStyle(elem.parentNode, null).fontSize, 10),
+            elemFontSize = parseInt(W.getComputedStyle(elem, null).fontSize, 10);
+
+        var pxInEms = Math.floor((elemFontSize / parentFontSize) * 100) / 100;
+        elem.style.fontSize = pxInEms + 'em';
+    }
   },
 
   setupAlbumPage: function() {
@@ -311,6 +354,7 @@ badracket = {
 
     // when djax element loads, remove loadin class & mimic doc ready stuff
     $(window).bind('djaxLoad', function(e, data) {
+      $(window).scrollTop(0);
       badracket.lazyLoadImg('djaxload');
       badracket.lazyLoadImgEl('djaxload');
 
@@ -333,6 +377,7 @@ badracket = {
     // when djax link clicked, add loading class
     $(window).bind('djaxClick', function(e, data) {
       $('.main-content').addClass('loading');
+      $(window).off('sm2-play-event'); // free up the event bound to zombie vimeo iframes
     });
   },
 
@@ -462,10 +507,12 @@ var br_state = function() {
       viewState = 'album-detail';
       setupAlbumDetail();
       prefetchPhotos();
+      forceFixed();
     } else if ( badracket.stringContains( url, urls.albumRollup ) ) {
       viewState = 'album-rollup';
       setupAlbumPage();
       prefetchPhotos();
+      forceFixed();
     } else if ( url === urls.home ) {
       viewState = 'home';
       setupHome();
@@ -475,20 +522,25 @@ var br_state = function() {
       viewState = 'videos';
       setupVideosPage();
       prefetchPhotos();
+      forceFixed();
     } else if ( url === urls.photos ) {
       viewState = 'photos';
       setupPhotos();
+      forceFixed();
     } else if ( badracket.stringContains( url, urls.showDetail ) ) {
       viewState = 'show-detail';
       setupShow();
       prefetchPhotos();
+      forceFixed();
     } else if ( badracket.stringContains( url, urls.showRollup ) ) {
       viewState = 'show-rollup';
       setupShowRoll();
       prefetchPhotos();
+      forceFixed();
     } else {
       viewState = 'unknown';
       prefetchPhotos();
+      forceFixed();
     }
 
     applyViewState(viewState);
@@ -507,6 +559,10 @@ var br_state = function() {
     $('body').attr('data-view', viewState);
   }
 
+  function forceFixed(){
+    $('html').addClass('force-fixed').removeClass('page-fixed');
+  }
+
   function setupAlbumPage(){
     if ( br_player.state.isPlaying ) {
         $('[data-album-title="'+ br_player.state.currAlbum.albumName +'"]').addClass('playing');
@@ -515,6 +571,7 @@ var br_state = function() {
 
 
   function setupHome(){
+  $('html').removeClass('force-fixed');
    if (typeof br_fb.BR.videos !== 'undefined') {
      if ( br_fb.BR.videos.length > 10 ) {
        br_fb.UI.render.videosHome();

@@ -4,10 +4,10 @@
 
 <div class="badracket-window">
 
+<div  class="app-main page-width group ">
 <?php  get_template_part('parts/header-desktop');?>
 <?php  get_template_part('parts/header-mobile');?>
 
-<div  class="app-main page-width group ">
 
 <?php  get_template_part('parts/nav');?>
 

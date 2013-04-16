@@ -1,8 +1,4 @@
 <header class="desktop hidden-mobile">
-  <div class="inner page-width">
-    <a href="<?php echo bloginfo('url')?>/">
-      <div class="logo"><div class="logo-mark"></div></div>
-    </a>
     <div class="header-bar">
 
       <div class="audio-player-wrapper">

@@ -16,7 +16,7 @@ $cream: #f2e7cc;
 $pink-cream: #f8ebe1;
 $red: #dc5b59;
 $orange: #d27f62;
-$dark:hsl(282, 12%, 19%);
+$dark:hsl(265, 12%, 19%);
 $light-on-dark:lighten($dark,30%);
 $green: #468d72;
 
@@ -185,6 +185,8 @@ $nav-width-big:19%;
 $nav-width-bigger:17%;
 $nav-width-huge:14%;
 
+$offset: 6em;
+
 %page-width {
   width:100%;
   @include breakpoint(big){
@@ -215,7 +217,7 @@ $nav-width-huge:14%;
  }
 }
 
-%nav-width {
+%nav-width-fixed {
   width:$nav-width-mobile;
   @include breakpoint(big) {
     float:left;
@@ -229,6 +231,26 @@ $nav-width-huge:14%;
   }
   @include breakpoint(huge) {
     width:$nav-width-huge *.8;
+  }
+ @media (min-width:2400px) {                                 // address static page-width above 2400
+    width:268.8125px;
+  }
+}
+
+%nav-width {
+  width:$nav-width-mobile;
+  @include breakpoint(big) {
+    float:left;
+    width:$nav-width-big;
+  }
+  @include breakpoint(bigger) {
+    width:$nav-width-bigger;
+  }
+ @media (min-width:1280px) and (max-width:1600px) { // address static page-width between 1280 and 1600
+    width:217.609375px;
+  }
+  @include breakpoint(huge) {
+    width:$nav-width-huge;
   }
  @media (min-width:2400px) {                                 // address static page-width above 2400
     width:268.8125px;
@@ -250,6 +272,7 @@ $nav-width-huge:14%;
 
 .badracket-window {
   @extend %full-absolute;
+  -webkit-backface-visibility: hidden;
 }
 
 .page-width {
@@ -258,12 +281,13 @@ $nav-width-huge:14%;
 }
 
 .app-main {
-  padding-top:4em;
-  @include breakpoint(big) {
-    padding-top:$header-height;
-  }
   position:relative;
+  top:$offset;
   background:$dark;
+  height:100%;
+  .page-fixed &, .force-fixed & {
+    top:$header-height;
+  }
 }
 
 /* background image */
@@ -296,7 +320,6 @@ header.desktop {
   top:0;
   left:0;
   right:0;
-  position:fixed;
   z-index:100;
 }
 
@@ -347,32 +370,21 @@ header.mobile {
 }
 
 header.desktop {
-  background:lighten($dark,3%);
+  background:desaturate(lighten($dark,9%),1%);
+  // background:#514757;
 
-
-  .logo {
-    @extend %nav-width;
-    @extend %full-absolute;
-    padding:0.5em;
-
-    .logo-mark {
-      height:3em;
-      width:3em;
-      margin-top:0.4em;
-      @extend %logo-mark;
-      opacity: 0;
-    }
-
-  } // end .logo
+  .page-fixed &, .force-fixed & {
+   position: fixed;
+   @extend %page-width;
+ }
 
   .header-bar {
-    @extend %main-width;
     height:$header-height;
     padding:1em;
     @include breakpoint(big) {
       padding:1em 1em 1em 1.6em;
     }
-    @include background(linear-gradient(left, desaturate(lighten($dark,7.5%),1%), lighten($dark,3%)));
+    // @include background(linear-gradient(left, desaturate(lighten($dark,8%),1%), lighten($dark,5%)));
 
     .facebook {
 
@@ -441,7 +453,7 @@ header.desktop {
 nav[role="navigation"] {
   background:saturate(darken($dark,3.7%),1%);
   @extend %nav-width;
-  position:fixed;
+  position:absolute;
   height:100%;
   @include transition(opacity .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
   @include breakpoint(big) {
@@ -453,10 +465,18 @@ nav[role="navigation"] {
   @include breakpoint(huge) {
     font-size:0.9em;
   }
+
+  .page-fixed &, .force-fixed & {
+    position: fixed;
+    @extend %nav-width-fixed;
+    top:$header-height;
+
+  }
 }
 
 .main-nav-container {
   position:relative;
+  -webkit-backface-visibility: hidden;
 }
 
 
@@ -506,8 +526,8 @@ nav[role="navigation"] {
       font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
       text-rendering:optimizelegibility;
       font-size:0.65em;
-      background:lighten($dark,1%);
-      color:desaturate(lighten($dark,20%),2.7%);
+      background:lighten($dark,2%);
+      color:desaturate(lighten($dark,27%),2.7%);
       @include box-shadow(inset 0 1px 0 darken($dark,5.5%));
       text-shadow:0 1px 0 darken($dark,4%);
       border-radius:3px;
@@ -574,6 +594,10 @@ nav[role="navigation"] {
   min-height:100%;
   z-index:10;
   position:relative; // for z-index effect
+
+  .page-fixed & {
+    padding-top:$offset;
+  }
 }
 
 /* --------------------------------------------------------------------------------------- *\
