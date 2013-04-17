@@ -230,12 +230,19 @@ var br_player = function() {
           el.artist.html( song.artist );
           var humanDate = date("M j", new Date(album.date));
 
-          el.albumLink.find('.target').text('Playing ' + humanDate + ': view show');
+          el.albumLink.find('.show').text('Playing ' + humanDate + ': ').show();
+          el.albumLink.find('.target').text('view show');
           el.albumLink.find('.track-count').hide();
           el.ctaWrap.attr('data-toggle', 'none');
           el.ctaWrap.attr('href', album.albumUrl);
           el.ctaButton.text('Get Tickets');
         } else {
+          if ( song.isSampleTrack != 1 ) {
+            el.player.addClass('preview-song');
+          } else {
+            el.player.removeClass('preview-song');
+          }
+          el.albumLink.find('.show').hide();
           el.artist.html( album.artist );
           el.albumLink.find('.track-count').show();
           el.albumLink.find('.target').text('View album');

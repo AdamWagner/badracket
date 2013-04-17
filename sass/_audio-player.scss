@@ -1,15 +1,16 @@
-$audio-player-width:70%;
 
 $player-control-bar-height:0.55em;
-$statusbar-bg-color:$dark;
-$progress-color:darken($dark,4%);
-$dark-text:darken($dark,12%);
-$darkest:darken($dark,11%);
+$statusbar-bg-color:lighten($dark,7%);
+$progress-color:$dark;
+$dark-text:darken($dark,11%);
+$darkest:darken($dark,4%);
 
 
 .audio-player {
 
-  width:$audio-player-width;
+  width: 65%;
+  width: -webkit-calc(100% - 21em);
+  width: -moz-calc(100% - 21em);
   float:left;
   margin-right:1.5em;
 
@@ -19,9 +20,13 @@ $darkest:darken($dark,11%);
   &.preview-song {
     .statusbar {
       width:60%;
-      width: -webkit-calc(100% - 11em);
+      width: -webkit-calc(100% - 11.5em);
+      width: -moz-calc(100% - 11.5em);
     }
-    .preview-song-indicator { display:inline; font-style:italic; }
+    .preview-song-indicator {
+      display:inline;
+      font-style:italic;
+   }
   }
 }
 
@@ -53,18 +58,14 @@ $darkest:darken($dark,11%);
   .single-album & { width: 75%; }
   font-size:0.9em;
 }
-.buy-album {
-  float:left;
-  background:lighten($dark,10%);
-  padding:0.75em 1.5em;
-  border-radius:3px;
-}
+
 
 .view-full-album {
   float:right;
   font-size:0.80em;
   margin-top:0.15em;
   .target { text-decoration:underline; }
+  color:$progress-color!important;
 }
 
 .single-album & .target { display:none; }
@@ -72,8 +73,13 @@ $darkest:darken($dark,11%);
 .timing {
   float:right;
   position:relative;
-  font-size:80%;
-  color:$dark-text;
+  top:0.125em;
+  font-size:75%;
+  color:$progress-color;
+  .progress-time {
+    display: inline-block;
+    width:2.4em;
+  }
 }
 
 .preview-song-indicator {
@@ -88,26 +94,34 @@ $darkest:darken($dark,11%);
     color:$progress-color;
     font-size:0.8em;
     @include breakpoint(big) {
-      margin-top:0.2em;
+      margin-top:0.25em;
     }
     @include breakpoint(huge) {
       margin-top:0.125em;
     }
     float:left;
-    width:1.4em;
+    width:1.8em;
     cursor:pointer;
     &:hover {
       color:darken($progress-color,5%);
     }
   }
 
+  .next {
+    text-align:center;
+  }
+
   .play-pause {
     font-size:1.1em;
-    width:1.6em;
-    padding-left:0.6em;
+    width:1.5em;
+    padding-left:0.4em;
     margin:0;
+    text-align:left;
     @include box-sizing(content-box);
-    color:#211b23;
+    color:hsl(285, 13%, 15%);
+    &:hover {
+      color:darken(hsl(285, 13%, 13%),5%);
+    }
   }
 
   .statusbar {
@@ -119,6 +133,7 @@ $darkest:darken($dark,11%);
     height:$player-control-bar-height;
     width:65%;
     width: -webkit-calc(100% - 8.5em);
+    width: -moz-calc(100% - 8.5em);
     left:$player-control-bar-height/2;
     position:relative;
     &::after, &::before {

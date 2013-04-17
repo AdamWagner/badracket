@@ -1043,7 +1043,7 @@ html {
 }
 
 body, html {
-  background: #322b36;
+  background: #4d4153;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -1190,17 +1190,17 @@ a:active {
 }
 
 /* ------- Layout variables ----------------------------------------------------------------- */
-.page-width, .page-fixed header.desktop, .force-fixed header.desktop {
+.page-width, .logo, .page-fixed header.desktop, .force-fixed header.desktop {
   width: 100%;
 }
 @media (min-width: 1024px) {
-  .page-width, .page-fixed header.desktop, .force-fixed header.desktop {
+  .page-width, .logo, .page-fixed header.desktop, .force-fixed header.desktop {
     width: 100%;
     margin: auto;
   }
 }
 @media (min-width: 1280px) {
-  .page-width, .page-fixed header.desktop, .force-fixed header.desktop {
+  .page-width, .logo, .page-fixed header.desktop, .force-fixed header.desktop {
     width: 80%;
     min-width: 1280px;
     max-width: 1920px;
@@ -1311,7 +1311,7 @@ nav[role="navigation"] {
 
 .app-main {
   position: relative;
-  top: 6em;
+  top: 8.5em;
   background: #322b36;
   height: 100%;
 }
@@ -1337,8 +1337,107 @@ nav[role="navigation"] {
 }
 @media (min-width: 1024px) {
   .bg.loaded {
-    opacity: 0.5;
+    opacity: 0.35;
   }
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Logo
+/* --------------------------------------------------------------------------------------- */
+.animated {
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+.animated.hinge {
+  -webkit-animation-duration: 2s;
+  -moz-animation-duration: 2s;
+  -ms-animation-duration: 2s;
+  -o-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+@-webkit-keyframes rotateIn {
+  0% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: rotate(-200deg);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes rotateIn {
+  0% {
+    -moz-transform-origin: center center;
+    -moz-transform: rotate(-200deg);
+    opacity: 0;
+  }
+
+  100% {
+    -moz-transform-origin: center center;
+    -moz-transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@-o-keyframes rotateIn {
+  0% {
+    -o-transform-origin: center center;
+    -o-transform: rotate(-200deg);
+    opacity: 0;
+  }
+
+  100% {
+    -o-transform-origin: center center;
+    -o-transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateIn {
+  0% {
+    transform-origin: center center;
+    transform: rotate(-200deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform-origin: center center;
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+.rotateIn {
+  -webkit-animation-name: rotateIn;
+  -moz-animation-name: rotateIn;
+  -o-animation-name: rotateIn;
+  animation-name: rotateIn;
+}
+
+.logo {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8.5em;
+  position: fixed;
+  padding-top: 2.5em;
+}
+.logo .logo-container {
+  position: relative;
 }
 
 /* --------------------------------------------------------------------------------------- *\
@@ -1405,7 +1504,8 @@ header.mobile .logo {
 
 header.desktop {
   background: #54495a;
-  background: #6b5f6d;
+  background: #665969;
+  position: relative;
   /* --------------------------------------------------------------------------------------- *\
     Audio Player
   /* --------------------------------------------------------------------------------------- */
@@ -1419,50 +1519,33 @@ header.desktop .header-bar {
 }
 @media (min-width: 1024px) {
   header.desktop .header-bar {
-    padding: 0.7em 1.4em;
+    padding: 0.75em 1.2em;
   }
+}
+header.desktop .header-bar .facebook .login, header.desktop .header-bar .support-band .support-band-button {
+  border-radius: 3px;
+  color: #857b8a;
+  background: #3a313f;
+  padding: 16px 20px;
+  cursor: pointer;
+}
+header.desktop .header-bar .facebook .login:hover, header.desktop .header-bar .support-band .support-band-button:hover {
+  color: #8f8593;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #342c38), color-stop(100%, #312a35));
+  background: -webkit-linear-gradient(#342c38, #312a35);
+  background: -moz-linear-gradient(#342c38, #312a35);
+  background: -o-linear-gradient(#342c38, #312a35);
+  background: linear-gradient(#342c38, #312a35);
+}
+header.desktop .header-bar .facebook .login:active, header.desktop .header-bar .support-band .support-band-button:active {
+  color: #857b8a;
+  background: #3a313f;
 }
 header.desktop .header-bar .facebook .login, header.desktop .header-bar .facebook .fb-user {
   float: right;
 }
 header.desktop .header-bar .facebook .login {
-  color: #251f28;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #504356), color-stop(100%, #483d4d));
-  background: -webkit-linear-gradient(#504356, #483d4d);
-  background: -moz-linear-gradient(#504356, #483d4d);
-  background: -o-linear-gradient(#504356, #483d4d);
-  background: linear-gradient(#504356, #483d4d);
-  text-decoration: none;
-  padding: 19px 20px 20px;
-  display: inline-block;
-  text-align: center;
-  border-radius: 3px;
-  font-size: 1em;
-  cursor: pointer;
-  padding: 16px 20px;
-  -webkit-box-shadow: 0 1px 1px #2a242e;
-  -moz-box-shadow: 0 1px 1px #2a242e;
-  box-shadow: 0 1px 1px #2a242e;
   display: none;
-}
-header.desktop .header-bar .facebook .login:hover {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #55485b), color-stop(100%, #453a4a));
-  background: -webkit-linear-gradient(#55485b, #453a4a);
-  background: -moz-linear-gradient(#55485b, #453a4a);
-  background: -o-linear-gradient(#55485b, #453a4a);
-  background: linear-gradient(#55485b, #453a4a);
-  text-shadow: #322b36;
-}
-header.desktop .header-bar .facebook .login:active {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4d4152), color-stop(100%, #4d4153));
-  background: -webkit-linear-gradient(#4d4152, #4d4153);
-  background: -moz-linear-gradient(#4d4152, #4d4153);
-  background: -o-linear-gradient(#4d4152, #4d4153);
-  background: linear-gradient(#4d4152, #4d4153);
-  text-shadow: #322b36;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
 }
 .fb-logged-out header.desktop .header-bar .facebook .login {
   display: block;
@@ -1493,47 +1576,10 @@ header.desktop .header-bar .facebook .fb-user .fb-user-picture {
 header.desktop .header-bar .support-band {
   float: left;
 }
-header.desktop .header-bar .support-band .support-band-button {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #504356), color-stop(100%, #483d4d));
-  background: -webkit-linear-gradient(#504356, #483d4d);
-  background: -moz-linear-gradient(#504356, #483d4d);
-  background: -o-linear-gradient(#504356, #483d4d);
-  background: linear-gradient(#504356, #483d4d);
-  text-decoration: none;
-  padding: 19px 20px 20px;
-  display: inline-block;
-  text-align: center;
-  border-radius: 3px;
-  font-size: 1em;
-  cursor: pointer;
-  -webkit-box-shadow: 0 1px 0 #322b36;
-  -moz-box-shadow: 0 1px 0 #322b36;
-  box-shadow: 0 1px 0 #322b36;
-  text-shadow: 0 1px 1px #524659;
-  color: #201b22;
-  padding: 16px 19px;
-}
-header.desktop .header-bar .support-band .support-band-button:hover {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #55485b), color-stop(100%, #453a4a));
-  background: -webkit-linear-gradient(#55485b, #453a4a);
-  background: -moz-linear-gradient(#55485b, #453a4a);
-  background: -o-linear-gradient(#55485b, #453a4a);
-  background: linear-gradient(#55485b, #453a4a);
-  text-shadow: #322b36;
-}
-header.desktop .header-bar .support-band .support-band-button:active {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4d4152), color-stop(100%, #4d4153));
-  background: -webkit-linear-gradient(#4d4152, #4d4153);
-  background: -moz-linear-gradient(#4d4152, #4d4153);
-  background: -o-linear-gradient(#4d4152, #4d4153);
-  background: linear-gradient(#4d4152, #4d4153);
-  text-shadow: #322b36;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
 header.desktop .audio-player {
-  width: 70%;
+  width: 65%;
+  width: -webkit-calc(100% - 21em);
+  width: -moz-calc(100% - 21em);
   float: left;
   margin-right: 1.5em;
   opacity: 0.5;
@@ -1547,7 +1593,8 @@ header.desktop .audio-player.ready {
 }
 header.desktop .audio-player.preview-song .statusbar {
   width: 60%;
-  width: -webkit-calc(100% - 11em);
+  width: -webkit-calc(100% - 11.5em);
+  width: -moz-calc(100% - 11.5em);
 }
 header.desktop .audio-player.preview-song .preview-song-indicator {
   display: inline;
@@ -1561,16 +1608,16 @@ header.desktop .ready .hide-till-ready {
 }
 header.desktop .player-metadata {
   text-decoration: none;
-  color: #28222b;
+  color: #322b36;
 }
 header.desktop .player-metadata a {
-  color: #131014;
+  color: #151217;
 }
 header.desktop .player-metadata .song {
-  color: #050406;
+  color: #18141a;
 }
 header.desktop .player-metadata .artist {
-  color: #1e1821;
+  color: #29212d;
   font-style: italic;
 }
 header.desktop .audio-player-title {
@@ -1582,16 +1629,11 @@ header.desktop .audio-player-title {
 .single-album header.desktop .audio-player-title {
   width: 75%;
 }
-header.desktop .buy-album {
-  float: left;
-  background: #4d4153;
-  padding: 0.75em 1.5em;
-  border-radius: 3px;
-}
 header.desktop .view-full-album {
   float: right;
   font-size: 0.80em;
   margin-top: 0.15em;
+  color: #322b36 !important;
 }
 header.desktop .view-full-album .target {
   text-decoration: underline;
@@ -1602,8 +1644,13 @@ header.desktop .view-full-album .target {
 header.desktop .timing {
   float: right;
   position: relative;
-  font-size: 80%;
-  color: #131014;
+  top: 0.125em;
+  font-size: 75%;
+  color: #322b36;
+}
+header.desktop .timing .progress-time {
+  display: inline-block;
+  width: 2.4em;
 }
 header.desktop .preview-song-indicator {
   margin-right: 0.5em;
@@ -1613,15 +1660,15 @@ header.desktop .controls {
   margin: 0.5em 0;
 }
 header.desktop .controls .play-pause, header.desktop .controls .previous, header.desktop .controls .next {
-  color: #28222b;
+  color: #322b36;
   font-size: 0.8em;
   float: left;
-  width: 1.4em;
+  width: 1.8em;
   cursor: pointer;
 }
 @media (min-width: 1024px) {
   header.desktop .controls .play-pause, header.desktop .controls .previous, header.desktop .controls .next {
-    margin-top: 0.2em;
+    margin-top: 0.25em;
   }
 }
 @media (min-width: 1900px) {
@@ -1630,27 +1677,35 @@ header.desktop .controls .play-pause, header.desktop .controls .previous, header
   }
 }
 header.desktop .controls .play-pause:hover, header.desktop .controls .previous:hover, header.desktop .controls .next:hover {
-  color: #1b161d;
+  color: #251f28;
+}
+header.desktop .controls .next {
+  text-align: center;
 }
 header.desktop .controls .play-pause {
   font-size: 1.1em;
-  width: 1.6em;
-  padding-left: 0.6em;
+  width: 1.5em;
+  padding-left: 0.4em;
   margin: 0;
+  text-align: left;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  color: #211b23;
+  color: #29212b;
+}
+header.desktop .controls .play-pause:hover {
+  color: #161217;
 }
 header.desktop .controls .statusbar {
   float: left;
   margin-top: 0.33em;
   margin-right: 1%;
   margin-left: 1%;
-  background: #322b36;
+  background: #453a4a;
   height: 0.55em;
   width: 65%;
   width: -webkit-calc(100% - 8.5em);
+  width: -moz-calc(100% - 8.5em);
   left: 0.275em;
   position: relative;
 }
@@ -1664,16 +1719,16 @@ header.desktop .controls .statusbar::after, header.desktop .controls .statusbar:
 }
 header.desktop .controls .statusbar::before {
   left: -0.275em;
-  background: #28222b;
+  background: #322b36;
 }
 header.desktop .controls .statusbar::after {
   right: -0.275em;
   top: 0;
-  background: #322b36;
+  background: #453a4a;
   z-index: 1;
 }
 header.desktop .controls .progress-bar, header.desktop .controls .loading {
-  background-color: #28222b;
+  background-color: #322b36;
   width: 0;
   height: 0.55em;
   position: absolute;
@@ -1688,11 +1743,11 @@ header.desktop .controls .progress-bar::after, header.desktop .controls .progres
   width: 0.55em;
   height: 0.55em;
   border-radius: 0.55em;
-  background: #151217;
+  background: #28222b;
 }
 header.desktop .controls .progress-bar::before {
   left: -0.275em;
-  background: #28222b;
+  background: #322b36;
 }
 header.desktop .controls .loading {
   background-color: #2d2631;
@@ -2218,7 +2273,7 @@ nav[role="navigation"] {
   padding: 0.33em 0.6em 0.3em;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 0.33em;
   opacity: 0;
   -webkit-transition: opacity, 0.4s;
   -moz-transition: opacity, 0.4s;
@@ -2271,7 +2326,7 @@ nav[role="navigation"] {
   position: relative;
 }
 .page-fixed .main-content {
-  padding-top: 6em;
+  padding-top: 8.5em;
 }
 
 /* --------------------------------------------------------------------------------------- *\
@@ -2317,7 +2372,7 @@ header.mobile,
   Image containing divs
 /* --------------------------------------------------------------------------------------- */
 .lazyload {
-  background-color: #261e2a;
+  background3color: #261e2a;
   position: relative;
   display: block;
   position: relative;
@@ -2479,17 +2534,12 @@ section {
   position: absolute;
   z-index: 100;
   top: 0.25em;
-  right: 0;
+  right: 0.25em;
   padding: 0.5em;
   width: 1.5em;
   height: 1em;
   text-align: right;
   font-size: 1rem;
-  background: -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, #b55050), color-stop(100%, rgba(181, 80, 80, 0.5)));
-  background: -webkit-linear-gradient(right, #b55050, rgba(181, 80, 80, 0.5));
-  background: -moz-linear-gradient(right, #b55050, rgba(181, 80, 80, 0.5));
-  background: -o-linear-gradient(right, #b55050, rgba(181, 80, 80, 0.5));
-  background: linear-gradient(right, #b55050, rgba(181, 80, 80, 0.5));
   opacity: 0;
 }
 .playing .album-meta .speaker-indicator {

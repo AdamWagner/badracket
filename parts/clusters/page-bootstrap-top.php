@@ -4,6 +4,10 @@
 
 <div class="badracket-window">
 
+  <div class="logo" align="center">
+      <div class="name"> <img src="<?php echo get_bloginfo('template_url') ?>/images/logo-big.svg" alt=""> </div>
+  </div>
+
 <div  class="app-main page-width group ">
 <?php  get_template_part('parts/header-desktop');?>
 <?php  get_template_part('parts/header-mobile');?>

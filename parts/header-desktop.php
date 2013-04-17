@@ -5,12 +5,21 @@
         <div class="audio-player">
          <div class="player-metadata group">
            <div class="audio-player-title">
-             <a href="" class="audio-title">
+             <span class="audio-title">
                 <span class="song">Loading...</span> <span class="hide-till-ready">-</span>
                 <span class="artist"></span>
-             </a>
+             </span>
            </div>
-           <a class="view-full-album dJAX_internal" > <span class="track-count hide-till-ready">track <span class="current-track">0</span> of <span class="total-tracks"></span>  </span><span class="target"></span>  </a>
+           <a class="view-full-album dJAX_internal" >
+            <span class="track-count hide-till-ready">
+              track
+            <span class="current-track">0</span>
+              of
+            <span class="total-tracks"></span>
+            </span>
+            <span class="show"></span>
+            <span class="target"></span>
+          </a>
          </div>
          <div class="controls group">
           <span data-icon="h" class="previous"></span>

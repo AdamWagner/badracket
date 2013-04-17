@@ -31,7 +31,7 @@ html {
   overflow-y: scroll;
 }
 body, html {
-  background:$dark;
+  background:lighten($dark,10%);
   padding:0;
   margin:0;
   width:100%;
@@ -185,7 +185,7 @@ $nav-width-big:19%;
 $nav-width-bigger:17%;
 $nav-width-huge:14%;
 
-$offset: 6em;
+$offset: 8.5em;
 
 %page-width {
   width:100%;
@@ -304,9 +304,33 @@ $offset: 6em;
   opacity:0;
   @include transition(opacity .2s);
   @include breakpoint(big) {
-    &.loaded { opacity: 0.5; }
+    &.loaded { opacity: 0.35; }
   }
 }
+
+
+/* --------------------------------------------------------------------------------------- *\
+  Logo
+/* --------------------------------------------------------------------------------------- */
+
+
+@import 'animations';
+
+.logo {
+  top:0;
+  left:0;
+  right:0;
+  height:$offset;
+  position:fixed;
+  padding-top:2.5em;
+  @extend %page-width;
+  // @include background-image(radial-gradient(top, ellipse cover,  hsla(296, 15%, 19%, 0.3) 36%, hsla(296, 15%, 19%, 0) 75% ));
+  .logo-container {
+    position:relative;
+  }
+}
+
+
 
 
 /* --------------------------------------------------------------------------------------- *\
@@ -371,7 +395,8 @@ header.mobile {
 
 header.desktop {
   background:desaturate(lighten($dark,13%),2%);
-  background:hsl(290, 7%, 40%);;
+  background:hsl(290, 8%, 38%);;
+  position:relative;
   // background:#514757;
 
   .page-fixed &, .force-fixed & {
@@ -383,21 +408,37 @@ header.desktop {
     height:$header-height;
     padding:1em;
     @include breakpoint(big) {
-      padding:0.7em 1.4em;
+      padding:0.75em 1.2em;
     }
     // @include background(linear-gradient(left, desaturate(lighten($dark,8%),1%), lighten($dark,5%)));
+
+
+    %header-button {
+      $bg : hsl(280, 12%, 22%);;
+      border-radius:3px;
+      color:desaturate(lighten($dark,32%),6%);
+      background: $bg;
+      padding:16px 20px;
+      cursor:pointer;
+      &:hover {
+        color:desaturate(lighten($dark,36%),6%);
+        @include background(linear-gradient( darken($bg , 2.5%), darken($bg , 3.5%)));
+      }
+      &:active {
+       color:desaturate(lighten($dark,32%),6%);
+        background:hsl(280, 12%, 22%);
+      }
+
+    }
 
     .facebook {
 
       .login, .fb-user { float: right; }
 
       .login {
-        color:darken($dark,5%);
-        @include button(lighten($dark,10%));
-        padding:16px 20px;
-        @include box-shadow(0 1px 1px darken($dark, 3%));
         display:none;
         .fb-logged-out & { display:block; }
+        @extend %header-button;
       }
 
       .fb-user {
@@ -423,11 +464,7 @@ header.desktop {
     .support-band {
       float:left;
       .support-band-button {
-        @include button(lighten($dark,10%));
-        @include box-shadow(0 1px 0 $dark);
-        @include text-shadow(0 1px 1px lighten($dark,12%));
-        color:darken($dark,7%);
-        padding:16px 19px;
+        @extend %header-button;
       }
     }
   }
@@ -535,7 +572,7 @@ nav[role="navigation"] {
       padding:0.33em 0.6em 0.3em;
       position:absolute;
       right:0;
-      top:0;
+      top:0.33em;
       opacity:0;
       @include transition(opacity, .4s);
       &.loaded { opacity: 1; }
@@ -636,7 +673,7 @@ header.mobile,
 /* --------------------------------------------------------------------------------------- */
 
 .lazyload {
-  background-color:saturate(darken($dark,5%),5%);
+  background3color:saturate(darken($dark,5%),5%);
   position:relative;
   display:block;
   position: relative;
@@ -772,13 +809,12 @@ section {
     position:absolute;
     z-index:100;
     top:0.25em;
-    right:0;
+    right:0.25em;
     padding:0.5em;
     width:1.5em;
     height:1em;
     text-align:right;
     font-size:1rem;
-    @include background(linear-gradient(right, #b55050, transparentize(#b55050,0.5)));
     opacity:0;
     .playing & { opacity:1; }
   }
