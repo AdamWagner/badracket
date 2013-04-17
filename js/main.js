@@ -217,6 +217,7 @@ badracket = {
   },
 
   albumNormalization : function(rawData) {
+    br_state.setupNav( { albums:rawData.length } );
     return _.map(rawData, function(value, key, list ){
       return {
         artist : value._br_artist[0],
@@ -233,6 +234,7 @@ badracket = {
 
   albumNormalizationShows : function(rawData) {
 
+    br_state.setupNav( { shows:rawData.length } );
     var now = (new Date().getTime() / 1000).toFixed();
 
     var upcoming = _.filter( rawData, function( show ) {
@@ -317,6 +319,7 @@ badracket = {
          success:function(data){
           br_fb.BR.videos = data;
           $(window).trigger('videos-loaded');
+          br_state.setupNav({videos:data.length});
          },
          error: function(errorThrown){
               console.log(errorThrown);
@@ -583,6 +586,21 @@ var br_state = function() {
    }
   }
 
+  var countObj = {};
+  function setupNav( count ) {
+    countObj = _.extend(countObj, count);
+
+    if ( _.keys(countObj).length === 3 ) {
+      var a = $('#nav-albums'),
+          v = $('#nav-videos'),
+          s = $('#nav-shows');
+
+      a.find('.count').html( countObj.albums ).addClass('loaded');
+      v.find('.count').html( countObj.videos ).addClass('loaded');
+      s.find('.count').html( countObj.shows ).addClass('loaded');
+    }
+  }
+
   function setupVideosPage(){
 
     console.log('setup videos page ran');
@@ -685,7 +703,8 @@ var br_state = function() {
   return {
     viewSet : viewSet,
     viewGet : viewGet,
-    urls : urls
+    urls : urls,
+    setupNav : setupNav,
   };
 
 }();

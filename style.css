@@ -2219,6 +2219,14 @@ nav[role="navigation"] {
   position: absolute;
   right: 0;
   top: 0;
+  opacity: 0;
+  -webkit-transition: opacity, 0.4s;
+  -moz-transition: opacity, 0.4s;
+  -o-transition: opacity, 0.4s;
+  transition: opacity, 0.4s;
+}
+.nav-level-1 li .count.loaded {
+  opacity: 1;
 }
 .nav-level-1 li.small {
   font-size: 0.65em;

@@ -536,6 +536,9 @@ nav[role="navigation"] {
       position:absolute;
       right:0;
       top:0;
+      opacity:0;
+      @include transition(opacity, .4s);
+      &.loaded { opacity: 1; }
       // &.new::before {
       //     content:'';
       //     display:block;

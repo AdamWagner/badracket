@@ -10,18 +10,18 @@
         </div>
 
         <ul class="reset-list">
-          <li>
+          <li id="nav-albums">
             <a href="<?php echo get_post_type_archive_link( 'album' ); ?>">Albums</a>
-            <span class="count">12</span>
+            <span class="count"></span>
           </li>
-          <li>
+          <li id="nav-videos">
             <a href="<?php echo get_page_link(160);?>">Videos</a>
-            <span class="count">25</span>
+            <span class="count"></span>
 
           </li>
-          <li>
+          <li id="nav-shows">
             <a href="<?php echo get_post_type_archive_link( 'show' ); ?>">Shows</a>
-            <span class="count">3</span>
+            <span class="count"></span>
           </li>
           <li class="small"> <a href="<?php echo get_page_link(336);?>">More</a> </li>
           <li>
