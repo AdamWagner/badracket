@@ -446,7 +446,7 @@ var br_fb = function(){
         _.each(BR.videos, function( el ){
           var thumbnail = el.thumbnail_large,
               title = el.title.split(':')[0],
-              formatted_date = date("M Y", new Date(el.upload_date)),
+              formatted_date = date("M Y", new Date(el.upload_date.split(' ')[0])), // if not split to remove time, bug in firefox and safari
               id = el.id;
 
           var vidEl = [
@@ -481,7 +481,7 @@ var br_fb = function(){
            var el = BR.videos[i];
            var thumbnail = el.thumbnail_large,
                title = el.title.split(':')[0],
-               formatted_date = date("M Y", new Date(el.upload_date)),
+               formatted_date = date("M Y", new Date(el.upload_date.split(' ')[0])), // if not split to remove time, bug in safari and FF
                id = el.id;
 
            var vidEl = [

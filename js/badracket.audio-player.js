@@ -228,7 +228,7 @@ var br_player = function() {
         el.player.addClass('ready');
         if ( album.kind === 'show' ) {
           el.artist.html( song.artist );
-          var humanDate = date("M j", new Date(album.date));
+          var humanDate = date("M j", new Date(album.date.split(' ')[0])); //if not split, bug in safari and FF
 
           el.albumLink.find('.show').text('Playing ' + humanDate + ': ').show();
           el.albumLink.find('.target').text('view show');
