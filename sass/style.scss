@@ -4,6 +4,7 @@
 @import 'breakpoints';
 @import 'grid';
 @import 'typography';
+@import 'arrows';
 
 
 
@@ -406,23 +407,22 @@ header.desktop {
 
   .header-bar {
     height:$header-height;
-    padding:1em;
-    @include breakpoint(big) {
-      padding:0.75em 1.2em;
-    }
-    // @include background(linear-gradient(left, desaturate(lighten($dark,8%),1%), lighten($dark,5%)));
+    overflow:hidden;
 
-
-    %header-button {
-      $bg : hsl(280, 12%, 22%);;
-      border-radius:3px;
-      color:desaturate(lighten($dark,32%),6%);
+    %box-button {
+      $bg : #78697b;
+      color:$dark;
       background: $bg;
-      padding:16px 20px;
+      padding:1.5em 1.5em;
       cursor:pointer;
+      display:block;
+      height:100%;
+      float:right;
+      border-left:solid 2px darken(#78697b , 12%);
       &:hover {
         color:desaturate(lighten($dark,36%),6%);
-        @include background(linear-gradient( darken($bg , 2.5%), darken($bg , 3.5%)));
+        @include background(linear-gradient( lighten($dark , 7%), lighten($dark , 5%)));
+        border-left:solid 2px lighten($dark, 5%);
       }
       &:active {
        color:desaturate(lighten($dark,32%),6%);
@@ -431,23 +431,38 @@ header.desktop {
 
     }
 
-    .facebook {
+    .header-buttons {
+      height:$header-height;
+      width:21em;
+      float:left;
+      @extend .group;
+      opacity:0;
+      &.loaded { opacity: 1; @include transition(opacity, .2s); }
+    }
 
-      .login, .fb-user { float: right; }
+    .facebook {
 
       .login {
         display:none;
         .fb-logged-out & { display:block; }
-        @extend %header-button;
+        @extend %box-button;
       }
 
       .fb-user {
         display:none;
+        @extend %box-button;
+        &:hover{ background:#78697b; color:$dark; }
+        padding:0;
+        height:$header-height;
+        padding:0.7em 1em;
+        width:11.5em;
         .fb-logged-in & { display:block; }
         .fb-user-name, .fb-user-picture { float:left; }
         .fb-user-name {
-          padding:0.5em 0;
-          display:none;
+          padding:0.8em 0;
+          max-width:4em;
+          overflow:hidden;
+          @extend %no-wrap-text;
         }
 
         .fb-user-picture {
@@ -456,15 +471,34 @@ header.desktop {
           border-radius:3px;
           width:2.75em;
           height:2.75em;
-          @include box-shadow(0 1px 1px darken($dark,3%));
+          @include box-shadow(inset 0 1px 3px darken($dark,3%));
         }
       }
     } // facebook
 
     .support-band {
-      float:left;
       .support-band-button {
-        @extend %header-button;
+        @extend %box-button;
+        position:relative;
+        &:before, &:after {
+          content:'';
+          position:absolute;
+          left:-0.5em;
+        }
+        &:before {
+          @include arrow(left, lighten($dark,15%), 0.73em);
+          left:-.62em;
+          top:31%;
+          z-index:-1;
+        }
+        &:after {
+          @include arrow(left, #78697b, 0.55em);
+          top:35%;
+        }
+        &:hover:after {
+          @include arrow(left, lighten($dark,6%), 0.55em);
+        }
+        &:hover:before { border:none; }
       }
     }
   }

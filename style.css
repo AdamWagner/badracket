@@ -490,12 +490,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .group:before, [class*="grid"]:before, [class^="layout-"]:before, header.mobile:before,
-header.desktop:before, .album-page-meta:before,
+header.desktop:before, header.desktop .header-bar .header-buttons:before, .album-page-meta:before,
 .group:after,
 [class*="grid"]:after,
 [class^="layout-"]:after,
 header.mobile:after,
 header.desktop:after,
+header.desktop .header-bar .header-buttons:after,
 .album-page-meta:after {
   display: table;
   line-height: 0;
@@ -503,7 +504,7 @@ header.desktop:after,
 }
 
 .group:after, [class*="grid"]:after, [class^="layout-"]:after, header.mobile:after,
-header.desktop:after, .album-page-meta:after {
+header.desktop:after, header.desktop .header-bar .header-buttons:after, .album-page-meta:after {
   clear: both;
 }
 
@@ -1089,7 +1090,7 @@ body, html {
 /* --------------------------------------------------------------------------------------- *\
   Typography
 /* --------------------------------------------------------------------------------------- */
-header.desktop .player-metadata .artist, header.desktop .audio-player-title, .album-meta .album-title, .album-meta .artist-name, .track-list td {
+header.desktop .header-bar .facebook .fb-user .fb-user-name, header.desktop .player-metadata .artist, header.desktop .audio-player-title, .album-meta .album-title, .album-meta .artist-name, .track-list td {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -1515,34 +1516,43 @@ header.desktop {
 }
 header.desktop .header-bar {
   height: 4.1em;
-  padding: 1em;
+  overflow: hidden;
 }
-@media (min-width: 1024px) {
-  header.desktop .header-bar {
-    padding: 0.75em 1.2em;
-  }
-}
-header.desktop .header-bar .facebook .login, header.desktop .header-bar .support-band .support-band-button {
-  border-radius: 3px;
-  color: #857b8a;
-  background: #3a313f;
-  padding: 16px 20px;
+header.desktop .header-bar .facebook .login, header.desktop .header-bar .facebook .fb-user, header.desktop .header-bar .support-band .support-band-button {
+  color: #322b36;
+  background: #78697b;
+  padding: 1.5em 1.5em;
   cursor: pointer;
+  display: block;
+  height: 100%;
+  float: right;
+  border-left: solid 2px #584d5a;
 }
-header.desktop .header-bar .facebook .login:hover, header.desktop .header-bar .support-band .support-band-button:hover {
+header.desktop .header-bar .facebook .login:hover, header.desktop .header-bar .facebook .fb-user:hover, header.desktop .header-bar .support-band .support-band-button:hover {
   color: #8f8593;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #342c38), color-stop(100%, #312a35));
-  background: -webkit-linear-gradient(#342c38, #312a35);
-  background: -moz-linear-gradient(#342c38, #312a35);
-  background: -o-linear-gradient(#342c38, #312a35);
-  background: linear-gradient(#342c38, #312a35);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #453a4a), color-stop(100%, #403645));
+  background: -webkit-linear-gradient(#453a4a, #403645);
+  background: -moz-linear-gradient(#453a4a, #403645);
+  background: -o-linear-gradient(#453a4a, #403645);
+  background: linear-gradient(#453a4a, #403645);
+  border-left: solid 2px #403645;
 }
-header.desktop .header-bar .facebook .login:active, header.desktop .header-bar .support-band .support-band-button:active {
+header.desktop .header-bar .facebook .login:active, header.desktop .header-bar .facebook .fb-user:active, header.desktop .header-bar .support-band .support-band-button:active {
   color: #857b8a;
   background: #3a313f;
 }
-header.desktop .header-bar .facebook .login, header.desktop .header-bar .facebook .fb-user {
-  float: right;
+header.desktop .header-bar .header-buttons {
+  height: 4.1em;
+  width: 21em;
+  float: left;
+  opacity: 0;
+}
+header.desktop .header-bar .header-buttons.loaded {
+  opacity: 1;
+  -webkit-transition: opacity, 0.2s;
+  -moz-transition: opacity, 0.2s;
+  -o-transition: opacity, 0.2s;
+  transition: opacity, 0.2s;
 }
 header.desktop .header-bar .facebook .login {
   display: none;
@@ -1552,6 +1562,14 @@ header.desktop .header-bar .facebook .login {
 }
 header.desktop .header-bar .facebook .fb-user {
   display: none;
+  padding: 0;
+  height: 4.1em;
+  padding: 0.7em 1em;
+  width: 11.5em;
+}
+header.desktop .header-bar .facebook .fb-user:hover {
+  background: #78697b;
+  color: #322b36;
 }
 .fb-logged-in header.desktop .header-bar .facebook .fb-user {
   display: block;
@@ -1560,8 +1578,9 @@ header.desktop .header-bar .facebook .fb-user .fb-user-name, header.desktop .hea
   float: left;
 }
 header.desktop .header-bar .facebook .fb-user .fb-user-name {
-  padding: 0.5em 0;
-  display: none;
+  padding: 0.8em 0;
+  max-width: 4em;
+  overflow: hidden;
 }
 header.desktop .header-bar .facebook .fb-user .fb-user-picture {
   box-sizing: content-box;
@@ -1569,19 +1588,56 @@ header.desktop .header-bar .facebook .fb-user .fb-user-picture {
   border-radius: 3px;
   width: 2.75em;
   height: 2.75em;
-  -webkit-box-shadow: 0 1px 1px #2a242e;
-  -moz-box-shadow: 0 1px 1px #2a242e;
-  box-shadow: 0 1px 1px #2a242e;
+  -webkit-box-shadow: inset 0 1px 3px #2a242e;
+  -moz-box-shadow: inset 0 1px 3px #2a242e;
+  box-shadow: inset 0 1px 3px #2a242e;
 }
-header.desktop .header-bar .support-band {
-  float: left;
+header.desktop .header-bar .support-band .support-band-button {
+  position: relative;
+}
+header.desktop .header-bar .support-band .support-band-button:before, header.desktop .header-bar .support-band .support-band-button:after {
+  content: '';
+  position: absolute;
+  left: -0.5em;
+}
+header.desktop .header-bar .support-band .support-band-button:before {
+  display: block;
+  height: 0;
+  width: 0;
+  border-top: 0.73em solid transparent;
+  border-right: 0.73em solid #5a4c61;
+  border-bottom: 0.73em solid transparent;
+  left: -.62em;
+  top: 31%;
+  z-index: -1;
+}
+header.desktop .header-bar .support-band .support-band-button:after {
+  display: block;
+  height: 0;
+  width: 0;
+  border-top: 0.55em solid transparent;
+  border-right: 0.55em solid #78697b;
+  border-bottom: 0.55em solid transparent;
+  top: 35%;
+}
+header.desktop .header-bar .support-band .support-band-button:hover:after {
+  display: block;
+  height: 0;
+  width: 0;
+  border-top: 0.55em solid transparent;
+  border-right: 0.55em solid #423847;
+  border-bottom: 0.55em solid transparent;
+}
+header.desktop .header-bar .support-band .support-band-button:hover:before {
+  border: none;
 }
 header.desktop .audio-player {
-  width: 65%;
+  width: 63%;
   width: -webkit-calc(100% - 21em);
   width: -moz-calc(100% - 21em);
+  height: 4.1em;
   float: left;
-  margin-right: 1.5em;
+  padding: 0.75em 1.2em;
   opacity: 0.5;
   -webkit-transition: opacity 0.25s;
   -moz-transition: opacity 0.25s;

@@ -361,6 +361,7 @@ badracket = {
       badracket.lazyLoadImg('djaxload');
       badracket.lazyLoadImgEl('djaxload');
 
+      br_fb.UI.bindUI.unBindAll();
       br_fb.UI.bindUI.bindAll();
 
       var html = data.response,

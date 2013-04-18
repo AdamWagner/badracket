@@ -448,10 +448,24 @@ var br_player = function() {
 
     function attach30SecondListener ( song ) {
       if (song.isSampleTrack === '0') {
-         song.sm2_obj.onPosition(30000, function() {
+        var s = song.sm2_obj;
+         s.onPosition(26000, function(eventPosition) {                 // fire at 30 seconds
+          fadeOutSound( s );
+        });
+         s.onPosition(30000, function() {
           br_sm2.onFinish( song.sm2_obj );
         });
       }
+    }
+
+    function fadeOutSound ( s ) {
+      var vol = s.volume;
+      if (vol === 0) {
+        setTimeout(function() { s.setVolume(100); }, 1000); // undo fadeout after 1sec
+        return false;                                       // stop recursion
+      }
+      s.setVolume( Math.min(100 , vol - 1) );
+      setTimeout(function(){ fadeOutSound(s); } , 40);
     }
 
     return { // logic {}

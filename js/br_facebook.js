@@ -283,17 +283,17 @@ var br_fb = function(){
        if ( loggedIn ) {
          html.addClass('fb-logged-in');
          html.removeClass('fb-logged-out');
+        $('.header-buttons').addClass('loaded');
        } else {
          html.addClass('fb-logged-out');
          html.removeClass('fb-logged-in');
+        $('.header-buttons').addClass('loaded');
        }
       },
 
       user : function(){
        console.log('render login ran');
-       var greeting = ['Welcome ', 'Howdy ', 'Hola '];
-       var random = Math.floor(Math.random() * greeting.length );
-       $('.fb-user-name').text( greeting[random] + user.first_name + '!');
+       $('.fb-user-name').text( user.first_name );
       },
 
       userPicture : function(){
@@ -566,7 +566,6 @@ var br_fb = function(){
         var id = $(this).data('id');
 
         $(window).on('djaxLoad', function(e, data) {
-          console.log(id);
           $('[data-id="'+id+'"]').click();
         });
 
@@ -643,13 +642,20 @@ var br_fb = function(){
       },
 
       videoHome : function(){
-        $('.video').on('click', handlers.videoHomeClick );
+        $('[data-view="home"]').find('.video').on('click', handlers.videoHomeClick );
       },
 
       bindAll : function(){
         this.login();
         this.logout();
         this.rsvp();
+      },
+
+      unBindAll: function(){
+        $('.facebook .login').off('click', handlers.login );
+        $('.facebook .logout').off('click', handlers.logout );
+        $('.show-rsvp').off('click', handlers.rsvp );
+        $('.video').off('click', handlers.videoHomeClick );
       }
     };
 

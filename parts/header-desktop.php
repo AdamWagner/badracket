@@ -40,18 +40,22 @@
      </div>
     </div> <?php // end audio-player ?>
 
-    <a href="#buy-album-form" data-toggle="modal" class="support-band">
-      <div class="support-band-button button">Get album </div>
-    </a>
+    <div class="header-buttons">
 
-    <div class="facebook">
-      <div class="login">Login with Facebook</div>
-      <div class="fb-user">
-        <img class="fb-user-picture"/>
-        <div class="fb-user-name"></div>
-        <!-- <div class="logout">Logout</div> -->
+      <div class="facebook">
+        <div class="login">Login with Facebook</div>
+        <div class="fb-user">
+          <img class="fb-user-picture"/>
+          <div class="fb-user-name"></div>
+          <!-- <div class="logout">Logout</div> -->
+        </div>
       </div>
+
+      <a href="#buy-album-form" data-toggle="modal" class="support-band">
+        <div class="support-band-button button">Get album </div>
+      </a>
     </div>
+
 
   </div>
 </header>
