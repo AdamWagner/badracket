@@ -23,14 +23,14 @@
             <a href="<?php echo get_post_type_archive_link( 'show' ); ?>">Shows</a>
             <span class="count"></span>
           </li>
-          <li class="small"> <a href="<?php echo get_page_link(336);?>">More</a> </li>
-          <li>
+          <li class="small hidden-mobile"> <a href="<?php echo get_page_link(336);?>">More</a> </li>
+          <li class="hidden-mobile">
             <a href="<?php echo get_page_link(336);?>">Photos</a>
           </li>
-          <li>
+          <li class="hidden-mobile">
             <a href="<?php echo get_post_type_archive_link( 'interview' ); ?>">Interviews</a>
           </li>
-          <li>
+          <li class="hidden-mobile">
             <a href="<?php echo get_page_link(2479);?>">Articles</a>
           </li>
         </ul>

@@ -18,7 +18,7 @@ $pink-cream: #f8ebe1;
 $red: #dc5b59;
 $orange: #d27f62;
 $dark:hsl(280, 12%, 19%);
-$light-on-dark:lighten($dark,30%);
+$light-on-dark:desaturate(lighten($dark,30%),4%);
 $green: #468d72;
 
 @import 'loading';
@@ -48,6 +48,12 @@ body, html {
   }
   @include breakpoint(huge) {
     font-size:122%;
+  }
+  ::selection {
+    background: transparent;
+  }
+  ::-moz-selection {
+    background: transparent;
   }
 }
 
@@ -283,11 +289,15 @@ $offset: 8.5em;
 
 .app-main {
   position:relative;
-  top:$offset;
   background:$dark;
   height:100%;
-  .page-fixed &, .force-fixed & {
-    top:$header-height;
+  @include breakpoint(big){
+    top:$offset;
+  }
+  @include breakpoint(big){
+    .page-fixed &, .force-fixed & {
+      top:$header-height;
+    }
   }
 }
 
@@ -318,16 +328,21 @@ $offset: 8.5em;
 @import 'animations';
 
 .logo {
-  top:0;
-  left:0;
-  right:0;
-  height:$offset;
-  position:fixed;
-  padding-top:2.5em;
-  @extend %page-width;
-  // @include background-image(radial-gradient(top, ellipse cover,  hsla(296, 15%, 19%, 0.3) 36%, hsla(296, 15%, 19%, 0) 75% ));
-  .logo-container {
-    position:relative;
+  display:none;
+  -webkit-user-select: none;
+  @include breakpoint(big) {
+    display:block;
+    top:0;
+    left:0;
+    right:0;
+    height:$offset;
+    position:fixed;
+    padding-top:2.5em;
+    @extend %page-width;
+    // @include background-image(radial-gradient(top, ellipse cover,  hsla(296, 15%, 19%, 0.3) 36%, hsla(296, 15%, 19%, 0) 75% ));
+    .logo-container {
+      position:relative;
+    }
   }
 }
 
@@ -346,6 +361,7 @@ header.desktop {
   left:0;
   right:0;
   z-index:100;
+  -webkit-user-select: none;
 }
 
 header.mobile {
@@ -355,7 +371,7 @@ header.mobile {
   background:$dark;
   height:4em;
 
-  .menu, .info, .logo {
+  .menu, .info, .logo-mark {
     width:2.4rem;
     height:2.4rem;
     cursor:pointer;
@@ -363,11 +379,12 @@ header.mobile {
     @include transition(opacity .3s linear .28s);  // to fade out when in mobile states
   }
 
-  .logo {
+  .logo-mark {
+    background:url('images/mark.svg');
+    background-size:cover;
     margin:auto;
-    @extend %logo-mark;
-    opacity:0.75;
   }
+
   .info, .menu {
     color:desaturate(lighten($dark,12%),3%);
     display:inline-block;
@@ -413,7 +430,7 @@ header.desktop {
       $bg : #78697b;
       color:$dark;
       background: $bg;
-      padding:1.5em 1.5em;
+      padding:1.55em 1.5em;
       cursor:pointer;
       display:block;
       height:100%;
@@ -459,7 +476,7 @@ header.desktop {
         .fb-logged-in & { display:block; }
         .fb-user-name, .fb-user-picture { float:left; }
         .fb-user-name {
-          padding:0.8em 0;
+          padding:0.84em 0;
           max-width:4em;
           overflow:hidden;
           @extend %no-wrap-text;
@@ -488,12 +505,12 @@ header.desktop {
         &:before {
           @include arrow(left, lighten($dark,15%), 0.73em);
           left:-.62em;
-          top:31%;
+          top:32.5%;
           z-index:-1;
         }
         &:after {
           @include arrow(left, #78697b, 0.55em);
-          top:35%;
+          top:36%;
         }
         &:hover:after {
           @include arrow(left, lighten($dark,6%), 0.55em);
@@ -523,12 +540,14 @@ header.desktop {
 /* --------------------------------------------------------------------------------------- */
 
 nav[role="navigation"] {
-  background:saturate(darken($dark,3.7%),1%);
+  -webkit-user-select: none;
+  background:darken($dark,3%);
   @extend %nav-width;
   position:absolute;
   height:100%;
   @include transition(opacity .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
   @include breakpoint(big) {
+    background:saturate(darken($dark,3.7%),1%);
     padding:1em;
   }
   @include breakpoint-reverso(small) {
@@ -566,13 +585,17 @@ nav[role="navigation"] {
   }
 
   .nav-title {
-    @include font-stack-headline;
-    font-size:.85em;
-    background:darken($dark,6.5%);
+    font-family:'Helvetica Neue' Helvetica, Arial, sans-serif;
+    text-transform:uppercase;
+    font-size:0.75em;
+    background:darken($dark,2%);
+    text-rendering:optimizelegibility;
     @include breakpoint(big) {
+      @include font-stack-headline;
+      text-transform:none;
+      font-size:.85em;
       background:none;
       font-size:1.4em;
-      text-rendering:optimizelegibility;
       padding:0.4em 0;
       margin-top:0.23em;
     }
@@ -582,18 +605,9 @@ nav[role="navigation"] {
     position:relative;
     opacity:0.75;
     font-size:1.2em;
-    border-top:solid 1px lighten($dark, 2%);
+    border-top:solid 1px $dark;
     &:first-child { border-top:none; }
-    // &:before {
-    //   content:'';
-    //   display:block;
-    //   float:left;
-    //   width:1em;
-    //   height:1em;
-    //   background:lighten($dark,8%);
-    //   margin-right:0.75em;
-    //   border-radius:3px;
-    // }
+
     .count {
       font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
       text-rendering:optimizelegibility;
@@ -605,11 +619,16 @@ nav[role="navigation"] {
       border-radius:3px;
       padding:0.33em 0.6em 0.3em;
       position:absolute;
-      right:0;
-      top:0.33em;
+      right:1em;
+      top:1em;
       opacity:0;
       @include transition(opacity, .4s);
       &.loaded { opacity: 1; }
+      @include breakpoint(big){
+      right:0;
+      top:0.33em;
+
+      }
       // &.new::before {
       //     content:'';
       //     display:block;
@@ -658,7 +677,29 @@ nav[role="navigation"] {
   }
 }
 
+/* --------------------------------------------------------------------------------------- *\
+  Info panel
+/* --------------------------------------------------------------------------------------- */
 
+[role="info"] {
+  @include breakpoint(big) {display:none;}
+  opacity:0;
+  background:darken($dark,3%);
+  @extend %nav-width;
+  position:absolute;
+  right:0;
+  height:100%;
+  padding:1em;
+  color:$light-on-dark;
+  @include transition(opacity .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
+
+  .page-fixed &, .force-fixed & {
+    position: fixed;
+    @extend %nav-width-fixed;
+    top:$header-height;
+
+  }
+}
 
 /* --------------------------------------------------------------------------------------- *\
   Main content
@@ -669,9 +710,10 @@ nav[role="navigation"] {
   min-height:100%;
   z-index:10;
   position:relative; // for z-index effect
-
-  .page-fixed & {
-    padding-top:$offset;
+  @include breakpoint(big) {
+    .page-fixed & {
+      padding-top:$offset;
+    }
   }
 }
 
@@ -684,8 +726,12 @@ header.mobile,
   @include transition(transform .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
 }
 
+
 @include breakpoint-reverso(small) {
-  [data-state="nav-state"] .modal { display:none; }
+  [data-state="nav-state"] .modal, [data-state="nav-state"] .modal { display:none; }
+}
+
+@include breakpoint-reverso(small) {
   [data-state="nav-state"] .main-content,
   [data-state="nav-state"] header.mobile {
     @include transform(translateX($nav-width-mobile));
@@ -702,6 +748,23 @@ header.mobile,
   }
 }
 
+@include breakpoint-reverso(small) {
+  [data-state="info-state"] .modal { display:none; }
+  [data-state="info-state"] .main-content,
+  [data-state="info-state"] header.mobile {
+    @include transform(translateX(-$nav-width-mobile));
+  }
+
+  [data-state="info-state"] [role="info"] {
+    @include breakpoint-reverso(small) {
+      opacity:1;
+    }
+  }
+
+  [data-state="info-state"] .outer-wrapper {
+    @include transform(translateX(-$nav-width-mobile));
+  }
+}
 /* --------------------------------------------------------------------------------------- *\
   Image containing divs
 /* --------------------------------------------------------------------------------------- */
@@ -734,12 +797,73 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
   Sections
 /* --------------------------------------------------------------------------------------- */
 
-.red { background:$red; }
-.cream { background:$cream; }
-.pink-cream { background:$pink-cream; }
-.dark-red { background:desaturate(darken($red,7%),20%); }
-.green { background:$green; }
-.orange { background:$orange; }
+
+
+$cream: #f2e7cc;
+$pink-cream: #f8ebe1;
+$red: #dc5b59;
+$orange: #d27f62;
+$dark:hsl(280, 12%, 19%);
+$light-on-dark:desaturate(lighten($dark,30%),4%);
+$green: #468d72;
+
+@import 'loading';
+
+
+.red {
+  background:$red;
+  ::selection {
+    background: hsl(1, 65%, 70%);
+  }
+  ::-moz-selection {
+    background: hsl(1, 65%, 70%);
+  }
+}
+.cream {
+  background:$cream;
+  ::selection {
+    background: hsl(43, 59%, 92%);
+  }
+  ::-moz-selection {
+    background: hsl(43, 59%, 92%);
+  }
+}
+.pink-cream {
+  background:$pink-cream;
+  ::selection {
+    background: hsl(26, 62%, 90%);
+  }
+  ::-moz-selection {
+    background: hsl(26, 62%, 90%);
+  }
+}
+.dark-red {
+ $background:desaturate(darken($red,7%),20%);
+ ::selection {
+    background: hsl(1, 65%, 70%);
+  }
+  ::-moz-selection {
+    background: hsl(1, 65%, 70%);
+  }
+}
+.green {
+ background:$green;
+ ::selection {
+    background: hsl(157, 34%, 51%);
+  }
+ ::-moz-selection {
+    background: hsl(157, 34%, 51%);
+  }
+}
+.orange {
+ background:$orange;
+  ::selection {
+    background: hsl(16, 55%, 68%);
+  }
+ ::-moz-selection {
+    background: hsl(16, 55%, 68%);
+  }
+}
 
 section {
   -webkit-transform: translateZ(0); // kill the flash on load

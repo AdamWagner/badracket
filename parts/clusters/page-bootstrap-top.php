@@ -14,5 +14,6 @@
 
 
 <?php  get_template_part('parts/nav');?>
+<?php  get_template_part('parts/info');?>
 
 <div id="home-main"class="main-content scrollable group updatable">
