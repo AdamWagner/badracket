@@ -468,6 +468,7 @@ header.desktop {
       .fb-user {
         display:none;
         @extend %box-button;
+        background:darken(#78697b,3%);
         &:hover{ background:#78697b; color:$dark; }
         padding:0;
         height:$header-height;
