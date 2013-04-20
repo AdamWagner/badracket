@@ -450,12 +450,11 @@ var br_fb = function(){
               id = el.id;
 
           var vidEl = [
-          '<div class="grid padded"><span>',
+          '<div class="grid padded">',
             '<div class="playable video" data-id="'+id+'">',
               '<div class="play"></div> ',
               '<div class="lazyload fade ratio-16-9" data-src="'+ thumbnail +'">',
               '</div>',
-              '</span>',
             '</div>',
             '<div class="album-meta">',
               '<div class="album-title">'+title+'</div>',
@@ -487,12 +486,9 @@ var br_fb = function(){
            var vidEl = [
            '<div class="grid padded">',
            '<a href="'+br_state.urls.videos+'" class="dJAX_internal">',
-           '<span>',
              '<div class="playable video" data-id="'+id+'">',
                '<div class="play"></div> ',
-               '<div class="lazyload fade ratio-16-9" data-src="'+ thumbnail +'">',
-               '</div>',
-               '</span>',
+              '<div class="lazyload fade ratio-16-9" data-src="'+ thumbnail +'"></div>',
              '</div>',
              '<div class="album-meta">',
                '<div class="album-title">'+title+'</div>',

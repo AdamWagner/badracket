@@ -19,7 +19,7 @@
     </div>
 
     <div class="overflow-carousel">
-      <div class="overflow-wrapper group p-5-9 s-3 m-5 b-5 h-7 padded">
+      <div class="overflow-wrapper group p-5-9 s-3 m-5 b-5 h-6 padded">
 
       <?php get_template_part('parts/content-loops/album-loop');?>
 

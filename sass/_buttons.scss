@@ -2,7 +2,7 @@
 @mixin button($color) {
   @include button-color($color);
   text-decoration:none;
-  padding:19px 20px 20px; 
+  padding:19px 20px 20px;
   display:inline-block;
   text-align:center;
   border-radius:3px;
@@ -12,7 +12,7 @@
 
 @mixin button-color($base_color) {
   @include background(linear-gradient(lighten($base_color, 1%), darken($base_color, 2%)));
- 
+
   &:hover {
     @include background(linear-gradient(lighten($base_color , 3%), darken($base_color , 3%)));
     @include text-shadow(darken($base_color,10%));
@@ -23,6 +23,22 @@
     @include box-shadow(none);
   }
 }
+
+.pill-button {
+  background:transparentize($dark,0.65);
+  font-family:'Helvetica Neue', Helvetica, Arial, san-serif;
+  font-size:0.75em;
+  padding:0.4em 1em;
+  margin-right:0.5em;
+  text-transform:uppercase;
+  border-radius:3px;
+  .red &, .red &:hover { color:$red; }
+  .green &, .green &:hover { color:$green; }
+  @include transition(background .2s);
+  &:hover { background:$dark; }
+  span { font-size:0.8em;}
+}
+
 
 
 /* Apply button mixin */

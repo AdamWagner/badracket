@@ -103,8 +103,6 @@ badracket = {
 
     $(document).scroll(function() {
         if( !fixed && !force && $(this).scrollTop() >= offset ) {
-          console.log(offset);
-          console.log($(this).scrollTop());
           fixed = true;
           $('html').addClass('page-fixed');
         } else if ($(this).scrollTop() <= offset) {

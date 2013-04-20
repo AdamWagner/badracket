@@ -21,6 +21,27 @@
       }
     }
 
+    $tax_args = array(
+      'taxonomy' => 'engineer',
+      'title_li' => '',
+      'style' => 'none'
+      );
+
+    $tax_args = array(
+      'fields' => 'names'
+
+     );
+
+    $taxonomy = array (
+      'engineer'
+    );
+
+    $engineer = get_terms($taxonomy, $tax_args);
+    $eng_name = $engineer['0'];
+    $eng_id = (get_page_by_title($eng_name, OBJECT, 'staff')->ID);
+    $eng_link = get_permalink($eng_id);
+
+
     $albumName = ucwords(get_the_title());
     $artist = ucwords($custom_fields['_br_artist']['0']);
     $cover = $custom_fields['_br_cover_url']['0'];
@@ -50,7 +71,7 @@
       <div class="meta-text padded-mobile-1">
         <h1 class="album-page-title" data-album-title="<?php the_title();?>"><?php the_title(); ?></h1>
         <h2 class="album-page-artist"><?php echo $artist; ?></h2>
-        <p class="release-date hidden-phone"><?php echo date("M j, Y",strtotime($releaseDate)); ?> | Recorded at <?php echo $recordingStudio ?></p>
+        <p class="release-date hidden-phone"><?php echo date("M j, Y",strtotime($releaseDate)); ?> | Recorded at <?php echo $recordingStudio ?> by <a class="engineer" href="<?php echo $eng_link; ?>"><?php echo $eng_name; ?> </a> </p>
         <p class="total-duration hidden-phone"><?php echo $songCount; ?> songs (<?php echo secondsToWords($total_msecs); ?> )</p>
       </div>
     </div>

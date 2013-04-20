@@ -1,8 +1,8 @@
 .group:before,
-.group:after { 
-  display: table; 
-  line-height: 0; 
-  content: ""; 
+.group:after {
+  display: table;
+  line-height: 0;
+  content: "";
 }
 .group:after { clear: both;}
 
@@ -15,8 +15,10 @@
 .pb2 { padding-bottom: 2em; }
 .pb5 { padding-bottom: 5em; }
 .p0 { padding:0!important; }
+.pt0 { padding-top: 0em!important; }
 
 .top05 { margin-top: 0.5em; }
+.top0 { margin-top: 0; }
 .top1 { margin-top: 1em; }
 .top3 { margin-top: 3em; }
 .top2 { margin-top: 2em; }

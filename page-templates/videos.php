@@ -21,7 +21,9 @@
       <div class="video-name pull-left padded-sides">Videos</div>
     </div>
 
-    <div id="video-container" class="s-1 m-3 b-3 h-4 padded group"> </div>
+    <div id="video-container" class="s-1 m-3 b-3 h-4 padded group">
+
+    </div>
 
   </div>  <?php // end videos ?>
 </section>

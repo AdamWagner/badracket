@@ -35,6 +35,11 @@
       color:$cream;
       -webkit-font-smoothing:antialiased;
       font-size:90%;
+      .engineer {
+        color:$dark;
+        text-decoration: underline;
+        &:hover { color:darken($dark,10%);}
+      }
       @include breakpoint(above-mobile) {
         position:static;
         color:$dark;
@@ -70,7 +75,7 @@
   @include breakpoint(above-mobile) {
     margin-top:2em;
   }
-  td { 
+  td {
     padding:1em;
     @include breakpoint(big) {
       padding:0.5em 1em;
@@ -96,7 +101,7 @@
       .play-icon { display:block; }
     }
     &.song-playing {
-      .red & { 
+      .red & {
         background:$dark;
         color:$red;
       }

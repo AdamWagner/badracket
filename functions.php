@@ -138,12 +138,13 @@ add_taxonomy('name', 'associated_post_type', $args optional: overwrite defaults)
 
 
 add_post_type('album', 'albums', array (
-'taxonomies' => array('post_tag'),
+'taxonomies' => array('post_tag', 'engineer'),
 'rewrite' => array(
           'with_front' => FALSE,
     ),
 ));
 
+add_taxonomy('Engineer', 'Engineers', 'album');
 
 add_post_type('interview', 'interviews', array (
 'taxonomies' => array('post_tag'),
