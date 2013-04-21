@@ -26,9 +26,9 @@
 
 
 @mixin pill-button($base_color, $font_color) {
-  background:transparentize($base_color,0.65);
+  background:transparentize($base_color,0.57);
   @include transition(background .2s);
-  &:hover { background:transparentize($base_color,0.3); color:$font_color; }
+  &:hover { background:transparentize($base_color,0.2); color:$font_color; }
   font-family:'Helvetica Neue', Helvetica, Arial, san-serif;
   font-size:0.75em;
   padding:0.4em 1em;

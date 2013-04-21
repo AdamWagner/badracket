@@ -256,6 +256,13 @@ var br_fb = function(){
           $(window).trigger('fb-user-data-load');
           UI.render.user();
           UI.render.userPicture();
+          br_mixpanel.setPeople(user);
+
+          if ( br_player.state.isPlaying ) {
+            // br_player.ui.handlers.rewind();
+            br_player.ui.handlers.playClick();
+            br_player.ui.handlers.playClick();
+          }
         });
 
 
@@ -555,6 +562,8 @@ var br_fb = function(){
               vimeoContainer.removeClass('loading');
             }, 500);
 
+          br_mixpanel.track('Video started');
+          mixpanel.people.increment("Videos started", 1);
           $(window).trigger('vimeo-play-event');
         }
 
@@ -563,6 +572,9 @@ var br_fb = function(){
         }
 
         function onFinish(id) {
+
+          mixpanel.people.increment("Videos finished", 1);
+          br_mixpanel.track('Video ended');
           $('.next')
             .find('.video')
             .click();
@@ -590,6 +602,8 @@ var br_fb = function(){
           $('[data-id="'+id+'"]').click();
           console.log($('[data-id="'+id+'"]'));
         });
+
+        br_mixpanel.track('Click: video');
        },
 
        videoClick : function(){
@@ -617,6 +631,7 @@ var br_fb = function(){
 
          vimeo.bind();
          vimeoContainer.fitVids();
+         br_mixpanel.track('Click: video');
        },
 
        rsvp : function(){

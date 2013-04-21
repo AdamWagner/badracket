@@ -1,6 +1,6 @@
 
 $player-control-bar-height:0.55em;
-$statusbar-bg-color:lighten($dark,7%);
+$statusbar-bg-color:desaturate(lighten($dark,8%),2%);
 $progress-color:$dark;
 $dark-text:darken($dark,11%);
 $darkest:darken($dark,4%);
@@ -21,8 +21,8 @@ $darkest:darken($dark,4%);
   &.preview-song {
     .statusbar {
       width:60%;
-      width: -webkit-calc(100% - 11.5em);
-      width: -moz-calc(100% - 11.5em);
+      width: -webkit-calc(100% - 15em);
+      width: -moz-calc(100% - 15em);
     }
     .preview-song-indicator {
       display:inline;

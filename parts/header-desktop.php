@@ -32,7 +32,7 @@
           </div>
            <div class="timing">
             <div id="sm2_timing" class="timing-data">
-             <span class="preview-song-indicator">preview</span>
+             <span class="preview-song-indicator">login for full song</span>
              <span class="progress-time"></span>
             </div>
           </div>

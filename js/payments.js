@@ -7,7 +7,7 @@ jQuery(function($){
   var paymentFormWrapper, paymentForm, loadingContainer,
       loadingSpinner, needsValidation, submitButton,
       name, email, ccNum, ccExp, ccCvc, filePath,
-      _cover, _title, _artist, _file;
+      _cover, _title, _artist, _file, _price;
 
   badracket.setupPayForm = function( cover, title, artist, price, file) {
 
@@ -15,6 +15,7 @@ jQuery(function($){
     _title = title;
     _artist = artist;
     _file = file;
+    _price = price;
 
     var priceCents = price * 100;
     filePath = file;
@@ -133,6 +134,8 @@ jQuery(function($){
           loadingContainer.hide();
           submitButton.hide();
           sendMail( name.val(), email.val() );
+          mixpanel.people.increment("Albums purchased", 1);
+          mixpanel.people.track_charge( parseInt( _price.substring(1) ,10) );
 
           var downloadButton = '<a class="red-button" href="'+filePath+'">Download album</a>';
 

@@ -21,16 +21,8 @@
       }
     }
 
-    $tax_args = array(
-      'fields' => 'names'
-     );
-
-    $taxonomy = array (
-      'engineer'
-    );
-
-    $engineer = get_terms($taxonomy, $tax_args);
-    $eng_name = $engineer['0'];
+    $engineer = wp_get_post_terms($post->ID, 'engineer', array("fields" => "names"));
+    $eng_name = $engineer[0];
     $eng_id = (get_page_by_title($eng_name, OBJECT, 'staff')->ID);
     $eng_link = get_permalink($eng_id);
 

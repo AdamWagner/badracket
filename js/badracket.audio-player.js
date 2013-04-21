@@ -26,7 +26,7 @@ var br_sm2 = function(){
 
 
   function whilePlaying( sound ){
-    var duration     = badracket.stringToTime( br_player.state.currSong.duration ),
+    var duration     = (sound.sampleTrack ) ? badracket.stringToTime('0:30') : badracket.stringToTime( br_player.state.currSong.duration ),
         position     = sound.position,
         isSliding    = br_player.state.isSliding;
         playbarWidth = ( (position / duration) * 100 ).toFixed(2) + '%';
@@ -41,14 +41,17 @@ var br_sm2 = function(){
     console.log('on finish ran');
     sound.setPosition( 0 );                     // rewind song
     br_player.ui.handlers.nextPrev( 'next' );   // go to next song
+    br_mixpanel.track('Song Ended', { songUrl : sound.url, duration : badracket.msToTime(sound.duration) });
+    mixpanel.people.increment("Songs finished", 1);
   }
 
   var songCount = 0;
   function createSound( song, isInline ) {
 
-    if (song.isSampleTrack === '0') { song.duration = '0:30'; }
-
     console.log('create sound ran');
+
+    mixpanel.people.increment("Songs started", 1);
+    br_mixpanel.track('Song started');
 
     if ( isInline ) {
        return soundManager.createSound({
@@ -92,7 +95,16 @@ var br_sm2 = function(){
       song.sm2_obj = createSound( song, isInline );              // ... create sound
     }
 
-    br_player.logic.attach30SecondListener( song );              // attach 30 second listener
+
+     if ( song.isSampleTrack == 0 && !$('html').hasClass('fb-logged-in') ) {
+      br_player.logic.attach30SecondListener( song );              // attach 30 second listener
+      song.sm2_obj.sampleTrack = true;
+     } else {
+      song.sm2_obj.sampleTrack = false;
+      br_player.logic.remove30SecondListener( song );              // attach 30 second listener
+     }
+
+     br_player.ui.render.sampleState( song );
 
     if ( isPause ) {
       song.sm2_obj.pause(); // seems to work fine, not rewinding
@@ -237,7 +249,7 @@ var br_player = function() {
           el.ctaWrap.attr('href', album.albumUrl);
           el.ctaButton.text('Get Tickets');
         } else {
-          if ( song.isSampleTrack != 1 ) {
+          if ( song.isSampleTrack != 1 && !$('html').hasClass('fb-logged-in')) {
             el.player.addClass('preview-song');
           } else {
             el.player.removeClass('preview-song');
@@ -264,6 +276,14 @@ var br_player = function() {
         el.playButton.attr('data-icon', icn);
       },
 
+      sampleState : function( song ){
+        if ( song.isSampleTrack != 1 && !$('html').hasClass('fb-logged-in')) {
+          el.player.addClass('preview-song');
+        } else {
+          el.player.removeClass('preview-song');
+        }
+      },
+
       updateTime : function ( time ) {
         el.progressTime.html( time );
       }
@@ -274,6 +294,7 @@ var br_player = function() {
       playClick : function() {
         br_player.logic.targetSong( state.currAlbum, state.currSong );
         render.playState();
+        br_mixpanel.track('Click: Play / Pause');
       },
 
       albumClick : function( e ) {
@@ -289,6 +310,7 @@ var br_player = function() {
             targetSong    = albumData.sampleSong( targetAlbum );
 
         logic.targetSong( targetAlbum, targetSong);
+        br_mixpanel.track('Click: Album', { albumTitle : albumName });
       },
 
       songClick : function( e ) {
@@ -298,6 +320,7 @@ var br_player = function() {
             targetSong    = targetAlbum.tracks[songIndex];
 
         logic.targetSong( targetAlbum, targetSong );
+        br_mixpanel.track('Click: Song', { songTitle : targetSong.songTitle });
       },
 
       nextPrev : function( direction ) {
@@ -309,6 +332,7 @@ var br_player = function() {
             previousAlbumSong = history.song.previous();  // [ album, song ]
             logic.targetSong( previousAlbumSong[0], previousAlbumSong[1] );
           }
+          br_mixpanel.track('Click: Next / Previous');
       },
 
       buyAlbum : function(e){
@@ -322,6 +346,7 @@ var br_player = function() {
             cover = album.coverUrl;
 
         badracket.setupPayForm(cover, title, artist, price, file);
+        br_mixpanel.track('Click: Buy Album');
       },
 
       buyAlbumHover : function(){
@@ -338,12 +363,25 @@ var br_player = function() {
 
       slideStart : function() {
         state.isSliding = true;
+        br_mixpanel.track('Drag: Progress bar');
       },
 
       slideStop : function( event, ui) {
         state.isSliding = false;
-        var smPosition = ( ui.value / 100 ) * badracket.stringToTime( state.currSong.duration );
+        var smPosition;
+        if ( br_player.state.currSong.isSampleTrack == 0 && !$('html').hasClass('fb-logged-in')) {
+          smPosition = ( ui.value / 100 ) * 30000;
+        } else {
+          smPosition = ( ui.value / 100 ) * badracket.stringToTime( state.currSong.duration );
+        }
         state.currSong.sm2_obj.setPosition( smPosition );
+      },
+
+      rewind : function() {
+        s = br_player.history.song.current();
+        if ( s.sm2_obj ) {
+          s.sm2_obj.setPosition(0);
+        }
       }
     };
 
@@ -447,15 +485,19 @@ var br_player = function() {
     }
 
     function attach30SecondListener ( song ) {
-      if (song.isSampleTrack === '0') {
-        var s = song.sm2_obj;
-         s.onPosition(26000, function(eventPosition) {                 // fire at 30 seconds
-          fadeOutSound( s );
-        });
-         s.onPosition(30000, function() {
-          br_sm2.onFinish( song.sm2_obj );
-        });
-      }
+      var s = song.sm2_obj;
+       s.onPosition(26000, function(eventPosition) {                 // fire at 30 seconds
+        fadeOutSound( s );
+      });
+       s.onPosition(30000, function() {
+        br_sm2.onFinish( song.sm2_obj );
+      });
+    }
+
+    function remove30SecondListener ( song ) {
+      var s = song.sm2_obj;
+      s.clearOnPosition(26000);
+      s.clearOnPosition(30000);
     }
 
     function fadeOutSound ( s ) {
@@ -470,7 +512,8 @@ var br_player = function() {
 
     return { // logic {}
       targetSong : targetSongLogic,
-      attach30SecondListener : attach30SecondListener
+      attach30SecondListener : attach30SecondListener,
+      remove30SecondListener : remove30SecondListener
     };
 
   }();

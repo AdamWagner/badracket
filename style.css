@@ -1102,7 +1102,7 @@ html {
 }
 
 body, html {
-  background-color: #4d4153;
+  background-color: #4e4752;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -1589,8 +1589,7 @@ header.mobile .menu {
 }
 
 header.desktop {
-  background: #54495a;
-  background: #665969;
+  background: #6b5e6e;
   position: relative;
   /* --------------------------------------------------------------------------------------- *\
     Audio Player
@@ -1615,7 +1614,7 @@ header.desktop .header-bar {
 }
 header.desktop .header-bar .facebook .login, header.desktop .header-bar .facebook .fb-user, header.desktop .header-bar .support-band .support-band-button {
   color: #322b36;
-  background: #78697b;
+  background: #7b6d7e;
   padding: 1.55em 1.5em;
   cursor: pointer;
   display: block;
@@ -1724,7 +1723,7 @@ header.desktop .header-bar .support-band .support-band-button:after {
   height: 0;
   width: 0;
   border-top: 0.55em solid transparent;
-  border-right: 0.55em solid #78697b;
+  border-right: 0.55em solid #7b6d7e;
   border-bottom: 0.55em solid transparent;
   top: 36.5%;
 }
@@ -1762,8 +1761,8 @@ header.desktop .audio-player.ready {
 }
 header.desktop .audio-player.preview-song .statusbar {
   width: 60%;
-  width: -webkit-calc(100% - 11.5em);
-  width: -moz-calc(100% - 11.5em);
+  width: -webkit-calc(100% - 15em);
+  width: -moz-calc(100% - 15em);
 }
 header.desktop .audio-player.preview-song .preview-song-indicator {
   display: inline;
@@ -1870,7 +1869,7 @@ header.desktop .controls .statusbar {
   margin-top: 0.33em;
   margin-right: 1%;
   margin-left: 1%;
-  background: #453a4a;
+  background: #473e4c;
   height: 0.55em;
   width: 65%;
   width: -webkit-calc(100% - 8.5em);
@@ -1893,7 +1892,7 @@ header.desktop .controls .statusbar::before {
 header.desktop .controls .statusbar::after {
   right: -0.275em;
   top: 0;
-  background: #453a4a;
+  background: #473e4c;
   z-index: 1;
 }
 header.desktop .controls .progress-bar, header.desktop .controls .loading {
@@ -2349,15 +2348,27 @@ nav[role="navigation"] {
   -webkit-user-select: none;
   background: #2a242e;
   position: absolute;
-  height: 100%;
+  top: 4.1em;
+  top: 4.1em;
+  bottom: 0;
   -webkit-transition: opacity 0.3s cubic-bezier(0.51, 0.01, 0.37, 0.98);
   -moz-transition: opacity 0.3s cubic-bezier(0.51, 0.01, 0.37, 0.98);
   -o-transition: opacity 0.3s cubic-bezier(0.51, 0.01, 0.37, 0.98);
   transition: opacity 0.3s cubic-bezier(0.51, 0.01, 0.37, 0.98);
 }
+@media (min-width: 1280px) {
+  nav[role="navigation"] {
+    top: 3.62951em;
+  }
+}
+@media (min-width: 1900px) {
+  nav[role="navigation"] {
+    top: 3.62951em;
+  }
+}
 @media (min-width: 1024px) {
   nav[role="navigation"] {
-    background: #29222c;
+    background: #2a232d;
     padding: 1em;
   }
 }
@@ -2377,22 +2388,30 @@ nav[role="navigation"] a {
 }
 .page-fixed nav[role="navigation"], .force-fixed nav[role="navigation"] {
   position: fixed;
-  top: 4.1em;
-}
-@media (min-width: 1280px) {
-  .page-fixed nav[role="navigation"], .force-fixed nav[role="navigation"] {
-    top: 3.62951em;
-  }
-}
-@media (min-width: 1900px) {
-  .page-fixed nav[role="navigation"], .force-fixed nav[role="navigation"] {
-    top: 3.62951em;
-  }
 }
 
 .main-nav-container {
   position: relative;
   -webkit-backface-visibility: hidden;
+}
+
+.watermark-logo {
+  position: absolute;
+  bottom: 1.5em;
+  color: #f8ebe1;
+  -webkit-font-smoothing: antialiased;
+  font-size: 90%;
+  opacity: 0.4;
+  text-align: center;
+  width: 80%;
+}
+.watermark-logo .mark {
+  background: url("images/mark.svg");
+  background-size: cover;
+  margin: auto;
+  width: 2.1em;
+  height: 2.1em;
+  margin-bottom: 0.75em;
 }
 
 .nav-title, .nav-level-1 li {
@@ -2690,7 +2709,7 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 }
 
 .red .pill-button {
-  background: rgba(50, 43, 54, 0.35);
+  background: rgba(50, 43, 54, 0.43);
   -webkit-transition: background 0.2s;
   -moz-transition: background 0.2s;
   -o-transition: background 0.2s;
@@ -2704,7 +2723,7 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
   color: #dc5b59;
 }
 .red .pill-button:hover {
-  background: rgba(50, 43, 54, 0.7);
+  background: rgba(50, 43, 54, 0.8);
   color: #dc5b59;
 }
 .red .pill-button span {
@@ -2712,7 +2731,7 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 }
 
 .orange .pill-button {
-  background: rgba(50, 43, 54, 0.35);
+  background: rgba(50, 43, 54, 0.43);
   -webkit-transition: background 0.2s;
   -moz-transition: background 0.2s;
   -o-transition: background 0.2s;
@@ -2726,7 +2745,7 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
   color: #d27f62;
 }
 .orange .pill-button:hover {
-  background: rgba(50, 43, 54, 0.7);
+  background: rgba(50, 43, 54, 0.8);
   color: #d27f62;
 }
 .orange .pill-button span {
@@ -2734,7 +2753,7 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 }
 
 .green .pill-button {
-  background: rgba(50, 43, 54, 0.35);
+  background: rgba(50, 43, 54, 0.43);
   -webkit-transition: background 0.2s;
   -moz-transition: background 0.2s;
   -o-transition: background 0.2s;
@@ -2748,7 +2767,7 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
   color: #468d72;
 }
 .green .pill-button:hover {
-  background: rgba(50, 43, 54, 0.7);
+  background: rgba(50, 43, 54, 0.8);
   color: #468d72;
 }
 .green .pill-button span {
@@ -2756,7 +2775,7 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 }
 
 [role="navigation"] .pill-button {
-  background: rgba(77, 65, 83, 0.35);
+  background: rgba(66, 56, 71, 0.43);
   -webkit-transition: background 0.2s;
   -moz-transition: background 0.2s;
   -o-transition: background 0.2s;
@@ -2767,11 +2786,11 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
   margin-right: 0.5em;
   text-transform: uppercase;
   border-radius: 3px;
-  color: #826e8c;
+  color: #817288;
 }
 [role="navigation"] .pill-button:hover {
-  background: rgba(77, 65, 83, 0.7);
-  color: #826e8c;
+  background: rgba(66, 56, 71, 0.8);
+  color: #817288;
 }
 [role="navigation"] .pill-button span {
   font-size: 0.8em;
@@ -3668,7 +3687,7 @@ section {
 }
 
 .inline-player {
-  margin: 1em 0;
+  margin: 1em 0 1.5em;
   background: #dc5b59;
   border-radius: 3px;
 }
@@ -3837,6 +3856,26 @@ section {
 .carousel-caption h4,
 .carousel-caption p {
   color: #ffffff;
+}
+
+/* Interviews */
+.single-interview .quote {
+  font-size: 1.6em;
+  font-style: normal;
+  line-height: 1.6em;
+  font-family: "zine-italic", georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-align: center;
+  border-top: solid 1px #322b36;
+  border-bottom: solid 1px #322b36;
+  padding: 0.8em 0;
+  margin-bottom: 1em;
+}
+.single-interview .inline-player + .quote {
+  margin-top: 1em;
 }
 
 /* --------------------------------------------------------------------------------------- *\

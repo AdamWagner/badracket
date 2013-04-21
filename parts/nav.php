@@ -19,11 +19,10 @@
             <span class="count"></span>
 
           </li>
-          <li id="nav-shows">
+          <li class="bottom1" id="nav-shows">
             <a href="<?php echo get_post_type_archive_link( 'show' ); ?>">Shows</a>
             <span class="count"></span>
           </li>
-          <li class="small hidden-mobile"> <a href="<?php echo get_page_link(336);?>">More</a> </li>
           <li class="hidden-mobile">
             <a href="<?php echo get_page_link(336);?>">Photos</a>
           </li>
@@ -69,6 +68,10 @@
   </div> <?php // end main nav container ?>
 
 <a class="pill-button top1 mr-0"href="<?php echo get_bloginfo('url'); ?>"><span>◀</span>&nbsp;Home</a>
+<div class="watermark-logo">
+  <div class="mark"></div>
+  Bad Racket Recording Studio
+</div>
 
 </nav>
 
