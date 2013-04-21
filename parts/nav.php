@@ -67,4 +67,25 @@
 
     </ul>
   </div> <?php // end main nav container ?>
+
+<a class="pill-button top1 mr-0"href="<?php echo get_bloginfo('url'); ?>"><span>◀</span>&nbsp;Home</a>
+
 </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

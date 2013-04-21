@@ -37,14 +37,25 @@
 }
 
 .padded-sides {
-  padding-left:0.625em;
-  padding-right:0.625em;
+  padding-left:0.625rem;
+  padding-right:0.625rem;
+  .p0 & {
+    padding-left:2rem;
+    padding-right:2rem;
+  }
 }
 
 .padded-section {
   padding:0.5em;
   @include breakpoint(big) {
     padding:1.6em;
+  }
+}
+
+
+.txt-col-2 {
+  @include breakpoint(big) {
+    @include column-count(2);
   }
 }
 
@@ -207,13 +218,15 @@ $breakpoint_prefixes: s-,m-,l-;
 .layout-two-third { width:66.6666667%; }
 .layout-half { width:50%; }
 
-.grid-10 { width:10%; }
-.grid-15 { width:15%; }
-.grid-20 { width:20%; }
-.grid-30 { width:30%; }
-.grid-60 { width:60%; }
-.grid-70 { width:70%; }
-.grid-80 { width:80%; }
+@include breakpoint(big) {
+  .grid-10 { width:10%; }
+  .grid-15 { width:15%; }
+  .grid-20 { width:20%; }
+  .grid-30 { width:30%; }
+  .grid-60 { width:60%; }
+  .grid-70 { width:70%; }
+  .grid-80 { width:80%; }
+}
 
 .layout-main {
   width:100%;

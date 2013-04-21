@@ -1,16 +1,35 @@
 .inline-player {
   margin:1em 0;
   background:$red;
+  border-radius:3px;
+
 
   .inline-play-pause {
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px;
+    display:block;
+    text-align:center;
     color:$dark;
-    font-size:1em;
+    font-size:1.1em;
     float:left;
-    width:1.4em;
+    padding:1em 1.3em;
+    min-width:4em;
+    margin-right:1em;
+    background:lighten($red,5%);
     cursor:pointer;
     &:hover {
+      background:darken($red,5%);
       color:darken($dark,5%);
     }
+  }
+
+  .inline-player-title {
+    display:inline-block;
+    padding:1.2em 0;
+    @extend %no-wrap-text;
+    width:70%;
+    width: -webkit-calc(100% - 6em);
+    width: -moz-calc(100% - 6em);
   }
 
 }

@@ -55,10 +55,7 @@ function inline_audio($atts, $content = null) {
   extract(shortcode_atts(array("url" => '', "title" => ''), $atts));
 
   return '
-  <div class="inline-player" data-song-url="'.$url.'">
-    <span  data-icon="m" class="inline-play-pause"></span>
-    <span class="inline-player-title">'.$title.'</span>
-  </div>';
+  <div class="inline-player group" data-song-url="'.$url.'"><span data-icon="m" class="inline-play-pause"></span><span class="inline-player-title">'.$title.'</span></div>';
 }
 add_shortcode('inline-audio','inline_audio');
 

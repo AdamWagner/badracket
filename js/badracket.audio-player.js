@@ -419,7 +419,7 @@ var br_player = function() {
             songDOM.removeClass('song-playing');
           }
         }
-      } else if (currentView === 'home' || currentView === 'album-rollup') {
+      } else {
         if ( mode === 'toggle' ) {
           albumDOM.toggleClass('playing');
         } else {

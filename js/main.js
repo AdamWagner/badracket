@@ -95,6 +95,7 @@ badracket = {
 
     $(window).bind('djaxLoad', function(e, data) {
       force = $('html').hasClass('force-fixed');
+      offset = $('header.desktop').offset().top;
     });
 
     $(window).resize(function(){
@@ -372,7 +373,6 @@ badracket = {
 
       $.publish('/view/change', data.url);
 
-      // badracket.soundmanager.djaxInit();
       $('.main-content').removeClass('loading');
     });
 
@@ -501,6 +501,7 @@ var br_state = function() {
     videos : domain + '?page_id=160'
   };
 
+
   function viewSet( url ) {
     console.log('view set ran and url is ' + url);
     if ( typeof url === 'undefined' ) { url = window.location.toString(); }
@@ -515,7 +516,7 @@ var br_state = function() {
       setupAlbumPage();
       prefetchPhotos();
       forceFixed();
-    } else if ( url === urls.home ) {
+    } else if ( url  === urls.home.substring(0, urls.home.length -1 ) || url === urls.home ) {
       viewState = 'home';
       setupHome();
       setupAlbumPage();
@@ -556,7 +557,6 @@ var br_state = function() {
   }
 
   function applyViewState(viewState) {
-      console.log(urls.photos);
     console.log('apply view state ran. State is ' + viewState);
     $('body').attr('data-view', viewState);
   }
@@ -703,7 +703,7 @@ var br_state = function() {
     viewSet : viewSet,
     viewGet : viewGet,
     urls : urls,
-    setupNav : setupNav,
+    setupNav : setupNav
   };
 
 }();

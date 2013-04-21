@@ -80,8 +80,8 @@
       <?php endwhile; ?>
 
     </section>
-    <section class="red show-rollup-section group p0">
-      <h1 class="padded-sides">Past Shows</h1>
+    <section class="red show-rollup-section group p0 past-shows">
+      <h2 class="padded-sides top1">Past Shows</h2>
       <?php
        while (have_posts()) : the_post();
        $supporting_band_count = count(get_post_meta($post->ID, '_br_supporting-band-names', true));
@@ -110,23 +110,12 @@
 
       <?php  if($then < $now_now):?>
       <div class="group padded-section" data-timestamp="<?php echo $then; ?>">
-      <a href="<?php echo the_permalink();?>">
-         <div class="layout-main">
-            <div class="pull-left padded-mobile-1">
-                <h2 class="show-headliner"><?php the_title(); echo ' <span class="other-bands">and ' . $supporting_band_count . ' ' . $more_text . ' </span>' ?></h2>
-                <div class="show-details"><?php echo $show_venue; ?>, <?php echo $show_human_date;?> </div>
-
-            </div>
-         </div>
-       </a>
-
-        <div class="layout-sidebar">
-          <div class="show-rollup-sidebar padded-mobile-1">
-            <div class="button-group top1">
-              <span data-fb-id="<?php echo $fb_event_id; ?>"  class="show-rsvp not-attending"><span data-icon="c" class="icon-checkmark"></span><span class="text">RSVP</span></span>
-            </div>
-          </div>
+        <div class="padded-mobile-1">
+            <p class="bottom0"><?php the_title(); echo ' <span class="other-bands">and ' . $supporting_band_count . ' ' . $more_text . ' </span>' ?></p>
+            <div class="show-details"><?php echo $show_venue; ?>, <?php echo $show_human_date;?> </div>
         </div>
+
+       <div data-fb-id="<?php echo $fb_event_id; ?>" class="show-rsvp not-attending"><span data-icon="c" class="icon-checkmark"></span><span class="text">You didn't go.</span></div>
 
       </div>
       <?php  endif; ?>

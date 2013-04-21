@@ -42,6 +42,7 @@
     font-size:1.1em;
     font-weight:normal;
     margin:0;
+    @extend %no-wrap-text;
   }
 
   .show-description {

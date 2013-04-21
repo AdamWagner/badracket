@@ -101,7 +101,6 @@ var br_fb = function(){
     function getUser () {
       var fields = [
         'likes',
-        'events',
         'email',
         'gender',
         'first_name',
@@ -116,15 +115,20 @@ var br_fb = function(){
       return call_fb( 'me?fields=' + fields.join(',') );
     }
 
+    function getUserEvents() {
+      return call_fb( 'me/events?limit=99999&type=attending&since=0' );
+    }
+
     function popUser ( d ) {
+      console.log(d);
       user.username = d.username;
       user.userID = d.id;
       user.first_name = d.first_name;
       user.last_name = d.last_name;
       user.email = d.email;
+      user.events = d.events;
       user.gender = d.gender;
       user.likes = d.likes.data;
-      user.events = (typeof d.events !== 'undefined') ? d.events.data : null;
       user.location = d.location.name;
       user.picture = d.picture.data.url;
       user.friends = d.friends.data;
@@ -216,6 +220,7 @@ var br_fb = function(){
     isFan : isFan,
     isAttending : isAttending,
     getUser : getUser,
+    getUserEvents : getUserEvents,
     popUser : popUser,
     getBR : getBR,
     getBR_albums : getBR_albums,
@@ -245,8 +250,9 @@ var br_fb = function(){
         config.connectStatus = 'connected';
         UI.render.authStatus(true);
 
-        $.when( fetch.getUser() ).then(function( r ){
-          fetch.popUser( r );
+        $.when( fetch.getUser(), fetch.getUserEvents() ).done(function( r1, r2 ){
+          r1.events = r2.data;
+          fetch.popUser( r1 );
           $(window).trigger('fb-user-data-load');
           UI.render.user();
           UI.render.userPicture();
@@ -283,12 +289,11 @@ var br_fb = function(){
        if ( loggedIn ) {
          html.addClass('fb-logged-in');
          html.removeClass('fb-logged-out');
-        $('.header-buttons').addClass('loaded');
        } else {
          html.addClass('fb-logged-out');
          html.removeClass('fb-logged-in');
-        $('.header-buttons').addClass('loaded');
        }
+      $('.header-buttons').addClass('loaded');
       },
 
       user : function(){
@@ -323,18 +328,29 @@ var br_fb = function(){
           button = $('.show-rsvp');
         }
 
-        if ( status ) {
+        if ( status && status !== 'error' ) {
           button.removeClass('not-attending')
             .addClass('rsvp-attending')
             .find('.text').text(text);
+            $('.show-rsvp').off('click', handlers.rsvp );       // unbind to make label unclickable & error-producing
+        } else if ( status == 'error') {
+          button
+            .removeClass('not-attending')
+            .find('.text').text('Oops! Something went wrong.');
         }
       },
 
       attending : function() {
-        console.log('regular attending rannnnnnnnnnnnnnnnn0q93284-203948-2034982-30498');
         var eventID = $('.show-rsvp').data('fb-id'),
-            attendees = fetch.getEventByID( eventID ).attending.data,
+            eventObj = fetch.getEventByID( eventID ),
             names = [];
+
+        if ( eventObj === null ) {
+          console.log('fuck ');
+          return false;
+        }
+
+        var attendees = eventObj.attending.data;
 
         var peopleGoing = function(){
           var num  = 0;
@@ -354,7 +370,7 @@ var br_fb = function(){
         var frag = [];
         _.each( attendees , function( el ){
           var url = el.picture.data.url;
-          frag.push('<img class="grid lazyload_img fade" src="'+url+'"/>');
+          frag.push('<img class="grid" src="'+url+'"/>');
         });
         $('.show-sidebar .attendees .facepile').html( frag.join('') );
 
@@ -363,7 +379,14 @@ var br_fb = function(){
       usersAttending: function() {
         console.log('users attending raaaaaaaaaaaannnnnnnn');
         var eventID = $('.show-rsvp').data('fb-id'),
-            attendees = fetch.getEventByID( eventID ).attending.data,
+            eventObj = fetch.getEventByID( eventID );
+
+        if ( eventObj === null ) {
+          console.log('fuck ');
+          return false;
+        }
+
+        var attendees = fetch.getEventByID( eventID ).attending.data,
             friendIDs = _.pluck(user.friends, 'id'),
             friendsGoing = [],
             names = [];
@@ -417,12 +440,13 @@ var br_fb = function(){
 
         $('.show-sidebar .attendees .text').html( '<span class="not-xparent">'  + names.join(', ') + '</span>' + extra + ' are going.');
 
-
         var frag = [];
+        console.log('the list of 4 attendees');
+        console.log(attendees);
         _.each( attendees , function( el ){
-          if ( el.friend || el.name === (user.first_name + ' ' + user.last_name )) {
+          if ( el.friend || el.name === (user.first_name + ' ' + user.last_name ) || numFriendsGoing < 6 ) {
             var url = el.picture.data.url;
-            frag.push('<img class="grid lazyload_img fade" src="'+url+'"/>');
+            frag.push('<img class="grid" src="'+url+'"/>');
           }
         });
         $('.show-sidebar .attendees .facepile').html( frag.join('') );
@@ -560,11 +584,12 @@ var br_fb = function(){
 
        videoHomeClick : function(){
         var id = $(this).data('id');
+        console.log('vid home click ran biiiiiiiiiiiiiiiiiooooooooooooch');
 
         $(window).on('djaxLoad', function(e, data) {
           $('[data-id="'+id+'"]').click();
+          console.log($('[data-id="'+id+'"]'));
         });
-
        },
 
        videoClick : function(){
@@ -604,7 +629,7 @@ var br_fb = function(){
              that.removeClass('transparent');
               console.log(data);
              if ( data.error ) {
-              render.rsvpButton(false);
+              render.rsvpButton('error', that);
              } else {
               render.rsvpButton(true);
              }
@@ -651,7 +676,6 @@ var br_fb = function(){
         $('.facebook .login').off('click', handlers.login );
         $('.facebook .logout').off('click', handlers.logout );
         $('.show-rsvp').off('click', handlers.rsvp );
-        $('.video').off('click', handlers.videoHomeClick );
       }
     };
 

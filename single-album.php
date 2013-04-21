@@ -22,14 +22,7 @@
     }
 
     $tax_args = array(
-      'taxonomy' => 'engineer',
-      'title_li' => '',
-      'style' => 'none'
-      );
-
-    $tax_args = array(
       'fields' => 'names'
-
      );
 
     $taxonomy = array (
