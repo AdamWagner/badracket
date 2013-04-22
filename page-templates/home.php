@@ -16,7 +16,7 @@
 <?php // ALBUMS ?>
  <div class="album-container bottom1">
    <div class="section-subtitle pt0 album-container-header group ">
-     <!-- <div class="album-name pull-left padded-sides">Albums</div> -->
+     <div class="album-name pull-left padded-sides">Record store</div>
      <a href="<?php echo get_post_type_archive_link( 'album' ); ?>" class="pill-button see-albums pull-right padded-sides">All Albums &nbsp; <span>▶</span></a>
    </div>
    <div class="overflow-carousel">
@@ -44,7 +44,7 @@
 
      <div class="section-subtitle album-container-header group border-bottom">
        <div class="album-name pull-left padded-sides">Record</div>
-       <a href="<?php echo get_post_type_archive_link( 'album' ); ?>" class="pill-button see-albums pull-right padded-sides">Explore our process&nbsp <span>▶</span></a>
+       <a href="<?php echo get_page_link(9);?>" class="pill-button see-albums pull-right padded-sides">Explore our process&nbsp <span>▶</span></a>
      </div>
        <div class="txt-col-2 padded-sides limit-1">
        <p>We love seeing music live, when people get together and pour out lyrics over chords into a room full of strangers. There’s something essential in four walls that makes music sound so good. Our space is inspired by that idea. It’s not too fancy: a single acoustically treated live room with lots of space to play, a team of people that live for sound, and the tools to make silent smiles.</p>
