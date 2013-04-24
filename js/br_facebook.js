@@ -671,17 +671,17 @@ var br_fb = function(){
              $that.removeClass('transparent');
               console.log(data);
              if ( data.error ) {
-              render.rsvpButton('error', $that);
+                render.rsvpButton('error', $that);
              } else {
-              render.rsvpButton(true, $that);
-             }
+                 render.rsvpButton(true, $that);
+                 if ( user.events === null ) { user.events = []; }
+
+                 if ( !alreadyGoing(eventId) ) {
+                   user.events.push(fetch.getEventByID(eventId));
+                 }
+              }
             });
 
-            if ( user.events === null ) { user.events = []; }
-
-            if ( !alreadyGoing(eventId) ) {
-              user.events.push(fetch.getEventByID(eventId));
-            }
         }
 
         if ( config.connectStatus !== 'connected' ) {
