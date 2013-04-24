@@ -264,10 +264,17 @@ badracket = {
 
   doAjaxRequest: function( type ){
        // here is where the request will happen
-       var domain = document.location.origin + document.location.pathname;
+       var domain = window.location.hostname,
+           cleanDomain;
+
+       if ( badracket.stringContains( domain, 'localhost') ) {
+        cleanDomain =  document.location.origin + document.location.pathname;
+       } else {
+        cleanDomain = window.location.hostname;
+       }
 
        jQuery.ajax({
-            url: domain + 'wp-admin/admin-ajax.php',
+            url: cleanDomain + '/wp-admin/admin-ajax.php',
             data:{
                  'action':'do_ajax',
                  'fn':'get_latest_posts',
@@ -491,10 +498,17 @@ var br_state = function() {
 
   var viewState = 'unknown';
 
-  var domain = document.location.origin + document.location.pathname;
+  var domain = window.location.hostname,
+      cleanDomain;
+
+  if ( badracket.stringContains( domain, 'localhost') ) {
+   cleanDomain =  document.location.origin + document.location.pathname;
+  } else {
+   cleanDomain = window.location.hostname;
+  }
 
   var urls = {
-    home : domain,
+    home : cleanDomain,
     albumDetail : 'album=',
     albumRollup : '?post_type=album',
     showDetail : 'show=',
@@ -631,7 +645,11 @@ var br_state = function() {
 
     function checkAttending(){
 
+      var n = 0;
+
       $('.show-rsvp').each(function(){
+        n++;
+        console.log(n);
         var eventID = $(this).data('fb-id');
         if ( br_fb.fetch.isAttending( eventID ) ) {
           br_fb.UI.render.rsvpButton(true, $(this) );
@@ -657,7 +675,8 @@ var br_state = function() {
 
     function checkAttending(){
       if ( br_fb.fetch.isAttending( eventID ) ) {
-        br_fb.UI.render.rsvpButton(true);
+        console.log('is indeed attending');
+        br_fb.UI.render.rsvpButton(true, $('.show-rsvp'));
       }
     }
 

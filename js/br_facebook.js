@@ -121,19 +121,22 @@ var br_fb = function(){
 
     function popUser ( d ) {
       console.log(d);
-      user.username = d.username;
-      user.userID = d.id;
-      user.first_name = d.first_name;
-      user.last_name = d.last_name;
-      user.email = d.email;
-      user.events = d.events;
-      user.gender = d.gender;
-      user.likes = d.likes.data;
-      user.location = d.location.name;
+      user.username = d.username || 'not given';
+      user.userID = d.id || 'not given';
+      user.first_name = d.first_name || 'not given';
+      user.last_name = d.last_name || 'not given';
+      user.email = d.email || 'not given';
+      user.events = d.events || 'not given';
+      user.gender = d.gender || 'not given';
       user.picture = d.picture.data.url;
-      user.friends = d.friends.data;
+      if ( typeof d.likes !== 'undefined') { user.likes = d.likes.data; }
+      if ( typeof d.location !== 'undefined') { user.likes = d.location.name; }
+      if ( typeof d.picture !== 'undefined') { user.likes = d.picture.data.url; }
+      if ( typeof d.friends !== 'undefined') { user.likes = d.friends.data; }
 
-      isFan( user.likes );
+      if ( typeof d.likes !== 'undefined') { isFan( user.likes ); }
+
+
 
     }
 
@@ -153,7 +156,7 @@ var br_fb = function(){
 
     function getEventByID ( eventID ) {
        for ( var i = BR.events.length; i--; ) {
-         if ( BR.events[i].id == eventID ) { console.log(BR.events[i]); return BR.events[i]; }
+         if ( BR.events[i].id == eventID ) { return BR.events[i]; }
      }
    }
 
@@ -314,12 +317,13 @@ var br_fb = function(){
 
       rsvpButton : function( status , target ){
 
+        var button = target.closest('.show-rsvp');
+
         var now = (new Date().getTime() / 1000).toFixed();
 
-        var then = $(target).closest('.padded-section').data('timestamp');
-        console.log(now);
-        console.log(target);
-        console.log(then);
+        var then = target.closest('.padded-mobile-1').find('.show-rsvp').attr('data-fb-id');
+        console.log('now: ' + now);
+        console.log('then: ' + then);
 
         var text = '';
         if ( then > now ) {
@@ -328,12 +332,6 @@ var br_fb = function(){
           text = 'You went!';
         }
 
-        var button;
-        if ( target ) {
-          button = target;
-        } else {
-          button = $('.show-rsvp');
-        }
 
         if ( status && status !== 'error' ) {
           button.removeClass('not-attending')
@@ -341,14 +339,12 @@ var br_fb = function(){
             .find('.text').text(text);
             $('.show-rsvp').off('click', handlers.rsvp );       // unbind to make label unclickable & error-producing
         } else if ( status == 'error') {
-          button
-            .removeClass('not-attending')
-            .find('.text').text('Oops! Something went wrong.');
+          button.removeClass('not-attending').find('.text').text('Oops! Something went wrong.');
         }
       },
 
-      attending : function() {
-        var eventID = $('.show-rsvp').data('fb-id'),
+      attending : function( target ) {
+        var eventID = $('.show-rsvp').attr('data-fb-id'),
             eventObj = fetch.getEventByID( eventID ),
             names = [];
 
@@ -388,15 +384,17 @@ var br_fb = function(){
         var eventID = $('.show-rsvp').data('fb-id'),
             eventObj = fetch.getEventByID( eventID );
 
-        if ( eventObj === null ) {
-          console.log('fuck ');
+        if ( typeof eventObj === 'undefined' ) {
           return false;
         }
 
-        var attendees = fetch.getEventByID( eventID ).attending.data,
+        var attendees = eventObj.attending.data,
             friendIDs = _.pluck(user.friends, 'id'),
             friendsGoing = [],
             names = [];
+
+        console.log('this is the attendees:');
+        console.log(attendees);
 
         function is_in_list( search, list ) {
           for ( var i = 0; i < list.length; i++ ) {
@@ -595,15 +593,15 @@ var br_fb = function(){
 
 
        videoHomeClick : function(){
-        var id = $(this).data('id');
-        console.log('vid home click ran biiiiiiiiiiiiiiiiiooooooooooooch');
+         var id = $(this).data('id');
+         console.log('vid home click ran biiiiiiiiiiiiiiiiiooooooooooooch');
 
-        $(window).on('djaxLoad', function(e, data) {
-          $('[data-id="'+id+'"]').click();
-          console.log($('[data-id="'+id+'"]'));
-        });
+         $(window).on('djaxLoad', function(e, data) {
+           $('[data-id="'+id+'"]').click();
+           console.log($('[data-id="'+id+'"]'));
+         });
 
-        br_mixpanel.track('Click: video');
+         br_mixpanel.track('Click: video');
        },
 
        videoClick : function(){
@@ -634,21 +632,23 @@ var br_fb = function(){
          br_mixpanel.track('Click: video');
        },
 
-       rsvp : function(){
-        var that = $(this);
-        that.addClass('transparent');
-        var eventId = $('.show-rsvp').data('fb-id');
+       rsvp : function(e){
+        var $that = $(e.target).closest('.show-rsvp');
+        $that.addClass('transparent');
+        var eventId = $that.data('fb-id');
+        console.log(eventId);
 
         function attend(){
             FB.api('/'+eventId+'/attending', 'post', function(data) {
-             that.removeClass('transparent');
+             $that.removeClass('transparent');
               console.log(data);
              if ( data.error ) {
-              render.rsvpButton('error', that);
+              render.rsvpButton('error', $that);
              } else {
-              render.rsvpButton(true);
+              render.rsvpButton(true, $that);
              }
             });
+            user.events.push(fetch.getEventByID(eventId));
         }
 
         if ( config.connectStatus !== 'connected' ) {
@@ -670,7 +670,10 @@ var br_fb = function(){
       },
 
       rsvp : function(){
-        $('.show-rsvp').on('click', handlers.rsvp );
+        console.log('++++++++++++++++++++++++++++++++++++++++++rsvp button bound');
+        s.bd.on({
+            click : function(e){ handlers.rsvp(e); }
+          } , '.show-rsvp' );
       },
 
       video : function(){
