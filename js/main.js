@@ -513,8 +513,8 @@ var br_state = function() {
     albumRollup : '?post_type=album',
     showDetail : 'show=',
     showRollup : '=show',
-    photos : domain + '?page_id=336',
-    videos : domain + '?page_id=160'
+    photos : cleanDomain + '?page_id=336',
+    videos : cleanDomain + '?page_id=160'
   };
 
 

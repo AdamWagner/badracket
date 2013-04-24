@@ -120,13 +120,28 @@ var br_fb = function(){
     }
 
     function popUser ( d ) {
-      console.log(d);
+
+      function alreadyGoing(id){
+        var going = false;
+        _.each(user.events, function(el){
+          if (el.id == id) {
+            console.log('is already going');
+            going = true;
+          }
+        });
+        return going;
+      }
+
       user.username = d.username || 'not given';
       user.userID = d.id || 'not given';
       user.first_name = d.first_name || 'not given';
       user.last_name = d.last_name || 'not given';
       user.email = d.email || 'not given';
-      user.events = d.events || 'not given';
+      if ( user.events === null ) {
+        user.events = d.events || [];
+      } else {
+        user.events.push();
+      }
       user.gender = d.gender || 'not given';
       user.picture = d.picture.data.url;
       if ( typeof d.likes !== 'undefined') { user.likes = d.likes.data; }
@@ -202,7 +217,9 @@ var br_fb = function(){
       _.each(albums, function(el){
         var dfd = new $.Deferred();
 
-       FB.api(el.id + '/photos?fields=images,likes&limit=9999', function( r ) {
+        var path = (br_fb.config.connectStatus !== 'connected') ? '/photos?fields=images,likes&limit=9999&access_token=' + escape(config.appAccess) : '/photos?fields=images,likes&limit=9999';
+
+       FB.api(el.id + path , function( r ) {
 
          _.each(r.data, function(el){
            var mediumSrc = el.images[4].source;
@@ -262,7 +279,6 @@ var br_fb = function(){
           br_mixpanel.setPeople(user);
 
           if ( br_player.state.isPlaying ) {
-            // br_player.ui.handlers.rewind();
             br_player.ui.handlers.playClick();
             br_player.ui.handlers.playClick();
           }
@@ -339,7 +355,7 @@ var br_fb = function(){
             .find('.text').text(text);
             $('.show-rsvp').off('click', handlers.rsvp );       // unbind to make label unclickable & error-producing
         } else if ( status == 'error') {
-          button.removeClass('not-attending').find('.text').text('Oops! Something went wrong.');
+          button.removeClass('not-attending').find('.text').text('Oops! Something went wrong. You might be a Bad Racket admin and can\'t RSVP');
         }
       },
 
@@ -605,31 +621,31 @@ var br_fb = function(){
        },
 
        videoClick : function(){
-        $(window).off('sm2-play-event');
-        var that = $(this);
+         $(window).off('sm2-play-event');
+         var that = $(this);
 
-        var id = that.data('id'),
-            vimeoContainer = $('.vimeo-container');
+         var id = that.data('id'),
+             vimeoContainer = $('.vimeo-container');
 
-         $('.grid').removeClass('playing next');
+          $('.grid').removeClass('playing next');
 
-         that
-           .closest('.grid')
-           .addClass('playing')
-           .next()
-           .addClass('next');
+          that
+            .closest('.grid')
+            .addClass('playing')
+            .next()
+            .addClass('next');
 
-         var ratioHeight = $('.main-content').width() * 0.5;
+          var ratioHeight = $('.main-content').width() * 0.5;
 
-         vimeoContainer
-          .addClass('loading')
-          .css('height', ratioHeight );
+          vimeoContainer
+           .addClass('loading')
+           .css('height', ratioHeight );
 
-         vimeoContainer.find('.iframe-wrap').html('<iframe style="visibility:hidden;" onload="this.style.visibility=\'visible\';" id="vimeo-player" src="http://player.vimeo.com/video/'+id+'?api=1&autoplay=true&player_id=vimeo-player"></iframe>');
+          vimeoContainer.find('.iframe-wrap').html('<iframe style="visibility:hidden;" onload="this.style.visibility=\'visible\';" id="vimeo-player" src="http://player.vimeo.com/video/'+id+'?api=1&autoplay=true&player_id=vimeo-player"></iframe>');
 
-         vimeo.bind();
-         vimeoContainer.fitVids();
-         br_mixpanel.track('Click: video');
+          vimeo.bind();
+          vimeoContainer.fitVids();
+          br_mixpanel.track('Click: video');
        },
 
        rsvp : function(e){
@@ -638,7 +654,19 @@ var br_fb = function(){
         var eventId = $that.data('fb-id');
         console.log(eventId);
 
+        function alreadyGoing(id){
+          var going = false;
+          _.each(user.events, function(el){
+            if (el.id == id) {
+              console.log('is already going');
+              going = true;
+            }
+          });
+          return going;
+        }
+
         function attend(){
+            console.log('attend called');
             FB.api('/'+eventId+'/attending', 'post', function(data) {
              $that.removeClass('transparent');
               console.log(data);
@@ -648,7 +676,12 @@ var br_fb = function(){
               render.rsvpButton(true, $that);
              }
             });
-            user.events.push(fetch.getEventByID(eventId));
+
+            if ( user.events === null ) { user.events = []; }
+
+            if ( !alreadyGoing(eventId) ) {
+              user.events.push(fetch.getEventByID(eventId));
+            }
         }
 
         if ( config.connectStatus !== 'connected' ) {
