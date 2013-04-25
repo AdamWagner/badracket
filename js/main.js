@@ -645,11 +645,7 @@ var br_state = function() {
 
     function checkAttending(){
 
-      var n = 0;
-
       $('.show-rsvp').each(function(){
-        n++;
-        console.log(n);
         var eventID = $(this).data('fb-id');
         if ( br_fb.fetch.isAttending( eventID ) ) {
           br_fb.UI.render.rsvpButton(true, $(this) );
