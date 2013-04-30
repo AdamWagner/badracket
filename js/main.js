@@ -8,6 +8,13 @@
 /* @codekit-prepend "lib/froogaloop.js" */
 
 
+/*
+Consider using
+https://github.com/jakiestfu/Snap.js
+for nav menu exposure
+*/
+
+
 (function($) {
 
   var o = $({});

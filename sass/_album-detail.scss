@@ -89,6 +89,12 @@
     &.duration {
       text-align:right;
     }
+    &.unlocked { display:none; }
+
+    .fb-logged-in {
+      &.preview { display:none; }
+      &.unlocked { display:block; }
+    }
   }
   tr {
     cursor:pointer;

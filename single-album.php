@@ -85,9 +85,9 @@
                 </td>
                 <td>'. $songTitle . '</td>';
               if (!$isPreview) {
-                echo  '<td>preview</td>';
+                echo  '<td class="preview">preview</td> <td class="unlocked">unlocked</td>';
               } else {
-                echo '<td></td>';
+                echo '<td class="preview"></td> <td class="unlocked"></td>';
               }
               echo  '<td class="duration">'. $duration . '</td>';
               // echo  '<td><a href="#">Tweet</a></td>';
