@@ -52,6 +52,7 @@ badracket = {
     this.docReady();
     this.load();
     this.djaxLoad();
+    this.bindUI();
   },
 
   enquire: function(){
@@ -271,17 +272,19 @@ badracket = {
 
   doAjaxRequest: function( type ){
        // here is where the request will happen
-       var domain = window.location.hostname,
-           cleanDomain;
+        var domain = window.location.hostname,
+            cleanDomain;
 
-       if ( badracket.stringContains( domain, 'localhost') ) {
-        cleanDomain =  document.location.origin + document.location.pathname;
-       } else {
-        cleanDomain = window.location.hostname;
-       }
+        if ( badracket.stringContains( domain, 'localhost') ) {
+         cleanDomain =  'http://' + document.location.hostname + ':8888' + document.location.pathname;
+        } else {
+         cleanDomain =  'http://' + document.location.hostname + document.location.pathname;
+        }
+
+        console.log(cleanDomain + 'wp-admin/admin-ajax.php');
 
        jQuery.ajax({
-            url: cleanDomain + '/wp-admin/admin-ajax.php',
+            url: cleanDomain + 'wp-admin/admin-ajax.php',
             data:{
                  'action':'do_ajax',
                  'fn':'get_latest_posts',
@@ -310,6 +313,7 @@ badracket = {
                    init.dataReady( type );
                  },
             error: function(errorThrown){
+              console.log('did not get the stuff');
                  console.log(errorThrown);
             }
        });
@@ -474,6 +478,13 @@ badracket = {
     }
   },
 
+
+  bindUI: function(){
+    $('.welcome-button').on('click',function(){
+      $('.badracket-window').removeClass('welcome-state');
+    });
+  },
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
    Utilities
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
@@ -509,9 +520,9 @@ var br_state = function() {
       cleanDomain;
 
   if ( badracket.stringContains( domain, 'localhost') ) {
-   cleanDomain =  document.location.origin + document.location.pathname;
+   cleanDomain =  'http://' + document.location.hostname + ':8888' + document.location.pathname;
   } else {
-   cleanDomain = window.location.hostname;
+   cleanDomain =  'http://' + document.location.hostname + document.location.pathname;
   }
 
   var urls = {
@@ -532,22 +543,18 @@ var br_state = function() {
     if ( badracket.stringContains( url, urls.albumDetail ) ) {
       viewState = 'album-detail';
       setupAlbumDetail();
-      prefetchPhotos();
       forceFixed();
     } else if ( badracket.stringContains( url, urls.albumRollup ) ) {
       viewState = 'album-rollup';
       setupAlbumPage();
-      prefetchPhotos();
       forceFixed();
     } else if ( url  === urls.home.substring(0, urls.home.length -1 ) || url === urls.home ) {
       viewState = 'home';
       setupHome();
       setupAlbumPage();
-      prefetchPhotos();
     } else if ( url === urls.videos ) {
       viewState = 'videos';
       setupVideosPage();
-      prefetchPhotos();
       forceFixed();
     } else if ( url === urls.photos ) {
       viewState = 'photos';
@@ -556,16 +563,13 @@ var br_state = function() {
     } else if ( badracket.stringContains( url, urls.showDetail ) ) {
       viewState = 'show-detail';
       setupShow();
-      prefetchPhotos();
       forceFixed();
     } else if ( badracket.stringContains( url, urls.showRollup ) ) {
       viewState = 'show-rollup';
       setupShowRoll();
-      prefetchPhotos();
       forceFixed();
     } else {
       viewState = 'unknown';
-      prefetchPhotos();
       forceFixed();
     }
 

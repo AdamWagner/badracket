@@ -10,9 +10,13 @@
 
 <?php get_template_part('parts/clusters/page-bootstrap-top'); ?>
 
+<!-- <section class="dark" id="welcome">
+  <h1>Welcome to the new Bad Racket.</h1>
+  <p></p>
+
+</section> -->
+
 <section class="red bottom1">
-
-
 <?php // ALBUMS ?>
  <div class="album-container bottom1">
    <div class="section-subtitle pt0 album-container-header group ">

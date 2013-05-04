@@ -12,4 +12,13 @@
     margin-bottom:1em;
   }
   .inline-player + .quote { margin-top:1em; }
+  .badracket {
+    color:lighten($dark,8%);
+    &:before {
+      content:'BR:\00a0 ';
+      display:inline-block;
+      font-weight:bold;
+      color:$red;
+    }
+  }
 }

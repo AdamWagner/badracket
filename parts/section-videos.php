@@ -5,7 +5,6 @@
   </div>
 
     <div class="s-1 m-3 b-3 h-4 padded">
-      <?php get_template_part('parts/content-loops/video-loop');?>
     </div>
 
 </div>  <?php // end videos ?>

@@ -121,7 +121,16 @@
 }
 
 .past-shows {
+  table { width:100%; margin:1em 0 3em;}
+  td {
+    padding: 0.35em 0;
+    font-size:0.9em;
+    opacity:0.9;
+  }
   .show-rsvp {
     display:block;
+  }
+  .past-show-date {
+    text-align:right;
   }
 }

@@ -91,11 +91,12 @@
     }
     &.unlocked { display:none; }
 
-    .fb-logged-in {
+    .fb-logged-in & {
       &.preview { display:none; }
       &.unlocked { display:block; }
     }
   }
+
   tr {
     cursor:pointer;
     &:nth-child(odd) {

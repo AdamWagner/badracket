@@ -1,3 +1,10 @@
+/* --------------------------------------------------------------------------------------- *\
+  Vars
+/* --------------------------------------------------------------------------------------- */
+.main-content.loading > section > * {
+  opacity: 0.2;
+}
+
 /* normalize.css 2012-08-07T21:27 UTC | MIT License | git.io/normalize */
 /* ==========================================================================
    HTML5 display definitions
@@ -516,6 +523,10 @@ header.desktop:after, header.desktop .header-bar .header-buttons:after, .album-p
   float: right;
 }
 
+.bottom05 {
+  margin-bottom: 0.5em;
+}
+
 .bottom1 {
   margin-bottom: 1em;
 }
@@ -554,6 +565,20 @@ header.desktop:after, header.desktop .header-bar .header-buttons:after, .album-p
 
 .pt0 {
   padding-top: 0em!important;
+}
+
+.pt1 {
+  padding-top: 1em!important;
+}
+
+.ab1 {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.ab2 {
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 
 .top05 {
@@ -1068,12 +1093,31 @@ h2 {
   line-height: 1em;
 }
 
+h3 {
+  margin: 0;
+}
+
 p {
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
   margin: 0 0 1.6em;
-  line-height: 1.65;
+  line-height: 1.68;
+}
+
+article ul, article ol {
+  line-height: 1.68;
+  margin-bottom: 1.68em;
+}
+
+article ol li {
+  list-style: decimal;
+}
+
+article ul li:before {
+  content: '\2022';
+  margin-right: 0.5em;
+  color: #736878;
 }
 
 @media (min-width: 1280px) {
@@ -1085,13 +1129,6 @@ p {
   .limit-1 {
     font-size: 0.88525em;
   }
-}
-
-/* --------------------------------------------------------------------------------------- *\
-  Vars
-/* --------------------------------------------------------------------------------------- */
-.main-content.loading > section > * {
-  opacity: 0.2;
 }
 
 /* --------------------------------------------------------------------------------------- *\
@@ -1154,7 +1191,7 @@ body ::-moz-selection, html ::-moz-selection {
 /* --------------------------------------------------------------------------------------- *\
   Typography
 /* --------------------------------------------------------------------------------------- */
-header.desktop .header-bar .facebook .fb-user .fb-user-name, header.desktop .player-metadata .artist, header.desktop .audio-player-title, .album-meta .album-title, .album-meta .artist-name, .track-list td, .show-main-section .show-supporting-bands, .inline-player .inline-player-title {
+header.desktop .header-bar .facebook .fb-user .fb-user-name, header.desktop .player-metadata .artist, header.desktop .audio-player-title, .album-meta .album-title, .album-meta .artist-name, .track-list td, .show-main-section .show-supporting-bands, .inline-player .inline-player-title, .blog .post-item h3, .post-type-archive-interview .post-item h3 {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -1375,8 +1412,20 @@ nav[role="navigation"], [role="info"] {
 }
 
 .app-main {
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  -webkit-transition-delay: 0.2s;
+  -moz-transition: -moz-transform 0.5s ease-in-out 0.2s;
+  -o-transition: -o-transform 0.5s ease-in-out 0.2s;
+  transition: transform 0.5s ease-in-out 0.2s;
   position: relative;
   height: 100%;
+}
+.welcome-state .app-main {
+  -webkit-transform: translateY(30em);
+  -moz-transform: translateY(30em);
+  -ms-transform: translateY(30em);
+  -o-transform: translateY(30em);
+  transform: translateY(30em);
 }
 @media (min-width: 1024px) {
   .app-main {
@@ -2275,7 +2324,7 @@ td.label-container {
 .modal.fade {
   opacity: 0;
   top: 5%;
-  z-index: 0;
+  z-index: -100;
 }
 
 .modal.fade.in {
@@ -2393,24 +2442,29 @@ nav[role="navigation"] a {
 .main-nav-container {
   position: relative;
   -webkit-backface-visibility: hidden;
+  z-index: 99999;
+  background: #2a242e;
+}
+@media (min-width: 1024px) {
+  .main-nav-container {
+    background: #2a232d;
+  }
 }
 
 .watermark-logo {
   position: absolute;
   bottom: 1.5em;
-  color: #f8ebe1;
   -webkit-font-smoothing: antialiased;
-  font-size: 90%;
-  opacity: 0.4;
   text-align: center;
   width: 80%;
 }
 .watermark-logo .mark {
-  background: url("images/mark.svg");
+  background: url("images/nav-logo.svg");
   background-size: cover;
   margin: auto;
-  width: 2.1em;
-  height: 2.1em;
+  width: 4.5em;
+  height: 3.4em;
+  padding: 1em;
   margin-bottom: 0.75em;
 }
 
@@ -2863,6 +2917,11 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
   background: #da9881;
 }
 
+.dark {
+  background-color: #322B36;
+  color: #5a4c61;
+}
+
 section {
   -webkit-transform: translateZ(0);
 }
@@ -3177,10 +3236,10 @@ section {
 .track-list td.unlocked {
   display: none;
 }
-.track-list td .fb-logged-in.preview {
+.fb-logged-in .track-list td.preview {
   display: none;
 }
-.track-list td .fb-logged-in.unlocked {
+.fb-logged-in .track-list td.unlocked {
   display: block;
 }
 .track-list tr {
@@ -3258,6 +3317,9 @@ section {
   display: none;
 }
 
+.show-main-section {
+  position: relative;
+}
 .show-main-section .show-bg-image {
   position: absolute;
   top: 0;
@@ -3610,8 +3672,20 @@ section {
   font-size: 0.8em;
 }
 
+.past-shows table {
+  width: 100%;
+  margin: 1em 0 3em;
+}
+.past-shows td {
+  padding: 0.35em 0;
+  font-size: 0.9em;
+  opacity: 0.9;
+}
 .past-shows .show-rsvp {
   display: block;
+}
+.past-shows .past-show-date {
+  text-align: right;
 }
 
 /* --------------------------------------------------------------------------------------- *\
@@ -3632,6 +3706,7 @@ section {
   Videos page
 /* --------------------------------------------------------------------------------------- */
 .vimeo-container {
+  background: #322b36;
   -webkit-transition: height, 0.2s;
   -moz-transition: height, 0.2s;
   -o-transition: height, 0.2s;
@@ -3666,6 +3741,20 @@ section {
 }
 
 /* --------------------------------------------------------------------------------------- *\
+  Photos page
+/* --------------------------------------------------------------------------------------- */
+.photos-container .loading {
+  background: rgba(50, 43, 54, 0.3);
+  text-align: center;
+  padding: 4.5em 0;
+  margin: 0.75em;
+  float: none;
+  display: block;
+  width: auto;
+  border-radius: 0.5em;
+}
+
+/* --------------------------------------------------------------------------------------- *\
   Blog post + Interviews + heavy reading
 /* --------------------------------------------------------------------------------------- */
 .longform-text {
@@ -3693,6 +3782,10 @@ section {
     width: 75%;
     margin-top: 1em;
   }
+}
+
+.single h1 {
+  margin: 1.2em 0 1.4em 0;
 }
 
 .inline-player {
@@ -3724,6 +3817,30 @@ section {
   width: 70%;
   width: -webkit-calc(100% - 6em);
   width: -moz-calc(100% - 6em);
+}
+
+.blog .caption, .post-type-archive-interview .caption {
+  margin-top: 0.5em;
+  display: inline-block;
+  font-size: 0.8em;
+  color: #483d4d;
+  font-style: italic;
+}
+.blog .post-item, .post-type-archive-interview .post-item {
+  margin: 1.5em 0;
+}
+@media (min-width: 1024px) {
+  .blog .post-item h3, .post-type-archive-interview .post-item h3 {
+    font-size: 1.4em;
+  }
+}
+.blog .pagination, .post-type-archive-interview .pagination {
+  margin-top: 2em;
+  border-top: solid 2px #dc5b59;
+  padding-top: 1em;
+}
+.blog .pagination .page-numbers, .post-type-archive-interview .pagination .page-numbers {
+  padding: 0.3em;
 }
 
 .clearfix {
@@ -3886,6 +4003,15 @@ section {
 .single-interview .inline-player + .quote {
   margin-top: 1em;
 }
+.single-interview .badracket {
+  color: #483d4d;
+}
+.single-interview .badracket:before {
+  content: 'BR:\00a0 ';
+  display: inline-block;
+  font-weight: bold;
+  color: #dc5b59;
+}
 
 /* --------------------------------------------------------------------------------------- *\
   Staff
@@ -3946,4 +4072,129 @@ section {
 .single-staff .staff-headshot {
   width: 7em;
   height: 7em;
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Rates
+/* --------------------------------------------------------------------------------------- */
+.rates .price, .rates .subtitle {
+  margin: 0.5em 0;
+}
+.rates .pricing {
+  border-bottom: solid 1px rgba(50, 43, 54, 0.25);
+  margin-bottom: 1em;
+}
+.rates .subtitle {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+.rates .price {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+.rates .button {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(221, 95, 93, 0.9)), color-stop(100%, rgba(218, 83, 81, 0.9)));
+  background: -webkit-linear-gradient(rgba(221, 95, 93, 0.9), rgba(218, 83, 81, 0.9));
+  background: -moz-linear-gradient(rgba(221, 95, 93, 0.9), rgba(218, 83, 81, 0.9));
+  background: -o-linear-gradient(rgba(221, 95, 93, 0.9), rgba(218, 83, 81, 0.9));
+  background: linear-gradient(rgba(221, 95, 93, 0.9), rgba(218, 83, 81, 0.9));
+  text-decoration: none;
+  padding: 19px 20px 20px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 1em;
+  cursor: pointer;
+}
+.rates .button:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(223, 103, 102, 0.9)), color-stop(100%, rgba(217, 79, 76, 0.9)));
+  background: -webkit-linear-gradient(rgba(223, 103, 102, 0.9), rgba(217, 79, 76, 0.9));
+  background: -moz-linear-gradient(rgba(223, 103, 102, 0.9), rgba(217, 79, 76, 0.9));
+  background: -o-linear-gradient(rgba(223, 103, 102, 0.9), rgba(217, 79, 76, 0.9));
+  background: linear-gradient(rgba(223, 103, 102, 0.9), rgba(217, 79, 76, 0.9));
+  text-shadow: rgba(211, 49, 47, 0.9);
+}
+.rates .button:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(220, 90, 88, 0.9)), color-stop(100%, rgba(220, 91, 89, 0.9)));
+  background: -webkit-linear-gradient(rgba(220, 90, 88, 0.9), rgba(220, 91, 89, 0.9));
+  background: -moz-linear-gradient(rgba(220, 90, 88, 0.9), rgba(220, 91, 89, 0.9));
+  background: -o-linear-gradient(rgba(220, 90, 88, 0.9), rgba(220, 91, 89, 0.9));
+  background: linear-gradient(rgba(220, 90, 88, 0.9), rgba(220, 91, 89, 0.9));
+  text-shadow: rgba(211, 49, 47, 0.9);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.rates .button, .rates .button:hover, .rates .button:active, .rates .button:visited {
+  color: #f8ebe1;
+}
+@media (min-width: 1024px) {
+  .rates .border-left {
+    border-left: solid 1px rgba(50, 43, 54, 0.25);
+    padding-left: 1em;
+  }
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Welcome
+/* --------------------------------------------------------------------------------------- */
+.welcome-state .welcome {
+  opacity: 1;
+}
+.welcome-state .welcome-button {
+  opacity: 1;
+}
+
+.welcome {
+  width: 60%;
+  margin: 2em auto 1em;
+  text-align: left;
+  padding: 2em;
+}
+.welcome h1 {
+  margin: 0;
+}
+
+.welcome-button {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f9eee5), color-stop(100%, #f6e5d9));
+  background: -webkit-linear-gradient(#f9eee5, #f6e5d9);
+  background: -moz-linear-gradient(#f9eee5, #f6e5d9);
+  background: -o-linear-gradient(#f9eee5, #f6e5d9);
+  background: linear-gradient(#f9eee5, #f6e5d9);
+  text-decoration: none;
+  padding: 19px 20px 20px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 1em;
+  cursor: pointer;
+  width: 60%;
+  z-index: 999999;
+}
+.welcome-button:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fbf3ed), color-stop(100%, #f5e3d5));
+  background: -webkit-linear-gradient(#fbf3ed, #f5e3d5);
+  background: -moz-linear-gradient(#fbf3ed, #f5e3d5);
+  background: -o-linear-gradient(#fbf3ed, #f5e3d5);
+  background: linear-gradient(#fbf3ed, #f5e3d5);
+  text-shadow: #eecfb8;
+}
+.welcome-button:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f8ebe0), color-stop(100%, #f8ebe1));
+  background: -webkit-linear-gradient(#f8ebe0, #f8ebe1);
+  background: -moz-linear-gradient(#f8ebe0, #f8ebe1);
+  background: -o-linear-gradient(#f8ebe0, #f8ebe1);
+  background: linear-gradient(#f8ebe0, #f8ebe1);
+  text-shadow: #eecfb8;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.welcome, .welcome-button {
+  opacity: 0;
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  transition: opacity 0.2s;
 }

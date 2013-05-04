@@ -281,6 +281,7 @@ $meta_boxes[] = array(
        'id'  => $prefix.'isSampleTrack-01',
        'type'  => 'checkbox',
        'desc'    => 'sampleTrack',
+       'std'  => 1,
      ),
   ) //end fields array
 ); //end $meta_boxes array

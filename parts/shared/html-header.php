@@ -13,5 +13,8 @@
 
 </head>
 
+<script>
+  BR_ENV = 'local';
+</script>
 <body <?php body_class(); ?>>
-<div id="fb-root"></div> 
+<div id="fb-root"></div>

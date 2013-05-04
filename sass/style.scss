@@ -1,14 +1,3 @@
-@import 'compass';
-@import 'normalize';
-@import 'utility';
-@import 'breakpoints';
-@import 'grid';
-@import 'typography';
-@import 'arrows';
-
-
-
-
 /* --------------------------------------------------------------------------------------- *\
   Vars
 /* --------------------------------------------------------------------------------------- */
@@ -22,6 +11,17 @@ $light-on-dark:desaturate(lighten($dark,30%),4%);
 $green: #468d72;
 
 @import 'loading';
+@import 'compass';
+@import 'normalize';
+@import 'utility';
+@import 'breakpoints';
+@import 'grid';
+@import 'typography';
+@import 'arrows';
+
+
+
+
 
 
 /* --------------------------------------------------------------------------------------- *\
@@ -288,6 +288,10 @@ $offset: 8.5em;
 }
 
 .app-main {
+  .welcome-state & {
+    @include transform(translateY(30em));
+  }
+  @include transition(transform .5s ease-in-out 0.2s);
   position:relative;
   height:100%;
   @include breakpoint(big) {
@@ -583,23 +587,24 @@ nav[role="navigation"] {
 .main-nav-container {
   position:relative;
   -webkit-backface-visibility: hidden;
+  z-index:99999;
+  background:darken($dark,3%);
+  @include breakpoint(big) { background:darken($dark,3.2%); }
 }
 
   .watermark-logo {
     position:absolute;
     bottom:1.5em;
-    color:$pink-cream;
     -webkit-font-smoothing:antialiased;
-    font-size:90%;
-    opacity:0.4;
     text-align:center;
     width:80%;
     .mark {
-      background:url('images/mark.svg');
+      background:url('images/nav-logo.svg');
       background-size:cover;
       margin:auto;
-      width:2.1em;
-      height:2.1em;
+      width:4.5em;
+      height:3.4em;
+      padding:1em;
       margin-bottom:0.75em;
     }
   }
@@ -924,6 +929,11 @@ $green: #468d72;
   }
 }
 
+.dark {
+  background-color:#322B36;
+  color:lighten($dark,15%);
+}
+
 section {
   -webkit-transform: translateZ(0); // kill the flash on load
   @include breakpoint(big) {
@@ -1125,15 +1135,19 @@ section {
   }
 }
 
-
-
-
-
 /* --------------------------------------------------------------------------------------- *\
   Videos page
 /* --------------------------------------------------------------------------------------- */
 
 @import 'video-rollup';
+
+/* --------------------------------------------------------------------------------------- *\
+  Photos page
+/* --------------------------------------------------------------------------------------- */
+
+@import 'photos';
+
+
 
 
 /* --------------------------------------------------------------------------------------- *\
@@ -1167,6 +1181,7 @@ section {
 }
 
 @import 'blog-post';
+@import 'blog-rollup';
 @import 'lib/bootstrap-carousel';
 
 
@@ -1182,9 +1197,19 @@ section {
 @import 'staff';
 
 
+/* --------------------------------------------------------------------------------------- *\
+  Rates
+/* --------------------------------------------------------------------------------------- */
+
+@import 'rates';
 
 
 
+/* --------------------------------------------------------------------------------------- *\
+  Welcome
+/* --------------------------------------------------------------------------------------- */
+
+@import 'welcome';
 
 
 

@@ -65,13 +65,14 @@
       </li>
 
     </ul>
+<a class="pill-button top1 mr-0"href="<?php echo get_bloginfo('url'); ?>"><span>◀</span>&nbsp;Home</a>
   </div> <?php // end main nav container ?>
 
-<a class="pill-button top1 mr-0"href="<?php echo get_bloginfo('url'); ?>"><span>◀</span>&nbsp;Home</a>
-<div class="watermark-logo">
-  <div class="mark"></div>
-  Bad Racket Recording Studio
-</div>
+<a href="<?php echo get_bloginfo('url'); ?>">
+  <div class="watermark-logo">
+    <div class="mark"></div>
+  </div>
+</a>
 
 </nav>
 

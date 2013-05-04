@@ -2,6 +2,7 @@
 
 // player container
 .vimeo-container {
+  background:$dark;
   @include transition(height, .2s);
   iframe {
     opacity:1;

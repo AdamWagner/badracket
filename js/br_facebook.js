@@ -1,10 +1,13 @@
 
-var br_fb = function(){
+var br_fb = function() {
 
   var config = {
+    appId : (BR_ENV === 'prod') ? '182655285084916' :  '500547106661064',
+    secret : (BR_ENV === 'prod') ? 'd6a8a494139d8f0a4ebc981bdb5751a3' : 'fde7ca80b4bc1e1d912984266f67e36f',
     accessToken : null,
     appAccess : null,
-    connectStatus : null  // connected, not_authorized, not_logged_to_fb
+    connectStatus : null,  // connected, not_authorized, not_logged_to_fb
+    loginCounter : 0
   };
 
   var user = {
@@ -41,12 +44,13 @@ var br_fb = function(){
   ];
 
   function fbEnsureInit ( cb ) {
-       if ( !window.FB || ( !config.accessToken && !config.appAccess ) ) {
-           console.log('ensure init still running');
-           setTimeout( function() { fbEnsureInit( cb ); }, 150);
-       } else {
-           if ( cb ) { cb(); }
-       }
+    if ( !window.FB || ( !config.accessToken && !config.appAccess ) ) {
+        console.log('ensure init still running');
+        config.loginCounter++;
+        if ( config.loginCounter < 50 ) { setTimeout( function() { fbEnsureInit( cb ); }, 150); }
+    } else {
+        if ( cb ) { cb(); }
+    }
   }
 
   function user_do_or_wait ( cb ) {
@@ -290,8 +294,9 @@ var br_fb = function(){
         config.connectStatus = s;
 
       } else {
+          console.log('https://graph.facebook.com/oauth/access_token?client_id='+config.appId+'&redirect_uri=http://localhost:8888/sites/brv5/wp-br/&client_secret='+config.secret+'&grant_type=client_credentials');
         $.ajax({
-          url: 'https://graph.facebook.com/oauth/access_token?client_id=517493138282534&redirect_uri=http://adamwagner.aws.af.cm/&client_secret=6434a549f714ca38d8920802637ee7b9&grant_type=client_credentials',
+          url: 'https://graph.facebook.com/oauth/access_token?client_id='+config.appId+'&redirect_uri=http://localhost:8888/sites/brv5/wp-br/&client_secret='+config.secret+'&grant_type=client_credentials',
           success: function(r){ config.appAccess = r.split('=')[1]; }
         });
         UI.render.authStatus(false);
@@ -477,9 +482,11 @@ var br_fb = function(){
       renderPhotos : function(){
         $.when.apply(null, window.dfds ).done(function( r ){
           BR.sortedPhotos = _.sortBy(BR.photos, function( p ){ return -p.likes; });
+          var frag = [];
           for (var i = 0; i < 95; i++ ) {
-            $('.s-1').append('<div class="grid padded"><div class="lazyload fade ratio-4-3" data-src="' + BR.sortedPhotos[i].medium + '"></div>');
+            frag.push('<div class="grid padded"><div class="lazyload fade ratio-4-3" data-src="' + BR.sortedPhotos[i].medium + '"></div></div>');
           }
+          $('.photos-container').html(frag.join('\n'));
           badracket.lazyLoadImg('render photos');
         });
       },
@@ -489,10 +496,10 @@ var br_fb = function(){
             frag = [];
 
         _.each(BR.videos, function( el ){
-          var thumbnail = el.thumbnail_large,
-              title = el.title.split(':')[0],
-              formatted_date = date("M Y", new Date(el.upload_date.split(' ')[0])), // if not split to remove time, bug in firefox and safari
-              id = el.id;
+           var thumbnail = el.thumbnail_large,
+               title = el.title.split(':')[0],
+               date = el.title.split('-')[1],
+               id = el.id;
 
           var vidEl = [
           '<div class="grid padded">',
@@ -503,7 +510,7 @@ var br_fb = function(){
             '</div>',
             '<div class="album-meta">',
               '<div class="album-title">'+title+'</div>',
-              '<div class="artist-name">'+formatted_date+'</div>',
+              '<div class="artist-name">'+date+'</div>',
             '</div>',
           '</div>'
           ].join('');
@@ -525,7 +532,7 @@ var br_fb = function(){
            var el = BR.videos[i];
            var thumbnail = el.thumbnail_large,
                title = el.title.split(':')[0],
-               formatted_date = date("M Y", new Date(el.upload_date.split(' ')[0])), // if not split to remove time, bug in safari and FF
+               date = el.title.split('-')[1],
                id = el.id;
 
            var vidEl = [
@@ -537,7 +544,7 @@ var br_fb = function(){
              '</div>',
              '<div class="album-meta">',
                '<div class="album-title">'+title+'</div>',
-               '<div class="artist-name">'+formatted_date+'</div>',
+               '<div class="artist-name">'+date+'</div>',
              '</div>',
            '</a>',
            '</div>'
@@ -623,6 +630,7 @@ var br_fb = function(){
        videoClick : function(){
          $(window).off('sm2-play-event');
          var that = $(this);
+         $("html, body").animate({ scrollTop: 0 }, "slow");
 
          var id = that.data('id'),
              vimeoContainer = $('.vimeo-container');
@@ -741,7 +749,7 @@ var br_fb = function(){
   function init(){
 
     FB.init({
-      appId      : '182655285084916', // App ID
+      appId      : config.appId, // App ID
       channelUrl : '//WWW.BADRACKET.COM/channel.html', // Channel File
       status     : true, // check login status
       cookie     : true, // enable cookies to allow the server to access the session

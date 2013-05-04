@@ -52,8 +52,8 @@
              <div class="pull-left padded-mobile-1 grid-80">
                  <h2 class="show-headliner"><?php the_title(); echo ' <span class="other-bands">and ' . $supporting_band_count . ' ' . $more_text . ' </span>' ?></h2>
                  <div class="show-details"><?php echo $show_venue; ?>, <?php echo $show_human_date;?> </div>
-                 <span class="start-playlist album"  data-album-title="<?php echo the_title(); ?>"><span data-icon="m"></span>Start show playlist</span>
-                 <div class="show-description top1"> <?php my_excerpt(55);?> </div>
+                 <span class="start-playlist album hidden-phone"  data-album-title="<?php echo the_title(); ?>"><span data-icon="m"></span>Start show playlist</span>
+                 <div class="show-description top1 hidden-phone"> <?php my_excerpt(55);?> </div>
              </div>
          </div>
        </a>
@@ -77,10 +77,10 @@
       <?php endwhile; ?>
     </section>
 
-    <section class="red show-rollup-section group p0 past-shows">
+    <section class="red show-rollup-section group p0 past-shows hidden-phone">
       <h2 class="padded-sides top1">Past Shows</h2>
 
-      <div class="group padded-section" data-timestamp="<?php echo $then; ?>">
+      <div class="group padded-sides" data-timestamp="<?php echo $then; ?>">
       <table>
         <tbody>
 

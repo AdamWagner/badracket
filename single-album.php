@@ -56,7 +56,7 @@
       <div class="meta-text padded-mobile-1">
         <h1 class="album-page-title" data-album-title="<?php the_title();?>"><?php the_title(); ?></h1>
         <h2 class="album-page-artist"><?php echo $artist; ?></h2>
-        <p class="release-date hidden-phone"><?php echo date("M j, Y",strtotime($releaseDate)); ?> | Recorded at <?php echo $recordingStudio ?> by <a class="engineer" href="<?php echo $eng_link; ?>"><?php echo $eng_name; ?> </a> </p>
+        <p class="release-date hidden-phone"><?php echo date("M j, Y",strtotime($releaseDate)); ?> | Recorded at <?php echo $recordingStudio ?> <?php if ($eng_name):?>  by <a class="engineer" href="<?php echo $eng_link; ?>"><?php echo $eng_name; ?> </a> <?php endif;?></p>
         <p class="total-duration hidden-phone"><?php echo $songCount; ?> songs (<?php echo secondsToWords($total_msecs); ?> )</p>
       </div>
     </div>
@@ -85,7 +85,7 @@
                 </td>
                 <td>'. $songTitle . '</td>';
               if (!$isPreview) {
-                echo  '<td class="preview">preview</td> <td class="unlocked">unlocked</td>';
+                echo  '<td class="preview">preview</td> <td class="unlocked"></td>';
               } else {
                 echo '<td class="preview"></td> <td class="unlocked"></td>';
               }

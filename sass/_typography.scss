@@ -89,12 +89,29 @@ h2 {
   line-height:1em;
 }
 
+h3 { margin:0; }
+
 p {
   -webkit-hyphens:auto;
   -moz-hyphens:auto;
   hyphens:auto;
   margin:0 0 1.6em;
-  line-height:1.65;
+  line-height:1.68;
+}
+
+article ul, article ol {
+  line-height:1.68;
+  margin-bottom:1.68em;
+}
+
+article ol li {
+  list-style:decimal;
+}
+
+article ul li:before {
+  content:'\2022';
+  margin-right:0.5em;
+  color:desaturate(lighten($dark,25%),5%);
 }
 
 .limit-1 {
