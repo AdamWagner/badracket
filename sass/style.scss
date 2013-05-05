@@ -325,7 +325,7 @@ $offset: 8.5em;
   opacity:0;
   @include transition(opacity .2s);
   @include breakpoint(big) {
-    &.loaded { opacity: 0.35; }
+    &.loaded { opacity: 1; }
   }
 }
 

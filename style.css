@@ -1470,7 +1470,7 @@ nav[role="navigation"], [role="info"] {
 }
 @media (min-width: 1024px) {
   .bg.loaded {
-    opacity: 0.35;
+    opacity: 1;
   }
 }
 
