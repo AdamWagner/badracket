@@ -1,0 +1,6 @@
+
+.page-interior, .rates, .gear  {
+  @include breakpoint(big) {
+    section { padding:1.6em 3em; }
+  }
+}

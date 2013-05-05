@@ -1,11 +1,15 @@
 .single {
   h1 { margin:1.2em 0 1.4em 0; }
+  .comments {
+    padding-top:1em;
+    border-top: solid 1px transparentize($dark,0.5);
+  }
 }
+
 .inline-player {
   margin:1em 0 1.5em;
   background:$red;
   border-radius:3px;
-
 
   .inline-play-pause {
     border-top-left-radius:3px;

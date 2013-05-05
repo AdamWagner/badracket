@@ -5,10 +5,10 @@
 $cream: #f2e7cc;
 $pink-cream: #f8ebe1;
 $red: #dc5b59;
-$orange: #d27f62;
+$orange: hsl(16, 55%, 61%);
 $dark:hsl(280, 12%, 19%);
 $light-on-dark:desaturate(lighten($dark,30%),4%);
-$green: #468d72;
+$green: hsl(159, 31%, 47%);
 
 @import 'loading';
 @import 'compass';
@@ -66,13 +66,13 @@ body, html {
 
 @font-face {
 font-family: 'icons';
-src: url('fonts/icomoon.woff') format('woff'),
-     url('fonts/icomoon.svg') format('svg'),
-     url('fonts/icomoon.eot') format('eot');
+// src: url('fonts/icomoon.woff') format('woff'),
+//      url('fonts/icomoon.svg') format('svg'),
+//      url('fonts/icomoon.eot') format('eot');
 
- // src: inline-font-files('icomoon.woff', 'woff'),
- //      inline-font-files('icomoon.svg', 'svg'),
- //      inline-font-files('icomoon.eot', 'eot');
+ src: inline-font-files('icomoon.woff', 'woff'),
+      inline-font-files('icomoon.svg', 'svg'),
+      inline-font-files('icomoon.eot', 'eot');
 }
 
 
@@ -130,11 +130,11 @@ a {
 
 .red a, .dark-red a {
   @include link-colors(
-            desaturate(darken($red,35%),30%),
-            desaturate(darken($red,35%),30%),
-            desaturate(darken($red,35%),30%),
-            desaturate(darken($red,35%),30%)
-            desaturate(darken($red,35%),30%)
+            desaturate(darken($red,42%),35%),
+            desaturate(darken($red,42%),35%),
+            desaturate(darken($red,42%),35%),
+            desaturate(darken($red,42%),35%)
+            desaturate(darken($red,42%),35%)
            );
 }
 
@@ -288,12 +288,9 @@ $offset: 8.5em;
 }
 
 .app-main {
-  .welcome-state & {
-    @include transform(translateY(30em));
-  }
-  @include transition(transform .5s ease-in-out 0.2s);
   position:relative;
   height:100%;
+  background:$dark;
   @include breakpoint(big) {
     top:$offset;
     .page-fixed &, .force-fixed & {
@@ -390,7 +387,7 @@ header.mobile {
   }
 
   .logo-mark {
-    background:url('images/mark.svg');
+    background:inline-image('mark.svg');
     background-size:cover;
     margin:auto;
   }
@@ -414,15 +411,9 @@ header.mobile {
   }
 }
 
-%logo-mark {
- display:block;
- background:inline-image('br-logo.svg');
- background-size:cover;
- background-repeat:no-repeat;
-}
 
 header.desktop {
-  background:hsl(290, 7.5%, 40%);
+  background:hsl(290, 7.5%, 41%);
   position:relative;
 
   @include breakpoint(bigger) { font-size:96.4285714%; }
@@ -554,6 +545,9 @@ header.desktop {
   Main Nav
 /* --------------------------------------------------------------------------------------- */
 
+
+$nav-color:darken($dark,3%);
+
 nav[role="navigation"] {
   -webkit-user-select: none;
   background:darken($dark,3%);
@@ -566,7 +560,7 @@ nav[role="navigation"] {
   @include breakpoint(huge) { top:$header-height * (108/122);}
   @include transition(opacity .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
   @include breakpoint(big) {
-    background:darken($dark,3.2%);
+    background:$nav-color;
     padding:1em;
   }
   @include breakpoint-reverso(small) {
@@ -588,8 +582,8 @@ nav[role="navigation"] {
   position:relative;
   -webkit-backface-visibility: hidden;
   z-index:99999;
-  background:darken($dark,3%);
-  @include breakpoint(big) { background:darken($dark,3.2%); }
+  background:$nav-color;
+  @include breakpoint(big) { background:$nav-color; }
 }
 
   .watermark-logo {
@@ -599,7 +593,7 @@ nav[role="navigation"] {
     text-align:center;
     width:80%;
     .mark {
-      background:url('images/nav-logo.svg');
+      background:inline-image('nav-logo.svg');
       background-size:cover;
       margin:auto;
       width:4.5em;
@@ -846,16 +840,6 @@ http://andmag.se/2012/10/responsive-images-how-to-prevent-reflow/ */
 /* --------------------------------------------------------------------------------------- *\
   Sections
 /* --------------------------------------------------------------------------------------- */
-
-
-
-$cream: #f2e7cc;
-$pink-cream: #f8ebe1;
-$red: #dc5b59;
-$orange: #d27f62;
-$dark:hsl(280, 12%, 19%);
-$light-on-dark:desaturate(lighten($dark,30%),4%);
-$green: #468d72;
 
 @import 'loading';
 
@@ -1204,12 +1188,15 @@ section {
 @import 'rates';
 
 
-
 /* --------------------------------------------------------------------------------------- *\
-  Welcome
+  Gear
 /* --------------------------------------------------------------------------------------- */
+@import 'gear';
 
-@import 'welcome';
+@import 'page';
+
+
+
 
 
 

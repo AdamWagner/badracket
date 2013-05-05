@@ -15,9 +15,16 @@
     }
   }
 
+  .border {
+    border-top:solid 1px transparentize($dark, 0.75);
+    padding-top:1em;
+  }
+
   @include breakpoint(big) {
-    .border-left {
-      border-left:solid 1px transparentize($dark,0.75);
+    .border {
+      border-left:solid 1px transparentize($dark, 0.75);
+      border-top:none;
+      padding-top:none;
       padding-left:1em;
     }
   }

@@ -11,11 +11,11 @@
 
 <section class="pink-cream bottom1 padded-mobile-1">
 
-  <div class="row s-1 m-3 group pt1 pb2 pricing">
+  <div class="row s-1 b-3 group pt1 pb2 pricing">
 
     <h2 class="bottom1-5 top1">Tracking &amp; Mixing</h2>
 
-    <div class="grid">
+    <div class="grid bottom1">
       <header>
         <h3 class="bottom0">SHORT DAY:</h3>
         <div class="subtitle">up to 3 hr</div>
@@ -24,7 +24,7 @@
       <a class="button mailto" href="mailto:thomas@badracket.com?subject=I just need a short session&amp;body=Describe what your project in as much detail as possible, and we'll be in touch.  Thanks!">Schedule short day</a>
     </div>
 
-    <div class="grid border-left">
+    <div class="grid border bottom1">
       <header>
         <h3 class="bottom0">DAY:</h3>
         <div class="subtitle">up to 6 hrs</div>
@@ -33,7 +33,7 @@
       <a class="button mailto" href="mailto:thomas@badracket.com?subject=I need to book a regular day session&amp;body=Describe what your project in as much detail as possible, and we'll be in touch.  Thanks!">Schedule regular day</a>
     </div>
 
-    <div class="grid border-left">
+    <div class="grid border">
       <header>
         <h3 class="bottom0">LONG DAY:</h3>
         <div class="subtitle">up to 10 hrs</div>

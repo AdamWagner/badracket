@@ -17,10 +17,25 @@
   <section class="pink-cream album-page-section ">
     <article class="longform-text">
 
+      <?php if ( has_post_thumbnail() ): ?>
+        <?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>
+        <div class="post-image">
+          <img src="<?php echo $url; ?>" alt="<? the_title(); ?>">
+        </div>
+      <?php endif; ?>
+
     <h1><?php the_title(); ?></h1>
+
     <?php the_content(); ?>
+
+    <div class="comments">
+      <?php comments_template( '', true ); ?>
+    </div>
+
     </article>
   </section>
+
+
 
 <?php endwhile; ?>
 

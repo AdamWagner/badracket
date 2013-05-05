@@ -221,7 +221,7 @@ var br_fb = function() {
       _.each(albums, function(el){
         var dfd = new $.Deferred();
 
-        var path = (br_fb.config.connectStatus !== 'connected') ? '/photos?fields=images,likes&limit=9999&access_token=' + escape(config.appAccess) : '/photos?fields=images,likes&limit=9999';
+       var path = (br_fb.config.connectStatus !== 'connected') ? '/photos?fields=images,likes&limit=9999&access_token=' + escape(config.appAccess) : '/photos?fields=images,likes&limit=9999';
 
        FB.api(el.id + path , function( r ) {
 
@@ -287,22 +287,26 @@ var br_fb = function() {
             br_player.ui.handlers.playClick();
           }
         });
-
-
       } else if ( s === 'not_authorized') {
         UI.render.authStatus(false);
         config.connectStatus = s;
-
+        forceGetAccessToken();
       } else {
-          console.log('https://graph.facebook.com/oauth/access_token?client_id='+config.appId+'&redirect_uri=http://localhost:8888/sites/brv5/wp-br/&client_secret='+config.secret+'&grant_type=client_credentials');
+        UI.render.authStatus(false);
+        config.connectStatus = s;
+        forceGetAccessToken();
+      }
+
+    }
+
+    function forceGetAccessToken(){
+        console.log('https://graph.facebook.com/oauth/access_token?client_id='+config.appId+'&redirect_uri=http://localhost:8888/sites/brv5/wp-br/&client_secret='+config.secret+'&grant_type=client_credentials');
         $.ajax({
           url: 'https://graph.facebook.com/oauth/access_token?client_id='+config.appId+'&redirect_uri=http://localhost:8888/sites/brv5/wp-br/&client_secret='+config.secret+'&grant_type=client_credentials',
           success: function(r){ config.appAccess = r.split('=')[1]; }
         });
         UI.render.authStatus(false);
         config.connectStatus = 'not_logged_to_fb';
-      }
-
     }
 
    return {

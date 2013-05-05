@@ -1,4 +1,6 @@
+
     </div>
+    </section>
   </div> <?php // end app-main ?>
 </div> <?php //end badracket-window ?>
 
