@@ -715,7 +715,7 @@ var br_fb = function() {
       },
 
       rsvp : function(){
-        console.log('++++++++++++++++++++++++++++++++++++++++++rsvp button bound');
+        // Think about using this https://github.com/acavailhez/jquery-async
         s.bd.on({
             click : function(e){ handlers.rsvp(e); }
           } , '.show-rsvp' );

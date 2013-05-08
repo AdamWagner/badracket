@@ -28,9 +28,11 @@
 
     <?php the_content(); ?>
 
+    <?php if ( have_comments() ) : ?>
     <div class="comments">
       <?php comments_template( '', true ); ?>
     </div>
+  <?php endif; ?>
 
     </article>
   </section>

@@ -25,17 +25,7 @@
     margin-bottom:2em;
   }
 
-  .quote {
-    font-size:1.6em;
-    font-style:normal;
-    line-height:1.6em;
-    @include font-stack-body-italic;
-    text-align:center;
-    border-top:solid 1px $dark;
-    border-bottom:solid 1px $dark;
-    padding:0.8em 0;
-    margin-bottom:1em;
-  }
+
   .inline-player + .quote { margin-top:1em; }
   .badracket {
     color:lighten($dark,8%);

@@ -66,13 +66,13 @@ body, html {
 
 @font-face {
 font-family: 'icons';
-// src: url('fonts/icomoon.woff') format('woff'),
-//      url('fonts/icomoon.svg') format('svg'),
-//      url('fonts/icomoon.eot') format('eot');
+src: url('fonts/icomoon.woff') format('woff'),
+     url('fonts/icomoon.svg') format('svg'),
+     url('fonts/icomoon.eot') format('eot');
 
- src: inline-font-files('icomoon.woff', 'woff'),
-      inline-font-files('icomoon.svg', 'svg'),
-      inline-font-files('icomoon.eot', 'eot');
+ // src: inline-font-files('icomoon.woff', 'woff'),
+ //      inline-font-files('icomoon.svg', 'svg'),
+ //      inline-font-files('icomoon.eot', 'eot');
 }
 
 
@@ -1138,6 +1138,7 @@ section {
   Blog post + Interviews + heavy reading
 /* --------------------------------------------------------------------------------------- */
 
+
 .longform-text {
 
   font-size:90%;
@@ -1147,10 +1148,44 @@ section {
   max-width:50rem;
   padding-right:6%;
   padding-bottom:4em;
+  padding-top:1.65em;
 
   img { width:100%; }
 
+  .quote {
+    font-size:1.6em;
+    font-style:normal;
+    line-height:1.6em;
+    @include font-stack-body-italic;
+    text-align:center;
+    border-top:solid 1px $dark;
+    border-bottom:solid 1px $dark;
+    padding:0.8em 0;
+    margin-bottom:1em;
+  }
+
+  .answer {
+    color:lighten($dark,8%);
+    &:before {
+      content:'A:\00a0 ';
+      display:inline-block;
+      font-weight:bold;
+      color:$red;
+    }
+  }
+
+  .badracket {
+    color:lighten($dark,8%);
+    &:before {
+      content:'BR:\00a0 ';
+      display:inline-block;
+      font-weight:bold;
+      color:$red;
+    }
+  }
+
   @include breakpoint(big) {
+    padding-top:0;
     font-size:108%;
     margin-top:2em;
     width:82%;
@@ -1162,6 +1197,16 @@ section {
     margin-top:1em;
   }
 
+}
+
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid transparentize($dark,0.75);
+    margin: 1em 0;
+    padding: 0;
 }
 
 @import 'blog-post';

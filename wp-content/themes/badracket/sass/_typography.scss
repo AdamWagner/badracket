@@ -101,6 +101,14 @@ p {
   line-height:1.68;
 }
 
+.caption {
+  font-size:0.8em;
+  color:transparentize($dark,0.25);
+  margin:1em 0;
+}
+
+
+
 article ul, article ol {
   line-height:1.68;
   margin-bottom:1.68em;

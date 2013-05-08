@@ -9,10 +9,10 @@
 ?>
 <?php get_template_part('parts/clusters/page-bootstrap-top'); ?>
 
-<section class="pink-cream">
-  <article class="longform-text">
+<section class="pink-cream padded-mobile-1">
+  <article>
   <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
-    <h2><?php the_title(); ?></h2>
+    <h1><?php the_title(); ?></h1>
     <?php the_content(); ?>
   <?php endwhile; ?>
   </article>
