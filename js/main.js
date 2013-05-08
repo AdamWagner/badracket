@@ -379,6 +379,7 @@ badracket = {
       $(window).scrollTop(0);
       badracket.lazyLoadImg('djaxload');
       badracket.lazyLoadImgEl('djaxload');
+      $('.video').fitVids(); // important to re-get DOM elements. s.video only has old ones
 
       br_fb.UI.bindUI.unBindAll();
       br_fb.UI.bindUI.bindAll();

@@ -1,6 +1,7 @@
 
-.page-interior, .rates, .gear  {
+.page-interior, .rates, .gear, .page-template-page-templatespage-normal-margins-php {
   @include breakpoint(big) {
     section { padding:1.6em 3em; }
   }
 }
+

@@ -42,4 +42,10 @@
 
 
 /* Apply button mixin */
+.button-red, a.button-red {
+  @include button($red);
+  &, &:hover, &:focus {
+    color:$pink-cream!important;
+  }
+}
 
