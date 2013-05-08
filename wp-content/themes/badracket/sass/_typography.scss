@@ -1,0 +1,140 @@
+h1,h2,h3,h4,h5,h6 {
+  font-weight:normal!important;
+}
+
+// probably only need woff
+// http://caniuse.com/woff
+
+// consider use of data-uri
+// http://www.motobit.com/util/base64-decoder-encoder.asp
+
+@font-face {
+font-family: 'zine-regular';
+src: url('fonts/ZineSerifDisWebPro.eot') format('eot'),
+     url('fonts/ZineSerifDisWebPro.woff') format('woff');
+}
+@font-face {
+font-family: 'zine-bold';
+src: url('fonts/ZineSerifDisWebPro-Bold.eot') format('eot'),
+     url('fonts/ZineSerifDisWebPro-Bold.woff') format('woff');
+}
+@font-face {
+font-family: 'zine-italic';
+src: url('fonts/ZineSerifDisWebPro-Italic.eot') format('woff'),
+     url('fonts/ZineSerifDisWebPro-Italic.woff') format('eot');
+}
+@font-face {
+font-family: 'zine-italic';
+src: url('fonts/ZineSerifDisWebPro-MediumIta.woff') format('woff'),
+     url('fonts/ZineSerifDisWebPro-MediumIta.eot') format('eot');
+}
+
+@font-face {
+font-family: 'icons';
+src: url('fonts/icomoon.woff') format('woff'),
+     url('fonts/icomoon.svg') format('svg'),
+     url('fonts/icomoon.eot') format('eot');
+}
+
+.red-text { color:$red; }
+
+
+@mixin font-stack-body {
+  font-family: georgia, serif;
+  // -webkit-font-smoothing:antialiased;
+  font-weight: normal;
+  font-style: normal;
+  font-variant:normal;
+}
+
+@mixin font-stack-body-italic {
+  font-family: 'zine-italic', georgia, serif;
+  -webkit-font-smoothing:antialiased;
+  font-weight: normal;
+  font-style: normal;
+  font-variant:normal;
+}
+
+@mixin font-stack-headline {
+  font-family:'zine-regular', georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  font-style: normal;
+  font-variant:normal;
+  text-rendering:optimizelegibility;
+}
+
+@mixin icons {
+  font-family: 'icons';
+  -webkit-font-smoothing:antialiased;
+  font-weight: normal;
+  font-style: normal;
+  font-variant:normal;
+  font-smooth:never;
+}
+
+[data-icon]:before {
+  @include icons;
+  content:attr(data-icon);
+}
+
+h1,h2,h3,h4,h5,h6 {
+  @include font-stack-body;
+  @include breakpoint(big) {
+    @include font-stack-headline;
+  }
+}
+
+h2 {
+  font-size:1.5em;
+  margin:0;
+  line-height:1em;
+}
+
+h3 { margin:0; }
+
+p {
+  -webkit-hyphens:auto;
+  -moz-hyphens:auto;
+  hyphens:auto;
+  margin:0 0 1.6em;
+  line-height:1.68;
+}
+
+article ul, article ol {
+  line-height:1.68;
+  margin-bottom:1.68em;
+}
+
+article ol li {
+  list-style:decimal;
+}
+
+article ul li:before {
+  content:'\2022';
+  margin-right:0.5em;
+  color:desaturate(lighten($dark,25%),5%);
+}
+
+.limit-1 {
+  @include breakpoint(bigger) { font-size:1em * (108/112); }
+  @include breakpoint(huge) { font-size:1em * (108/122); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

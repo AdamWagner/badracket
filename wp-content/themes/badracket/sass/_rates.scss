@@ -1,0 +1,32 @@
+.rates {
+  .price, .subtitle { margin: 0.5em 0;}
+
+  .pricing {
+    border-bottom:solid 1px transparentize($dark,0.75);
+    margin-bottom:1em;
+  }
+  .subtitle { font-size:0.9em; opacity:0.8; }
+  .price { font-size:1.5em; margin-bottom:1em; }
+
+  .button {
+    @include button( transparentize($red,0.1) );
+    &, &:hover, &:active, &:visited{
+      color:$pink-cream;
+    }
+  }
+
+  .border {
+    border-top:solid 1px transparentize($dark, 0.75);
+    padding-top:1em;
+  }
+
+  @include breakpoint(big) {
+    .border {
+      border-left:solid 1px transparentize($dark, 0.75);
+      border-top:none;
+      padding-top:none;
+      padding-left:1em;
+    }
+  }
+
+}
