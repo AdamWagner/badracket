@@ -35,6 +35,22 @@ wp-content/uploads
 wp-content/blogs.dir/*/*
 pclzip-*
 
+
+# Ignore sass-cache files.
+*.sass-cache*
+
+# Ignore compiled css
+css/
+
+# Codekit specific
+codekit-config.json
+
+# Sublime Text
+/*.sublime-project
+*.sublime-workspace
+sftp-config*.json
+
+
 # WordPress debugging files
 log.txt
 debug.log
