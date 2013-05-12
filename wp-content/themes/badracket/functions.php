@@ -1242,7 +1242,7 @@ function our_ajax_function(){
 }
 
 function ajax_get_latest_posts($count, $post_type){
-   query_posts(array('post_type' => $post_type, 'post_status'=>published, ) );
+   query_posts(array('post_type' => $post_type, 'post_status'=>publish, ) );
    $albums = array();
    while (have_posts()) : the_post();
      $meta = get_post_custom($post_id);
