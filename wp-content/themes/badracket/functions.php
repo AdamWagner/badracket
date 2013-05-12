@@ -35,7 +35,7 @@ require_once( 'external/shortcodes.php' );
 $environments = array(
   'local'      => 'localhost',
   'staging'    => 'badracket.staging',
-  'production' => 'badracket.com',
+  'production' => 'badracket.wpengine.com',
 );
 
 // Set environment
