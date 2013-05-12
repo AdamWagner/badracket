@@ -7,7 +7,7 @@
 
 
   <script>
-  var domain = window.location.hostname;
+  var domain = window.location.hostname, BR_ENV;
 
   if ( badracket.stringContains( domain, 'localhost') ) {
   	BR_ENV = 'local';
