@@ -18,7 +18,10 @@ uploads*
 gt-cache
 ics-importer-cache
 wp-config-sample.php
+<<<<<<< HEAD
 wp-config.php
+=======
+>>>>>>> 7239899b1427ed8853d9db72c8de760663d7e64c
 wp-content/w3tc*
 wp-content/w3-*
 wp-content/plugins/wpengine-snapshot/snapshots/*
@@ -35,6 +38,7 @@ wp-content/uploads
 wp-content/blogs.dir/*/*
 pclzip-*
 
+<<<<<<< HEAD
 
 # Ignore sass-cache files.
 *.sass-cache*
@@ -51,6 +55,8 @@ codekit-config.json
 sftp-config*.json
 
 
+=======
+>>>>>>> 7239899b1427ed8853d9db72c8de760663d7e64c
 # WordPress debugging files
 log.txt
 debug.log
