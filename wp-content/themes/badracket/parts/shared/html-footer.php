@@ -7,8 +7,15 @@
 
 
   <script>
-  BR_ENV = 'prod';
+  var domain = window.location.hostname;
+
+  if ( badracket.stringContains( domain, 'localhost') ) {
+  	BR_ENV = 'local';
+  } else {
+  	BR_ENV = 'prod';
+  }
   </script>
+
   <?php wp_footer(); ?>
   </body>
 </html>
