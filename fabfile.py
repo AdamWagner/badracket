@@ -106,7 +106,7 @@ def deploy(env):
     gzip_assets('main-min.js', '/js/prod', env)
     print '**** pushing to wp %s ****' % env
     if env == 'staging':	
-       local('git push br-staging master')
+       local('git push br-staging staging')
     else:
        local('git push br-production master')
           
