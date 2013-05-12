@@ -5,6 +5,7 @@
 .listing
 *.bak
 *.swp
+*.pyc
 plugins/wp-file-cache/cache
 cache
 _wpeprivate
