@@ -14,7 +14,7 @@
 </head>
 
 <script>
-  BR_ENV = 'local';
+  BR_ENV = 'prod';
 </script>
 <body <?php body_class(); ?>>
 <div id="fb-root"></div>
