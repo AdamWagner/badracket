@@ -8,8 +8,9 @@
 
   <script>
   var domain = window.location.hostname, BR_ENV;
+  function stringContains(string, search) { return string.indexOf(search) != -1; };
 
-  if ( badracket.stringContains( domain, 'localhost') ) {
+  if ( stringContains( domain, 'localhost') ) {
   	BR_ENV = 'local';
   } else {
   	BR_ENV = 'prod';
