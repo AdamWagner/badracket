@@ -1140,7 +1140,7 @@ function script_enqueuer() {
          return 'http://localhost:8888/brv5-prod/'.$rel_path.$filename;
          break;
         case 'staging':
-          $s3_path  = "http://da6ki5l3xfcf0.cloudfront.net/";
+          $s3_path  = "http://d1795rfny8s8fj.cloudfront.net/";
           return $s3_path.$rel_path.filename_builder($filename, $root);
           break;
         case 'production':

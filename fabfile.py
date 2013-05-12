@@ -12,7 +12,7 @@ WP_PATH = 'wp-content/themes/badracket'
 # bucket: copilot-fabric-test
 ACCESS_KEY = 'AKIAJRITOMRC7WTRLHLQ'
 SECRET = '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'
-# STAGE_BUCKET_NAME = 'copilot-concourse-staging-assets'
+STAGE_BUCKET_NAME = 'badracket-website-staging'
 PROD_BUCKET_NAME = 'badracket-website'
 
 
@@ -104,10 +104,9 @@ def deploy(env):
     print '**** Uploading to S3 ****'
     gzip_assets('style.css', '', env)
     gzip_assets('main-min.js', '/js/prod', env)
-    # gzip_assets('homepage-min.js', '/js', env)
     print '**** pushing to wp %s ****' % env
     if env == 'staging':	
-       local('git push br-production master')
+       local('git push br-staging master')
     else:
        local('git push br-production master')
           
