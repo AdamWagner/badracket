@@ -1,1 +1,0 @@
-badracket.loadBandTweets=function(){var e=$(".album-page-wrapper").attr("data-twitter");e.substring(0,1)==="@"&&(e=e.substring(1));JQTWEET.user=e;JQTWEET.loadTweets(3)};

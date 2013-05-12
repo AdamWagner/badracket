@@ -7,13 +7,13 @@ import gzip
 import os
 
 # Constants
-WP_PATH = 'wp-content/themes/starkers'
+WP_PATH = 'wp-content/themes/badracket'
 
 # bucket: copilot-fabric-test
-ACCESS_KEY = 'AKIAJUBYJCMVA5PFFJKA'
-SECRET = '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'
-STAGE_BUCKET_NAME = 'copilot-concourse-staging-assets'
-PROD_BUCKET_NAME = 'copilot-concourse-assets'
+ACCESS_KEY = 'AKIAJRITOMRC7WTRLHLQ'
+SECRET = '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'
+# STAGE_BUCKET_NAME = 'copilot-concourse-staging-assets'
+PROD_BUCKET_NAME = 'badracket-website'
 
 
 def make_filepath(filename, subdirectory):
@@ -103,12 +103,11 @@ def save_file_in_s3(filename, subdirectory, env, gzipped_file_path):
 def deploy(env):
     print '**** Uploading to S3 ****'
     gzip_assets('style.css', '', env)
-    gzip_assets('demo-account.css', '/css', env)
-    gzip_assets('site-min.js', '/js', env)
-    gzip_assets('homepage-min.js', '/js', env)
+    gzip_assets('main-min.js', '/js/prod', env)
+    # gzip_assets('homepage-min.js', '/js', env)
     print '**** pushing to wp %s ****' % env
     if env == 'staging':	
-       local('git push staging staging')
+       local('git push br-production master')
     else:
-       local('git push production master')
+       local('git push br-production master')
           

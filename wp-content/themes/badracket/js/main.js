@@ -82,7 +82,7 @@ badracket = {
     badracket_theme_path + "/js/prod/badracket.audio-player.min.js",
     badracket_theme_path + "/js/lib/jquery.fitvids.js",
     badracket_theme_path + "/js/lib/mixpanel-lib.js",
-    badracket_theme_path + "/js/mixpanel.js",
+    badracket_theme_path + "/js/prod/mixpanel.min.js",
     "//connect.facebook.net/en_US/all.js",
     badracket_theme_path + "/js/prod/br_facebook.min.js"],
         function() {

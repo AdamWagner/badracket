@@ -24,12 +24,43 @@ require_once( 'external/meta-box/meta-box.php' );
 require_once( 'external/stripe-php/lib/Stripe.php' );
 require_once( 'external/shortcodes.php' );
 
-// remove_filter( 'the_content', 'wpautop' );
+ // remove_filter( 'the_content', 'wpautop' );
+
+
+/* =================================================================================================
+   Evironment Settings
+================================================================================================= */
+
+// Define Environments
+$environments = array(
+  'local'      => 'localhost',
+  'staging'    => 'badracket.staging',
+  'production' => 'badracket.com',
+);
+
+// Set environment
+$server_name = $_SERVER['SERVER_NAME'];
+foreach($environments AS $key => $env){
+  if(strstr($server_name, $env)){
+    define('ENVIRONMENT', $key);
+    break;
+  }
+}
+
+// switch(ENVIRONMENT){
+//   case 'local':
+//     require_once( 'includes/env-local.php'); // environment getter functions
+//     break;
+//   case 'staging':
+//     require_once( 'includes/env-staging.php'); // environment getter functions
+//     break;
+//   case 'production':
+//     require_once( 'includes/env-production.php'); // production getter functions
+//     break;
+// }
 
 /* ========================================================================================================================
-
 Stripe
-
 ======================================================================================================================== */
 
 if ($_POST) {
@@ -1068,10 +1099,64 @@ add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
 
 function script_enqueuer() {
 
+    // Define local asset paths
+     $main_css_path     = 'style.css';
+     $site_js_path      = 'prod/main-min.js';
+
+    // Build filename from basename, hash, and extension
+    // Format: basename + hash + extension
+    function filename_builder($filename, $root) {
+      $WP_relative_path = "/wp-content/themes/badracket/";
+
+      $exploded_filename = explode('.', $filename);
+      $extension = $exploded_filename[1];
+      $basename = $exploded_filename[0];
+
+      $WP_theme_path = get_template_directory_uri().'/'; 
+
+      if (!$root) { $WP_theme_path = $WP_theme_path.$extension.'/'; }
+      // echo $basename.".".hash_file('md5', $WP_theme_path.$filename).'.gzip.'.$extension;
+      return $basename.".".hash_file('md5', $WP_theme_path.$filename).'.gzip.'.$extension;
+  }
+    // Build CDN file path
+    // $root is a boolean and specifies if file is in subdirectory named after the extension
+    function asset_file_path( $filename, $root ) {
+
+
+
+
+      $exploded_filename = explode('.', $filename);
+      $extension = $exploded_filename[1];
+      $basename = $exploded_filename[0];
+
+      if (!$root) { 
+        $rel_path = "wp-content/themes/badracket/".$extension."/";
+      } else {
+        $rel_path = "wp-content/themes/badracket/";
+      }
+
+      switch (ENVIRONMENT){
+        case 'local':
+         return 'http://localhost:8888/brv5-prod/'.$rel_path.$filename;
+         break;
+        case 'staging':
+          $s3_path  = "http://da6ki5l3xfcf0.cloudfront.net/";
+          return $s3_path.$rel_path.filename_builder($filename, $root);
+          break;
+        case 'production':
+         $s3_path  = "http://d2k310j93pm7t9.cloudfront.net/";
+         return $s3_path.$rel_path.filename_builder($filename, $root);
+         break; 
+      }
+    }
+
   wp_deregister_script('jquery');
 
-	wp_register_style( 'screen', get_template_directory_uri().'/style.css', '', '', 'screen' );
-  	wp_enqueue_style( 'screen' );
+    wp_register_style( 'screen', asset_file_path( $main_css_path , true ), '', '', 'screen' );
+    wp_enqueue_style( 'screen' );
+
+    wp_enqueue_script( 'main', asset_file_path( $site_js_path , false ), '', '', true );
+    wp_enqueue_script( 'main' );
 }
 
 /* ========================================================================================================================
