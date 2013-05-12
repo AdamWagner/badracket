@@ -1144,7 +1144,7 @@ function script_enqueuer() {
           return $s3_path.$rel_path.filename_builder($filename, $root);
           break;
         case 'production':
-         $s3_path  = "http://d245myou62vn42.cloudfront.net";
+         $s3_path  = "http://d245myou62vn42.cloudfront.net/";
          return $s3_path.$rel_path.filename_builder($filename, $root);
          break; 
       }
