@@ -1,11 +1,13 @@
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteBase /
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule . /index.php [L]
+RewriteEngine On
+RewriteBase /brv5-prod/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /brv5-prod/index.php [L]
 </IfModule>
+
 # END WordPress
 
 

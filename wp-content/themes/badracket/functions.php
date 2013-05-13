@@ -1242,12 +1242,12 @@ function our_ajax_function(){
 }
 
 function ajax_get_latest_posts($count, $post_type){
-   query_posts(array('post_type' => $post_type, 'post_status'=>publish, ) );
+   query_posts(array('post_type' => $post_type, 'post_status'=>'publish', ) );
    $albums = array();
    while (have_posts()) : the_post();
-     $meta = get_post_custom($post_id);
-     $meta['albumName'] = get_the_title($post_id);;
-     $meta['albumUrl'] = get_permalink($post_id);;
+     $meta = get_post_custom(get_the_ID());
+     $meta['albumName'] = get_the_title(get_the_ID());
+     $meta['albumUrl'] = get_permalink(get_the_ID());
      array_push($albums, $meta);
    endwhile;
    return $albums;
