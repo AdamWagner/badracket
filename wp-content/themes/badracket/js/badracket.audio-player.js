@@ -17,12 +17,12 @@ var br_sm2 = function(){
   };
 
   function setupSM2( onSMReady) {
+    console.log('setting up sm2 ********');
     soundManager.setup( sm2_settings );
     soundManager.onready(function(){
       onSMReady();
     });
   }
-
 
 
   function whilePlaying( sound ){

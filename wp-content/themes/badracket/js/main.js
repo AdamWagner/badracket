@@ -79,12 +79,12 @@ badracket = {
 
   setup: function(){
     badracket.loader.require([
-    badracket_theme_path + "/js/prod/badracket.audio-player.min.js",
+    badracket_theme_path + "/js/badracket.audio-player.js",
     badracket_theme_path + "/js/lib/jquery.fitvids.js",
     badracket_theme_path + "/js/lib/mixpanel-lib.js",
     badracket_theme_path + "/js/prod/mixpanel.min.js",
     "//connect.facebook.net/en_US/all.js",
-    badracket_theme_path + "/js/prod/br_facebook.min.js"],
+    badracket_theme_path + "/js/prod/br_facebook-min.js"],
         function() {
             // Callback
             console.log('All Scripts Loaded');
@@ -276,9 +276,9 @@ badracket = {
             cleanDomain;
 
         if ( badracket.stringContains( domain, 'localhost') ) {
-         cleanDomain =  'http://' + document.location.hostname + ':8888' + document.location.pathname;
+         cleanDomain =  'http://' + document.location.hostname + ':8888' + '/brv5-prod/';
         } else {
-         cleanDomain =  'http://' + document.location.hostname + document.location.pathname;
+         cleanDomain =  'http://' + document.location.hostname;
         }
 
         console.log(cleanDomain + 'wp-admin/admin-ajax.php');
@@ -521,51 +521,56 @@ var br_state = function() {
       cleanDomain;
 
   if ( badracket.stringContains( domain, 'localhost') ) {
-   cleanDomain =  'http://' + document.location.hostname + ':8888' + document.location.pathname;
+   cleanDomain =  'http://' + document.location.hostname + ':8888' + '/brv5-prod/';
   } else {
-   cleanDomain =  'http://' + document.location.hostname + document.location.pathname;
+   cleanDomain =  'http://' + document.location.hostname;
   }
 
-  var urls = {
+  var rx = {
     home : cleanDomain,
-    albumDetail : 'album=',
-    albumRollup : '?post_type=album',
-    showDetail : 'show=',
-    showRollup : '=show',
-    photos : cleanDomain + '?page_id=336',
-    videos : cleanDomain + '?page_id=160'
+    albumDetail : 'album/[a-zA-Z0-9-]*/$',
+    albumRollup : '/album/$',
+    showDetail : 'show/[a-zA-Z0-9-]*/$',
+    showRollup : '/show/$',
+    photos : '/photos/',
+    videos : '/videos/'
   };
+
+
+   function urlMatcher(rx, url) {
+      return new RegExp(rx).test(url);
+  }
 
 
   function viewSet( url ) {
     console.log('view set ran and url is ' + url);
     if ( typeof url === 'undefined' ) { url = window.location.toString(); }
 
-    if ( badracket.stringContains( url, urls.albumDetail ) ) {
+    if ( urlMatcher( rx.albumDetail, url ) ) {
       viewState = 'album-detail';
       setupAlbumDetail();
       forceFixed();
-    } else if ( badracket.stringContains( url, urls.albumRollup ) ) {
+    } else if ( urlMatcher( rx.albumRollup, url ) ) {
       viewState = 'album-rollup';
       setupAlbumPage();
       forceFixed();
-    } else if ( url  === urls.home.substring(0, urls.home.length -1 ) || url === urls.home ) {
+    } else if ( url  === rx.home.substring(0, rx.home.length -1 ) || url === rx.home ) {
       viewState = 'home';
       setupHome();
       setupAlbumPage();
-    } else if ( url === urls.videos ) {
+    } else if ( urlMatcher( rx.videos, url ) ) {
       viewState = 'videos';
       setupVideosPage();
       forceFixed();
-    } else if ( url === urls.photos ) {
+    } else if ( urlMatcher( rx.photos, url ) ) {
       viewState = 'photos';
       setupPhotos();
       forceFixed();
-    } else if ( badracket.stringContains( url, urls.showDetail ) ) {
+    } else if ( urlMatcher( rx.showDetail, url ) ) {
       viewState = 'show-detail';
       setupShow();
       forceFixed();
-    } else if ( badracket.stringContains( url, urls.showRollup ) ) {
+    } else if ( urlMatcher( rx.showRollup, url ) ) {
       viewState = 'show-rollup';
       setupShowRoll();
       forceFixed();
@@ -731,7 +736,7 @@ var br_state = function() {
   return {
     viewSet : viewSet,
     viewGet : viewGet,
-    urls : urls,
+    urls : rx,
     setupNav : setupNav
   };
 

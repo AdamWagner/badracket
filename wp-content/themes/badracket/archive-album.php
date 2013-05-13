@@ -11,7 +11,6 @@
 <?php get_template_part('parts/clusters/page-bootstrap-top'); ?>
 <section class="red bottom1">
 
-
   <div class="album-container ">
 
     <div class="section-subtitle album-container-header group ">
