@@ -511,7 +511,7 @@ var br_state = function() {
 
 
   var rx = {
-    home : s.domain,
+    home : s.domain + '',
     albumDetail : 'album/[a-zA-Z0-9-]*/$',
     albumRollup : '/album/$',
     showDetail : 'show/[a-zA-Z0-9-]*/$',
@@ -538,7 +538,7 @@ var br_state = function() {
       viewState = 'album-rollup';
       setupAlbumPage();
       forceFixed();
-    } else if ( badracket.stringContains( rx.home, 'badracket') || badracket.stringContains( rx.home, 'localhost')  ) {
+    } else if ( (BR_ENV==='prod' && rx.home===url + '/') || (BR_ENV==='local' && rx.home === url + '/') ) {
       viewState = 'home';
       setupHome();
       setupAlbumPage();
