@@ -8,7 +8,7 @@
 var br_sm2 = function(){
 
   var sm2_settings = {
-    url: (BR_ENV === 'prod') ? '/swf' : '/brv5-prod/swf',
+    url: (BR_ENV === 'prod') ? s.domain + 'swf' : '/brv5-prod/swf',
     flashVersion: 9,
     debugMode: false,
     flashPollingInterval: 125,
