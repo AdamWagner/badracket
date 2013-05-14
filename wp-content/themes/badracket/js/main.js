@@ -523,7 +523,7 @@ var br_state = function() {
   if ( badracket.stringContains( domain, 'localhost') ) {
    cleanDomain =  'http://' + document.location.hostname + ':8888' + '/brv5-prod/';
   } else {
-   cleanDomain =  'http://' + document.location.hostname;
+   cleanDomain =  document.location.hostname;
   }
 
   var rx = {
@@ -554,7 +554,7 @@ var br_state = function() {
       viewState = 'album-rollup';
       setupAlbumPage();
       forceFixed();
-    } else if ( url  === rx.home.substring(0, rx.home.length -1 ) || url === rx.home ) {
+    } else if ( badracket.stringContains( home, 'badracket') ) {
       viewState = 'home';
       setupHome();
       setupAlbumPage();
