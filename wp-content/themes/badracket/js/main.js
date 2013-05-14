@@ -364,6 +364,10 @@ badracket = {
     });
   },
 
+  hasTrailngSlash = function(url) {
+    return url.charAt(url.length - 1) === "/";
+  },
+
   djaxLoad: function(){
 
     // when djax element loads, remove loadin class & mimic doc ready stuff
@@ -384,7 +388,8 @@ badracket = {
 
       $('body').attr('class', bodyClass);
 
-      $.publish('/view/change', data.url);
+
+      $.publish('/view/change', (hasTrailingSlash(data.url)) ? data.url : data.url + '/';
 
       $('.main-content').removeClass('loading');
     });
