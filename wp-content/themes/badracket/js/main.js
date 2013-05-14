@@ -37,18 +37,18 @@ for nav menu exposure
   BADRACKET APP
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-var s,
+s = {
+  bd : $('body'),
+  mainContent : $('.main-content'),
+  video : $('.video'),
+  domain : (BR_ENV === 'prod') ? 'badracket.wpengine.com' : 'http://localhost:8888/brv5-prod/'
+};
+
 badracket = {
 
-  settings: {
-    bd : $('body'),
-    mainContent : $('.main-content'),
-    video : $('.video'),
-    domain : document.location.origin
-  },
+
 
   init: function() {
-    s = this.settings;
     this.docReady();
     this.load();
     this.djaxLoad();
@@ -272,19 +272,11 @@ badracket = {
 
   doAjaxRequest: function( type ){
        // here is where the request will happen
-        var domain = window.location.hostname,
-            cleanDomain;
 
-        if ( badracket.stringContains( domain, 'localhost') ) {
-         cleanDomain =  'http://' + document.location.hostname + ':8888' + '/brv5-prod/';
-        } else {
-         cleanDomain =  'http://' + document.location.hostname + '/';
-        }
-
-        console.log(cleanDomain + 'wp-admin/admin-ajax.php');
+        console.log(s.domain + 'wp-admin/admin-ajax.php');
 
        jQuery.ajax({
-            url: cleanDomain + 'wp-admin/admin-ajax.php',
+            url: s.domain + 'wp-admin/admin-ajax.php',
             data:{
                  'action':'do_ajax',
                  'fn':'get_latest_posts',
@@ -517,17 +509,9 @@ var br_state = function() {
 
   var viewState = 'unknown';
 
-  var domain = window.location.hostname,
-      cleanDomain;
-
-  if ( badracket.stringContains( domain, 'localhost') ) {
-   cleanDomain =  'http://' + document.location.hostname + ':8888' + '/brv5-prod/';
-  } else {
-   cleanDomain =  document.location.hostname;
-  }
 
   var rx = {
-    home : cleanDomain,
+    home : s.domain,
     albumDetail : 'album/[a-zA-Z0-9-]*/$',
     albumRollup : '/album/$',
     showDetail : 'show/[a-zA-Z0-9-]*/$',
@@ -554,7 +538,7 @@ var br_state = function() {
       viewState = 'album-rollup';
       setupAlbumPage();
       forceFixed();
-    } else if ( badracket.stringContains( home, 'badracket') ) {
+    } else if ( badracket.stringContains( rx.home, 'badracket') || badracket.stringContains( rx.home, 'localhost')  ) {
       viewState = 'home';
       setupHome();
       setupAlbumPage();
