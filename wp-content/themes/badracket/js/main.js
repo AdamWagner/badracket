@@ -364,7 +364,7 @@ badracket = {
     });
   },
 
-  hasTrailngSlash = function(url) {
+  hasTrailngSlash : function(url) {
     return url.charAt(url.length - 1) === "/";
   },
 
@@ -389,7 +389,7 @@ badracket = {
       $('body').attr('class', bodyClass);
 
 
-      $.publish('/view/change', (hasTrailingSlash(data.url)) ? data.url : data.url + '/';
+      $.publish('/view/change', badracket.hasTrailngSlash(data.url) ? data.url : data.url + '/');
 
       $('.main-content').removeClass('loading');
     });
@@ -543,7 +543,7 @@ var br_state = function() {
       viewState = 'album-rollup';
       setupAlbumPage();
       forceFixed();
-    } else if ( (BR_ENV==='prod' && rx.home===url + '/') || (BR_ENV==='local' && rx.home === url + '/') ) {
+    } else if ( (BR_ENV==='prod' && rx.home===url ) || (BR_ENV==='local' && rx.home === url ) ) {
       viewState = 'home';
       setupHome();
       setupAlbumPage();
