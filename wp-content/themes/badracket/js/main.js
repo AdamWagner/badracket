@@ -278,7 +278,7 @@ badracket = {
         if ( badracket.stringContains( domain, 'localhost') ) {
          cleanDomain =  'http://' + document.location.hostname + ':8888' + '/brv5-prod/';
         } else {
-         cleanDomain =  'http://' + document.location.hostname;
+         cleanDomain =  'http://' + document.location.hostname + '/';
         }
 
         console.log(cleanDomain + 'wp-admin/admin-ajax.php');
