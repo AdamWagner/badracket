@@ -79,7 +79,7 @@ badracket = {
 
   setup: function(){
     badracket.loader.require([
-    badracket_theme_path + "/js/badracket.audio-player.js",
+    badracket_theme_path + "/js/prod/badracket.audio-player-min.js",
     badracket_theme_path + "/js/lib/jquery.fitvids.js",
     badracket_theme_path + "/js/lib/mixpanel-lib.js",
     badracket_theme_path + "/js/prod/mixpanel.min.js",

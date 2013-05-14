@@ -8,7 +8,7 @@
 var br_sm2 = function(){
 
   var sm2_settings = {
-    url: 'swf',
+    url: (BR_ENV === 'prod') ? 'swf' : '/brv5-prod/swf',
     flashVersion: 9,
     debugMode: false,
     flashPollingInterval: 125,
@@ -737,6 +737,7 @@ var init = function(){
   };
 
   function loadSM() {
+    console.log('trying to load sm');
     if( typeof soundManager !== 'undefined' ) {
       br_sm2.setup( smReady );
     } else {
