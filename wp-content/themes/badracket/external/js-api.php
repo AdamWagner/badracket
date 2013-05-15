@@ -35,7 +35,7 @@ function our_ajax_function(){
 
 
 function ajax_get_latest_posts($count, $post_type){
-   query_posts(array('post_type' => $post_type, 'post_status'=>'publish', ) );
+   query_posts(array('post_type' => $post_type, 'post_status'=>'publish', 'posts_per_page' => 99) );
    $albums = array();
    while (have_posts()) : the_post();
      $meta = get_post_custom(get_the_ID());

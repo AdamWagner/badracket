@@ -1,5 +1,5 @@
 <?php
-    query_posts(array('post_type' => 'album' ) );
+    query_posts(array('post_type' => 'album', 'posts_per_page' => 99 ) );
 
     while (have_posts()) : the_post();
 
