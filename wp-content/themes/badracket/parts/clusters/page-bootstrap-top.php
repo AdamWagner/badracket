@@ -1,6 +1,6 @@
 <?php get_template_part('parts/shared/html-header'); ?>
 <body data-state="default-state" >
-<div data-src="http://badracket.com/wp-content/themes/badracketv4/images/bad-racket-bg-image2.jpg" class="bg lazyload fade-this"></div>
+<div data-src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/bad-racket-bg-image2.jpg" class="bg lazyload fade-this"></div>
 
 <div class="badracket-window">
 

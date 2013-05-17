@@ -408,7 +408,7 @@ header.mobile {
 
 
 header.desktop {
-  background:hsl(290, 7.5%, 41%);
+  background:hsl(290, 7.5%, 45%);
   position:relative;
 
   @include breakpoint(bigger) { font-size:96.4285714%; }
@@ -424,7 +424,7 @@ header.desktop {
     overflow:hidden;
 
     %box-button {
-      $bg : hsl(290, 7.5%, 46%);
+      $bg : hsl(290, 7.5%, 50%);
       color:$dark;
       background: $bg;
       padding:1.55em 1.5em;
@@ -509,7 +509,7 @@ header.desktop {
           z-index:-1;
         }
         &:after {
-          @include arrow(left, hsl(290, 7.5%, 46%), 0.55em);
+          @include arrow(left, hsl(290, 7.5%, 50%), 0.55em);
           top:36.5%;
           @media (min-width:1280px) and (max-width:1900px) { top:37.5%;  } // fix misalignment at this range
         }
