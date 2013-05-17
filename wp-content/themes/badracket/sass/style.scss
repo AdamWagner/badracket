@@ -52,38 +52,38 @@ body, html {
   }
 }
 
-/* --------------------------------------------------------------------------------------- *\
-  Icon fonts
-/* --------------------------------------------------------------------------------------- */
+// /* --------------------------------------------------------------------------------------- *\
+//   Icon fonts
+// /* --------------------------------------------------------------------------------------- */
 
-// try again to use compass helper inline-font-files()
-// http://compass-style.org/reference/compass/helpers/inline-data/#inline-font-files
+// // try again to use compass helper inline-font-files()
+// // http://compass-style.org/reference/compass/helpers/inline-data/#inline-font-files
 
-@font-face {
-font-family: 'icons';
-src: url('fonts/icomoon.woff') format('woff'),
-     url('fonts/icomoon.svg') format('svg'),
-     url('fonts/icomoon.eot') format('eot');
+// @font-face {
+// font-family: 'icons';
+// src: url('fonts/icomoon.woff') format('woff'),
+//      url('fonts/icomoon.svg') format('svg'),
+//      url('fonts/icomoon.eot') format('eot');
 
- // src: inline-font-files('icomoon.woff', 'woff'),
- //      inline-font-files('icomoon.svg', 'svg'),
- //      inline-font-files('icomoon.eot', 'eot');
-}
+//  // src: inline-font-files('icomoon.woff', 'woff'),
+//  //      inline-font-files('icomoon.svg', 'svg'),
+//  //      inline-font-files('icomoon.eot', 'eot');
+// }
 
 
-@mixin icons {
-  font-family: 'icons';
-  font-weight: normal;
-  font-style: normal;
-  font-variant:normal;
-  -webkit-font-smoothing:antialiased;
-  font-smooth:never;
-}
+// @mixin icons {
+//   font-family: 'icons';
+//   font-weight: normal;
+//   font-style: normal;
+//   font-variant:normal;
+//   -webkit-font-smoothing:antialiased;
+//   font-smooth:never;
+// }
 
-[data-icon]:before {
-  @include icons;
-  content:attr(data-icon);
-}
+// [data-icon]:before {
+//   @include icons;
+//   content:attr(data-icon);
+// }
 
 /* --------------------------------------------------------------------------------------- *\
   Typography
