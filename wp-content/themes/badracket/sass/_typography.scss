@@ -10,13 +10,13 @@ h1,h2,h3,h4,h5,h6 {
 
 @font-face {
 font-family: 'zine-regular';
-src: url('fonts/ZineSerifDisWebPro.eot') format('eot'),
-     url('fonts/ZineSerifDisWebPro.woff') format('woff');
+src: url('fonts/ZineSerifDisWebPro.woff') format('woff'),
+     url('fonts/ZineSerifDisWebPro.eot') format('eot');
 }
 @font-face {
 font-family: 'zine-bold';
-src: url('fonts/ZineSerifDisWebPro-Bold.eot') format('eot'),
-     url('fonts/ZineSerifDisWebPro-Bold.woff') format('woff');
+src: url('fonts/ZineSerifDisWebPro-Bold.woff') format('woff'),
+     url('fonts/ZineSerifDisWebPro-Bold.eot') format('eot');
 }
 @font-face {
 font-family: 'zine-italic';
