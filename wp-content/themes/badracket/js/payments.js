@@ -23,7 +23,7 @@ jQuery(function($){
     filePath = file;
 
     jQuery.ajax({
-         url: 'http://localhost:8888/brv5-prod/wp-admin/admin-ajax.php',
+         url: s.domain + 'wp-admin/admin-ajax.php',
          data:{ 'action':'do_ajax', 'fn':'download_modal' },
          dataType: 'JSON',
          success:function(data){ renderForm(data); },
