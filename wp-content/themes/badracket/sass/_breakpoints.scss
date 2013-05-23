@@ -1,3 +1,26 @@
+/*
+
+$name1:  320px;
+$name2:  500px;
+$name3:  600px;
+$name4:  992px;
+
+@mixin at-least($device-width) {
+  @media screen and (min-width: $device-width) {
+    @content 
+  }
+}
+
+@mixin until($device-width) {
+  @media screen and (max-width: $device-width - 1) {
+    @content 
+  }
+}
+
+*/
+
+
+
 @mixin breakpoint($point) {
   @if $point == huge { // if above 1280;
     @media (min-width:1900px) { @content; }

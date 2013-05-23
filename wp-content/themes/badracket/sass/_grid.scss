@@ -59,6 +59,31 @@
   }
 }
 
+/*
+Standard overflow: scroll and overflow: auto don’t display scroll bars as users might expect, 
+and they don’t have the momentum touch-scrolling feel that users have become accustomed to from their native apps. 
+
+The -webkit-overflow-scrolling: touch declaration does add momentum scrolling and scroll bars, 
+but it doesn’t allow developers to style the scroll bars in any way, 
+and has limited support (iOS 5+ and Chrome on Android).
+
+more issues: 
+http://barrow.io/overflow-scrolling
+http://stackoverflow.com/questions/7808110/css3-property-webkit-overflow-scrollingtouch-error
+
+
+## SOLUTION? ##
+A CONSISTENT EXPERIENCE
+Fragmented support and an inconsistent feel forced us to turn to JavaScript. Our first implementation used the TouchScroll library. This solution met our needs, but as our list of supported devices grew and as more complex scrolling interactions were required, working with it became trickier. TouchScroll lacks IE 10 support, and its API interface is difficult to work with. We also tried Scrollability and Zynga Scroller, neither of which have the features, performance or cross-browser capability we were looking for. Out of this problem, FTScroller was developed: a high-performance, momentum-scrolling library with support for iOS, Android, Playbook and IE 10.
+FTSCROLLER
+FTScroller’s scrolling implementation is similar to TouchScroll’s, with a flexible API much like Zynga Scroller. We added some enhancements, such as CSS bezier curves for bouncing, requestAnimationFrame for smoother frame rates, and support for IE 10. The advantage of writing our own solution is that we could develop a product that exactly meets our requirements. When you know the code base inside out, fixing bugs and adding features is a lot simpler.
+FTScroller is dead simple to use. Just pass in the element that will wrap the overflowing content, and FTScroller will implement horizontal or vertical scrolling as and when needed. Many other options may be declared in an object as the second argument, for more custom requirements. We use FTScroller throughout the Financial Times’ Web app for a consistent cross-platform scrolling experience.
+A simple example:
+var container = document.getElementById('scrollcontainer');
+var scroller = new FTScroller(container);
+
+*/
+
 @include breakpoint(mobile) {
   .overflow-carousel {
     overflow:hidden;
