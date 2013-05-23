@@ -1,4 +1,3 @@
-<!-- Modal -->
 <div id="buy-album-form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header group">
     <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->

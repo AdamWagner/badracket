@@ -19,6 +19,12 @@ function our_ajax_function(){
           case 'send_mail':
                $output = send_mail($_REQUEST['subject'], $_REQUEST['message'], $_REQUEST['email'] );
           break;
+          case 'get_payment_modal':
+               $output = get_payment_modal();
+          break;
+          case 'download_modal':
+               $output = download_modal();
+          break;
           default:
               $output = 'No function specified, check your jQuery.ajax() call';
           break;
@@ -45,6 +51,25 @@ function ajax_get_latest_posts($count, $post_type){
    endwhile;
    return $albums;
 }
+
+
+function get_payment_modal(){
+  ob_start();
+  get_template_part('parts/payment-modal');
+  $var = ob_get_contents();
+  ob_end_clean();
+  return $var;
+}
+
+
+function download_modal(){
+  ob_start();
+  get_template_part('parts/download-modal');
+  $var = ob_get_contents();
+  ob_end_clean();
+  return $var;
+}
+
 
 
 function send_mail($subject, $message, $email){

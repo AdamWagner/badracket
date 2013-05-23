@@ -241,6 +241,10 @@ td.label-container {
   opacity:0;
   top: 5%;
   z-index:-100;
+  .modal--active & {
+    opacity:1;
+    z-index:9000;
+  }
 }
 .modal.fade.in {
   top: 5%;

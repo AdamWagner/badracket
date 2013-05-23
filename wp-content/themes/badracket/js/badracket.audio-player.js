@@ -345,12 +345,16 @@ var br_player = function() {
             artist = album.artist,
             cover = album.coverUrl;
 
-        badracket.setupPayForm(cover, title, artist, price, file);
+        if ( parseInt(album.price, 10) === 0 ) {
+          badracket.setupDownloadForm(cover, title, artist, price, file);
+        } else {
+          badracket.setupPayForm(cover, title, artist, price, file);
+        }
         br_mixpanel.track('Click: Buy Album');
       },
 
       buyAlbumHover : function(){
-          badracket.loader.require( [ badracket_theme_path + "/js/prod/payments.min.js" ], paymentsLoaded() );
+          badracket.loader.require( [ badracket_theme_path + "/js/prod/payments-min.js" ], paymentsLoaded() );
           function paymentsLoaded(){
             console.log('yep');
              s.bd.off('hover' , '.support-band-button' );

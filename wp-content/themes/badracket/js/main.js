@@ -273,7 +273,7 @@ badracket = {
   doAjaxRequest: function( type ){
        // here is where the request will happen
 
-        console.log(s.domain + 'wp-admin/admin-ajax.php');
+       console.log(s.domain + 'wp-admin/admin-ajax.php');
 
        jQuery.ajax({
             url: s.domain + 'wp-admin/admin-ajax.php',

@@ -408,7 +408,10 @@ header.mobile {
 
 
 header.desktop {
-  background:hsl(290, 7.5%, 45%);
+  $header-bg:hsl(290, 7%, 48%);
+  $buy-bg : hsl(290, 7.5%, 53%);
+  @include box-shadow(0 1px 0 1px transparentize($dark,0.65));
+  background:$header-bg;
   position:relative;
 
   @include breakpoint(bigger) { font-size:96.4285714%; }
@@ -424,9 +427,8 @@ header.desktop {
     overflow:hidden;
 
     %box-button {
-      $bg : hsl(290, 7.5%, 50%);
       color:$dark;
-      background: $bg;
+      background: $buy-bg;
       padding:1.55em 1.5em;
       cursor:pointer;
       display:block;
@@ -460,12 +462,13 @@ header.desktop {
         display:none;
         .fb-logged-out & { display:block; }
         @extend %box-button;
+        background:$header-bg;
       }
 
       .fb-user {
         display:none;
         @extend %box-button;
-        background:darken(#78697b,3%);
+        background:$header-bg;
         &:hover{ background:#78697b; color:$dark; }
         padding:0;
         height:$header-height;
@@ -509,7 +512,7 @@ header.desktop {
           z-index:-1;
         }
         &:after {
-          @include arrow(left, hsl(290, 7.5%, 50%), 0.55em);
+          @include arrow(left, $buy-bg, 0.55em);
           top:36.5%;
           @media (min-width:1280px) and (max-width:1900px) { top:37.5%;  } // fix misalignment at this range
         }
@@ -576,7 +579,7 @@ nav[role="navigation"] {
 .main-nav-container {
   position:relative;
   -webkit-backface-visibility: hidden;
-  z-index:99999;
+  z-index:1000;
   background:$nav-color;
   @include breakpoint(big) { background:$nav-color; }
 }

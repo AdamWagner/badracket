@@ -9,6 +9,100 @@ jQuery(function($){
       name, email, ccNum, ccExp, ccCvc, filePath,
       _cover, _title, _artist, _file, _price;
 
+  badracket.setupDownloadForm = function(cover, title, artist, price, file) {
+    var formHTML;
+
+    $('#buy-album-form').remove();
+    // $('body').addClass('modal--active');
+
+    _cover = cover;
+    _title = title;
+    _artist = artist;
+    _file = file;
+    _price = price;
+    filePath = file;
+
+    jQuery.ajax({
+         url: 'http://localhost:8888/brv5-prod/wp-admin/admin-ajax.php',
+         data:{ 'action':'do_ajax', 'fn':'download_modal' },
+         dataType: 'JSON',
+         success:function(data){ renderForm(data); },
+         error:function(err){ console.log('there has been an error');},
+    });
+
+
+    function renderForm(data){
+        $('body').append(data);
+
+        modalFormHTML = $('#buy-album-form');
+        modalFormHTML .modal('show');
+
+        $('.buy-album-cover').attr('src',cover);
+        $('#buy-album-header').text(title);
+        $('.buy-artist-name').text(artist);
+        $('.price').text('Free');
+
+
+        modalFormHTML.on('hidden', function(){
+          this.remove();
+        });
+
+
+        paymentFormWrapper = $('.payment-form-wrapper');
+        name = $('.your-name');
+        email = $('.your-email');
+        submitButton = $('.submit-payment-button');
+        paymentForm = $('#payment-form');
+
+        function isValidEmail(email) {
+          var eReg=/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+          return eReg.test(email) && email.length > 0;
+        }
+
+        name.toggleClass('invalid', name.val().length < 3 );
+        email.toggleClass('invalid', !isValidEmail( email.val() ) );
+
+        function validateFields(){
+          name.toggleClass('invalid', name.val().length < 3 );
+          email.toggleClass('invalid', !isValidEmail( email.val() ) );
+
+          if ( $('input.invalid').length ) {
+              submitButton.addClass('disabled');
+              return false;
+            } else {
+              submitButton.removeClass('disabled');
+              return true;
+            }
+        }
+
+       function handleFormSubmit(){
+          console.log(filePath);
+          console.log('handle form sumit attached');
+          paymentForm.submit(function(event) {
+            // Disable the submit button to prevent repeated clicks
+            event.preventDefault();
+
+            if ( validateFields() ) {
+              $(this).find('button').prop('disabled', true);
+              sendMail( name.val(), email.val() );
+              mixpanel.people.increment("Albums purchased", 1);
+              submitButton.remove();
+              var downloadButton = '<a class="red-button" href="'+filePath+'">Download album</a>';
+              $('.modal-footer').append(downloadButton);
+            }
+
+          // Prevent the form from submitting with the default action
+          return false;
+        });
+      }
+       validateFields();
+       paymentFormWrapper.keyup( validateFields );
+       handleFormSubmit();
+
+    }
+
+    };
+
   badracket.setupPayForm = function( cover, title, artist, price, file) {
 
     _cover = cover;
@@ -19,45 +113,64 @@ jQuery(function($){
 
     var priceCents = price * 100;
     filePath = file;
-    $('#modal-content').html('<form action="" method="POST" id="payment-form" novalidate autocomplete="on"> <div class="modal-body"> <div class="loading-container"> <span class="loading-spinner style-2"> </span> <div class="loading-messages"></div> </div> <div class="payment-form-wrapper"> <span class="payment-errors"></span> <table> <tr> <td class="label-container">Name </td> <td class="input-container"> <input type="text" size="20" class="your-name w-100" placeholder="Your name" /> </td> </tr> <tr> <td class="label-container">Email </td> <td class="input-container"><input type="email" size="20" class="your-email w-100" placeholder="Your email" /> </td> </tr> <tr> <td class="label-container">Card Number </td> <td class="input-container"><input type="text" size="20" data-stripe="number " class="cc-number w-100 " pattern="\d*" x-autocompletetype="cc-number" placeholder="Card number" required/> </td> </tr> <tr> <td class="label-container">CVC </td> <td class="input-container"><input type="text" size="4" data-stripe="cvc" class="cc-cvc" pattern="\d*" x-autocompletetype="cc-csc" placeholder="Security code" required  autocomplete="off"/> </td> </tr> <tr> <td class="label-container">Exp date </td> <td class="input-container"><input type="text" size="9" data-stripe="exp-date " class="cc-exp w-100 " pattern="\d*" x-autocompletetype="cc-exp" placeholder="MM / YY" required maxlength="9"/> </td> </tr> </table> </div> <!-- end form-wrapper --> </div> <!-- end modal-body --> <div class="modal-footer"> <span  class="cancel-purchase" data-dismiss="modal" aria-hidden="true">close </span> <button class="submit-payment-button disabled" type="submit">Submit Payment </button> </div> </form>');
 
-    $('#payment-form').append('<input type="hidden" name="price" value="'+priceCents+'"/">');
-    $('.buy-album-cover').attr('src',cover);
-    $('#buy-album-header').text(title);
-    $('.buy-artist-name').text(artist);
-    $('.price').text(price);
 
-    // cache jQuery lookup
-    paymentFormWrapper = $('.payment-form-wrapper');
-    paymentForm = $('#payment-form');
-    loadingContainer = $('.loading-container');
-    loadingSpinner = $('.submit-payment-button');
-    needsValidation = $('.validation');
-    submitButton = $('.submit-payment-button');
-    name = $('.your-name');
-    email = $('.your-email');
-    ccNum = $('.cc-number');
-    ccExp = $('.cc-exp');
-    ccCvc = $('.cc-cvc');
+    jQuery.ajax({
+         url: 'http://localhost:8888/brv5-prod/wp-admin/admin-ajax.php',
+         data:{ 'action':'do_ajax', 'fn':'get_payment_modal' },
+         dataType: 'JSON',
+         success:function(data){ renderForm(data); },
+         error:function(err){ console.log('there has been an error');},
+    });
 
-    // format fields
-    $('[data-numeric]').payment('restrictNumeric');
-    ccNum.payment('formatCardNumber');
-    ccExp.payment('formatCardExpiry');
-    ccCvc.payment('formatCardCVC');
 
-    validateFields();
-    paymentFormWrapper.keyup( validateFields );
-    handleFormSubmit();
+  function renderForm(data){
 
-    // console.log(file);
+      $('body').append(data);
+
+      modalFormHTML = $('#buy-album-form');
+      modalFormHTML.modal('show');
+
+      modalFormHTML.on('hidden', function(){
+        this.remove();
+      });
+
+      // cache jQuery lookup
+      paymentFormWrapper = $('.payment-form-wrapper');
+      paymentForm = $('#payment-form');
+      loadingContainer = $('.loading-container');
+      loadingSpinner = $('.submit-payment-button');
+      needsValidation = $('.validation');
+      submitButton = $('.submit-payment-button');
+      name = $('.your-name');
+      email = $('.your-email');
+      ccNum = $('.cc-number');
+      ccExp = $('.cc-exp');
+      ccCvc = $('.cc-cvc');
+
+      paymentForm.append('<input type="hidden" name="price" value="'+priceCents+'"/">');
+      $('.buy-album-cover').attr('src',cover);
+      $('#buy-album-header').text(title);
+      $('.buy-artist-name').text(artist);
+      $('.price').text(price);
+
+      // format fields
+      $('[data-numeric]').payment('restrictNumeric');
+      ccNum.payment('formatCardNumber');
+      ccExp.payment('formatCardExpiry');
+      ccCvc.payment('formatCardCVC');
+
+      validateFields();
+      paymentFormWrapper.keyup( validateFields );
+      handleFormSubmit();
+
+    }
   };
 
    function isValidEmail(email) {
       var eReg=/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
       return eReg.test(email);
   }
-
 
 
   function validateFields(){
