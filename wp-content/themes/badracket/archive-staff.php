@@ -20,7 +20,7 @@
   <a href="<?php esc_url( the_permalink() ); ?>" title="Permalink to <?php the_title(); ?>" rel="bookmark">
     <div class="grid">
        <img class="album-cover-img lazyload_img fade" data-src="<?php echo $headshot; ?>" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACH/C1hNUCBEYXRhWE1QAz94cAAsAAAAAAEAAQBAAgJEAQA7"  alt="<?php echo $artist; ?> - <?php echo $albumName; ?>"/>
-      <header class="bottom0">
+      <header class="bottom0 top05">
         <h3 class="bottom0"><?php the_title(); ?></h3>
         <p class="staff-description top0"><?php echo $description; ?></p>
       </header>

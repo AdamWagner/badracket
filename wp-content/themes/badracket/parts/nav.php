@@ -54,12 +54,14 @@
       <li class="nav-level-1 active">
         <div class="nav-title">
           <div class="icon"></div>
-          <div class="text">Team</div>
+          <div class="text">Community</div>
         </div>
 
         <ul class="reset-list">
-          <li><a href="<?php echo get_post_type_archive_link( 'staff' ); ?>">Staff</a></li>
+          <li><a href="<?php echo get_post_type_archive_link( 'staff' ); ?>">Engineers</a></li>
           <li><a href="<?php echo get_page_link(2696);?>">Join Team</a></li>
+          
+          <!-- <li><a href="<?php echo get_page_link(2696);?>">Join Team</a></li> -->
         </ul>
 
       </li>

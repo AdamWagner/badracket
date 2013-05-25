@@ -248,6 +248,7 @@ var br_player = function() {
           el.ctaWrap.attr('data-toggle', 'none');
           el.ctaWrap.attr('href', album.albumUrl);
           el.ctaButton.text('Get Tickets');
+          el.ctaButton.removeClass('get-album');
         } else {
           if ( song.isSampleTrack != 1 && !$('html').hasClass('fb-logged-in')) {
             el.player.addClass('preview-song');
@@ -261,6 +262,7 @@ var br_player = function() {
           el.ctaWrap.attr('data-toggle', 'modal');
           el.ctaWrap.attr('href', '#buy-album-form');
           el.ctaButton.text('Get Album');
+          el.ctaButton.addClass('get-album');
         }
 
         el.song.html( song.songTitle );
@@ -418,7 +420,7 @@ var br_player = function() {
       buyAlbum : function() {
          s.bd.on({
           click : function(e){ handlers.buyAlbum(e); }
-        } , '.support-band-button' );
+        } , '.get-album' );
       },
       buyAlbumHover : function() {
        s.bd.on({
