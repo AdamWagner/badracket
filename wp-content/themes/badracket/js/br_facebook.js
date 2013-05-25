@@ -148,10 +148,11 @@ var br_fb = function() {
       }
       user.gender = d.gender || 'not given';
       user.picture = d.picture.data.url;
+
       if ( typeof d.likes !== 'undefined') { user.likes = d.likes.data; }
       if ( typeof d.location !== 'undefined') { user.likes = d.location.name; }
       if ( typeof d.picture !== 'undefined') { user.likes = d.picture.data.url; }
-      if ( typeof d.friends !== 'undefined') { user.likes = d.friends.data; }
+      if ( typeof d.friends !== 'undefined') { user.friends = d.friends.data; }
 
       if ( typeof d.likes !== 'undefined') { isFan( user.likes ); }
 

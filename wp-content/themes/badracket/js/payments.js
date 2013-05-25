@@ -81,7 +81,7 @@ jQuery(function($){
           submitButton.click(function(event) {
 
             if ( validateFields() ) {
-              submitButton.addClass('disabled');
+              submitButton.style('opacity', 0.5);
               sendMail( name.val(), email.val() );
               mixpanel.people.increment("Albums purchased", 1);
               setTimeout(function() {
