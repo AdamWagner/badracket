@@ -15,7 +15,8 @@
   $this_eng = get_the_title();
   $albums = array();
 
-  query_posts(array('post_type' => 'album' ) );
+  query_posts(array('post_type' => 'album', 'posts_per_page' => 99  ) );
+
     while (have_posts()) : the_post();
 
     $engineer = wp_get_post_terms($post->ID, 'engineer', array("fields" => "names"));
