@@ -78,15 +78,12 @@ jQuery(function($){
         }
 
        function handleFormSubmit(){
-          console.log(filePath);
-          console.log('handle form sumit attached');
           submitButton.click(function(event) {
 
             if ( validateFields() ) {
-              $(this).find('button').prop('disabled', true);
+              submitButton.prop('disabled', true);
               sendMail( name.val(), email.val() );
               mixpanel.people.increment("Albums purchased", 1);
-              $('.modal-footer').append(downloadButton);
               setTimeout(function() {
                 modalFormHTML.modal('hide');
               }, 500);
