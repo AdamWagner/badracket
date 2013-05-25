@@ -302,10 +302,8 @@ jQuery(function($){
 
     var subject = _title + ' Download Link';
 
-    var domain = document.location.origin + document.location.pathname;
-
     jQuery.ajax({
-         url: domain + 'wp-admin/admin-ajax.php',
+         url: s.domain + 'wp-admin/admin-ajax.php',
          data:{
               'action':'do_ajax',
               'fn':'send_mail',
