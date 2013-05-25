@@ -81,7 +81,7 @@ jQuery(function($){
           submitButton.click(function(event) {
 
             if ( validateFields() ) {
-              submitButton.prop('disabled', true);
+              submitButton.addClass('disabled');
               sendMail( name.val(), email.val() );
               mixpanel.people.increment("Albums purchased", 1);
               setTimeout(function() {
@@ -89,9 +89,6 @@ jQuery(function($){
               }, 500);
 
             }
-
-          // Prevent the form from submitting with the default action
-          return false;
         });
       }
        validateFields();
