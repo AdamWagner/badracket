@@ -35,7 +35,7 @@ jQuery(function($){
         $('body').append(data);
 
         modalFormHTML = $('#buy-album-form');
-        modalFormHTML .modal('show');
+        modalFormHTML.modal('show');
 
         $('.buy-album-cover').attr('src',cover);
         $('#buy-album-header').text(title);
@@ -81,14 +81,16 @@ jQuery(function($){
           console.log(filePath);
           console.log('handle form sumit attached');
           submitButton.click(function(event) {
-            // Disable the submit button to prevent repeated clicks
-            event.preventDefault();
 
             if ( validateFields() ) {
               $(this).find('button').prop('disabled', true);
               sendMail( name.val(), email.val() );
               mixpanel.people.increment("Albums purchased", 1);
               $('.modal-footer').append(downloadButton);
+              setTimeout(function() {
+                modalFormHTML.modal('hide');
+              }, 500);
+
             }
 
           // Prevent the form from submitting with the default action
