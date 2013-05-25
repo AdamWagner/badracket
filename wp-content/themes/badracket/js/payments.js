@@ -80,7 +80,7 @@ jQuery(function($){
        function handleFormSubmit(){
           console.log(filePath);
           console.log('handle form sumit attached');
-          paymentForm.submit(function(event) {
+          submitButton.click(function(event) {
             // Disable the submit button to prevent repeated clicks
             event.preventDefault();
 
