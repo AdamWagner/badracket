@@ -19,7 +19,7 @@
         <form action="" method="POST" id="payment-form" novalidate autocomplete="on">
           <span class="payment-errors"></span>
 
-          <table>
+          <table class="bottom1">
           <tr>
             <td class="label-container">Name</td>
             <td class="input-container"><input type="text" size="20" class="your-name w-100 invalid" placeholder="Your name" /></td>
@@ -33,7 +33,8 @@
 
     <div class="modal-footer">
       <span  class="cancel-purchase" data-dismiss="modal" aria-hidden="true">close</span>
-      <button class="submit-payment-button disabled" type="submit">Download</button>
+      <!-- <button class="submit-payment-button disabled" type="submit">Download</button> -->
+      <a class="red-button submit-payment-button">Download</a>
     </div>
     </form>
   </div>

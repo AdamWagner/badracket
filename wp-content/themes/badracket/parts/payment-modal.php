@@ -38,7 +38,7 @@
 
           <tr>
             <td class="label-container">CVC</td>
-            <td class="input-container"><input type="text" size="4" data-stripe="cvc" class="cc-cvc" pattern="\d*" x-autocompletetype="cc-csc" placeholder="Security code" required  autocomplete="off"/></td>
+            <td class="input-container"><input type="text" size="4" data-stripe="cvc" class="cc-cvc" pattern="\d*" x-autocompletetype="cc-csc" placeholder="CVC" required  autocomplete="off"/></td>
           </tr>
 
           <tr>

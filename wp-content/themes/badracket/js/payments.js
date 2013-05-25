@@ -54,6 +54,8 @@ jQuery(function($){
         submitButton = $('.submit-payment-button');
         paymentForm = $('#payment-form');
 
+        submitButton.attr('href', filePath);
+
         function isValidEmail(email) {
           var eReg=/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
           return eReg.test(email) && email.length > 0;
@@ -86,8 +88,6 @@ jQuery(function($){
               $(this).find('button').prop('disabled', true);
               sendMail( name.val(), email.val() );
               mixpanel.people.increment("Albums purchased", 1);
-              submitButton.remove();
-              var downloadButton = '<a class="red-button" href="'+filePath+'">Download album</a>';
               $('.modal-footer').append(downloadButton);
             }
 
@@ -116,7 +116,7 @@ jQuery(function($){
 
 
     jQuery.ajax({
-         url: 'http://localhost:8888/brv5-prod/wp-admin/admin-ajax.php',
+         url: s.domain + 'wp-admin/admin-ajax.php',
          data:{ 'action':'do_ajax', 'fn':'get_payment_modal' },
          dataType: 'JSON',
          success:function(data){ renderForm(data); },
