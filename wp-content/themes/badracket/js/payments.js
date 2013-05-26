@@ -107,8 +107,10 @@ jQuery(function($){
     _file = file;
     _price = price;
 
-    var priceCents = price * 100;
+    var priceCents = parseInt( _price.substring(1) , 10 ) * 100;
     filePath = file;
+
+    console.log(priceCents);
 
 
     jQuery.ajax({
@@ -226,6 +228,9 @@ jQuery(function($){
 
   var stripeResponseHandler = function(status, response) {
 
+    console.log(status);
+    console.log(response);
+
     if (response.error) {
       // Show the errors on the form
       paymentForm.find('.payment-errors').text(response.error.message);
@@ -233,7 +238,7 @@ jQuery(function($){
 
     } else {
 
-      console.log('payment success');
+      console.log('payment success yea');
       var token = response.id;
       paymentForm.append($('<input type="hidden" name="stripeToken" />').val(token));
       // and submit
@@ -319,5 +324,15 @@ jQuery(function($){
   }
 });
 
+
+var stripe_pk = (BR_ENV === 'local') ? 'pk_test_iV1NX0AkuxskATxdKxLU26ba' : 'pk_live_ef75VL0GrurD3Fkv7qq4lkHl';
+
 // This identifies your website in the createToken call below
-Stripe.setPublishableKey('pk_test_iV1NX0AkuxskATxdKxLU26ba');
+Stripe.setPublishableKey(stripe_pk);
+
+
+
+
+
+
+

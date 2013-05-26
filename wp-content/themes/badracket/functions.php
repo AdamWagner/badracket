@@ -10,6 +10,38 @@
  */
 
 
+/* =================================================================================================
+   Evironment Settings
+================================================================================================= */
+
+// Define Environments
+$environments = array(
+  'local'      => 'localhost',
+  'staging'    => 'badracket.staging',
+  'production' => 'badracket.wpengine.com',
+);
+
+// Set environment
+$server_name = $_SERVER['SERVER_NAME'];
+foreach($environments AS $key => $env){
+  if(strstr($server_name, $env)){
+    define('ENVIRONMENT', $key);
+    break;
+  }
+}
+
+// switch(ENVIRONMENT){
+//   case 'local':
+//     require_once( 'includes/env-local.php'); // environment getter functions
+//     break;
+//   case 'staging':
+//     require_once( 'includes/env-staging.php'); // environment getter functions
+//     break;
+//   case 'production':
+//     require_once( 'includes/env-production.php'); // production getter functions
+//     break;
+// }
+
 
 require_once( 'external/starkers-utilities.php' );
 require_once( 'external/cpt.php' );
@@ -56,37 +88,7 @@ add_filter("gform_init_scripts_footer", "init_scripts");
 }
 
 
-/* =================================================================================================
-   Evironment Settings
-================================================================================================= */
 
-// Define Environments
-$environments = array(
-  'local'      => 'localhost',
-  'staging'    => 'badracket.staging',
-  'production' => 'badracket.wpengine.com',
-);
-
-// Set environment
-$server_name = $_SERVER['SERVER_NAME'];
-foreach($environments AS $key => $env){
-  if(strstr($server_name, $env)){
-    define('ENVIRONMENT', $key);
-    break;
-  }
-}
-
-// switch(ENVIRONMENT){
-//   case 'local':
-//     require_once( 'includes/env-local.php'); // environment getter functions
-//     break;
-//   case 'staging':
-//     require_once( 'includes/env-staging.php'); // environment getter functions
-//     break;
-//   case 'production':
-//     require_once( 'includes/env-production.php'); // production getter functions
-//     break;
-// }
 
 
 
