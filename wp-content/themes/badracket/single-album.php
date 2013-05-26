@@ -69,7 +69,7 @@
         <p class="total-duration hidden-phone"><?php echo $songCount; ?> songs (<?php echo secondsToWords($total_msecs); ?> )</p>
         <span class="buy-album-detail">
           <?php if($price > 0) {
-            echo '$' . money_format('%i',$price) . '- Buy this album';
+            echo '$' . money_format('%i',$price) . ' - Buy this album';
           } else {
             echo 'Download for free';
           } ?>
