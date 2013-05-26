@@ -29,7 +29,7 @@ $name4:  992px;
     @media (min-width:1280px) { @content; }
   }
   @if $point == big { // if above 1024;
-    @media (min-width:1024px) { @content; }
+    @media (min-width:1023px) { @content; }
   }
   @if $point == medium { // if above 768;
     @media (min-width:768px) { @content; }
@@ -49,7 +49,11 @@ $name4:  992px;
 
 @mixin breakpoint-reverso($point) {
   @if $point == small { // if below 1024;
-    @media (max-width:1024px) { @content; }
+    @media (max-width:1023px) { @content; }
+  }
+
+  @if $point == lt768 { // if below 1024;
+    @media (max-width:768px) { @content; }
   }
 }
 

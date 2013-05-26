@@ -23,11 +23,9 @@
      <div class="album-name pull-left padded-sides">Record store</div>
      <a href="<?php echo get_post_type_archive_link( 'album' ); ?>" class="pill-button see-albums pull-right padded-sides">All Albums &nbsp; <span>▶</span></a>
    </div>
-   <div class="overflow-carousel">
-     <div class="overflow-wrapper group p-5-9 s-3 m-5 b-5 h-6 single-row padded">
-     <?php get_template_part('parts/content-loops/album-loop');?>
+   <div class="group p-5-9 s-3 m-5 b-5 h-6 single-row padded">
+    <?php get_template_part('parts/content-loops/album-loop');?>
    </div>
- </div>
 
  </div> <?php // end albums ?>
 
