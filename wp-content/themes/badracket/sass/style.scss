@@ -434,7 +434,7 @@ header.mobile {
 header.desktop {
   $header-bg:hsl(290, 7%, 48%);
   $buy-bg : hsl(290, 7.5%, 53%);
-  @include box-shadow(0 1px 0 1px transparentize($dark,0.65));
+  // @include box-shadow(0 1px 0 1px transparentize($dark,0.65));
   background:$header-bg;
   position:relative;
 
@@ -992,6 +992,21 @@ section {
 
 .green {
   color:darken($dark,5%);
+}
+
+.border-bottom-red {
+  border-bottom:solid 2px desaturate(darken($red,10%),15%);
+}
+
+
+
+.border-top-red {
+  border-top:solid 2px desaturate(darken($red,10%),15%);
+}
+
+
+.border-bottom-green {
+  border-bottom:solid 2px desaturate(darken($green,10%),15%);
 }
 
 /* --------------------------------------------------------------------------------------- *\

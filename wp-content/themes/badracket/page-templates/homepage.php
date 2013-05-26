@@ -16,7 +16,7 @@
 
 </section> -->
 
-<section class="red bottom1">
+<section class="red border-bottom-red border-top-red">
 <?php // ALBUMS ?>
  <div class="album-container bottom1">
    <div class="section-subtitle pt0 album-container-header group ">
@@ -42,7 +42,7 @@
 
   </section>
 
-  <section class="green bottom1 pb3">
+  <section class="green border-bottom-green pb3">
 
      <div class="section-subtitle album-container-header group border-bottom">
        <div class="album-name pull-left padded-sides">Record</div>
