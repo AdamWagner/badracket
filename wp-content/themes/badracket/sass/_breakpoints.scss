@@ -43,6 +43,13 @@ $name4:  992px;
 
 }
 
+
+@mixin below-height($height) {
+  @media screen and (max-height: $height) {
+    @content;
+  }
+}
+
 @mixin tablet() {
   @media (max-width : 1024px) and (min-width : 768px) { @content; }
 }

@@ -606,6 +606,9 @@ nav[role="navigation"] {
   z-index:1000;
   background:$nav-color;
   @include breakpoint(big) { background:$nav-color; }
+
+  @include below-height(800px) {
+  }
 }
 
   .watermark-logo {
@@ -614,6 +617,7 @@ nav[role="navigation"] {
     -webkit-font-smoothing:antialiased;
     text-align:center;
     width:80%;
+    @include below-height(800px) { bottom:1em; }
     .mark {
       background:inline-image('nav-logo.svg');
       background-size:cover;
@@ -622,6 +626,11 @@ nav[role="navigation"] {
       height:3.4em;
       padding:1em;
       margin-bottom:0.75em;
+      @include below-height(800px) {
+        margin-bottom:0;
+        width:4em;
+        height:3.05em;
+      }
     }
   }
 
@@ -652,6 +661,8 @@ nav[role="navigation"] {
       padding:0.4em 0;
       margin-top:0.23em;
     }
+
+    @include below-height(800px) {font-size:1em; }
   }
 
   li { // sub-nav items
@@ -694,6 +705,7 @@ nav[role="navigation"] {
       //     border-radius:50%;
       // }
     }
+
     &.small {
       font-size:0.65em;
       font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -716,17 +728,14 @@ nav[role="navigation"] {
     @include breakpoint(huge) {
       padding:0.3em 0;
     }
+
+    @include below-height(800px) { &.bottom1 { margin-bottom:0; } }
+
   }
 
   &.active {
-    @include breakpoint(big) {
-      padding-bottom:1em;
-    }
-  }
-
-  @include breakpoint(big) { // only show active nav sub items
-    // ul { display:none; }
-    // &.active ul { display:block; }
+    @include breakpoint(big) { padding-bottom:1em; }
+    @include below-height(800px) { padding-bottom:0.5em; }
   }
 
 
