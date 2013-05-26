@@ -57,7 +57,7 @@
   <div class="group staff-meta bottom2 border-bottom">
     <img class="pull-right staff-headshot lazyload_img fade" data-src="<?php echo $headshot; ?>" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACH/C1hNUCBEYXRhWE1QAz94cAAsAAAAAAEAAQBAAgJEAQA7"  alt="">
     <div class="meta-text">
-      <h1 class=" bottom0 album-page-title" data-album-title="<?php the_title();?>"><?php the_title(); ?></h1>
+      <h1 class=" bottom0 top0 album-page-title" data-album-title="<?php the_title();?>"><?php the_title(); ?></h1>
       <p class="bottom0 top0 top05"><?php echo $description ?></p>
 
       <?php if ( count($client_list) > 1 ): ?>
