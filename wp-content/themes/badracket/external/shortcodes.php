@@ -42,8 +42,8 @@ function carousel($atts, $content = null) {
   return '
   <div id="'. $id . '" class="carousel">
     <div class="carousel-inner">'.do_shortcode($content).'</div>
-    <a class="carousel-control left" href="#'. $id . '" data-slide="prev"></a>
-    <a class="carousel-control right" href="#'. $id . '" data-slide="next"></a>
+    <a class="carousel-control left" href="#'. $id . '" data-slide="prev">&#9664;</a>
+    <a class="carousel-control right" href="#'. $id . '" data-slide="next">&#9654;</a>
   </div> ';
 }
 add_shortcode('carousel','carousel');

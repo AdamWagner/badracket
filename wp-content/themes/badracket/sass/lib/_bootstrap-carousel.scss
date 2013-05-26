@@ -77,25 +77,23 @@
 }
 .carousel-control {
   position: absolute;
-  top: 42%;
-  left: 15px;
-  width: 40px;
-  height: 40px;
+  top: 42.5%;
+  left: 10px;
   margin-top: -20px;
-  font-size: 60px;
-  font-weight: 100;
-  line-height: 30px;
-  color: #ffffff;
+  font-size: 1.1em;
+  padding:0.75em;
+  line-height: 1em;
+  color: $dark!important;
   text-align: center;
-  background: #222222;
-  border: 3px solid #ffffff;
-  border-radius: 50%;
+  background:$pink-cream;
   opacity: 0.5;
 }
+
 .carousel-control.right {
   left: auto;
-  right: 15px;
+  right: 10px;
 }
+
 .carousel-control:hover {
   color: #ffffff;
   text-decoration: none;
