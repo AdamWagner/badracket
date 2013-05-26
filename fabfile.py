@@ -103,7 +103,7 @@ def save_file_in_s3(filename, subdirectory, env, gzipped_file_path):
 def deploy(env):
     print '**** Uploading to S3 ****'
     gzip_assets('style.css', '', env)
-    gzip_assets('main-min.js', '/js/prod', env)
+    gzip_assets('main_v500-min.js', '/js/prod', env)
     print '**** pushing to wp %s ****' % env
     if env == 'staging':	
        local('git push br-staging staging')
