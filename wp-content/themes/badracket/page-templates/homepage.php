@@ -50,7 +50,7 @@
      </div>
      <div class="group s-1 m-2">
        <div class="grid padded-sides-2">
-         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/recording-process.jpg" alt="Recording studio, Cleveland style">
+         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/recording-process1.jpg" alt="Recording studio, Cleveland style">
        </div>
        <div class="grid padded-sides limit-1 shortform-text">
          <p>A recording studio is first and foremost a performance space, and that’s where we begin. Although getting tones with fascinating audio gear and tweaking levels to make great sound excites our <a href="<?php echo get_page_link(2476);?>">inner nerd</a>, recordings are ultimately a capture of your performance. </p>
@@ -79,7 +79,7 @@
          
        </div>
        <div class="grid padded-sides-2">
-         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/community.jpg" alt="Recording studio, Cleveland style">
+         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/community1.jpg" alt="Recording studio, Cleveland style">
        </div>
      </div>
 
