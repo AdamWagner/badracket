@@ -33,6 +33,8 @@
     $releaseDate = $custom_fields['_br_release_date']['0'];
     $recordingStudio = $custom_fields['_br_recording_studio']['0'];
     $twitterHandle = $custom_fields['_br_artist_twitter']['0'];
+    $price = $custom_fields['_br_price']['0'];
+
 
     $totalmins;
     $totalsecs;
@@ -52,13 +54,28 @@
 
 
     <div class="album-page-meta">
-      <img class="album-page-cover" src="<?php echo $cover; ?>" alt="<?php echo $artist . ' - ' . $albumName; ?>">
+
+      <div class="album-page-cover">
+        <img src="<?php echo $cover; ?>" alt="<?php echo $artist . ' - ' . $albumName; ?>">
+        <div class="detail-buy-album-wrap">
+        </div>
+      </div>
+
+
       <div class="meta-text padded-mobile-1">
         <h1 class="album-page-title" data-album-title="<?php the_title();?>"><?php the_title(); ?></h1>
         <h2 class="album-page-artist"><?php echo $artist; ?></h2>
         <p class="release-date hidden-phone"><?php echo date("M j, Y",strtotime($releaseDate)); ?> | Recorded at <?php echo $recordingStudio ?> <?php if ($eng_name):?>  by <a class="engineer" href="<?php echo $eng_link; ?>"><?php echo $eng_name; ?> </a> <?php endif;?></p>
         <p class="total-duration hidden-phone"><?php echo $songCount; ?> songs (<?php echo secondsToWords($total_msecs); ?> )</p>
+        <span class="buy-album-detail">
+          <?php if($price > 0) {
+            echo '$' . money_format('%i',$price) . '- Buy this album';
+          } else {
+            echo 'Download for free';
+          } ?>
+          </span>
       </div>
+
     </div>
 
 

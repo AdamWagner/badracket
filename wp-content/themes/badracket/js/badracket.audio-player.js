@@ -363,6 +363,25 @@ var br_player = function() {
           }
       },
 
+      buyAlbumDetail : function(e){
+        e.preventDefault();
+        var albumTitle = $('[data-album-title]').attr('data-album-title'),
+            album = br_player.albumData.getAlbumByName(albumTitle),
+            title = album.albumName,
+            file = album.zipFile,
+            price = '$' + album.price + '.00',
+            priceCents = album.price * 100,
+            artist = album.artist,
+            cover = album.coverUrl;
+
+        if ( parseInt(album.price, 10) === 0 ) {
+          badracket.setupDownloadForm(cover, title, artist, price, file);
+        } else {
+          badracket.setupPayForm(cover, title, artist, price, file);
+        }
+        br_mixpanel.track('Click: Buy Album');
+      },
+
       whileSliding : function( event, ui, playbar ) {
         el.progressBar.css( 'width', ui.value + '%' );
       },
@@ -422,10 +441,15 @@ var br_player = function() {
           click : function(e){ handlers.buyAlbum(e); }
         } , '.get-album' );
       },
+      buyAlbumDetail : function() {
+         s.bd.on({
+          click : function(e){ handlers.buyAlbumDetail(e); }
+        } , '.buy-album-detail' );
+      },
       buyAlbumHover : function() {
        s.bd.on({
           hover : function(e){ handlers.buyAlbumHover(e); }
-        } , '.support-band-button' );
+        } , '.support-band-button, .buy-album-detail' );
       },
       slider : function() {
         el.slider.slider({
@@ -799,6 +823,7 @@ function doMoreStuff() {
   br_player.ui.bindui.play();
   br_player.ui.bindui.next();
   br_player.ui.bindui.buyAlbum();
+  br_player.ui.bindui.buyAlbumDetail();
   br_player.ui.bindui.buyAlbumHover();
   br_player.ui.bindui.previous();
 }

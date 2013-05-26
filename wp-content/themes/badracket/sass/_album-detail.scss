@@ -12,18 +12,38 @@
   .album-page-meta {
     @extend .group;
     position:relative;
+
     .album-page-cover {
-      width:100%;
+
+      img {
+        width:100%;
+        @include breakpoint(above-mobile) {
+          width:7em;
+          float:right;
+        }
+      }
+
+
       @include breakpoint(above-mobile) {
         float:right;
-        width:7em;
         margin-right:1em;
         margin-top:1em;
       }
+
       @include breakpoint(big) {
         margin-top:0;
         margin-right:0;
       }
+
+    }
+
+    .buy-album-detail {
+      @include pill-button($pink-cream, $red);
+      background: transparentize($pink-cream, 0.3);
+      font-size:90%;
+      margin-top:0.5em;
+      display:inline-block;
+      cursor:pointer;
     }
 
     .meta-text {
