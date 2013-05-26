@@ -17,9 +17,9 @@
    $cover_photo = wp_get_attachment_url(get_post_meta($post->ID, '_br_plupload', true));
   ?>
 
-  <div class="show-bg-image">
+<!--   <div class="show-bg-image">
     <img class="show-cover-photo lazyload_img" data-src="<?php echo $cover_photo;  ?>" src="" alt="<?php echo the_title(); ?> at <?php ?>">
-  </div>
+  </div> -->
 
     <div class="show-heading padded-mobile-1">
       <h1 class="show-headliner"><?php the_title(); ?></h1>
