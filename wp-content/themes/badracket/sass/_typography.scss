@@ -101,6 +101,15 @@ p {
   line-height:1.68;
 }
 
+.dark-text {
+  color:$dark;
+}
+
+.shortform-text p,
+p.shortform-text {
+  margin-bottom:1em;
+}
+
 .caption {
   font-size:0.8em;
   color:transparentize($dark,0.25);

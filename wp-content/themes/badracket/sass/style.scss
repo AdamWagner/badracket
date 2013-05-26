@@ -131,7 +131,7 @@ a {
             desaturate(darken($red,42%),35%),
             desaturate(darken($red,42%),35%),
             desaturate(darken($red,42%),35%),
-            desaturate(darken($red,42%),35%)
+            desaturate(darken($red,42%),35%),
             desaturate(darken($red,42%),35%)
            );
 }
@@ -157,11 +157,32 @@ a {
            );
 }
 
+.green a {
+ @include link-colors(
+          $dark,
+          transparentize($pink-cream,0),
+          $dark,
+          $dark,
+          $dark
+         );
 
+}
 
-/* --------------------------------------------------------------------------------------- *\
-  buttons
-/* --------------------------------------------------------------------------------------- */
+.green .shortform-text a,
+.orange .shortform-text a { 
+  @include link-colors(
+          $dark,
+          transparentize($pink-cream,0),
+          $dark,
+          $dark,
+          $dark
+         );
+  text-decoration:underline;  
+  &:before {
+   content:' ↪';
+   display:inline-block;
+  }
+}
 
 
 
@@ -956,6 +977,21 @@ section {
     font-size:0.85em;
     display:inline-block;
   }
+}
+
+/* --------------------------------------------------------------------------------------- *\
+  Homepage section specific styles
+/* --------------------------------------------------------------------------------------- */
+
+.recording-process-image {
+  max-width:500px;
+  margin:auto;
+  display:block;
+  margin-bottom:1em;
+}
+
+.green {
+  color:darken($dark,5%);
 }
 
 /* --------------------------------------------------------------------------------------- *\

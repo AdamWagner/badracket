@@ -45,6 +45,16 @@
   }
 }
 
+
+.padded-sides-2 {
+  padding-left:2rem;
+  padding-right:2rem;
+  .p0 & {
+    padding-left:2rem;
+    padding-right:2rem;
+  }
+}
+
 .padded-section {
   padding:0.5em;
   @include breakpoint(big) {
