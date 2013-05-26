@@ -47,6 +47,15 @@ function AW_register_meta_boxes() {
 add_action( 'admin_init', 'AW_register_meta_boxes' );
 
 
+
+
+/* Move gravity forms jQuery call to footer so jQuery is loaded */
+add_filter("gform_init_scripts_footer", "init_scripts");
+  function init_scripts() {
+  return true;
+}
+
+
 /* =================================================================================================
    Evironment Settings
 ================================================================================================= */

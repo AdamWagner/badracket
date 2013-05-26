@@ -32,6 +32,9 @@
 .top3 { margin-top: 3em; }
 .top2 { margin-top: 2em; }
 
+.border-top--cream { border-top:solid 1px darken($cream,20%); }
+.border-bottom--cream { border-bottom:solid 1px darken($cream,20%); }
+
 .mr-0 { margin-right: 0!important; }
 
 .reset-list {
