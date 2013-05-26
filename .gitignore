@@ -41,9 +41,6 @@ pclzip-*
 # Ignore sass-cache files.
 *.sass-cache*
 
-# Ignore compiled css
-css/
-
 # Codekit specific
 codekit-config.json
 

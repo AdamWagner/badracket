@@ -9,9 +9,19 @@
   <!-- <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" /> -->
   <!-- <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon.ico"/> -->
 
+  <!--[if lte IE 9]>
+  	<link href="<?php echo get_stylesheet_directory_uri(); ?>/css/ie.css" rel="stylesheet" type="text/css">
+  <![endif]-->
+
   <?php wp_head(); ?>
 
 </head>
 
 <body <?php body_class(); ?>>
+
+<div class="ie-message">
+	<h1>Your browser is not supported</h1>
+	<p>We're sorry, but badracket.com supports modern browsers only. To use the site, switch to Chrome, Firefox, or IE10.</p>
+</div>
+
 <div id="fb-root"></div>
