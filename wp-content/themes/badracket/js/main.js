@@ -41,7 +41,7 @@ s = {
   bd : $('body'),
   mainContent : $('.main-content'),
   video : $('.video'),
-  domain : (BR_ENV === 'prod') ? 'http://badracket.wpengine.com/' : 'http://localhost:8888/brv5-prod/'
+  domain : (BR_ENV === 'prod') ? 'http://badracket.com/' : 'http://localhost:8888/brv5-prod/'
 };
 
 badracket = {
