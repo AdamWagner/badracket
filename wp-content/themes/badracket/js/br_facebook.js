@@ -301,9 +301,9 @@ var br_fb = function() {
     }
 
     function forceGetAccessToken(){
-        console.log('https://graph.facebook.com/oauth/access_token?client_id='+config.appId+'&redirect_uri=http://localhost:8888/sites/brv5/wp-br/&client_secret='+config.secret+'&grant_type=client_credentials');
+        console.log('https://graph.facebook.com/oauth/access_token?client_id='+config.appId+'&redirect_uri=http://badracket.com&client_secret='+config.secret+'&grant_type=client_credentials');
         $.ajax({
-          url: 'https://graph.facebook.com/oauth/access_token?client_id='+config.appId+'&redirect_uri=http://localhost:8888/sites/brv5/wp-br/&client_secret='+config.secret+'&grant_type=client_credentials',
+          url: 'https://graph.facebook.com/oauth/access_token?client_id='+config.appId+'&redirect_uri=http://badracket.com&client_secret='+config.secret+'&grant_type=client_credentials',
           success: function(r){ config.appAccess = r.split('=')[1]; }
         });
         UI.render.authStatus(false);
