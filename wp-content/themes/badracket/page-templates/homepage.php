@@ -46,19 +46,19 @@
   <section class="green border-bottom-green pb3">
 
      <div class="section-subtitle album-container-header group border-bottom">
-       <div class="album-name pull-left padded-sides">Record</div>
+       <div class="album-name pull-left padded-sides">Record with Bad Racket</div>
        <a href="<?php echo get_page_link(9);?>" class="pill-button see-albums pull-right padded-sides">Explore our process&nbsp <span>▶</span></a>
      </div>
      <div class="group s-1 m-2">
-       <div class="grid padded-sides-2">
-         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/recording-process1.jpg" alt="Recording studio, Cleveland style">
-       </div>
        <div class="grid padded-sides limit-1 shortform-text">
          <p>A recording studio is first and foremost a performance space, and that’s where we begin. Although getting tones with fascinating audio gear and tweaking levels to make great sound excites our <a href="<?php echo get_page_link(2476);?>">inner nerd</a>, recordings are ultimately a capture of your performance. </p>
          <p>We’re very lucky to have an amazing <a href="<?php echo get_post_type_archive_link( 'staff' ); ?>">team of engineers</a> and even more fortunate to have the culture, energy, and talent of the Cleveland music community at our back. </p>
          <p><a href="mailto:play@badracket.com">Book studio time</a> by the day or a short day, not on the hour, and spend some time emerged in the music. We’ll take care of the rest. </p>
          <p>Learn more about our team and our <a href="<?php echo get_page_link(9);?>">recording process</a>, and get in touch with us to schedule a session.</p>
          
+       </div>
+       <div class="grid padded-sides-2">
+         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/recording-process1.jpg" alt="Recording studio, Cleveland style">
        </div>
      </div>
 
@@ -74,13 +74,13 @@
        <a href="<?php echo get_post_type_archive_link( 'staff' ); ?>" class="pill-button see-albums pull-right padded-sides">Team profiles &nbsp; <span>▶</span></a>
      </div>
      <div class="group s-1 m-2">
+       <div class="grid padded-sides-2">
+         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/community1.jpg" alt="Recording studio, Cleveland style">
+       </div>
        <div class="grid padded-sides limit-1 shortform-text">
          <p>Music Fans, you can find lots of <a href="<?php echo get_post_type_archive_link( 'album' ); ?>">music</a> and <a href="<?php echo get_page_link(160);?>">videos</a> here at Bad Racket. Musicians there’s ton’s of toys and time to make some awesome recordings, shows, videos with our team of recording engineers.</p> 
          <p>The Cleveland music community works together in a simple, amazing way. Thanks to you for being a part of it. </p>
          
-       </div>
-       <div class="grid padded-sides-2">
-         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/community1.jpg" alt="Recording studio, Cleveland style">
        </div>
      </div>
 
