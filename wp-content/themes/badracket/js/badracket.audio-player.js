@@ -374,6 +374,8 @@ var br_player = function() {
             artist = album.artist,
             cover = album.coverUrl;
 
+        console.log(album);
+
         if ( parseInt(album.price, 10) === 0 ) {
           badracket.setupDownloadForm(cover, title, artist, price, file);
         } else {
