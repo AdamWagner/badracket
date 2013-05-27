@@ -33,6 +33,7 @@
        $fb_event_id = get_post_meta($post->ID, '_br_facebook-event-url', true);
        $advance_ticket_price = get_post_meta($post->ID, '_br_advance-ticket-price', true);
        $door_ticket_price = get_post_meta($post->ID, '_br_door-ticket-price', true);
+       $ticket_url = get_post_meta($post->ID, '_br_ticket-url', true);
 
        $now =  new DateTime('NOW');
        $date_split = split(" ", $show_date);
@@ -62,7 +63,7 @@
           <div class="show-rollup-sidebar padded-mobile-1">
             <div class="button-group top1">
               <span data-fb-id="<?php echo $fb_event_id; ?>"  class="show-rsvp not-attending"><span data-icon="c" class="icon-checkmark"></span><span class="text">RSVP</span></span>
-              <a href="#" class="show-buy-tickets top1">Get tickets</a>
+              <a href="<?php echo $ticket_url; ?>" class="show-buy-tickets top1">Get tickets</a>
               <div class="sub-button-details">
                 <div class="txtC top1">Tickets <?php echo '$' . $advance_ticket_price; ?> advance</div>
                 <div class="txtC top05">Show at <?php echo $show_human_time; ?></div>
