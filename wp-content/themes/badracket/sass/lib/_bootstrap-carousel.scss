@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 .clearfix {
   *zoom: 1;
 }
@@ -87,11 +94,19 @@
   text-align: center;
   background:$pink-cream;
   opacity: 0.5;
+  &:after {
+    content:'◀';
+    display:inline;
+  }
 }
 
 .carousel-control.right {
   left: auto;
   right: 10px;
+  &:after {
+    content:' ▶';
+    display:inline;
+  }
 }
 
 .carousel-control:hover {
