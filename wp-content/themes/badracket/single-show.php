@@ -15,6 +15,7 @@
    while (have_posts()) : the_post();
    $supporting_bands = get_post_meta($post->ID, '_br_supporting-band-names', true);
    $cover_photo = wp_get_attachment_url(get_post_meta($post->ID, '_br_plupload', true));
+
   ?>
 
 <!--   <div class="show-bg-image">
@@ -105,6 +106,8 @@
    // RSVP + ticketing
    $fb_event_id = get_post_meta($post->ID, '_br_facebook-event-url', true);
 
+  $ticket_url = wp_get_attachment_url(get_post_meta($post->ID, '_br_ticket-url', true));
+
    $advance_ticket_price = get_post_meta($post->ID, '_br_advance-ticket-price', true);
    $door_ticket_price = get_post_meta($post->ID, '_br_door-ticket-price', true);
   ?>
@@ -129,7 +132,7 @@
 
     <span data-fb-id="<?php echo $fb_event_id; ?>"  class="show-rsvp not-attending"><span data-icon="c" class="icon-checkmark"></span><span class="text">RSVP with Facebook</span></span>
 
-    <a href="#" class="show-buy-tickets top1">Get $<?php echo $advance_ticket_price; ?> advance tickets</a>
+    <a href="<?php echo $ticket_url; ?>" class="show-buy-tickets top1">Get $<?php echo $advance_ticket_price; ?> advance tickets</a>
     <div class="price-note txtC top05">tickets will be $<?php echo $door_ticket_price; ?> at door</div>
 
     <div class="attendees"><div class="text"></div><div class="facepile s-4 m-4 b-6 h-9 single-row group"></div></div>
