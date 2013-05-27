@@ -18,7 +18,7 @@
 $environments = array(
   'local'      => 'localhost',
   'staging'    => 'badracket.staging',
-  'production' => 'badracketcom',
+  'production' => 'badracket.com',
 );
 
 // Set environment
