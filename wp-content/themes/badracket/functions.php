@@ -18,7 +18,7 @@
 $environments = array(
   'local'      => 'localhost',
   'staging'    => 'badracket.staging',
-  'production' => 'badracket.wpengine.com',
+  'production' => 'badracketcom',
 );
 
 // Set environment
