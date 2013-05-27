@@ -64,7 +64,7 @@
               <span data-fb-id="<?php echo $fb_event_id; ?>"  class="show-rsvp not-attending"><span data-icon="c" class="icon-checkmark"></span><span class="text">RSVP</span></span>
               <a href="#" class="show-buy-tickets top1">Get tickets</a>
               <div class="sub-button-details">
-                <div class="txtC top1">Tickets <?php echo $advance_ticket_price; ?> advance</div>
+                <div class="txtC top1">Tickets <?php echo '$' . $advance_ticket_price; ?> advance</div>
                 <div class="txtC top05">Show at <?php echo $show_human_time; ?></div>
               </div>
             </div>
