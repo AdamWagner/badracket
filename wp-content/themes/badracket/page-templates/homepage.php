@@ -20,7 +20,8 @@
 <?php // ALBUMS ?>
  <div class="album-container bottom1">
    <div class="section-subtitle pt0 album-container-header group ">
-     <div class="album-name pull-left padded-sides">Music from the Community</div>
+     <div class="album-name pull-left padded-sides">Music from our recording community</div>
+     <div class="hidden-desktop album-name pull-left padded-sides">Record store</div>
      <a href="<?php echo get_post_type_archive_link( 'album' ); ?>" class="pill-button see-albums pull-right padded-sides">All Albums &nbsp; <span>▶</span></a>
    </div>
    <div class="group p-5-9 s-3 m-5 b-5 h-6 single-row padded">
