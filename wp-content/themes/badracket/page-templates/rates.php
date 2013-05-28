@@ -15,7 +15,7 @@
 
     <h2 class="bottom1-5 top1">Tracking &amp; Mixing</h2>
 
-    <div class="grid bottom1">
+    <div class="grid bottom1 pt1">
       <header>
         <h3 class="bottom0">SHORT DAY:</h3>
         <div class="subtitle">up to 3 hr</div>
