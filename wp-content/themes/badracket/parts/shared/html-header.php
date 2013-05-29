@@ -20,9 +20,4 @@
 
 <body <?php body_class(); ?>>
 
-<div class="ie-message">
-	<h1>Your browser is not supported</h1>
-	<p>We're sorry, but badracket.com supports modern browsers only. To use the site, switch to Chrome, Firefox, or IE10.</p>
-</div>
-
 <div id="fb-root"></div>
