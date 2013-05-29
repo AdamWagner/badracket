@@ -17,7 +17,6 @@
 
   <?php endwhile; ?>
   </article>
-  here's a change
 </section>
 
 <?php get_template_part('parts/clusters/page-bootstrap-bottom'); ?>

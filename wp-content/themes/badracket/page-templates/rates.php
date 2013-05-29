@@ -80,7 +80,7 @@
         <p>No, we don't.  What could you get done in an hour? Don't answer that... the answer is "not much".  Working in day-chunks is a more natural way to think of projects.  You'll see.</p>
       </li>
       <li>
-        <p class="bottom0"><strong>What do do the rates include?</strong></p>
+        <p class="bottom0"><strong>What do the rates include?</strong></p>
         <p>Pretty much everything.  Space, engineer, all of our gear, a Wendy's run, the beer fridge, and mixing. </p>
       </li>
       <li>
