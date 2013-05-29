@@ -10,9 +10,6 @@
   <!-- <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" /> -->
   <!-- <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon.ico"/> -->
 
-  <!--[if lte IE 9]>
-  	<link href="<?php echo get_stylesheet_directory_uri(); ?>/css/ie.css" rel="stylesheet" type="text/css">
-  <![endif]-->
 
   <?php wp_head(); ?>
 
