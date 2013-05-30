@@ -84,7 +84,7 @@ badracket = {
     badracket_theme_path + "/js/lib/mixpanel-lib.js",
     badracket_theme_path + "/js/prod/mixpanel-min.js",
     "//connect.facebook.net/en_US/all.js",
-    badracket_theme_path + "/js/prod/br_facebook-min.js"],
+    badracket_theme_path + "/js/prod/6724c64c.br_facebook.min.cache.js"],
         function() {
             // Callback
             console.log('All Scripts Loaded');

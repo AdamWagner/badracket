@@ -28,6 +28,7 @@ var br_mixpanel = function(){
     };
 
     mixpanel.people.set( user );
+    // use mixpanel.people.set_once
   }
   return {
     track : track,

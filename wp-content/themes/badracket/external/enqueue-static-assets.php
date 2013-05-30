@@ -12,7 +12,7 @@ add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
 add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
 
 
-
+$test = 'b506d51d.br_facebook.min.cache.js';
 
 
 
