@@ -12,7 +12,7 @@ add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
 add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
 
 
-$test = 'b506d51d.br_facebook.min.cache.js';
+$test = '8b1f9d4e.base.min.js';
 
 
 
@@ -66,7 +66,7 @@ function script_enqueuer() {
 
     // Define local asset paths
      $main_css_path     = 'style.css';
-     $site_js_path      = 'prod/main-min.js';
+     $site_js_path      = 'prod/601430f3.main.min.cache.js';
 
     // Build filename from basename, hash, and extension
     // Format: basename + hash + extension

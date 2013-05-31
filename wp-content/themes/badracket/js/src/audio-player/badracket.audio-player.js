@@ -26,14 +26,14 @@ var br_sm2 = function(){
 
 
   function whilePlaying( sound ){
-    var duration     = (sound.sampleTrack ) ? badracket.stringToTime('0:30') : badracket.stringToTime( br_player.state.currSong.duration ),
+    var duration     = (sound.sampleTrack ) ? badracket.utils.stringToTime('0:30') : badracket.utils.stringToTime( br_player.state.currSong.duration ),
         position     = sound.position,
         isSliding    = br_player.state.isSliding;
         playbarWidth = ( (position / duration) * 100 ).toFixed(2) + '%';
 
     if (!isSliding && br_player.state.currSong.sm2_obj === sound ) {      // if not sliding and recieving current song
       br_player.ui.el.progressBar.css('width', playbarWidth);             // update progress bar ...
-      br_player.ui.el.progressTime.text( badracket.msToTime(position) );  // ... and time progress
+      br_player.ui.el.progressTime.text( badracket.utils.msToTime(position) );  // ... and time progress
     }
   }
 
@@ -41,7 +41,7 @@ var br_sm2 = function(){
     console.log('on finish ran');
     sound.setPosition( 0 );                     // rewind song
     br_player.ui.handlers.nextPrev( 'next' );   // go to next song
-    br_mixpanel.track('Song Ended', { songUrl : sound.url, duration : badracket.msToTime(sound.duration) });
+    br_mixpanel.track('Song Ended', { songUrl : sound.url, duration : badracket.utils.msToTime(sound.duration) });
     mixpanel.people.increment("Songs finished", 1);
   }
 
@@ -401,7 +401,7 @@ var br_player = function() {
         if ( br_player.state.currSong.isSampleTrack == 0 && !$('html').hasClass('fb-logged-in')) {
           smPosition = ( ui.value / 100 ) * 30000;
         } else {
-          smPosition = ( ui.value / 100 ) * badracket.stringToTime( state.currSong.duration );
+          smPosition = ( ui.value / 100 ) * badracket.utils.stringToTime( state.currSong.duration );
         }
         state.currSong.sm2_obj.setPosition( smPosition );
       },
