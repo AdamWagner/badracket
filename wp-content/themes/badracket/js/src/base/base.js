@@ -51,8 +51,7 @@ badracket = {
   setup: function(){
     badracket.loader.require([
     badracket_theme_path + "/js/build/c54d4052.post-load.min.js",
-    badracket_theme_path + "/js/build/4a2e4963.br_audio-player.min.js",
-    badracket_theme_path + "/js/lib/mixpanel-lib.js",
+    badracket_theme_path + "/js/build/9f35432b.br_audio-player.min.js",
     "//connect.facebook.net/en_US/all.js",
     badracket_theme_path + "/js/build/b506d51d.br_facebook.min.js"],
         function() {

@@ -48,7 +48,7 @@ badracket.utils = {
 	    time = time.toString().split(/:/);
 	    return time[0] * 60000 + time[1] * 1000;
 	}
-}
+};
 
 
 (function($) {

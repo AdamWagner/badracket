@@ -2,12 +2,13 @@
     Normalize album data
   \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
+
 badracket.normalize = {
 
   count_tracks: function(obj) {
     var trackCount = 0;
     for (var prop in obj) {
-      if ( badracket.stringContains( prop.toString(), 'songTitle' ) ) {
+      if ( badracket.utils.stringContains( prop.toString(), 'songTitle' ) ) {
         trackCount++;
       }
     }
@@ -16,7 +17,7 @@ badracket.normalize = {
 
  createTrackHierarchy :function (obj, type) {
     var tracks = [];
-    var trackCount = badracket.count_tracks(obj);
+    var trackCount = badracket.normalize.count_tracks(obj);
     for ( var i = 01; i <= trackCount; i++ ) {
       if (i >= 10) { enumerator = i.toString(); } else { enumerator = '0' + i.toString(); }
       if (type === 'album') {
@@ -46,12 +47,12 @@ badracket.normalize = {
     return _.map(rawData, function(value, key, list ){
       return {
         artist : value._br_artist[0],
-        albumName : badracket.htmlDecode(value.albumName),
+        albumName : badracket.utils.htmlDecode(value.albumName),
         kind : 'album',
         coverUrl : value._br_cover_url[0],
         price : value._br_price[0],
         zipFile : value._br_zip_file[0],
-        tracks : badracket.createTrackHierarchy(value, 'album'),
+        tracks : badracket.normalize.createTrackHierarchy(value, 'album'),
         albumUrl : value.albumUrl
       };
     });
@@ -71,11 +72,11 @@ badracket.normalize = {
       var date = value['_br_show-date'][0];
 
       return {
-        albumName : badracket.htmlDecode(value.albumName),
+        albumName : badracket.utils.htmlDecode(value.albumName),
         kind : 'show',
         date : date,
         albumUrl : value.albumUrl,
-        tracks : badracket.createTrackHierarchy(value, 'show')
+        tracks : badracket.normalize.createTrackHierarchy(value, 'show')
       };
     });
   },

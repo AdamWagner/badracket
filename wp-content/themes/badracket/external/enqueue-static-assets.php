@@ -2,7 +2,7 @@
 
 /* =======================================================================================================
 Scripts Add scripts via wp_head() // CODEX: wp_register_script( $handle, $src, $deps, $ver, $in_footer );
-========+=============================================================================================== */
+======================================================================================================== */
 
 function _remove_script_version( $src ){
     $parts = explode( '?', $src );
@@ -12,33 +12,14 @@ add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
 add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
 
 
-$test = '8b1f9d4e.base.min.js';
-
-
-
-function filename_builder($filename, $root) {
-  $WP_relative_path = "/wp-content/themes/badracket/";
-
-  $exploded_filename = explode('.', $filename);
-  $extension = $exploded_filename[1];
-  $basename = $exploded_filename[0];
-
-  $WP_theme_path = get_template_directory_uri().'/'; 
-
-  if (!$root) { $WP_theme_path = $WP_theme_path.$extension.'/'; }
-  // echo $basename.".".hash_file('md5', $WP_theme_path.$filename).'.gzip.'.$extension;
-  return $basename.".".hash_file('md5', $WP_theme_path.$filename).'.gzip.'.$extension;
-}
-
-
 function asset_file_path( $filename, $root ) {
 
-$exploded_filename = explode('.', $filename);
-$extension = $exploded_filename[1];
-$basename = $exploded_filename[0];
+  $exploded_filename = explode('.', $filename);
+  $extension = $exploded_filename[3];
+  $basename = $exploded_filename[0];
 
   if (!$root) { 
-    $rel_path = "wp-content/themes/badracket/".$extension."/";
+    $rel_path = "wp-content/themes/badracket/".$extension."/build/";
   } else {
     $rel_path = "wp-content/themes/badracket/";
   }
@@ -66,7 +47,7 @@ function script_enqueuer() {
 
     // Define local asset paths
      $main_css_path     = 'style.css';
-     $site_js_path      = 'prod/601430f3.main.min.cache.js';
+     $site_js_path      = '1cc115d1.base.min.js';
 
     // Build filename from basename, hash, and extension
     // Format: basename + hash + extension

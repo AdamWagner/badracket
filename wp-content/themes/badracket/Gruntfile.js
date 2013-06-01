@@ -35,6 +35,8 @@ module.exports = function(grunt) {
     concat: {
        audioPlayer: {
          src: [
+          'js/src/lib/jquery-ui-1.9.2.custom.js',
+          'js/src/lib/soundmanager2.js',
           'js/src/audio-player/badracket.audio-player.js',
          ],
          dest: 'js/build/br_audio-player.js'
@@ -68,11 +70,12 @@ module.exports = function(grunt) {
            'js/src/lib/enquire.js',
            'js/src/lib/underscore.js',
            'js/src/lib/format_date.js',
+           'js/src/lib/mixpanel-lib.js',
            'js/src/mixpanel.js',
-           'js/src/base/normalize-albums.js',
+           'js/src/base/base.js',
            'js/src/base/utils.js',
+           'js/src/base/normalize-albums.js',
            'js/src/base/router.js',
-           'js/src/base/base.js'
           ],
           dest: 'js/build/base.js'
        },
