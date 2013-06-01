@@ -11,7 +11,7 @@ var br_state = function() {
 
 
   var rx = {
-    home : s.domain() + '',
+    home : s.domain + '',
     albumDetail : 'album/[a-zA-Z0-9-]*/$',
     albumRollup : '/album/$',
     showDetail : 'show/[a-zA-Z0-9-]*/$',

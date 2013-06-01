@@ -2,6 +2,7 @@
    Utilities
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
+var badracket = window.badracket || {};
 
 badracket.utils = {
 	px2em: function( elem ){
@@ -17,6 +18,18 @@ badracket.utils = {
 	      var pxInEms = Math.floor((elemFontSize / parentFontSize) * 100) / 100;
 	      elem.style.fontSize = pxInEms + 'em';
 	  }
+	},
+
+	envCheck : function(local, staging, production){
+	  var result;
+	  if (BR_ENV === 'local') {
+	    result = local;
+	  } else if (BR_ENV === 'staging') {
+	    result = staging;
+	  } else {
+	    result = production;
+	  }
+	  return result;
 	},
 
 	stringContains : function(string, search) { 

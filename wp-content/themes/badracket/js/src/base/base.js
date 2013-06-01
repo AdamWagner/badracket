@@ -14,21 +14,15 @@ s = {
   bd : $('body'),
   mainContent : $('.main-content'),
   video : $('.video'),
-  domain : function(){
-    var domain;
-    if (BR_ENV === 'local') {
-      domain = 'http://localhost:8888/brv5-prod/';
-    } else if (BR_ENV === 'staging') {
-      domain = 'http://badracket.staging.wpengine.com/';
-    } else {
-      domain = 'http://badracket.com/';
-    }
-    return domain;
-  }
+  domain : badracket.utils.envCheck('http://localhost:8888/brv5-prod/', 'http://badracket.staging.wpengine.com/', 'http://badracket.com/'),
 
 };
 
-badracket = {
+
+
+var br = window.badracket || {};
+
+badracket = _.extend(br, {
 
   init: function() {
     this.docReady();
@@ -141,10 +135,10 @@ badracket = {
   doAjaxRequest: function( type ){
        // here is where the request will happen
 
-       console.log(s.domain() + 'wp-admin/admin-ajax.php');
+       console.log(s.domain + 'wp-admin/admin-ajax.php');
 
        jQuery.ajax({
-            url: s.domain() + 'wp-admin/admin-ajax.php',
+            url: s.domain + 'wp-admin/admin-ajax.php',
             data:{
                  'action':'do_ajax',
                  'fn':'get_latest_posts',
@@ -348,7 +342,7 @@ badracket = {
     });
   },
 
-} // end badracket {}
+}); // end badracket {}
 
 
 
