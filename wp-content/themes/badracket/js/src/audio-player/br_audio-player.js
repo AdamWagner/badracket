@@ -5,7 +5,7 @@
 var br_sm2 = function(){
 
   var sm2_settings = {
-    url: badracket.utils.envCheck('/brv5-prod/swf', 'swf', 'swf'),
+    url: badracket.utils.envCheck('/brv5-prod/swf', '/swf', '/swf'),
     flashVersion: 9,
     debugMode: false,
     flashPollingInterval: 125,
