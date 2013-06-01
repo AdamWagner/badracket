@@ -388,5 +388,5 @@ var gf_placeholder = function() {
 
 
 
-badracket.init();
+
 

@@ -1,0 +1,1 @@
+badracket.init();

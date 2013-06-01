@@ -31,12 +31,12 @@ function asset_file_path( $filename, $root ) {
 
     case 'staging':
       $s3_path  = "http://d1795rfny8s8fj.cloudfront.net/";
-      return $s3_path.$rel_path.filename_builder($filename, $root);
+      return $s3_path.$rel_path.$filename;;
     break;
 
     case 'production':
       $s3_path  = "http://d245myou62vn42.cloudfront.net/";
-      return $s3_path.$rel_path.filename_builder($filename, $root);
+      return $s3_path.$rel_path.$filename;;
     break; 
   }
 }
@@ -47,7 +47,7 @@ function script_enqueuer() {
 
     // Define local asset paths
      $main_css_path     = 'style.css';
-     $site_js_path      = 'cbc88b8b.base.min.js';
+     $site_js_path      = 'b2216f23.base.min.js';
 
     // Build filename from basename, hash, and extension
     // Format: basename + hash + extension
@@ -58,7 +58,7 @@ function script_enqueuer() {
 
   wp_deregister_script('jquery');
 
-    wp_register_style( 'screen', asset_file_path( $main_css_path , true ), '', '', 'screen' );
+    wp_register_style( 'screen', get_template_directory_uri() . '/style.css' , '', '', 'screen' );
     wp_enqueue_style( 'screen' );
 
     wp_enqueue_script( 'main', asset_file_path( $site_js_path , false ), '', '', true );
