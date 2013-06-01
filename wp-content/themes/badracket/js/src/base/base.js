@@ -14,7 +14,18 @@ s = {
   bd : $('body'),
   mainContent : $('.main-content'),
   video : $('.video'),
-  domain : (BR_ENV === 'prod') ? 'http://badracket.com/' : 'http://localhost:8888/brv5-prod/'
+  domain : function(){
+    var domain;
+    if (BR_ENV === 'local') {
+      domain = 'http://localhost:8888/brv5-prod/';
+    } else if (BR_ENV === 'staging') {
+      domain = 'http://badracket.staging.wpengine.com/';
+    } else {
+      domain = 'http://badracket.com/';
+    }
+    return domain;
+  }
+
 };
 
 badracket = {
