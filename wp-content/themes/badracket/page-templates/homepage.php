@@ -51,7 +51,7 @@
          
        </div>
        <div class="grid padded-sides-2">
-         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/recording-process1.jpg" alt="Recording studio, Cleveland style">
+         <img class="recording-process-image lazyload_img" data-src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/recording-process1.jpg" alt="Recording studio, Cleveland style">
        </div>
      </div>
 
@@ -66,7 +66,7 @@
      </div>
      <div class="group s-1 m-2">
        <div class="grid padded-sides-2">
-         <img class="recording-process-image lazyload_img" src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/community1.jpg" alt="Recording studio, Cleveland style">
+         <img class="recording-process-image lazyload_img" data-src="http://d245myou62vn42.cloudfront.net/wp-content/uploads/2013/05/community1.jpg" alt="Recording studio, Cleveland style">
        </div>
        <div class="grid padded-sides limit-1 shortform-text">
          <p>Music Fans, you can find lots of <a href="<?php echo get_post_type_archive_link( 'album' ); ?>">music</a> and <a href="<?php echo get_page_link(160);?>">videos</a> here at Bad Racket. Musicians there’s ton’s of toys and time to make some awesome recordings, shows, videos with our team of recording engineers.</p> 
