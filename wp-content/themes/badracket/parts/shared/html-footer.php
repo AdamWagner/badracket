@@ -12,6 +12,8 @@
 
   if ( stringContains( domain, 'localhost') ) {
   	BR_ENV = 'local';
+  } else if ( stringContains( domain, 'staging') ) {
+    BR_ENV = 'staging';
   } else {
   	BR_ENV = 'prod';
   }

@@ -37,7 +37,7 @@ module.exports = function(grunt) {
          src: [
           'js/src/lib/jquery-ui-1.9.2.custom.js',
           'js/src/lib/soundmanager2.js',
-          'js/src/audio-player/badracket.audio-player.js',
+          'js/src/audio-player/br_audio-player.js',
          ],
          dest: 'js/build/br_audio-player.js'
        },
@@ -49,6 +49,9 @@ module.exports = function(grunt) {
        },
        payments : {
          src: [
+          'js/src/lib/stripe.js',
+          'js/src/lib/jquery.payments.js',
+          'js/src/lib/jquery.form.js',
           'js/src/payments.js',
          ],
          dest: 'js/build/payments.js'
@@ -65,7 +68,7 @@ module.exports = function(grunt) {
        },
        base: {
           src: [
-           'js/src/lib/page.js', // express-style router with context saving
+           // 'js/src/lib/page.js', // express-style router with context saving
            'js/src/lib/jquery.js',
            'js/src/lib/jquery.djax.js',
            'js/src/lib/enquire.js',
@@ -73,10 +76,12 @@ module.exports = function(grunt) {
            'js/src/lib/format_date.js',
            'js/src/lib/mixpanel-lib.js',
            'js/src/mixpanel.js',
+           'js/src/base/br_scripts.js',
            'js/src/base/base.js',
            'js/src/base/utils.js',
            'js/src/base/normalize-albums.js',
            'js/src/base/router.js',
+           'js/src/base/init.js',
           ],
           dest: 'js/build/base.js'
        },
@@ -88,13 +93,17 @@ module.exports = function(grunt) {
 
     /* Uglify */
     uglify: {
-      build: {
+      first: {
         files: {
-          'js/build/base.min.js' : ['js/build/base.js'],
           'js/build/post-load.min.js' : ['js/build/post-load.js'],
           'js/build/br_audio-player.min.js' : ['js/build/br_audio-player.js'],
           'js/build/br_facebook.min.js' : ['js/build/br_facebook.js'],
           'js/build/payments.min.js' : ['js/build/payments.js'],
+        }
+      },
+      second: {
+        files: {
+          'js/build/base.min.js' : ['js/build/base.js'],
         }
       }
     },
@@ -117,7 +126,7 @@ module.exports = function(grunt) {
           'js/build/post-load.min.js',
         ],
         // File that refers to above files and needs to be updated with the hashed name
-        dest: ['js/src/base/base.js', 'js/build/base.min.js'],
+        dest: ['js/src/base/br_scripts.js'],
       },
       second : {
         src: ['js/build/base.min.js'],
@@ -136,7 +145,19 @@ module.exports = function(grunt) {
       'js/build/post-load.js',
       'js/build/base.js'
       ]
-     }
+     },
+
+     watch: {
+       scripts: {
+         files: ['js/src/*/*.js'],
+         tasks: ['default'],
+         options: {
+           nospawn: true,
+           livereload : true,
+         },
+
+       },
+     },
 
   });
 
@@ -146,8 +167,31 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-hashres');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean:initial', 'concat', 'uglify', 'hashres','clean:post',]);
+  grunt.registerTask('default', [
+    'clean:initial',
+    'concat:audioPlayer',
+    'concat:payments',
+    'concat:facebook',
+    'concat:postLoad',
+    'uglify:first',
+    'hashres:first',
+    'concat:base',
+    'uglify:second',
+    'hashres:second',
+    'clean:post',
+    ]);
 
 };
+
+
+
+
+
+
+
+
+
+

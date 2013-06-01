@@ -29,16 +29,7 @@ def md5_for_filename(filepath, block_size=2 ** 20):
             break
         md5.update(data)
     fh.close()
-    return md5.hexdigest()
-
-
-def versioned_filename_builder(filename, subdirectory):
-    filename_parts = filename.split('.')
-    extension = filename_parts[1]
-    basename = filename_parts[0]
-
-    filepath = make_filepath(filename, subdirectory)
-    return '%s.%s.%s.%s' % (basename, md5_for_filename(filepath), 'gzip', extension)
+    return md5.hexdigest()[:8]
 
 
 def gzip_assets(filename, subdirectory, env):
@@ -57,7 +48,7 @@ def gzip_assets(filename, subdirectory, env):
     # !! This line made the gzipping NOT decode in the browser.
     # gzip.time = FakeTime()
 
-    gzipped_file_path = WP_PATH + subdirectory + '/' + basename + '.gzip.' + extension
+    gzipped_file_path = WP_PATH + subdirectory + '/' + basename + extension
 
     f_in = open(filepath, 'rb')
     contents = f_in.readlines()
@@ -75,14 +66,13 @@ def save_file_in_s3(filename, subdirectory, env, gzipped_file_path):
     else:
         BUCKET_NAME = PROD_BUCKET_NAME
 
-    versioned_filename = versioned_filename_builder(filename, subdirectory)
 
     if subdirectory != '':
         remote_filepath = WP_PATH + subdirectory + '/'
     else:
         remote_filepath = WP_PATH + '/'
 
-    print 'uploading -- %s --  to -- %s --' % (versioned_filename, BUCKET_NAME + ' : ' + remote_filepath)
+    print 'uploading -- %s --  to -- %s --' % (filename, BUCKET_NAME + ' : ' + remote_filepath)
 
     #set headers
     # css -> content-type: text/css, content-encoding: gzip
@@ -91,7 +81,7 @@ def save_file_in_s3(filename, subdirectory, env, gzipped_file_path):
     conn = S3Connection(ACCESS_KEY, SECRET)
     bucket = conn.get_bucket(BUCKET_NAME)
     k = Key(bucket)
-    k.key = remote_filepath + versioned_filename
+    k.key = remote_filepath + filename
     k.set_metadata('Content-Encoding', 'gzip')
     k.set_contents_from_filename(gzipped_file_path)
     k.make_public()
@@ -102,11 +92,14 @@ def save_file_in_s3(filename, subdirectory, env, gzipped_file_path):
 
 def deploy(env):
     print '**** Uploading to S3 ****'
-    gzip_assets('style.css', '', env)
-    gzip_assets('main-min.js', '/js/prod', env)
+
+    for filename in os.listdir(WP_PATH + '/js/build'):
+        if filename.split('.')[-1] == 'js':
+            gzip_assets(filename, '/js/build', env)
+
     print '**** pushing to wp %s ****' % env
     if env == 'staging':	
-       local('git push br-staging staging')
+       local('git push br-staging master')
     else:
        local('git push br-production master')
           
