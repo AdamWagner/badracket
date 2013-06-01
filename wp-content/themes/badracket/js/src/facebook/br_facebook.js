@@ -613,6 +613,8 @@ var br_fb = function() {
     var handlers = {
        login : function(){
          login();
+
+         br_mixpanel.track('FB Login Clicked');
        },
 
        logout : function(){
@@ -666,6 +668,8 @@ var br_fb = function() {
         $that.addClass('transparent');
         var eventId = $that.data('fb-id');
         console.log(eventId);
+
+        br_mixpanel.track('RSVP click');
 
         function alreadyGoing(id){
           var going = false;
