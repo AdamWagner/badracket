@@ -355,7 +355,7 @@ var br_player = function() {
       },
 
       buyAlbumHover : function(){
-          badracket.loader.require( [ badracket_theme_path + "/js/build/payments.min.js" ], paymentsLoaded() );
+          badracket.loader.require( [ br_scripts.payments ], paymentsLoaded() );
           function paymentsLoaded(){
             console.log('yep');
              s.bd.off('hover' , '.support-band-button' );
