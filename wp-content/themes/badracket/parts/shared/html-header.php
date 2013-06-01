@@ -15,6 +15,8 @@
   <link rel="dns-prefetch" href="//graph.facebook.com">
   <link rel="dns-prefetch" href="//connect.facebook.net">
   <link rel="dns-prefetch" href="//google-analytics.com"> 
+  <link rel="dns-prefetch" href="//cdn.mxpnl.com"> 
+  <link rel="dns-prefetch" href="//api.mxpnl.com"> 
   <link rel="dns-prefetch" href="//vimeo.com"> 
 
 
