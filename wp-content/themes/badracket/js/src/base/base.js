@@ -50,10 +50,10 @@ badracket = {
 
   setup: function(){
     badracket.loader.require([
-      badracket_theme_path + br_scripts.postLoad,
-      badracket_theme_path + br_scripts.player,
+      br_scripts.postLoad,
+      br_scripts.player,
       "//connect.facebook.net/en_US/all.js",
-      badracket_theme_path + br_scripts.facebook ],
+      br_scripts.facebook ],
         function() {
             // Callback
             console.log('All Scripts Loaded');
