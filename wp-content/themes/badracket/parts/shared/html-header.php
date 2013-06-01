@@ -10,6 +10,13 @@
   <!-- <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" /> -->
   <!-- <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon.ico"/> -->
 
+  <!-- prefetch dns -->
+  <link rel="dns-prefetch" href="//d245myou62vn42.cloudfront.net">
+  <link rel="dns-prefetch" href="//graph.facebook.com">
+  <link rel="dns-prefetch" href="//connect.facebook.net">
+  <link rel="dns-prefetch" href="//google-analytics.com"> 
+  <link rel="dns-prefetch" href="//vimeo.com"> 
+
 
   <?php wp_head(); ?>
 
