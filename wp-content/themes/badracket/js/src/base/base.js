@@ -235,6 +235,8 @@ badracket = {
       br_fb.UI.bindUI.unBindAll();
       br_fb.UI.bindUI.bindAll();
 
+      _gaq.push(["_trackPageview"]); 
+
       var html = data.response,
           search = '<body class="',
           start = html.indexOf(search) + search.length,

@@ -65,6 +65,7 @@ module.exports = function(grunt) {
        },
        base: {
           src: [
+           'js/src/lib/page.js', // express-style router with context saving
            'js/src/lib/jquery.js',
            'js/src/lib/jquery.djax.js',
            'js/src/lib/enquire.js',

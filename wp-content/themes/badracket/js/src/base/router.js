@@ -2,6 +2,52 @@
    Router
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
+// https://github.com/haithembelhaj/RouterJs
+
+/*
+
+https://github.com/visionmedia/page.js
+
+page('/', index)
+page('/user/:user', show)
+page('/user/:user/edit', edit)
+page('/user/:user/album', album)
+page('/user/:user/album/sort', sort)
+page('*', notfound)
+page()
+
+*/
+
+
+
+
+function test(){
+  alert('your route was found');
+}
+
+function videos(){
+  alert('you are on the videos page');
+}
+
+page('/', test);
+page('/brv5-prod', test);
+page('/brv5-prod/videos/', videos);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var br_state = function() {
 
   var viewState = 'unknown';
