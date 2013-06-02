@@ -224,13 +224,17 @@ var br_fb = function() {
 
        var path = (br_fb.config.connectStatus !== 'connected') ? '/photos?fields=images,likes&limit=9999&access_token=' + escape(config.appAccess) : '/photos?fields=images,likes&limit=9999';
 
+       var blacklist = ['545665242152200', '543409375711120'];
+
        FB.api(el.id + path , function( r ) {
 
          _.each(r.data, function(el){
+          if ( blacklist.indexOf(el.id) === -1 ) {
            var mediumSrc = el.images[4].source;
            var largeSrc = el.images[0].source;
            var likes = (el.likes) ? el.likes.data.length : 0;
-           BR.photos.push({ large: largeSrc, medium:mediumSrc, likes : likes });
+           BR.photos.push({ large: largeSrc, medium:mediumSrc, likes : likes, id: el.id });
+          }
          });
 
          dfd.resolve();

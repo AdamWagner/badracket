@@ -9,7 +9,7 @@ br_scripts = function(){
 	return {
 		payments : cdn + wpPath + '/js/build/26854135.payments.min.js',
 		player : cdn + wpPath + '/js/build/9b76a338.br_audio-player.min.js',
-		facebook : cdn + wpPath + '/js/build/47a3d264.br_facebook.min.js',
+		facebook : cdn + wpPath + '/js/build/a09ea7ce.br_facebook.min.js',
 		postLoad : cdn + wpPath + '/js/build/c54d4052.post-load.min.js'
 	};
 }();
