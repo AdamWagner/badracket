@@ -14,6 +14,7 @@
   <link rel="dns-prefetch" href="//d245myou62vn42.cloudfront.net">
   <link rel="dns-prefetch" href="//graph.facebook.com">
   <link rel="dns-prefetch" href="//connect.facebook.net">
+  <link rel="dns-prefetch" href="//static.ak.facebook.com">
   <link rel="dns-prefetch" href="//google-analytics.com"> 
   <link rel="dns-prefetch" href="//cdn.mxpnl.com"> 
   <link rel="dns-prefetch" href="//api.mixpanel.com"> 
