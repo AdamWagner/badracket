@@ -335,19 +335,19 @@ $offset: 8.5em;
   height:100%;
   background:$dark;
   @include breakpoint(big) {
-    top:$offset;
-    .page-fixed &, .force-fixed & {
-      top:$header-height;
+    top:$header-height;
+    .home & {
+      top:$offset;
     }
   }
   @include breakpoint(bigger) {
-    top:$offset * (108/122);
-    .page-fixed &, .force-fixed & { top:$header-height * (108/112); }
+    top:$header-height * (108/112); 
+    .home & { top:$offset * (108/122); }
   }
 
   @include breakpoint(huge) {
-    top:$offset * (108/122);
-    .page-fixed &, .force-fixed & { top:$header-height * (108/122); }
+    top:$header-height * (108/122); 
+    .home & { top:$offset * (108/122); }
   }
 }
 
@@ -458,16 +458,15 @@ header.mobile {
 header.desktop {
   $header-bg:hsl(290, 7%, 48%);
   $buy-bg : hsl(290, 7.5%, 53%);
-  // @include box-shadow(0 1px 0 1px transparentize($dark,0.65));
+  position: fixed;
+  @extend %page-width;
   background:$header-bg;
-  position:relative;
 
   @include breakpoint(bigger) { font-size:96.4285714%; }
   @include breakpoint(huge) { font-size:88.5245902%; }
 
-  .page-fixed &, .force-fixed & {
-   position: fixed;
-   @extend %page-width;
+  .home & {
+    position:relative;
  }
 
   .header-bar {
@@ -597,8 +596,8 @@ $nav-color:darken($dark,3%);
 nav[role="navigation"] {
   -webkit-user-select: none;
   background:darken($dark,3%);
-  @extend %nav-width;
-  position:absolute;
+  position: fixed;
+  @extend %nav-width-fixed;
   top:$header-height;
   top:$header-height;
   bottom:0;
@@ -618,9 +617,9 @@ nav[role="navigation"] {
 
   a { color:desaturate(lighten($dark,60%),3% );  display:block; }
 
-  .page-fixed &, .force-fixed & {
-    position: fixed;
-    @extend %nav-width-fixed;
+  .home & {
+    @extend %nav-width;
+    position:absolute;
   }
 }
 
@@ -773,17 +772,21 @@ nav[role="navigation"] {
   @include breakpoint(big) {display:none;}
   opacity:0;
   background:darken($dark,3%);
-  @extend %nav-width;
-  position:absolute;
+  position: fixed;
+  @extend %nav-width-fixed;
   right:0;
   height:100%;
   padding:1em;
   color:$light-on-dark;
   @include transition(opacity .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
 
-  .page-fixed &, .force-fixed & {
-    position: fixed;
-    @extend %nav-width-fixed;
+  .home & {
+    position:absolute;
+    @extend %nav-width;
+
+
+
+    
     top:$header-height;
     @include breakpoint(bigger) { top: $header-height * (108/122);}
     @include breakpoint(huge) { top: $header-height * (108/122);}
@@ -801,9 +804,9 @@ nav[role="navigation"] {
   min-height:100%;
   z-index:10;
   position:relative; // for z-index effect
-  @include breakpoint(big) { .page-fixed & { padding-top:$offset; } }
-  @include breakpoint(bigger) { .page-fixed & { padding-top:$offset * (108/122); } }
-  @include breakpoint(huge) { .page-fixed & { padding-top:$offset * (108/122); } }
+  // @include breakpoint(big) { .page-fixed & { padding-top:$offset; } }
+  // @include breakpoint(bigger) { .page-fixed & { padding-top:$offset * (108/122); } }
+  // @include breakpoint(huge) { .page-fixed & { padding-top:$offset * (108/122); } }
 }
 
 /* --------------------------------------------------------------------------------------- *\

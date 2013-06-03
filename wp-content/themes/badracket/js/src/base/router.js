@@ -2,7 +2,6 @@
    Router
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-
 var br_state = function() {
 
   var viewState = 'unknown';
@@ -34,7 +33,6 @@ var br_state = function() {
     } else if ( urlMatcher( rx.albumRollup, url ) ) {
       viewState = 'album-rollup';
       setupAlbumPage();
-      forceFixed();
     } else if ( ( rx.home===url ) ) {
       viewState = 'home';
       setupHome();
@@ -42,26 +40,20 @@ var br_state = function() {
     } else if ( urlMatcher( rx.videos, url ) ) {
       viewState = 'videos';
       setupVideosPage();
-      forceFixed();
     } else if ( urlMatcher( rx.photos, url ) ) {
       viewState = 'photos';
       setupPhotos();
-      forceFixed();
     } else if ( urlMatcher( rx.showDetail, url ) ) {
       viewState = 'show-detail';
       setupShow();
-      forceFixed();
     } else if ( urlMatcher( rx.showRollup, url ) ) {
       viewState = 'show-rollup';
       setupShowRoll();
-      forceFixed();
     } else if ( urlMatcher( rx.submitMusic, url ) ) {
       viewState = 'submit-music';
       gf_placeholder();
-      forceFixed();     
     } else {
       viewState = 'unknown';
-      forceFixed();
     }
 
     applyViewState(viewState);
@@ -69,6 +61,11 @@ var br_state = function() {
     return viewState;
 
   }
+
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
+     Route handlers
+  \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
   function viewGet() {
     return viewState;
@@ -79,16 +76,12 @@ var br_state = function() {
     $('body').attr('data-view', viewState);
   }
 
-  function forceFixed(){
-    $('html').addClass('force-fixed').removeClass('page-fixed');
-  }
 
   function setupAlbumPage(){
     if ( br_player.state.isPlaying ) {
         $('[data-album-title="'+ br_player.state.currAlbum.albumName +'"]').addClass('playing');
     }
   }
-
 
   function setupHome(){
   $('html').removeClass('force-fixed');
@@ -97,12 +90,11 @@ var br_state = function() {
        br_fb.UI.render.videosHome();
      }
    } else {
-     $(window).on('videos-loaded', function(){
+     s.win.on('videos-loaded', function(){
        br_fb.UI.render.videosHome();
      });
    }
   }
-
 
   var countObj = {};
   function setupNav( count ) {
@@ -128,7 +120,7 @@ var br_state = function() {
         br_fb.UI.render.videos();
       }
     } else {
-      $(window).on('videos-loaded', function(){
+      s.win.on('videos-loaded', function(){
         br_fb.UI.render.videos();
       });
     }
@@ -141,20 +133,18 @@ var br_state = function() {
         $('[data-track-number="'+ trackNumber +'"]').addClass('song-playing');
       }
     }
-
   }
+
 
   function setupShowRoll(){
 
     function checkAttending(){
-
       $('.show-rsvp').each(function(){
         var eventID = $(this).data('fb-id');
         if ( br_fb.fetch.isAttending( eventID ) ) {
           br_fb.UI.render.rsvpButton(true, $(this) );
         }
       });
-
     }
 
     br_fb.user_do_or_wait( checkAttending );
@@ -162,9 +152,7 @@ var br_state = function() {
   }
 
   function setupShow() {
-
     var eventID = $('.show-rsvp').data('fb-id');
-
       if ( br_player.state.isPlaying ) {
         if ( br_player.state.currAlbum.albumName === $('[data-album-title]').attr('data-album-title') ) {
           var trackNumber = br_player.state.currSong.trackNumber;
@@ -180,13 +168,10 @@ var br_state = function() {
     }
 
     br_fb.user_do_or_wait( checkAttending );
-
     br_fb.page_do_or_wait( br_fb.UI.render.attending );
     br_fb.user_do_or_wait( br_fb.UI.render.usersAttending );
 
-
   }
-
 
   function prefetchPhotos(){
     if ( br_fb.BR.photos.length < 50 ) {
@@ -212,10 +197,8 @@ var br_state = function() {
       br_fb.fbEnsureInit( blah );
     } else {
       console.log('running render photos');
-      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! didnt need to reget photos');
       br_fb.UI.render.renderPhotos();
     }
-
   }
 
 

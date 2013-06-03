@@ -82,6 +82,7 @@ module.exports = function(grunt) {
        mobile : {
          src: [
           'js/src/lib/jquery.tap.js',
+          'js/src/mobile/mobile.js',
          ],
          dest: 'js/build/mobile.js'
        },
@@ -100,6 +101,7 @@ module.exports = function(grunt) {
             'js/src/lib/froogaloop.js',
             'js/src/lib/bootstrap-modal.js',
             'js/src/lib/bootstrap-carousel.js',
+            'js/src/lib/underscore.js',
             'js/src/lib/jquery.fitvids.js',
          ],
          dest: 'js/build/post-load.js'
@@ -110,7 +112,6 @@ module.exports = function(grunt) {
            'js/src/lib/jquery.js',
            'js/src/lib/jquery.djax.js',
            'js/src/lib/enquire.js',
-           'js/src/lib/underscore.js',
            'js/src/lib/format_date.js',
            'js/src/lib/mixpanel-lib.js',
            'js/src/mixpanel.js',
@@ -175,6 +176,7 @@ module.exports = function(grunt) {
       'js/build/mixpanel.js',
       'js/build/payments.js',
       'js/build/post-load.js',
+      'js/build/mobile.js',
       'js/build/base.js'
       ]
     },

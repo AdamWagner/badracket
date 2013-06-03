@@ -62,8 +62,8 @@ var br_sm2 = function(){
       id:'brSound' + songCount++,
       url:song.songUrl,
       autoLoad: true,
-      onplay: function() { br_player.state.isPlaying = true; $(window).trigger('sm2-play-event'); },
-      onresume: function() { br_player.state.isPlaying = true; $(window).trigger('sm2-play-event');  },
+      onplay: function() { br_player.state.isPlaying = true; s.win.trigger('sm2-play-event'); },
+      onresume: function() { br_player.state.isPlaying = true; s.win.trigger('sm2-play-event');  },
       onpause: function() { br_player.state.isPlaying = false; },
       onstop: function() { br_player.state.isPlaying = false; },
       whileplaying: function() { whilePlaying( this ); },
@@ -140,7 +140,7 @@ var br_inline_player = function(){
   var bindUI = {
     playClick: function(){
       console.log('inline-play-click-bound');
-        s.bd.on({
+        s.body.on({
           click : function(e){ handlers.playClick(e); }
         }, '.inline-play-pause' );
       }
@@ -153,7 +153,7 @@ var br_inline_player = function(){
           exists = songAlreadyExists( songURL ),
           button = el.find('.inline-play-pause');
 
-      $(window).trigger('vimeo-play-event', songURL);
+      s.win.trigger('vimeo-play-event', songURL);
 
       if ( exists ) {
         exists.sm2_obj.togglePause();
@@ -164,7 +164,7 @@ var br_inline_player = function(){
         allSongs.push(song);
         br_sm2.playPause( song, false, true); // song, isPause, isInline
         button.attr('data-icon', 'n');
-        $(window).on('sm2-play-event vimeo-play-event', function( _ , songURL){
+        s.win.on('sm2-play-event vimeo-play-event', function( _ , songURL){
           if ( songURL === song.songUrl ) { return false; }
           song.sm2_obj.pause();
           button.attr('data-icon', 'm');
@@ -357,7 +357,7 @@ var br_player = function() {
           badracket.loader.require( [ br_scripts.payments ], paymentsLoaded() );
           function paymentsLoaded(){
             console.log('yep');
-             s.bd.off('hover' , '.support-band-button' );
+             s.body.off('hover' , '.support-band-button' );
           }
       },
 
@@ -412,42 +412,42 @@ var br_player = function() {
 
     var bindui = {
       play : function() {
-        s.bd.on({
+        s.body.on({
           click : function(){ handlers.playClick(); }
         }, '.play-pause' );
       },
       next : function() {
-        s.bd.on({
+        s.body.on({
           click: function(){  handlers.nextPrev('next'); }
           }, '.audio-player .next' );
       },
       previous : function() {
-        s.bd.on({
+        s.body.on({
           click: function(){  handlers.nextPrev('prev'); }
           }, '.previous' );
       },
       album : function() {
-        s.bd.on({
+        s.body.on({
           click : function(e){ handlers.albumClick(e); }
         }, '.album' );
       },
       song : function() {
-        s.bd.on({
+        s.body.on({
           click : function(e){ handlers.songClick(e); }
         } , '.song' );
       },
       buyAlbum : function() {
-         s.bd.on({
+         s.body.on({
           click : function(e){ handlers.buyAlbum(e); }
         } , '.get-album' );
       },
       buyAlbumDetail : function() {
-         s.bd.on({
+         s.body.on({
           click : function(e){ handlers.buyAlbumDetail(e); }
         } , '.buy-album-detail' );
       },
       buyAlbumHover : function() {
-       s.bd.on({
+       s.body.on({
           hover : function(e){ handlers.buyAlbumHover(e); }
         } , '.support-band-button, .buy-album-detail' );
       },
@@ -557,6 +557,8 @@ var br_player = function() {
       albums = albums.concat(cleanJSON);
       numAlbums = albums.length;
     }
+
+    console.log('set data method ready');
 
     function getAlbumByName( albumName ) {
       for (var i = numAlbums; i--;) {
@@ -778,7 +780,7 @@ var init = function(){
   function smReady() {
     console.log('Soundmanager ready');
     ready.sm = true;
-    $(window).on('vimeo-play-event', function(){
+    s.win.on('vimeo-play-event', function(){
       var a = br_player.state.currAlbum;
       var s = br_player.state.currSong;
       br_player.logic.targetSong(a,s,true);

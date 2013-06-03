@@ -55,12 +55,12 @@ var br_fb = function() {
 
   function user_do_or_wait ( cb ) {
     if ( br_fb.user.events !== null ) { cb(); }
-    else { $(window).on('fb-user-data-load', function() { cb(); }); }
+    else { s.win.on('fb-user-data-load', function() { cb(); }); }
   }
 
   function page_do_or_wait ( cb ) {
     if ( br_fb.BR.events.length > 0 ) { cb(); }
-    else { $(window).on('fb-page-data-load', function() { cb(); }); }
+    else { s.win.on('fb-page-data-load', function() { cb(); }); }
   }
 
   function call_fb ( path ) {
@@ -266,14 +266,14 @@ var br_fb = function() {
     function globalSetup( r ){
       console.log('response object is ........');
       console.log(r);
-      var s = r.status;
+      var status = r.status;
 
       $.when( fetch.getBR() ).then(function( r ){
         fetch.popBR( r );
-        $(window).trigger('fb-page-data-load');
+        s.win.trigger('fb-page-data-load');
       });
 
-      if ( s === 'connected') {
+      if ( status === 'connected') {
         var a = r.authResponse.accessToken;
         config.accessToken = a;
         config.connectStatus = 'connected';
@@ -282,7 +282,7 @@ var br_fb = function() {
         $.when( fetch.getUser(), fetch.getUserEvents() ).done(function( r1, r2 ){
           r1.events = r2.data;
           fetch.popUser( r1 );
-          $(window).trigger('fb-user-data-load');
+          s.win.trigger('fb-user-data-load');
           UI.render.user();
           UI.render.userPicture();
           br_mixpanel.setPeople(user);
@@ -292,7 +292,7 @@ var br_fb = function() {
             br_player.ui.handlers.playClick();
           }
         });
-      } else if ( s === 'not_authorized') {
+      } else if ( status === 'not_authorized') {
         UI.render.authStatus(false);
         config.connectStatus = s;
         forceGetAccessToken();
@@ -584,7 +584,7 @@ var br_fb = function() {
 
         });
 
-        $(window).on('sm2-play-event', function() { player.api('pause'); });
+        s.win.on('sm2-play-event', function() { player.api('pause'); });
 
         function onPlay(id){
             var vimeoContainer = $('.vimeo-container');
@@ -594,11 +594,11 @@ var br_fb = function() {
 
           br_mixpanel.track('Video started');
           mixpanel.people.increment("Videos started", 1);
-          $(window).trigger('vimeo-play-event');
+          s.win.trigger('vimeo-play-event');
         }
 
         function onPause(id) {
-          $(window).trigger('vimeo-pause-event');
+          s.win.trigger('vimeo-pause-event');
         }
 
         function onFinish(id) {
@@ -630,7 +630,7 @@ var br_fb = function() {
          var id = $(this).data('id');
          console.log('vid home click ran biiiiiiiiiiiiiiiiiooooooooooooch');
 
-         $(window).on('djaxLoad', function(e, data) {
+         s.win.on('djaxLoad', function(e, data) {
            $('[data-id="'+id+'"]').click();
            console.log($('[data-id="'+id+'"]'));
          });
@@ -639,7 +639,7 @@ var br_fb = function() {
        },
 
        videoClick : function(){
-         $(window).off('sm2-play-event');
+         s.win.off('sm2-play-event');
          var that = $(this);
          $("html, body").animate({ scrollTop: 0 }, "slow");
 
@@ -725,7 +725,7 @@ var br_fb = function() {
 
       rsvp : function(){
         // Think about using this https://github.com/acavailhez/jquery-async
-        s.bd.on({
+        s.body.on({
             click : function(e){ handlers.rsvp(e); }
           } , '.show-rsvp' );
       },

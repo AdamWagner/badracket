@@ -2,7 +2,6 @@
     Normalize album data
   \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-
 badracket.normalize = {
 
   count_tracks: function(obj) {
@@ -65,7 +64,7 @@ badracket.normalize = {
 
     var upcoming = _.filter( rawData, function( show ) {
       var then = (Date.parse(show['_br_show-date'][0]) / 1000).toFixed();
-        return then > now;
+      return then > now;
     });
 
     return _.map( upcoming, function( value, key, list ){
