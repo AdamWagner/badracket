@@ -19,7 +19,6 @@ s = {
 };
 
 
-
 var br = window.badracket || {};
 
 badracket = _.extend(br, {
@@ -40,8 +39,10 @@ badracket = _.extend(br, {
   setupMobile: function(){
     return {
       setup: function() {
-        badracket.loader.require([
-          badracket_theme_path + "/js/lib/jquery.tap.js"],
+        badracket.loader.require(
+          [
+            br_scripts.mobile
+          ],
             function() {
                 // Callback
                 badracket.bindMobileUI();
@@ -111,7 +112,7 @@ badracket = _.extend(br, {
       },
       loaded: function (evt) {
           this.loadCount++;
-          if (this.loadCount == this.totalRequired && typeof this.callback == 'function') this.callback.call();
+          if (this.loadCount == this.totalRequired && typeof this.callback == 'function') { this.callback.call(); } 
       },
       writeScript: function (src) {
           var self = this;

@@ -9,8 +9,13 @@
  * @since 		Starkers 4.0
  */
 ?>
-<?php get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
+<?php get_template_part('parts/clusters/page-bootstrap-top'); ?>
 
-<h2>Page not found</h2>
+<section class="pink-cream">
+	<article class="longform-text">
+		<h2 class="bottom1">Uh-oh</h2>
+		<p>We couldn't find this page. Try heading to the <a href="<?php echo get_bloginfo('url'); ?>">homepage</a> to find what you're looking for or email us at <a href="mailto:play@badracket.com">play@badracket.com</a>.</p>
+	</article>
+</section>
 
-<?php get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>
+<?php get_template_part('parts/clusters/page-bootstrap-bottom'); ?>

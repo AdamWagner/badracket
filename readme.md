@@ -5,6 +5,7 @@
 - Lazy-loaded scripts sourced from CDN
 - Add Mixpanel events for RSVP button click & FB login
 - Check FB photos against blacklist of IDs to avoid self-referential screenshots
+- Page templates for tag, category, author archives
 - New build process with grunt.js
 - Javascript cache-busting
 - Javascript modularization

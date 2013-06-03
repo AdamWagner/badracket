@@ -88,12 +88,11 @@ var br_sm2 = function(){
 
     previousLoadCheck();
 
-    if ( !('sm2_obj' in song) ) {                                // if sm2_object doesn't exist
-      song.sm2_obj = createSound( song, isInline );              // ... create sound
-    }
+     if ( !('sm2_obj' in song) ) {                                // if sm2_object doesn't exist
+       song.sm2_obj = createSound( song, isInline );              // ... create sound
+     }
 
-
-     if ( song.isSampleTrack == 0 && !$('html').hasClass('fb-logged-in') ) {
+     if ( song.isSampleTrack === '0' && !$('html').hasClass('fb-logged-in') ) {
       br_player.logic.attach30SecondListener( song );              // attach 30 second listener
       song.sm2_obj.sampleTrack = true;
      } else {
@@ -395,7 +394,7 @@ var br_player = function() {
       slideStop : function( event, ui) {
         state.isSliding = false;
         var smPosition;
-        if ( br_player.state.currSong.isSampleTrack == 0 && !$('html').hasClass('fb-logged-in')) {
+        if ( br_player.state.currSong.isSampleTrack === '0' && !$('html').hasClass('fb-logged-in')) {
           smPosition = ( ui.value / 100 ) * 30000;
         } else {
           smPosition = ( ui.value / 100 ) * badracket.utils.stringToTime( state.currSong.duration );

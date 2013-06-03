@@ -168,7 +168,7 @@ var br_fb = function() {
     }
 
     function isAttending ( eventID ) {
-      if ( !user.events ) return false;
+      if ( !user.events ) { return false; }
       for ( var i = user.events.length; i--; ) {
         if ( user.events[i].id == eventID ) { return true; }
       }

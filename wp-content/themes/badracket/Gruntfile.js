@@ -32,14 +32,37 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-
     compass: {
        dist: {
          options: {
            config: 'config.rb'
          }
        }
-     },
+    },
+
+    jshint: {
+        options: {
+            /* relax */
+            eqeqeq: false,
+            indent: false,
+            eqnull: true,
+            // globalstrict: true,
+            strict: false,
+            smarttabs: true,
+            /* enforce */
+            curly: true,
+            eqnull: true,
+            browser: true,
+            globals: { jQuery: true },
+        },
+        all: [
+          'js/src/base/*.js',
+          'js/src/audio-player/*.js',
+          'js/src/facebook/*.js',
+          'js/src/post-load/*.js',
+          'js/src/payments.js','js/src/mixpanel.js'
+          ],
+    },
 
     concat: {
        audioPlayer: {
@@ -55,6 +78,12 @@ module.exports = function(grunt) {
           'js/src/facebook/br_facebook.js',
          ],
          dest: 'js/build/br_facebook.js'
+       },
+       mobile : {
+         src: [
+          'js/src/lib/jquery.tap.js',
+         ],
+         dest: 'js/build/mobile.js'
        },
        payments : {
          src: [
@@ -94,13 +123,8 @@ module.exports = function(grunt) {
           ],
           dest: 'js/build/base.js'
        },
-       // css: {
-       //   src: 'src/css/*.css',
-       //   dest: 'dest/css/concat.css'
-       // }
-     },
+    },
 
-    /* Uglify */
     uglify: {
       first: {
         files: {
@@ -108,6 +132,7 @@ module.exports = function(grunt) {
           'js/build/br_audio-player.min.js' : ['js/build/br_audio-player.js'],
           'js/build/br_facebook.min.js' : ['js/build/br_facebook.js'],
           'js/build/payments.min.js' : ['js/build/payments.js'],
+          'js/build/mobile.min.js' : ['js/build/mobile.js']
         }
       },
       second: {
@@ -117,8 +142,6 @@ module.exports = function(grunt) {
       }
     },
 
-    /* HASH RES */
-    // https://github.com/Luismahou/grunt-hashres/
     hashres: {
       options: {
         fileNameFormat: '${hash}.${name}.${ext}',
@@ -133,6 +156,7 @@ module.exports = function(grunt) {
           'js/build/mixpanel.min.js',
           'js/build/payments.min.js',
           'js/build/post-load.min.js',
+          'js/build/mobile.min.js',
         ],
         // File that refers to above files and needs to be updated with the hashed name
         dest: ['js/src/base/br_scripts.js'],
@@ -142,7 +166,6 @@ module.exports = function(grunt) {
         dest: ['external/enqueue-static-assets.php'],
       }
     },
-
 
     clean: {
       initial: ['js/build/*.js'],
@@ -154,9 +177,9 @@ module.exports = function(grunt) {
       'js/build/post-load.js',
       'js/build/base.js'
       ]
-     },
+    },
 
-     watch: {
+    watch: {
        scripts: {
          files: ['sass/*.scss','js/src/*/*.js', '*.html', '*.php', 'assets/images/**/*.{png,jpg,jpeg,gif,webp,svg}'],
          tasks: ['default'],
@@ -166,7 +189,7 @@ module.exports = function(grunt) {
          },
 
        },
-     },
+    },
 
   });
 
@@ -179,6 +202,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
   grunt.registerTask('default', [
@@ -187,7 +211,9 @@ module.exports = function(grunt) {
     'concat:audioPlayer',
     'concat:payments',
     'concat:facebook',
+    'concat:mobile',
     'concat:postLoad',
+    'jshint',
     'uglify:first',
     'hashres:first',
     'concat:base',
