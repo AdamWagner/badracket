@@ -268,10 +268,10 @@ var br_fb = function() {
       console.log(r);
       var s = r.status;
 
-        $.when( fetch.getBR() ).then(function( r ){
-          fetch.popBR( r );
-          $(window).trigger('fb-page-data-load');
-        });
+      $.when( fetch.getBR() ).then(function( r ){
+        fetch.popBR( r );
+        $(window).trigger('fb-page-data-load');
+      });
 
       if ( s === 'connected') {
         var a = r.authResponse.accessToken;

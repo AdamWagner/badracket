@@ -6,7 +6,9 @@
 - Add Mixpanel events for RSVP button click & FB login
 - Check FB photos against blacklist of IDs to avoid self-referential screenshots
 - Page templates for tag, category, author archives
+- 404 page template
 - New build process with grunt.js
+- JShint
 - Javascript cache-busting
 - Javascript modularization
 

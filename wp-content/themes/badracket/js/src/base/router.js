@@ -3,12 +3,9 @@
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 
-
-
 var br_state = function() {
 
   var viewState = 'unknown';
-
 
   var rx = {
     home : s.domain + '',
@@ -21,14 +18,13 @@ var br_state = function() {
     submitMusic: '/submit-music/'
   };
 
-
    function urlMatcher(rx, url) {
       return new RegExp(rx).test(url);
   }
 
-
   function viewSet( url ) {
     console.log('view set ran and url is ' + url);
+
     if ( typeof url === 'undefined' ) { url = window.location.toString(); }
 
     if ( urlMatcher( rx.albumDetail, url ) ) {
@@ -39,7 +35,7 @@ var br_state = function() {
       viewState = 'album-rollup';
       setupAlbumPage();
       forceFixed();
-    } else if ( (BR_ENV==='prod' && rx.home===url ) || (BR_ENV==='local' && rx.home === url ) ) {
+    } else if ( ( rx.home===url ) ) {
       viewState = 'home';
       setupHome();
       setupAlbumPage();
