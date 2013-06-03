@@ -1,26 +1,24 @@
-.blog, .post-type-archive-interview {
-  .caption {
-    margin-top:0.5em;
-    display:inline-block;
-    font-size:0.8em;
-    color:lighten($dark,8%);
-    font-style:italic;
-  }
-  .post-item {
-    margin:1.5em 0;
-    h3 {
-      @extend %no-wrap-text;
-      @include breakpoint(big) {
-        font-size: 1.4em;
-      }
+.caption {
+  margin-top:0.5em;
+  display:inline-block;
+  font-size:0.8em;
+  color:lighten($dark,8%);
+  font-style:italic;
+}
+.post-item {
+  margin:1.5em 0;
+  h3 {
+    @extend %no-wrap-text;
+    @include breakpoint(big) {
+      font-size: 1.4em;
     }
   }
-  .pagination {
-    margin-top:2em;
-    border-top:solid 2px $red;
-    padding-top:1em;
-    .page-numbers{
-      padding:0.3em;
-    }
+}
+.pagination {
+  margin-top:2em;
+  border-top:solid 2px $red;
+  padding-top:1em;
+  .page-numbers{
+    padding:0.3em;
   }
 }

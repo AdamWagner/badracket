@@ -21,6 +21,12 @@
   <link rel="dns-prefetch" href="//vimeo.com"> 
   <link rel="dns-prefetch" href="//b.vimeocdn.com"> 
 
+  <?php 
+    if (ENVIRONMENT === 'local') {
+      echo '<script src="http://localhost:35729/livereload.js"></script>';
+    }
+  ?>
+
 
   <?php wp_head(); ?>
 

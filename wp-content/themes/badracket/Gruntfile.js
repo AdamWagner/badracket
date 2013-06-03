@@ -32,6 +32,15 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
+
+    compass: {
+       dist: {
+         options: {
+           config: 'config.rb'
+         }
+       }
+     },
+
     concat: {
        audioPlayer: {
          src: [
@@ -149,7 +158,7 @@ module.exports = function(grunt) {
 
      watch: {
        scripts: {
-         files: ['js/src/*/*.js'],
+         files: ['sass/*.scss','js/src/*/*.js', '*.html', '*.php', 'assets/images/**/*.{png,jpg,jpeg,gif,webp,svg}'],
          tasks: ['default'],
          options: {
            nospawn: true,
@@ -168,9 +177,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-hashres');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-compass');
 
   // Default task(s).
   grunt.registerTask('default', [
+    'compass',
     'clean:initial',
     'concat:audioPlayer',
     'concat:payments',
