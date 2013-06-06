@@ -15,6 +15,7 @@
 - Page templates for tag, category, author archives
 - 404 page template
 - Javascript cache-busting
+- 'Free Show' button & price metadata layout
 
 ### Optimization
 - Optimized load times using DNS prefetch, lazyloading, gziping, caching, deferred parsing

@@ -131,9 +131,12 @@
   <div class="button-group top2">
 
     <span data-fb-id="<?php echo $fb_event_id; ?>"  class="show-rsvp not-attending"><span data-icon="c" class="icon-checkmark"></span><span class="text">RSVP with Facebook</span></span>
-
+    <?php if ($advance_ticket_price === '0'): ?>
+    <a href="<?php echo $ticket_url; ?>" class="show-buy-tickets top1">Get free tickets</a>
+    <?php else: ?>
     <a href="<?php echo $ticket_url; ?>" class="show-buy-tickets top1">Get $<?php echo $advance_ticket_price; ?> advance tickets</a>
     <div class="price-note txtC top05">tickets will be $<?php echo $door_ticket_price; ?> at door</div>
+    <?php endif; ?>
 
     <div class="attendees"><div class="text"></div><div class="facepile s-4 m-4 b-6 h-9 single-row group"></div></div>
 
