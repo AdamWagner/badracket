@@ -117,6 +117,7 @@ module.exports = function(grunt) {
            'js/src/mixpanel.js',
            'js/src/base/utils.js',
            'js/src/base/br_scripts.js',
+           'js/src/videos/videos.js',
            'js/src/base/base.js',
            'js/src/base/normalize-albums.js',
            'js/src/base/router.js',

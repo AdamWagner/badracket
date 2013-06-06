@@ -27,8 +27,8 @@ var br_mixpanel = function(){
       'Likes BR on FB?' : o.likesBR
     };
 
-    mixpanel.people.set( user );
-    // use mixpanel.people.set_once
+    mixpanel.people.set_once( user );
+
   }
   return {
     track : track,

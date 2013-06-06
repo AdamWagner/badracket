@@ -29,7 +29,6 @@ var br_state = function() {
     if ( urlMatcher( rx.albumDetail, url ) ) {
       viewState = 'album-detail';
       setupAlbumDetail();
-      forceFixed();
     } else if ( urlMatcher( rx.albumRollup, url ) ) {
       viewState = 'album-rollup';
       setupAlbumPage();
@@ -84,14 +83,12 @@ var br_state = function() {
   }
 
   function setupHome(){
-  $('html').removeClass('force-fixed');
-   if (typeof br_fb.BR.videos !== 'undefined') {
-     if ( br_fb.BR.videos.length > 10 ) {
-       br_fb.UI.render.videosHome();
-     }
+  s.html.removeClass('page-fixed');
+   if ( badracket.videos.data.length > 10 ) {
+       badracket.videos.render.videosHome();
    } else {
      s.win.on('videos-loaded', function(){
-       br_fb.UI.render.videosHome();
+       badracket.videos.render.videosHome();
      });
    }
   }
@@ -115,13 +112,13 @@ var br_state = function() {
 
     console.log('setup videos page ran');
 
-    if (typeof br_fb.BR.videos !== 'undefined') {
-      if ( br_fb.BR.videos.length > 10 ) {
-        br_fb.UI.render.videos();
-      }
+    if ( badracket.videos.data.length > 10 ) {
+      badracket.videos.render.videosRollup();
+      console.log('more than 10 videos loaded');
     } else {
+      console.log('videos waiting for event');
       s.win.on('videos-loaded', function(){
-        br_fb.UI.render.videos();
+        badracket.videos.render.videosRollup();
       });
     }
   }

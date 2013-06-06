@@ -336,18 +336,18 @@ $offset: 8.5em;
   background:$dark;
   @include breakpoint(big) {
     top:$header-height;
-    .home & {
+    :not(.page-fixed) .home & {
       top:$offset;
     }
   }
   @include breakpoint(bigger) {
     top:$header-height * (108/112); 
-    .home & { top:$offset * (108/122); }
+    :not(.page-fixed) .home & { top:$offset * (108/122); }
   }
 
   @include breakpoint(huge) {
     top:$header-height * (108/122); 
-    .home & { top:$offset * (108/122); }
+    :not(.page-fixed) .home & { top:$offset * (108/122); }
   }
 }
 
@@ -465,7 +465,7 @@ header.desktop {
   @include breakpoint(bigger) { font-size:96.4285714%; }
   @include breakpoint(huge) { font-size:88.5245902%; }
 
-  .home & {
+   :not(.page-fixed) .home & {
     position:relative;
  }
 
@@ -617,7 +617,7 @@ nav[role="navigation"] {
 
   a { color:desaturate(lighten($dark,60%),3% );  display:block; }
 
-  .home & {
+  :not(.page-fixed) .home & {
     @extend %nav-width;
     position:absolute;
   }
@@ -780,7 +780,7 @@ nav[role="navigation"] {
   color:$light-on-dark;
   @include transition(opacity .3s  cubic-bezier(0.51,  0.01,  0.37,  0.98));
 
-  .home & {
+  :not(.page-fixed) .home & {
     position:absolute;
     @extend %nav-width;
 
@@ -804,9 +804,37 @@ nav[role="navigation"] {
   min-height:100%;
   z-index:10;
   position:relative; // for z-index effect
-  // @include breakpoint(big) { .page-fixed & { padding-top:$offset; } }
-  // @include breakpoint(bigger) { .page-fixed & { padding-top:$offset * (108/122); } }
-  // @include breakpoint(huge) { .page-fixed & { padding-top:$offset * (108/122); } }
+
+
+
+  /* --------------------------------------------------------------------------------------- *\
+
+
+
+
+
+
+  
+    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
+    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
+    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
+    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
+    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
+
+
+
+
+
+
+
+  /* --------------------------------------------------------------------------------------- */
+  
+  
+
+
+  @include breakpoint(big) { .page-fixed & { padding-top:$offset; } }
+  @include breakpoint(bigger) { .page-fixed & { padding-top:$offset * (108/122); } }
+  @include breakpoint(huge) { .page-fixed & { padding-top:$offset * (108/122); } }
 }
 
 /* --------------------------------------------------------------------------------------- *\

@@ -39,7 +39,7 @@ badracket = $.extend(br, {
   setupMobile: function(){
     return {
       setup: function() {
-        badracket.loader.require(
+        badracket.utils.loader.require(
           [ br_scripts.mobile ],
           function() { badracket.bindMobileUI(); } 
         );
@@ -51,7 +51,7 @@ badracket = $.extend(br, {
   },
 
   setup: function(){
-    badracket.loader.require(
+    badracket.utils.loader.require(
       [
         br_scripts.postLoad,
         br_scripts.player,
@@ -65,7 +65,7 @@ badracket = $.extend(br, {
           s.video.fitVids();
           badracket.doAjaxRequest('album');
           badracket.doAjaxRequest('show');
-          badracket.getVimeo();
+          badracket.videos.data.get();
           badracket.affix();
           br_fb.init();
       });
@@ -76,11 +76,9 @@ badracket = $.extend(br, {
     var header = $('header.desktop');
 
     var offset = header.offset().top,
-        force = s.html.hasClass('force-fixed'),
         fixed = false;
 
     s.win.bind('djaxLoad', function(e, data) {
-      force = s.html.hasClass('force-fixed');
       offset = header.offset().top;
     });
 
@@ -89,7 +87,7 @@ badracket = $.extend(br, {
     });
 
     s.doc.scroll(function() {
-        if( !fixed && !force && $(this).scrollTop() >= offset ) {
+        if( !fixed  && $(this).scrollTop() >= offset ) {
           fixed = true;
           s.html.addClass('page-fixed');
         } else if ($(this).scrollTop() <= offset) {
@@ -100,32 +98,6 @@ badracket = $.extend(br, {
 
   },
 
-
- loader: {
-    require: function (scripts, callback) {
-        this.loadCount      = 0;
-        this.totalRequired  = scripts.length;
-        this.callback       = callback;
-
-        for (var i = 0; i < scripts.length; i++) {
-            this.writeScript(scripts[i]);
-        }
-    },
-    loaded: function (evt) {
-        this.loadCount++;
-        if (this.loadCount == this.totalRequired && typeof this.callback == 'function') { this.callback.call(); } 
-    },
-    writeScript: function (src) {
-        var self = this;
-        var s = document.createElement('script');
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = src;
-        s.addEventListener('load', function (e) { self.loaded(e); }, false);
-        var head = document.getElementsByTagName('head')[0];
-        head.appendChild(s);
-      }
-    },
 
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
     Get album data via ajax
@@ -161,30 +133,6 @@ badracket = $.extend(br, {
 
   },
 
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
-     Get Vimeo
-  \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
-  getVimeo : function() {
-
-    var albumID = '1979291',
-        api_endpoint = 'http://vimeo.com/api/v2/album/',
-        path = '/videos.json?callback=?';
-
-    jQuery.ajax({
-        url: api_endpoint + albumID + path,
-        dataType: 'JSON',
-        success:function(data){
-          br_fb.BR.videos = data;
-          s.win.trigger('videos-loaded');
-          br_state.setupNav( { videos:data.length } );
-        },
-        error: function(errorThrown){
-          console.log(errorThrown);
-        }
-    });
-
-  },
 
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  *\
     Document.ready()

@@ -498,118 +498,6 @@ var br_fb = function() {
           $('.photos-container').html(frag.join('\n'));
           badracket.lazyLoadImg('render photos');
         });
-      },
-
-      videos : function(){
-        var videoContainer = $('#video-container'),
-            frag = [];
-
-        _.each(BR.videos, function( el ){
-           var thumbnail = el.thumbnail_large,
-               title = el.title.split(':')[0],
-               date = el.title.split('-')[1],
-               id = el.id;
-
-          var vidEl = [
-          '<div class="grid padded">',
-            '<div class="playable video" data-id="'+id+'">',
-              '<div class="play"></div> ',
-              '<div class="lazyload fade ratio-16-9" data-src="'+ thumbnail +'">',
-              '</div>',
-            '</div>',
-            '<div class="album-meta">',
-              '<div class="album-title">'+title+'</div>',
-              '<div class="artist-name">'+date+'</div>',
-            '</div>',
-          '</div>'
-          ].join('');
-
-          frag.push(vidEl);
-
-        });
-
-        videoContainer.html(frag);
-        bindUI.video();
-        badracket.lazyLoadImg('vimeo inject - all');
-      },
-
-      videosHome : function(){
-       var videoContainer = $('#video-container'),
-           frag = [];
-
-         for (var i = 0; i < 4; i++ ) {
-           var el = BR.videos[i];
-           var thumbnail = el.thumbnail_large,
-               title = el.title.split(':')[0],
-               date = el.title.split('-')[1],
-               id = el.id;
-
-           var vidEl = [
-           '<div class="grid padded">',
-           '<a href="'+br_state.urls.videos+'" class="dJAX_internal">',
-             '<div class="playable video" data-id="'+id+'">',
-               '<div class="play"></div> ',
-              '<div class="lazyload fade ratio-16-9" data-src="'+ thumbnail +'"></div>',
-             '</div>',
-             '<div class="album-meta">',
-               '<div class="album-title">'+title+'</div>',
-               '<div class="artist-name">'+date+'</div>',
-             '</div>',
-           '</a>',
-           '</div>'
-           ].join('');
-
-           frag.push(vidEl);
-         }
-
-
-       videoContainer.html(frag);
-       bindUI.videoHome();
-       badracket.lazyLoadImg('vimeo inject - home');
-      }
-
-
-    };
-
-    var vimeo = {
-      bind : function(){
-        var iframe = $('#vimeo-player')[0],
-            player = $f(iframe);
-
-        // When the player is ready, add listeners for pause, finish, and playProgress
-        player.addEvent('ready', function() {
-          player.addEvent('play', onPlay);
-          player.addEvent('pause', onPause);
-          player.addEvent('finish', onFinish);
-
-        });
-
-        s.win.on('sm2-play-event', function() { player.api('pause'); });
-
-        function onPlay(id){
-            var vimeoContainer = $('.vimeo-container');
-            setTimeout(function() {
-              vimeoContainer.removeClass('loading');
-            }, 500);
-
-          br_mixpanel.track('Video started');
-          mixpanel.people.increment("Videos started", 1);
-          s.win.trigger('vimeo-play-event');
-        }
-
-        function onPause(id) {
-          s.win.trigger('vimeo-pause-event');
-        }
-
-        function onFinish(id) {
-
-          mixpanel.people.increment("Videos finished", 1);
-          br_mixpanel.track('Video ended');
-          $('.next')
-            .find('.video')
-            .click();
-        }
-
       }
     };
 
@@ -623,48 +511,6 @@ var br_fb = function() {
 
        logout : function(){
          logout();
-       },
-
-
-       videoHomeClick : function(){
-         var id = $(this).data('id');
-         console.log('vid home click ran biiiiiiiiiiiiiiiiiooooooooooooch');
-
-         s.win.on('djaxLoad', function(e, data) {
-           $('[data-id="'+id+'"]').click();
-           console.log($('[data-id="'+id+'"]'));
-         });
-
-         br_mixpanel.track('Click: video');
-       },
-
-       videoClick : function(){
-         s.win.off('sm2-play-event');
-         var that = $(this);
-         $("html, body").animate({ scrollTop: 0 }, "slow");
-
-         var id = that.data('id'),
-             vimeoContainer = $('.vimeo-container');
-
-          $('.grid').removeClass('playing next');
-
-          that
-            .closest('.grid')
-            .addClass('playing')
-            .next()
-            .addClass('next');
-
-          var ratioHeight = $('.main-content').width() * 0.5;
-
-          vimeoContainer
-           .addClass('loading')
-           .css('height', ratioHeight );
-
-          vimeoContainer.find('.iframe-wrap').html('<iframe style="visibility:hidden;" onload="this.style.visibility=\'visible\';" id="vimeo-player" src="http://player.vimeo.com/video/'+id+'?api=1&autoplay=true&player_id=vimeo-player"></iframe>');
-
-          vimeo.bind();
-          vimeoContainer.fitVids();
-          br_mixpanel.track('Click: video');
        },
 
        rsvp : function(e){
@@ -730,13 +576,7 @@ var br_fb = function() {
           } , '.show-rsvp' );
       },
 
-      video : function(){
-        $('.video').on('click', handlers.videoClick );
-      },
-
-      videoHome : function(){
-        $('[data-view="home"]').find('.video').on('click', handlers.videoHomeClick );
-      },
+ 
 
       bindAll : function(){
         this.login();
@@ -754,7 +594,6 @@ var br_fb = function() {
     return {
       render : render,
       bindUI : bindUI,
-      vimeo : vimeo
     };
 
   }();
