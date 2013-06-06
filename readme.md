@@ -2,6 +2,10 @@
 ### Bug fixes
 - Remove layout flash on interior pages
 
+### Enhancements
+- 'Free Show' button & price metadata layout
+
+
 # 5.01 - 6/2/13
 
 ### Bug fixes
@@ -15,7 +19,6 @@
 - Page templates for tag, category, author archives
 - 404 page template
 - Javascript cache-busting
-- 'Free Show' button & price metadata layout
 
 ### Optimization
 - Optimized load times using DNS prefetch, lazyloading, gziping, caching, deferred parsing
