@@ -87,7 +87,7 @@ badracket = $.extend(br, {
     });
 
     s.doc.scroll(function() {
-        if( !fixed  && $(this).scrollTop() >= offset ) {
+        if( !fixed  && $(this).scrollTop() >= offset && s.body.hasClass('home') ) {
           fixed = true;
           s.html.addClass('page-fixed');
         } else if ($(this).scrollTop() <= offset) {
