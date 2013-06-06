@@ -4,6 +4,7 @@
 
 ### Enhancements
 - 'Free Show' button & price metadata layout
+- Modulzarize video tasks: get, set, ui, render
 
 
 # 5.01 - 6/2/13
