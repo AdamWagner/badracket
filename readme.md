@@ -1,6 +1,7 @@
 # 5.02 - 6/3/13
 ### Bug fixes
 - Remove layout flash on interior pages
+- Prevent affix() from adding fixed class to body on interior pages
 
 ### Enhancements
 - 'Free Show' button & price metadata layout
