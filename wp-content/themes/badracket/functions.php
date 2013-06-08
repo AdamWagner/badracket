@@ -100,7 +100,20 @@ require_once( 'external/enqueue-static-assets.php' );
 require_once( 'external/js-api.php' );
 
 
+/* =========================================================================================================
+Increase post count on archive pages
+========================================================================================================= */
+add_filter('pre_get_posts', 'Per_category_basis');
 
+function Per_category_basis($query){
+
+    if ( is_post_type_archive() ) {
+        $query->set('posts_per_page', 99);
+    }
+
+    return $query;
+
+}
 
 /* =========================================================================================================
 Theme specific settings

@@ -6,6 +6,7 @@
 ### Enhancements
 - 'Free Show' button & price metadata layout
 - Modulzarize video tasks: get, set, ui, render
+- Increase post count on archive pages to 99
 
 
 # 5.01 - 6/2/13
