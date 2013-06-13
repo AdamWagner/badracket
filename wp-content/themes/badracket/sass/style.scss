@@ -459,15 +459,14 @@ header.desktop {
   $header-bg:hsl(290, 7%, 48%);
   $buy-bg : hsl(290, 7.5%, 53%);
   position: fixed;
-  @extend %page-width;
   background:$header-bg;
 
   @include breakpoint(bigger) { font-size:96.4285714%; }
   @include breakpoint(huge) { font-size:88.5245902%; }
 
    :not(.page-fixed) .home & {
-    position:relative;
- }
+     position:relative;
+   }
 
   .header-bar {
     height:$header-height;
@@ -804,32 +803,6 @@ nav[role="navigation"] {
   min-height:100%;
   z-index:10;
   position:relative; // for z-index effect
-
-
-
-  /* --------------------------------------------------------------------------------------- *\
-
-
-
-
-
-
-  
-    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
-    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
-    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
-    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
-    FUCKING LOOK AT THIS BEFORE DEPLOYINGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!! 
-
-
-
-
-
-
-
-  /* --------------------------------------------------------------------------------------- */
-  
-  
 
 
   @include breakpoint(big) { .page-fixed & { padding-top:$offset; } }
