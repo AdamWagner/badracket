@@ -4,13 +4,6 @@
 Scripts Add scripts via wp_head() // CODEX: wp_register_script( $handle, $src, $deps, $ver, $in_footer );
 ======================================================================================================== */
 
-function _remove_script_version( $src ){
-    $parts = explode( '?', $src );
-    return $parts[0];
-}
-add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
-add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
-
 
 function asset_file_path( $filename, $root ) {
 
@@ -58,7 +51,10 @@ function script_enqueuer() {
 
   wp_deregister_script('jquery');
 
-    wp_register_style( 'screen', get_template_directory_uri() . '/style.css' , '', '', 'screen' );
+    // Filetime css cache busting: http://markjaquith.wordpress.com/2009/05/04/force-css-changes-to-go-live-immediately/
+    // Fulfills requirement that style.css must exist. 
+
+    wp_register_style( 'screen', get_template_directory_uri() . '/style.css' . '?' . filemtime( get_stylesheet_directory() . '/style.css') , '', '', 'screen' );
     wp_enqueue_style( 'screen' );
 
     wp_enqueue_script( 'main', asset_file_path( $site_js_path , false ), '', '', true );

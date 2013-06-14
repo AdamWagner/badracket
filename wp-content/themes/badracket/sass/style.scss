@@ -1,41 +1,18 @@
 
-/* List Vendor/Global Dependancies First, Then Author Dependancies, Then Patterns, Then Parts */
+/*!
+Theme Name: Bad Racket
+Theme URI: http://www.badracket.com
+Description: Custom theme based on starkers
+Author: Adam Wagner
+Author URI: http://dribbble.com/AdamWagner
+Version: 5.0
+Tags: colorful
 
-/* 
-
-Vendor Dependencies
-@import "compass";
-
-Authored Dependencies
-@import "global/colors";
-@import "global/mixins";
-
-Patterns
-@import "global/tabs";
-@import "global/modals";
-
-Sections
-@import "global/header";
-@import "global/footer";
-
-
-$zHeader: 2000;
-zOverlay: 5000;
-zMessage: 5050;
-
-.header {
-  z-index: $zHeader;
-}
-.overlay {
-  z-index: $zOverlay;
-}
-.message {
-  z-index: $zMessage;
-}
-
-Those numbers are probably in a separate file @import-ed as a dependency. That way you can keep track of your whole z-index stack in one place.
-
+License:
+License URI:
 */
+
+
 
 /* --------------------------------------------------------------------------------------- *\
   Vars

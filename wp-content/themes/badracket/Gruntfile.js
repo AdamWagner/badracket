@@ -167,6 +167,13 @@ module.exports = function(grunt) {
       second : {
         src: ['js/build/base.min.js'],
         dest: ['external/enqueue-static-assets.php'],
+      },
+      css : {
+        options: {
+          fileNameFormat: '${name}.${ext}?v=${hash}',
+        },
+        src: ['style.css'],
+        dest: ['external/enqueue-static-assets.php'],
       }
     },
 
@@ -223,6 +230,7 @@ module.exports = function(grunt) {
     'concat:base',
     'uglify:second',
     'hashres:second',
+    // 'hashres:css',
     'clean:post',
     ]);
 
