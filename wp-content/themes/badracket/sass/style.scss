@@ -461,12 +461,17 @@ header.desktop {
   position: fixed;
   background:$header-bg;
 
+  @extend %page-width; 
+
   @include breakpoint(bigger) { font-size:96.4285714%; }
   @include breakpoint(huge) { font-size:88.5245902%; }
 
    :not(.page-fixed) .home & {
      position:relative;
+     width:100%;
    }
+
+
 
   .header-bar {
     height:$header-height;

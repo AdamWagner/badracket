@@ -153,6 +153,7 @@ module.exports = function(grunt) {
       first: {
         // Files to hash
         src: [
+          'style.css',
           'js/build/br_facebook.min.js',
           'js/build/br_audio-player.min.js',
           'js/build/mixpanel.min.js',
@@ -161,7 +162,7 @@ module.exports = function(grunt) {
           'js/build/mobile.min.js',
         ],
         // File that refers to above files and needs to be updated with the hashed name
-        dest: ['js/src/base/br_scripts.js'],
+        dest: ['js/src/base/br_scripts.js', 'external/enqueue-static-assets.php'],
       },
       second : {
         src: ['js/build/base.min.js'],
@@ -170,7 +171,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      initial: ['js/build/*.js'],
+      initial: ['js/build/*.js', '*.css'],
       post: [
       'js/build/br_facebook.js',
       'js/build/br_audio-player.js',
@@ -209,8 +210,8 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', [
-    'compass',
     'clean:initial',
+    'compass',
     'concat:audioPlayer',
     'concat:payments',
     'concat:facebook',
