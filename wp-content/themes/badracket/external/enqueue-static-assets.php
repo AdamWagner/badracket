@@ -46,7 +46,7 @@ function asset_file_path( $filename, $root ) {
 function script_enqueuer() {
 
     // Define local asset paths
-     $main_css_path     = '9861fc3b.style.css';
+     $main_css_path     = 'style.css';
      $site_js_path      = '3ee13e79.base.min.js';
 
     // Build filename from basename, hash, and extension
@@ -58,7 +58,7 @@ function script_enqueuer() {
 
   wp_deregister_script('jquery');
 
-    wp_register_style( 'screen', get_template_directory_uri() . '/9861fc3b.style.css' , '', '', 'screen' );
+    wp_register_style( 'screen', get_template_directory_uri() . '/style.css' , '', '', 'screen' );
     wp_enqueue_style( 'screen' );
 
     wp_enqueue_script( 'main', asset_file_path( $site_js_path , false ), '', '', true );
