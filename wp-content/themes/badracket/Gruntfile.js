@@ -153,7 +153,7 @@ module.exports = function(grunt) {
       first: {
         // Files to hash
         src: [
-          'style.css',
+          // 'style.css',
           'js/build/br_facebook.min.js',
           'js/build/br_audio-player.min.js',
           'js/build/mixpanel.min.js',
@@ -171,7 +171,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      initial: ['js/build/*.js', '*.css'],
+      initial: ['js/build/*.js'],
       post: [
       'js/build/br_facebook.js',
       'js/build/br_audio-player.js',
