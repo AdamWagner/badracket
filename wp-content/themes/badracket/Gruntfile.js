@@ -102,6 +102,7 @@ module.exports = function(grunt) {
             'js/src/lib/bootstrap-modal.js',
             'js/src/lib/bootstrap-carousel.js',
             'js/src/lib/underscore.js',
+            'js/src/lib/underscore.string.js',
             'js/src/lib/jquery.fitvids.js',
          ],
          dest: 'js/build/post-load.js'
@@ -195,7 +196,7 @@ module.exports = function(grunt) {
          files: ['sass/*.scss','js/src/*/*.js', '*.html', '*.php', 'assets/images/**/*.{png,jpg,jpeg,gif,webp,svg}'],
          tasks: ['default'],
          options: {
-           nospawn: true,
+           nospawn: false,
            livereload : true,
          },
 

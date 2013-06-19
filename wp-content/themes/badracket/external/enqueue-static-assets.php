@@ -40,7 +40,7 @@ function script_enqueuer() {
 
     // Define local asset paths
      $main_css_path     = 'style.css';
-     $site_js_path      = '3ee13e79.base.min.js';
+     $site_js_path      = '97963d71.base.min.js';
 
     // Build filename from basename, hash, and extension
     // Format: basename + hash + extension
@@ -60,5 +60,14 @@ function script_enqueuer() {
     wp_enqueue_script( 'main', asset_file_path( $site_js_path , false ), '', '', true );
     wp_enqueue_script( 'main' );
 }
+
+
+if(is_admin()){
+    wp_enqueue_script('underscore', 'https://raw.github.com/documentcloud/underscore/master/underscore-min.js', array('jquery'));
+    wp_enqueue_script('custom_admin_script', get_bloginfo('template_url').'/js/admin_script.js', array('jquery', 'underscore'));
+    wp_register_style( 'custom-admin', get_template_directory_uri() . '/css/admin.css', '', '', '' );
+    wp_enqueue_style( 'custom-admin' );
+
+} 
 
  ?>

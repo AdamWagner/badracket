@@ -95,12 +95,14 @@
   @include breakpoint(above-mobile) {
     margin-top:2em;
   }
+
   td {
     padding:1em;
     @include breakpoint(big) {
       padding:0.5em 1em;
     }
     @extend %no-wrap-text;
+    &.artist { color:transparentize($dark,0.3); }
     &.trackNumber {
       width:2.5em;
       padding:0.5em 0;

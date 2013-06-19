@@ -34,6 +34,7 @@
     $recordingStudio = $custom_fields['_br_recording_studio']['0'];
     $twitterHandle = $custom_fields['_br_artist_twitter']['0'];
     $price = $custom_fields['_br_price']['0'];
+    $isCompilation = $custom_fields['_br_is_compilation']['0'];
 
 
     $totalmins;
@@ -87,20 +88,24 @@
           if ($i<10) {
             $songTitle = ucSent(get_post_meta($post->ID, '_br_songTitle-0'.$i.'', true));
             $duration = get_post_meta($post->ID, '_br_duration-0'.$i.'', true);
-            $songTrackNumber = get_post_meta($post->ID, '_br_songTrackNumber-0'.$i.'', true);
             $isPreview = get_post_meta($post->ID, '_br_isSampleTrack-0'.$i.'', true);
+            $songArtist = get_post_meta($post->ID, '_br_songArtist-0'.$i.'', true);
           } else {
             $songTitle = ucSent(get_post_meta($post->ID, '_br_songTitle-'.$i.'', true));
             $duration = get_post_meta($post->ID, '_br_duration-'.$i.'', true);
-            $songTrackNumber = get_post_meta($post->ID, '_br_songTrackNumber-'.$i.'', true);
+            $isPreview = get_post_meta($post->ID, '_br_isSampleTrack-'.$i.'', true);
+            $songArtist = get_post_meta($post->ID, '_br_songArtist-'.$i.'', true);
           }
-          echo '<tr class="song" data-track-number="'.$songTrackNumber.'">
+          echo '<tr class="song" data-track-number="'.$i.'">
                 <td class="trackNumber">
                     <div class="speaker-icon" data-icon="s"></div>
                     <div class="play-icon" data-icon="m"></div>
-                    <div class="the-track-number">'. intval($songTrackNumber) . '</div>
+                    <div class="the-track-number">'. $i . '</div>
                 </td>
                 <td>'. $songTitle . '</td>';
+              if ($isCompilation) {
+                echo '<td><em class="artist">' . $songArtist . '</em></td>';
+              }
               if (!$isPreview) {
                 echo  '<td class="preview">preview</td> <td class="unlocked"></td>';
               } else {

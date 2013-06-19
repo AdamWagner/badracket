@@ -17,7 +17,7 @@ add_post_type('album', 'albums', array (
 'rewrite' => array(
           'with_front' => FALSE,
     ),
-'supports'            => array( 'title', 'editor', 'custom-fields', 'revisions', )
+'supports'            => array( 'title', /*'editor',*/ 'custom-fields', 'revisions', )
 ));
 
 add_taxonomy('Engineer', 'Engineers', 'album');

@@ -17,15 +17,18 @@ $meta_boxes[] = array(
   // List of meta fields
   'fields' => array(
 
+    // CHECKBOX
+    array(
+        'id'   => $prefix.'is_compilation',
+        'type' => 'checkbox',
+        'desc' => 'Is compilation?',
+        'std'  => 0,
+      ),
+
     // TEXT
     array(
       'id'      => $prefix . 'artist', // Field ID, i.e. the meta key
-      'desc'    => 'Artist Name', // Field description (optional)
-      'type'    => 'text',
-    ),
-    array(
-      'id'      => $prefix . 'artist_twitter', // Field ID, i.e. the meta key
-      'desc'    => 'Artist Twitter Handle (e.g. @badracket)', // Field description (optional)
+      'desc'    => 'Artist Name. Use "Compilation" if the album is a compilation.', // Field description (optional)
       'type'    => 'text',
     ),
     array(
@@ -56,12 +59,12 @@ $meta_boxes[] = array(
     ),
     array(
       'id'      => $prefix . 'recording_studio', // Field ID, i.e. the meta key
-      'desc'    => 'Studio at which the album was recorded', // Field description (optional)
+      'desc'    => '(Optional) Studio at which the album was recorded', // Field description (optional)
       'type'    => 'text',
     ),
     array(
       'id'      => $prefix . 'price', // Field ID, i.e. the meta key
-      'desc'    => 'Price of the album. Use a single number only, e.g. "8"', // Field description (optional)
+      'desc'    => 'Price of the album. Use a single number only, e.g. "8". If free, use "0".', // Field description (optional)
       'type'    => 'text',
     ),
   ) //end fields array
@@ -82,11 +85,12 @@ $meta_boxes[] = array(
       'id'      => $prefix . 'songTitle-01',
       'type'    => 'text',
       'desc'    => 'songTitle',
+      'class' => 'test'
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-01',
+      'id'      => $prefix . 'songArtist-01',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-01',
@@ -126,9 +130,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-02',
+      'id'      => $prefix . 'songArtist-02',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-02',
@@ -167,9 +171,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-03',
+      'id'      => $prefix . 'songArtist-03',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-03',
@@ -208,9 +212,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-04',
+      'id'      => $prefix . 'songArtist-04',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-04',
@@ -249,9 +253,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-05',
+      'id'      => $prefix . 'songArtist-05',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-05',
@@ -288,9 +292,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-06',
+      'id'      => $prefix . 'songArtist-06',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-06',
@@ -327,9 +331,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-07',
+      'id'      => $prefix . 'songArtist-07',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-07',
@@ -367,9 +371,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-08',
+      'id'      => $prefix . 'songArtist-08',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-08',
@@ -407,9 +411,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-09',
+      'id'      => $prefix . 'songArtist-09',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-09',
@@ -446,9 +450,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-10',
+      'id'      => $prefix . 'songArtist-10',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-10',
@@ -486,9 +490,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-11',
+      'id'      => $prefix . 'songArtist-11',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-11',
@@ -526,9 +530,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-12',
+      'id'      => $prefix . 'songArtist-12',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-12',
@@ -565,9 +569,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-13',
+      'id'      => $prefix . 'songArtist-13',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-13',
@@ -604,9 +608,9 @@ $meta_boxes[] = array(
       'desc'    => 'songTitle',
     ),
     array(
-      'id'      => $prefix . 'songTrackNumber-14',
+      'id'      => $prefix . 'songArtist-14',
       'type'    => 'text',
-      'desc'    => 'songTrackNumber',
+      'desc'    => 'songArtist',
     ),
      array(
       'id'      => $prefix . 'duration-14',

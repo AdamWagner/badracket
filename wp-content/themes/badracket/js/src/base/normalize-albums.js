@@ -4,54 +4,65 @@
 
 badracket.normalize = {
 
-  count_tracks: function(obj) {
-    var trackCount = 0;
-    for (var prop in obj) {
-      if ( badracket.utils.stringContains( prop.toString(), 'songTitle' ) ) {
-        trackCount++;
-      }
-    }
-    return trackCount;
+
+  count_tracks: function(obj) { // song object
+    // Returns track count
+    return _.countBy(_.keys(obj), function(key) {
+      return _.str.include(key, 'songTitle');
+    }).true;
+
   },
 
- createTrackHierarchy :function (obj, type) {
+  createTrackHierarchy :function (obj, type) {
+    console.log(type);
     var tracks = [];
     var trackCount = badracket.normalize.count_tracks(obj);
+
     for ( var i = 01; i <= trackCount; i++ ) {
-      if (i >= 10) { enumerator = i.toString(); } else { enumerator = '0' + i.toString(); }
-      if (type === 'album') {
-        tracks.push({
-          songTitle: obj['_br_songTitle-' + enumerator][0],
-          duration: obj['_br_duration-' + enumerator][0],
-          trackNumber: obj['_br_songTrackNumber-' + enumerator][0],
-          songUrl: obj['_br_songUrl-' + enumerator][0],
-          isSampleTrack: obj['_br_isSampleTrack-' + enumerator][0]
-        });
-      } else {
-         tracks.push({
-          songTitle: obj['_br_songTitle-' + enumerator][0],
-          artist: obj['_br_artist-' + enumerator][0],
-          duration: obj['_br_duration-' + enumerator][0],
-          trackNumber: obj['_br_songTrackNumber-' + enumerator][0],
-          songUrl: obj['_br_songUrl-' + enumerator][0],
-          isSampleTrack: 1
-        });
+      var enumerator = (i >= 10) ? i.toString() : '0' + i.toString();
+
+      var trackItems = {
+        songTitle: obj['_br_songTitle-' + enumerator][0],
+        duration: obj['_br_duration-' + enumerator][0],
+        trackNumber: i,
+        songUrl: obj['_br_songUrl-' + enumerator][0],
+        isSampleTrack: obj['_br_isSampleTrack-' + enumerator][0]
+      };
+
+
+      if (type === 'compilation') {
+        trackItems.artist = obj['_br_songArtist-' + enumerator][0]; 
       }
+
+      if (type === 'show') { 
+        trackItems.artist = obj['_br_artist-' + enumerator][0]; 
+        trackItems.isSampleTrack =  1;
+      }
+
+      tracks.push(trackItems);
+
     }
+
     return tracks;
   },
 
+
   albumNormalization : function(rawData) {
     br_state.setupNav( { albums:rawData.length } );
-    return _.map(rawData, function(value, key, list ){
+
+    return _.map(rawData, function(value, key, list ) {
+
+
+      var kind = parseInt(value._br_is_compilation, 10) ? 'compilation' : 'album';
+
       return {
         artist : value._br_artist[0],
         albumName : badracket.utils.htmlDecode(value.albumName),
-        kind : 'album',
+        kind : kind,
         coverUrl : value._br_cover_url[0],
         price : value._br_price[0],
         zipFile : value._br_zip_file[0],
-        tracks : badracket.normalize.createTrackHierarchy(value, 'album'),
+        tracks : badracket.normalize.createTrackHierarchy(value, kind),
         albumUrl : value.albumUrl
       };
     });
@@ -61,6 +72,8 @@ badracket.normalize = {
 
     br_state.setupNav( { shows:rawData.length } );
     var now = (new Date().getTime() / 1000).toFixed();
+
+
 
     var upcoming = _.filter( rawData, function( show ) {
       var then = (Date.parse(show['_br_show-date'][0]) / 1000).toFixed();
