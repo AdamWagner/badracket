@@ -15,6 +15,7 @@ badracket.normalize = {
 
   createTrackHierarchy :function (obj, type) {
     console.log(type);
+    console.log(obj);
     var tracks = [];
     var trackCount = badracket.normalize.count_tracks(obj);
 
@@ -26,9 +27,11 @@ badracket.normalize = {
         duration: obj['_br_duration-' + enumerator][0],
         trackNumber: i,
         songUrl: obj['_br_songUrl-' + enumerator][0],
-        isSampleTrack: obj['_br_isSampleTrack-' + enumerator][0]
       };
 
+      if (type ==='album') {
+        trackItems.isSampleTrack = obj['_br_isSampleTrack-' + enumerator][0];
+      }
 
       if (type === 'compilation') {
         trackItems.artist = obj['_br_songArtist-' + enumerator][0]; 
