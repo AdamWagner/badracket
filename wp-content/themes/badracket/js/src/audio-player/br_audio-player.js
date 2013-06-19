@@ -247,6 +247,9 @@ var br_player = function() {
           el.ctaWrap.attr('href', album.albumUrl);
           el.ctaButton.text('Get Tickets');
           el.ctaButton.removeClass('get-album');
+        } else if ( album.kind == 'compilation' ) {
+
+          el.artist.html( song.artist );
         } else {
           if ( song.isSampleTrack != 1 && !$('html').hasClass('fb-logged-in')) {
             el.player.addClass('preview-song');

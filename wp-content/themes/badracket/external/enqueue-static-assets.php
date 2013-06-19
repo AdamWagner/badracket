@@ -40,7 +40,7 @@ function script_enqueuer() {
 
     // Define local asset paths
      $main_css_path     = 'style.css';
-     $site_js_path      = '97963d71.base.min.js';
+     $site_js_path      = 'f4e287da.base.min.js';
 
     // Build filename from basename, hash, and extension
     // Format: basename + hash + extension

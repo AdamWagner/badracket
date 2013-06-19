@@ -19,6 +19,8 @@ jQuery(document).ready(function($){
     }
     
 	function validateAlbum(){
+		clearInvalid();
+
 		var form = $('#album-details');
 
 		var albumDetails = {
@@ -29,16 +31,12 @@ jQuery(document).ready(function($){
 			'#_br_price' : emptyTest(form.find('#_br_price').val())
 		};
 
-		console.log(albumDetails);
-
 		var invalid = [];
 		for (prop in albumDetails) {
 			if (albumDetails[prop] === false ) {
 				invalid.push(prop);
 			}
 		}
-
-		clearInvalid();
 
 		_.each(invalid, function(el){
 			$(el).closest('[class*=wrapper]').addClass('invalid');
@@ -67,18 +65,11 @@ jQuery(document).ready(function($){
 			});
 		});
 
-		function track_count (songList) {
-		  return _.countBy(_.keys(songList), function(key) {
-		    return _.str.include(key, 'songTitle');
-		  }).true;
-		}
-
+		
 		var songList = _.filter(songList, function(song){ return song.songTitle !== ''});
 
 		_.each(songList, function(song){
-
 			var compilation = $('#_br_is_compilation').prop('checked');
-
 			for ( prop in song ) {
 				if ( song[prop] === '' ) {
 					if (compilation && stringContains(prop, 'Artist')) {
@@ -95,8 +86,6 @@ jQuery(document).ready(function($){
 		_.each(invalid, function(el){
 			$('#' + el.selector).addClass('invalid');
 		});
-
-		console.log(!invalid.length);
 
 		return !invalid.length;
 	}
