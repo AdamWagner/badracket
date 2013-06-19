@@ -1,3 +1,8 @@
+# 5.03 - 6/18/13
+### Enhancements
+- Add support for compilation albums
+- Add simple validation for adding albums in admin
+
 # 5.02 - 6/3/13
 ### Bug fixes
 - Remove layout flash on interior pages
