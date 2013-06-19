@@ -76,14 +76,12 @@ badracket.normalize = {
     br_state.setupNav( { shows:rawData.length } );
     var now = (new Date().getTime() / 1000).toFixed();
 
-
-
     var upcoming = _.filter( rawData, function( show ) {
       var then = (Date.parse(show['_br_show-date'][0]) / 1000).toFixed();
       return then > now;
     });
 
-    return _.map( upcoming, function( value, key, list ){
+    var shows = _.map( upcoming, function( value, key, list ){
       var date = value['_br_show-date'][0];
 
       return {
@@ -93,6 +91,10 @@ badracket.normalize = {
         albumUrl : value.albumUrl,
         tracks : badracket.normalize.createTrackHierarchy(value, 'show')
       };
+    });
+
+    return _.filter(shows, function(show){
+      return show.tracks.length;
     });
   },
 
