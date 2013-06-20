@@ -564,11 +564,7 @@ var br_player = function() {
     console.log('set data method ready');
 
     function getAlbumByName( albumName ) {
-      for (var i = numAlbums; i--;) {
-        if (albums[i].albumName === albumName) {
-         return albums[i];
-        }
-      }
+      return _.find(albums, { 'albumName' : albumName });
     }
 
     function findSampleSong ( album ) {

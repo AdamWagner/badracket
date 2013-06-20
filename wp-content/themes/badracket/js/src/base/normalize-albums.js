@@ -14,8 +14,6 @@ badracket.normalize = {
   },
 
   createTrackHierarchy :function (obj, type) {
-    console.log(type);
-    console.log(obj);
     var tracks = [];
     var trackCount = badracket.normalize.count_tracks(obj);
 
@@ -55,7 +53,6 @@ badracket.normalize = {
 
     return _.map(rawData, function(value, key, list ) {
 
-
       var kind = parseInt(value._br_is_compilation, 10) ? 'compilation' : 'album';
 
       return {
@@ -93,9 +90,12 @@ badracket.normalize = {
       };
     });
 
-    return _.filter(shows, function(show){
+    function hasPlaylist(show){
       return show.tracks.length;
-    });
-  },
+    }
+
+    return _.filter(shows, hasPlaylist);
+
+  }
 
 };

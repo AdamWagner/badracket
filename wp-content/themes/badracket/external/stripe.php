@@ -6,14 +6,11 @@ Stripe
 
 switch(ENVIRONMENT){
   case 'local':
-    // require_once( 'includes/env-local.php'); // environment getter functions
     $sk_key = "sk_test_5WPYe79f3ARl35CElPgwxV5y";
     break;
   case 'staging':
-    // require_once( 'includes/env-staging.php'); // environment getter functions
     break;
   case 'production':
-    // require_once( 'includes/env-production.php'); // production getter functions
     $sk_key = "sk_live_QbttFsj9dnkdgehWvBLCGxsz";
     break;
 }

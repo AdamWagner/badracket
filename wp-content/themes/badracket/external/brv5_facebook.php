@@ -50,7 +50,6 @@ if ($user) {
   $loginUrl = $facebook->getLoginUrl();
 }
 
-
 // This call will always work since we are fetching public data.
 $naitik = $facebook->api('/naitik');
 

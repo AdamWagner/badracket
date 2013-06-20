@@ -30,18 +30,6 @@ foreach($environments AS $key => $env){
   }
 }
 
-// switch(ENVIRONMENT){
-//   case 'local':
-//     require_once( 'includes/env-local.php'); // environment getter functions
-//     break;
-//   case 'staging':
-//     require_once( 'includes/env-staging.php'); // environment getter functions
-//     break;
-//   case 'production':
-//     require_once( 'includes/env-production.php'); // production getter functions
-//     break;
-// }
-
 
 require_once( 'external/starkers-utilities.php' );
 require_once( 'external/cpt.php' );
@@ -53,8 +41,6 @@ require_once( 'external/shortcodes.php' );
 
 require_once( 'external/stripe.php' );
 require_once( 'external/cpt-definitions.php' );
-
-
 
 
 /* =================================================================================================
@@ -81,17 +67,11 @@ function AW_register_meta_boxes() {
 add_action( 'admin_init', 'AW_register_meta_boxes' );
 
 
-
-
 /* Move gravity forms jQuery call to footer so jQuery is loaded */
 add_filter("gform_init_scripts_footer", "init_scripts");
   function init_scripts() {
   return true;
 }
-
-
-
-
 
 
 /* Enqueue static Assets */
@@ -105,17 +85,15 @@ require_once( 'external/js-api.php' );
 /* =========================================================================================================
 Increase post count on archive pages
 ========================================================================================================= */
-add_filter('pre_get_posts', 'Per_category_basis');
 
 function Per_category_basis($query){
-
     if ( is_post_type_archive() ) {
         $query->set('posts_per_page', 99);
     }
-
     return $query;
-
 }
+
+add_filter('pre_get_posts', 'Per_category_basis');
 
 /* =========================================================================================================
 Theme specific settings
@@ -182,24 +160,6 @@ add_action( 'wp_enqueue_scripts', 'script_enqueuer' );
 
 add_filter( 'body_class', 'add_slug_to_body_class' );
 
-/* ===========================================================================================================
-Comments: Custom callback for outputting comments
-============================================================================================================ */
-
-function starkers_comment( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment;
-	?>
-	<?php if ( $comment->comment_approved == '1' ): ?>
-	<li>
-		<article id="comment-<?php comment_ID() ?>">
-			<?php echo get_avatar( $comment ); ?>
-			<h4><?php comment_author_link() ?></h4>
-			<time><a href="#comment-<?php comment_ID() ?>" pubdate><?php comment_date() ?> at <?php comment_time() ?></a></time>
-			<?php comment_text() ?>
-		</article>
-	<?php endif;
-}
-
 
 /* ===========================================================================================================
 Remove Admin Menu Items
@@ -225,19 +185,3 @@ global $menu;
   }
 }
 add_action('admin_menu', 'remove_menus');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

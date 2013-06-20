@@ -30,7 +30,7 @@ badracket.videos = function(){
     }
 
     return {
-    	data : data,
+   	  data : data,
       get : getVimeo,
       set : setVimeo
     };
@@ -227,8 +227,8 @@ badracket.videos = function(){
 	return {
 		data: data,
 		render: render,
-    bindUI : bindUI,
-    handlers : handlers,
-    evnts : evnts
+	    bindUI : bindUI,
+	    handlers : handlers,
+	    evnts : evnts
 	};
 }();

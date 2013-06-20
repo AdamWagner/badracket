@@ -38,6 +38,10 @@ pclzip-*
 .htaccess
 
 
+# Ignore built js files
+wp-content/themes/badracket/js/build/*.js
+
+
 # Ignore sass-cache files.
 *.sass-cache*
 

@@ -1,30 +1,3 @@
-/*
-
-Ideas for sass, etc:
-https://gist.github.com/wbond/5337600
-
-https://gist.github.com/jwebcat/5261222
-
-https://gist.github.com/fayimora/5528552
-
-https://gist.github.com/stephenplusplus/5647725
-
-*/
-
-
-/* 
-TODO
-
-[ ] modularize br_audio-player.js
-[ ] modularize main.js into pre and post load
-[ ] separate build process for hashres
-[ ] file watching
-[ ] sass
-[ ] deploy to staging
-
-*/
-
-
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -101,7 +74,7 @@ module.exports = function(grunt) {
             'js/src/lib/froogaloop.js',
             'js/src/lib/bootstrap-modal.js',
             'js/src/lib/bootstrap-carousel.js',
-            'js/src/lib/underscore.js',
+            'js/src/lib/lodash.js',
             'js/src/lib/underscore.string.js',
             'js/src/lib/jquery.fitvids.js',
          ],

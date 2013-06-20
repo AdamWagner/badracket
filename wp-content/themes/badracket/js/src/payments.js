@@ -1,7 +1,3 @@
-/* @codekit-prepend "lib/stripe.js" */
-/* @codekit-prepend "lib/jquery.payments.js" */
-/* @codekit-prepend "lib/jquery.form.js" */
-
 jQuery(function($){
 
   var paymentFormWrapper, paymentForm, loadingContainer,
@@ -13,7 +9,6 @@ jQuery(function($){
     var formHTML;
 
     $('#buy-album-form').remove();
-    // $('body').addClass('modal--active');
 
     _cover = cover;
     _title = title;
@@ -329,10 +324,6 @@ var stripe_pk = (BR_ENV === 'local') ? 'pk_test_iV1NX0AkuxskATxdKxLU26ba' : 'pk_
 
 // This identifies your website in the createToken call below
 Stripe.setPublishableKey(stripe_pk);
-
-
-
-
 
 
 

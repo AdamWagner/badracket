@@ -11,35 +11,26 @@ add_taxonomy('name', 'associated_post_type', $args optional: overwrite defaults)
 
 ======================================================================================================================== */
 
-
 add_post_type('album', 'albums', array (
 'taxonomies' => array('engineer'),
-'rewrite' => array(
-          'with_front' => FALSE,
-    ),
-'supports'            => array( 'title', /*'editor',*/ 'custom-fields', 'revisions', )
+'rewrite' => array( 'with_front' => FALSE, ),
+'supports' => array( 'title', /*'editor',*/ 'custom-fields', 'revisions', )
 ));
 
 add_taxonomy('Engineer', 'Engineers', 'album');
 
 add_post_type('interview', 'interviews', array (
 'taxonomies' => array('post_tag'),
-'rewrite' => array(
-          'with_front' => FALSE,
-    ),
+'rewrite' => array( 'with_front' => FALSE, ),
 ));
 
 add_post_type('staff', 'staff', array (
 'taxonomies' => array(''),
-'rewrite' => array(
-          'with_front' => FALSE,
-    ),
-'supports'            => array( 'title', 'editor', 'custom-fields', 'revisions', )
+'rewrite' => array( 'with_front' => FALSE, ),
+'supports' => array( 'title', 'editor', 'custom-fields', 'revisions', )
 ));
 
 add_post_type('show', 'shows', array (
 'taxonomies' => array(''),
-'supports'            => array( 'title', 'editor', 'custom-fields', 'trackbacks','revisions')
+'supports'   => array( 'title', 'editor', 'custom-fields', 'trackbacks','revisions')
 ));
-
- ?>

@@ -8,9 +8,9 @@ br_scripts = function(){
 
 	return {
 		payments : cdn + wpPath + '/js/build/26854135.payments.min.js',
-		player : cdn + wpPath + '/js/build/fa6083ea.br_audio-player.min.js',
+		player : cdn + wpPath + '/js/build/0788b6c8.br_audio-player.min.js',
 		facebook : cdn + wpPath + '/js/build/c712af6c.br_facebook.min.js',
-		postLoad : cdn + wpPath + '/js/build/9c8b712a.post-load.min.js',
+		postLoad : cdn + wpPath + '/js/build/739a1058.post-load.min.js',
 		mobile : cdn + wpPath + '/js/build/714aca84.mobile.min.js'
 	};
 }();
