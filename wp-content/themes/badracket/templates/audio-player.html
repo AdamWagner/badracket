@@ -1,0 +1,36 @@
+  <div class="audio-player-wrapper" ng-controller="PlayerCtrl">
+
+  <audio controls>
+    <p>Your browser does not support the audio element.</p>
+  </audio>
+
+      <div ng-repeat="album in albums | filter:this.selected=true">
+        <div ng-repeat="song in album.tracks | filter:playing = true">
+
+          {{ song.title }}  -  <em>{{ album.artist }}</em>
+        </div>
+
+      </div>
+
+
+
+      <div class="covers push--top">
+        <div class="grid">
+            <div ng-click="clickAlbum()" class="grid__item one-fifth cursor--pointer" ng-repeat="album in albums | filter:kind = 'album'">
+              <img src="{{ album.cover }}" alt="">
+              <div ng-show="album.selected">
+                <ul class="list--unstyled">
+                  <li ng-class="{on:song.playing}" ng-repeat="song in album.tracks" ng-click="clickSong();$event.stopPropagation()"> {{ song.title }}</li>
+                </ul>
+                
+              </div>
+            </div>
+        </div>
+      </div>
+
+  </div>
+
+
+
+
+

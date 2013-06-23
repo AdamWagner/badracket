@@ -1,5 +1,0 @@
-@include breakpoint(big) {
-.three-column { @include column-count(3); }
-.two-column { @include column-count(2); }
-// .gear li { font-size:0.9em; }
-}

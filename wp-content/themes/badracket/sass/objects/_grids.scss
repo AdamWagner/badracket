@@ -1,0 +1,33 @@
+@if $use-grids == true{
+
+/*------------------------------------*\
+    $GRIDS
+\*------------------------------------*/
+/**
+ * Fluid and nestable grid system.
+ *
+
+/**
+ * Grid wrapper
+ */
+.grid{
+    list-style:none;
+    margin-bottom:0;
+    @extend .group;
+}
+
+    /**
+     * Grid
+     */
+    .grid__item{
+        float:left;
+        width:100%;
+        // padding-left:$base-spacing-unit/2;
+        vertical-align:top;
+        margin-bottom:0;
+    }
+
+
+
+
+}//endif

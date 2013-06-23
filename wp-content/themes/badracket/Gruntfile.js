@@ -30,72 +30,17 @@ module.exports = function(grunt) {
         },
         all: [
           'js/src/base/*.js',
-          'js/src/audio-player/*.js',
-          'js/src/facebook/*.js',
-          'js/src/post-load/*.js',
-          'js/src/payments.js','js/src/mixpanel.js'
           ],
     },
 
     concat: {
-       audioPlayer: {
-         src: [
-          'js/src/lib/jquery-ui-1.9.2.custom.js',
-          'js/src/lib/soundmanager2.js',
-          'js/src/audio-player/br_audio-player.js',
-         ],
-         dest: 'js/build/br_audio-player.js'
-       },
-       facebook : {
-         src: [
-          'js/src/facebook/br_facebook.js',
-         ],
-         dest: 'js/build/br_facebook.js'
-       },
-       mobile : {
-         src: [
-          'js/src/lib/jquery.tap.js',
-          'js/src/mobile/mobile.js',
-         ],
-         dest: 'js/build/mobile.js'
-       },
-       payments : {
-         src: [
-          'js/src/lib/stripe.js',
-          'js/src/lib/jquery.payments.js',
-          'js/src/lib/jquery.form.js',
-          'js/src/payments.js',
-         ],
-         dest: 'js/build/payments.js'
-       },
-       postLoad : {
-         src: [
-            'js/src/post-load/post-load.js',
-            'js/src/lib/froogaloop.js',
-            'js/src/lib/bootstrap-modal.js',
-            'js/src/lib/bootstrap-carousel.js',
-            'js/src/lib/lodash.js',
-            'js/src/lib/underscore.string.js',
-            'js/src/lib/jquery.fitvids.js',
-         ],
-         dest: 'js/build/post-load.js'
-       },
        base: {
           src: [
-           // 'js/src/lib/page.js', // express-style router with context saving
-           'js/src/lib/jquery.js',
-           'js/src/lib/jquery.djax.js',
-           'js/src/lib/enquire.js',
-           'js/src/lib/format_date.js',
-           'js/src/lib/mixpanel-lib.js',
-           'js/src/mixpanel.js',
-           'js/src/base/utils.js',
-           'js/src/base/br_scripts.js',
-           'js/src/videos/videos.js',
-           'js/src/base/base.js',
-           'js/src/base/normalize-albums.js',
-           'js/src/base/router.js',
-           'js/src/base/init.js',
+           'js/src/lib/jquery/jquery.js',
+           'js/src/lib/angular/angular.js',
+           'js/src/data.js',
+           'js/src/lib/lodash.js',
+           'js/src/app.js',
           ],
           dest: 'js/build/base.js'
        },
@@ -103,15 +48,6 @@ module.exports = function(grunt) {
 
     uglify: {
       first: {
-        files: {
-          'js/build/post-load.min.js' : ['js/build/post-load.js'],
-          'js/build/br_audio-player.min.js' : ['js/build/br_audio-player.js'],
-          'js/build/br_facebook.min.js' : ['js/build/br_facebook.js'],
-          'js/build/payments.min.js' : ['js/build/payments.js'],
-          'js/build/mobile.min.js' : ['js/build/mobile.js']
-        }
-      },
-      second: {
         files: {
           'js/build/base.min.js' : ['js/build/base.js'],
         }
@@ -124,31 +60,10 @@ module.exports = function(grunt) {
         renameFiles: true
       },
       // hashres is a multitask. Here 'prod' is the name of the subtask. You can have as many as you want.
-      first: {
-        // Files to hash
-        src: [
-          // 'style.css',
-          'js/build/br_facebook.min.js',
-          'js/build/br_audio-player.min.js',
-          'js/build/mixpanel.min.js',
-          'js/build/payments.min.js',
-          'js/build/post-load.min.js',
-          'js/build/mobile.min.js',
-        ],
-        // File that refers to above files and needs to be updated with the hashed name
-        dest: ['js/src/base/br_scripts.js', 'external/enqueue-static-assets.php'],
-      },
-      second : {
-        src: ['js/build/base.min.js'],
+      first : {
+        src: ['js/build/base.js'],
         dest: ['external/enqueue-static-assets.php'],
       },
-      css : {
-        options: {
-          fileNameFormat: '${name}.${ext}?v=${hash}',
-        },
-        src: ['style.css'],
-        dest: ['external/enqueue-static-assets.php'],
-      }
     },
 
     clean: {
@@ -166,7 +81,7 @@ module.exports = function(grunt) {
 
     watch: {
        scripts: {
-         files: ['sass/*.scss','js/src/*/*.js', '*.html', '*.php', 'assets/images/**/*.{png,jpg,jpeg,gif,webp,svg}'],
+         files: ['sass/*.scss','js/src/*.js', '*.html', '*.php', 'assets/images/**/*.{png,jpg,jpeg,gif,webp,svg}'],
          tasks: ['default'],
          options: {
            nospawn: false,
@@ -193,18 +108,10 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'clean:initial',
     'compass',
-    'concat:audioPlayer',
-    'concat:payments',
-    'concat:facebook',
-    'concat:mobile',
-    'concat:postLoad',
     'jshint',
-    'uglify:first',
-    'hashres:first',
     'concat:base',
-    'uglify:second',
-    'hashres:second',
-    // 'hashres:css',
+    // 'uglify:first',
+    'hashres:first',
     'clean:post',
     ]);
 

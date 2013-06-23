@@ -8,7 +8,7 @@ Scripts Add scripts via wp_head() // CODEX: wp_register_script( $handle, $src, $
 function asset_file_path( $filename, $root ) {
 
   $exploded_filename = explode('.', $filename);
-  $extension = $exploded_filename[3];
+  $extension = $exploded_filename[2];
   $basename = $exploded_filename[0];
 
   if (!$root) { 
@@ -40,7 +40,7 @@ function script_enqueuer() {
 
     // Define local asset paths
      $main_css_path     = 'style.css';
-     $site_js_path      = 'e703ec37.base.min.js';
+     $site_js_path      = 'bc047630.base.js';
 
     // Build filename from basename, hash, and extension
     // Format: basename + hash + extension

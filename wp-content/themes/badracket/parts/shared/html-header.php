@@ -32,6 +32,3 @@
 
 </head>
 
-<body <?php body_class(); ?>>
-
-<div id="fb-root"></div>
