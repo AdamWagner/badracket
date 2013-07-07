@@ -35,6 +35,7 @@
        $door_ticket_price = get_post_meta($post->ID, '_br_door-ticket-price', true);
        $ticket_url = get_post_meta($post->ID, '_br_ticket-url', true);
 
+       $tomorrow  = mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"));
        $now =  new DateTime('NOW');
        $date_split = split(" ", $show_date);
        $show_date_php = new DateTime($date_split["0"]);
@@ -42,7 +43,7 @@
        $now_now = $now->getTimestamp();
       ?>
 
-      <?php if( $then > $now_now ): ?>
+      <?php if( $then >= $tomorrow ): ?>
 
       <a href="<?php echo the_permalink();?>">
         <div class="show-card group padded-section" data-timestamp="<?php echo $then; ?>">
